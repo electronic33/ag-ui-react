@@ -55,5 +55,9 @@
     "build": "rollup -c",
     "lint": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix",
     "test": "jest"
+  },
+  "dependencies": {
+    "formik": "^2.2.6",
+    "react-icons": "^4.1.0"
   }
 }
