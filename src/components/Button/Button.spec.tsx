@@ -2,10 +2,10 @@ import "@testing-library/jest-dom";
 
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import HelloWorld from "./hello-world";
+import Button from "./Button";
 
 test('displays a "Hello World" message', () => {
-  render(<HelloWorld />);
+  render(<Button />);
   expect(screen.getByText("Hello World")).toBeInTheDocument();
 });
 
