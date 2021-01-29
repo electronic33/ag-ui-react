@@ -32,7 +32,6 @@ const Header: FC<HeaderProps> = ({
   // const { pathname } = useLocation();
   const pathname = "path/name/";
   const exactPath = pathname.split("/").pop();
-  const navLinksLength = navLinks.length;
   console.log(
     "🚀 ~ file: Header.tsx ~ line 30 ~ callToActionButton",
     callToActionButton,
@@ -65,7 +64,7 @@ const Header: FC<HeaderProps> = ({
 
         <div className="flex ">
           <nav className="hidden 800:flex 800:items-center justify-end self-end mr-3">
-            {alwaysShowingLinks.map(({ href, Icon, label, className }) => (
+            {alwaysShowingLinks?.map(({ href, Icon, label, className }) => (
               <LinkComponent
                 key={href}
                 to={href}
@@ -82,7 +81,7 @@ const Header: FC<HeaderProps> = ({
               </LinkComponent>
             ))}
             <div className="hidden 1410:flex">
-              {restNavLinks.map(({ href, Icon, label, className }) => (
+              {restNavLinks?.map(({ href, Icon, label, className }) => (
                 <LinkComponent
                   key={href}
                   to={href}

@@ -23,6 +23,12 @@
     "plugin:prettier/recommended"
   ],
   "rules": {
+    "prettier/prettier": ["error", {
+    "semi": true,
+    "trailingComma": "all",
+    "printWidth": 80,
+    "endOfLine":"auto"
+    }],
     "react/prop-types": "off"
   }
 }

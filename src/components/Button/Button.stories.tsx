@@ -26,7 +26,7 @@ export const IconRight = (): React.ReactNode => (
   <Button
     text="Az alma kerek"
     textClassName=""
-    className=""
+    className="bg-red-500"
     Icon={AiFillAudio}
     IconClassName=""
     iconPositionRight
