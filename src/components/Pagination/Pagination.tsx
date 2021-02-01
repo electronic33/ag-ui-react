@@ -11,15 +11,18 @@ const Pagination = ({
   currentPage = 1,
   setCurrentPage,
   firstAndLastSectionsNumber = 3,
+  initialGotoPageValue,
+  selectOptions,
 }) => {
   console.log("🚀 ~ file: Pagination.tsx ~ line 12 ~ currentPage", currentPage);
-  const numberOfPages = maxCount / itemsPerPage;
+  const numberOfPages = Math.ceil(maxCount / itemsPerPage);
 
   const [firstSection, setFirstSection] = useState([]);
   const [middleSection, setMiddleSection] = useState([]);
   const [lastSection, setLastSection] = useState([]);
 
-  const [goToPageValue, setGoToPageValue] = useState(1);
+  const [goToPageValue, setGoToPageValue] = useState(initialGotoPageValue);
+  const [itemsNumber, setItemsNumber] = useState(itemsPerPage);
 
   useEffect(() => {
     let i;
@@ -85,14 +88,21 @@ const Pagination = ({
         // val < numberOfPages,
       ),
     );
-  }, [currentPage]);
+  }, [currentPage, itemsPerPage]);
 
   return (
     <form
-      className="flex"
+      className="flex flex-col items-center justify-center space-y-10"
       onSubmit={(event) => {
         event.preventDefault();
-        if (goToPageValue > 0 && goToPageValue <= numberOfPages) {
+        setItemsPerPage(itemsNumber);
+        setCurrentPage(1);
+
+        if (
+          goToPageValue &&
+          goToPageValue > 0 &&
+          goToPageValue <= numberOfPages
+        ) {
           setCurrentPage(parseInt(goToPageValue));
         }
       }}
@@ -200,45 +210,42 @@ const Pagination = ({
           Next Page
         </p>
       </div>
-      <div className="flex items-baseline">
-        <label className="mr-2" htmlFor="goToPageValue">
-          Go To Page Number:
-        </label>
-        <TextInput
-          onChange={(event) => {
-            setGoToPageValue(event.target.value);
-          }}
-          value={goToPageValue}
-          className="bg-gray-100 shadow rounded px-2 py-1"
-          type="number"
+      {initialGotoPageValue && (
+        <div className="flex items-baseline">
+          <label className="mr-2" htmlFor="goToPageValue">
+            Go To Page Number:
+          </label>
+          <TextInput
+            onChange={(event) => {
+              setGoToPageValue(event.target.value);
+            }}
+            value={goToPageValue}
+            className="bg-gray-100 shadow rounded px-2 py-1"
+            type="number"
+          />
+        </div>
+      )}
+
+      {selectOptions && (
+        <Select
+          label="Items per page:"
+          className="max-w-16 w-64 mb-5 my-4 mr-2"
+          onChange={(selectedItemsNumber) =>
+            setItemsNumber(selectedItemsNumber)
+          }
+          selected={itemsNumber}
+          options={selectOptions}
         />
-      </div>
-      <Button
-        className={classNames("font-medium cursor-pointer bg-gray-500", {
-          "cursor-default bg-opacity-70 hover:bg-opacity-75":
-            goToPageValue <= 0 || goToPageValue > numberOfPages,
-        })}
-        text="Button"
-      />
-      <Select
-        label="Items per page:"
-        className="max-w-16 w-64 mb-5 my-4 mr-2"
-        onChange={(itemsNumber) =>
-          setItemsPerPage(itemsNumber) || setCurrentPage(1)
-        }
-        selected={itemsPerPage}
-        options={[
-          { label: "2", value: 2 },
-          {
-            label: "5",
-            value: 5,
-          },
-          {
-            label: "10",
-            value: 10,
-          },
-        ]}
-      />
+      )}
+      {(initialGotoPageValue || selectOptions) && (
+        <Button
+          className={classNames("font-medium cursor-pointer bg-gray-500", {
+            "cursor-default bg-opacity-70 hover:bg-opacity-75":
+              goToPageValue <= 0 || goToPageValue > numberOfPages,
+          })}
+          text="Button"
+        />
+      )}
     </form>
   );
 };
