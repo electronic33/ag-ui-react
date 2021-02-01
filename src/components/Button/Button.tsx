@@ -34,7 +34,7 @@ const Button: FunctionComponent<ButtonProps> = ({
   return (
     <button
       className={classNames(
-        "flex items-center justify-center cursor-pointer text-gray-50 shadow-md rounded-md bg-blue-700 px-3 py-1.5 hover:bg-blue-600",
+        "btn",
         {
           "bg-opacity-75 cursor-default": disabled || loading,
         },

@@ -1,10 +1,13 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+/* eslint-disable @typescript-eslint/no-var-requires */
 const colors = require("tailwindcss/colors");
+const plugin = require("tailwindcss/plugin");
+const ButtonBaseClasses = require("./src/components/Button/ButtonBaseClasses");
 
 module.exports = {
   purge: [],
   presets: [],
   darkMode: false, // or 'media' or 'class'
+  important: true,
   theme: {
     screens: {
       640: "640px",
@@ -12,7 +15,7 @@ module.exports = {
       800: "800px",
       1024: "1024px",
       1280: "1280px",
-      1410: "1410",
+      1410: "1410px",
       1536: "1536px",
     },
     colors: {
@@ -915,5 +918,15 @@ module.exports = {
     wordBreak: ["responsive"],
     zIndex: ["responsive", "focus-within", "focus"],
   },
-  plugins: [],
+  plugins: [
+    plugin(({ addUtilities, theme }) => {
+      const newComponents = {
+        ...ButtonBaseClasses(theme),
+      };
+
+      addUtilities(newComponents, {
+        respectImportant: false,
+      });
+    }),
+  ],
 };
