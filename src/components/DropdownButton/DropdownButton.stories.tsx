@@ -15,11 +15,6 @@ export const Default = (): React.ReactNode => (
       { text: "Item Three", href: "/page" },
       { text: "Item Four", href: "/page" },
       { text: "Item Five", href: "/page", disabled: true },
-      { text: "Item One", href: "/page" },
-      { text: "Item Two", href: "/page" },
-      { text: "Item Three", href: "/page" },
-      { text: "Item Four", href: "/page" },
-      { text: "Item Five", href: "/page", disabled: true },
     ]}
   />
 );

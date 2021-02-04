@@ -14,7 +14,6 @@ const Pagination = ({
   initialGotoPageValue,
   selectOptions,
 }) => {
-  console.log("🚀 ~ file: Pagination.tsx ~ line 12 ~ currentPage", currentPage);
   const numberOfPages = Math.ceil(maxCount / itemsPerPage);
 
   const [firstSection, setFirstSection] = useState([]);
@@ -58,19 +57,6 @@ const Pagination = ({
       arrayMiddle.push(k);
     }
 
-    console.log(
-      "🚀 ~ file: Pagination.tsx ~ line 79 ~ useEffect ~ lastSection",
-      lastSection,
-    );
-    console.log(
-      "🚀 ~ file: Pagination.tsx ~ line 79 ~ useEffect ~ firstSection",
-      firstSection,
-    );
-    console.log(
-      "🚀 ~ file: Pagination.tsx ~ line 79 ~ useEffect ~ arrayMiddle",
-      arrayMiddle,
-    );
-
     setMiddleSection(
       arrayMiddle.filter(
         (val) =>
@@ -81,12 +67,7 @@ const Pagination = ({
       ),
     );
     setLastSection(
-      arrayLast.filter(
-        (val) => !arrayFirst.includes(val) && val > 0,
-        // !arrayLast.includes(val) &&
-        //  &&
-        // val < numberOfPages,
-      ),
+      arrayLast.filter((val) => !arrayFirst.includes(val) && val > 0),
     );
   }, [currentPage, itemsPerPage]);
 
@@ -114,12 +95,9 @@ const Pagination = ({
               setCurrentPage(currentPage - 1);
             }
           }}
-          className={classNames(
-            "mr-2 px-2 py-1 shadow text-blue-400 font-medium cursor-pointer",
-            {
-              "cursor-default bg-gray-100": currentPage === 1,
-            },
-          )}
+          className={classNames("pagination", {
+            "cursor-default bg-gray-100": currentPage === 1,
+          })}
         >
           Previous Page
         </p>
@@ -129,7 +107,7 @@ const Pagination = ({
               <div
                 key={index}
                 className={classNames(
-                  "mr-2 px-2 py-1 shadow font-medium cursor-pointer",
+                  "pagination",
                   {
                     "bg-blue-400 text-white": firstSectionItem === currentPage,
                   },
@@ -153,7 +131,7 @@ const Pagination = ({
                 <div
                   key={index}
                   className={classNames(
-                    "mr-2 px-2 py-1 shadow font-medium cursor-pointer",
+                    "pagination",
                     {
                       "bg-blue-400 text-white":
                         middleSectionItem === currentPage,
@@ -179,7 +157,7 @@ const Pagination = ({
               <div
                 key={index}
                 className={classNames(
-                  "mr-2 px-2 py-1 shadow font-medium cursor-pointer",
+                  "pagination",
                   {
                     "bg-blue-400 text-white": lastSectionItem === currentPage,
                   },
@@ -200,12 +178,9 @@ const Pagination = ({
               setCurrentPage(currentPage + 1);
             }
           }}
-          className={classNames(
-            "mr-2 px-2 py-1 shadow text-blue-400 font-medium cursor-pointer",
-            {
-              "cursor-default bg-gray-100": currentPage === numberOfPages,
-            },
-          )}
+          className={classNames("pagination", {
+            "cursor-default bg-gray-100": currentPage === numberOfPages,
+          })}
         >
           Next Page
         </p>

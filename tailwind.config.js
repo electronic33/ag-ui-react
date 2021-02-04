@@ -2,6 +2,19 @@
 const colors = require("tailwindcss/colors");
 const plugin = require("tailwindcss/plugin");
 const ButtonBaseClasses = require("./src/components/Button/ButtonBaseClasses");
+const ButtonSpinnerBaseClasses = require("./src/components/ButtonSpinner/ButtonSpinnerBaseClasses");
+const AccordionbBaseClasses = require("./src/components/Accordion/AccordionbBaseClasses");
+const DropdownButtonBaseClasses = require("./src/components/DropdownButton/DropdownButtonBaseClasses");
+const LabelBaseClasses = require("./src/components/Label/LabelBaseClasses");
+const PaginationBaseClasses = require("./src/components/Pagination/PaginationBaseClasses");
+const TabsBaseClasses = require("./src/components/Tabs/TabsBaseClasses");
+const TextAreaBaseClasses = require("./src/components/TextArea/TextAreaBaseClasses");
+const TextInputBaseClasses = require("./src/components/TextInput/TextInputBaseClasses");
+const ModalBaseClasses = require("./src/components/Modal/ModalBaseClasses");
+const ErrorBaseClasses = require("./src/components/ErrorMessage/ErrorBaseClasses");
+const ErrorToastBaseClasses = require("./src/components/ErrorToast/ErrorToastBaseClasses");
+const SuccessToastBaseClasses = require("./src/components/SuccessToast/SuccessToastBaseClasses");
+const TooltipBaseClasses = require("./src/components/Tooltip/TooltipBaseClasses");
 
 module.exports = {
   purge: [],
@@ -922,6 +935,19 @@ module.exports = {
     plugin(({ addUtilities, theme }) => {
       const newComponents = {
         ...ButtonBaseClasses(theme),
+        ...ButtonSpinnerBaseClasses(theme),
+        ...AccordionbBaseClasses(theme),
+        ...DropdownButtonBaseClasses(theme),
+        ...LabelBaseClasses(theme),
+        ...PaginationBaseClasses(theme),
+        ...TabsBaseClasses(theme),
+        ...TextAreaBaseClasses(theme),
+        ...TextInputBaseClasses(theme),
+        ...ModalBaseClasses(theme),
+        ...ErrorBaseClasses(theme),
+        ...ErrorToastBaseClasses(theme),
+        ...SuccessToastBaseClasses(theme),
+        ...TooltipBaseClasses(theme),
       };
 
       addUtilities(newComponents, {

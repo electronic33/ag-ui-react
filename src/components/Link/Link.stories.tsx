@@ -6,11 +6,4 @@ export default {
   title: "Link",
 };
 
-export const Default = (): React.ReactNode => (
-  <Link
-    linkType="a"
-    linkAttribute="href"
-    to="google.com"
-    text="this is a link"
-  />
-);
+export const Default = (): React.ReactNode => <Link to="google.com" />;

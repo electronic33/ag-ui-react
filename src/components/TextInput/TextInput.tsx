@@ -78,7 +78,7 @@ const TextInput: FunctionComponent<TextInputProps> = ({
               ) || Boolean(error),
             "bg-gray-200 cursor-not-allowed": disabled,
           },
-          "rounded-md h-10 px-3 border-2 border-gray-200",
+          "text-input",
           inputClassName,
         )}
         value={field.value || value}

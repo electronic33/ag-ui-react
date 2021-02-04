@@ -10,23 +10,41 @@ export default {
 
 export const Default = (): React.ReactNode => (
   <Button
-    text="Az alma kerek"
+    text="Button"
     textClassName=""
     className=""
     Icon={AiFillAudio}
     IconClassName=""
-    // iconPositionRight
-    // disabled
-    // loading
-    // noLoadingSpinner={false}
     SpinnerClassName=""
+  />
+);
+export const Small = (): React.ReactNode => (
+  <Button
+    text="Button"
+    textClassName=""
+    className=""
+    Icon={AiFillAudio}
+    IconClassName=""
+    SpinnerClassName=""
+    sizeClass="btn-sm"
+  />
+);
+export const Large = (): React.ReactNode => (
+  <Button
+    text="Button"
+    textClassName=""
+    className=""
+    Icon={AiFillAudio}
+    IconClassName=""
+    SpinnerClassName=""
+    sizeClass="btn-lg"
   />
 );
 export const IconRight = (): React.ReactNode => (
   <Button
-    text="Az alma kerek"
+    text="Button"
     textClassName=""
-    className="bg-red-500"
+    className=""
     Icon={AiFillAudio}
     IconClassName=""
     iconPositionRight
@@ -35,7 +53,7 @@ export const IconRight = (): React.ReactNode => (
 );
 export const Disabled = (): React.ReactNode => (
   <Button
-    text="Az alma kerek"
+    text="Button"
     textClassName=""
     className=""
     Icon={AiFillAudio}
@@ -46,7 +64,7 @@ export const Disabled = (): React.ReactNode => (
 );
 export const Loading = (): React.ReactNode => (
   <Button
-    text="Az alma kerek"
+    text="Button"
     textClassName=""
     className=""
     Icon={AiFillAudio}

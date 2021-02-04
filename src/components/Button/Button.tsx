@@ -16,6 +16,7 @@ type ButtonProps = {
   loadingText?: string;
   SpinnerClassName?: string;
   noLoadingSpinner?: boolean;
+  sizeClass?: string;
 };
 
 const Button: FunctionComponent<ButtonProps> = ({
@@ -30,11 +31,12 @@ const Button: FunctionComponent<ButtonProps> = ({
   noLoadingSpinner = false,
   SpinnerClassName,
   textClassName,
+  sizeClass = "btn",
 }) => {
   return (
     <button
       className={classNames(
-        "btn",
+        `${sizeClass}`,
         {
           "bg-opacity-75 cursor-default": disabled || loading,
         },

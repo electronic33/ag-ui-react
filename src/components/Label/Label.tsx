@@ -19,13 +19,7 @@ const Label: FC<LabelProps> = ({
   htmlFor,
 }) => {
   return (
-    <label
-      htmlFor={htmlFor}
-      className={classNames(
-        "flex items-center mb-2 text-base text-gray-700",
-        className,
-      )}
-    >
+    <label htmlFor={htmlFor} className={classNames("label", className)}>
       {children}
       {required && (
         <span className="ml-px self-start text-xs font-thin text-red-600">

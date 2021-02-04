@@ -23,16 +23,11 @@ const Accordion: FC<AccordionProps> = ({
 
   const { onToggleIsOpen, isOpen, isTransitioning } = useCollapseAnimation(
     collapseRef,
-    true,
+    false,
   );
 
   return (
-    <div
-      className={classNames(
-        "flex flex-col rounded-md shadow-lg bg-gray-50 px-4 py-6 w-calendar overflow-hidden",
-        className,
-      )}
-    >
+    <div className={classNames("accordion", className)}>
       <div
         className="flex justify-center items-center cursor-pointer"
         onClick={isTransitioning ? undefined : onToggleIsOpen}
@@ -61,8 +56,8 @@ const Accordion: FC<AccordionProps> = ({
       </div>
       <div
         ref={collapseRef}
-        className={classNames("flex flex-col overflow-hidden h-auto", {})}
-        style={{ transition: "height 0.3s ease-out" }}
+        className={classNames("drop-down", {}, DropDownClassName)}
+        // style={{ transition: "height 0.3s ease-out" }}
       >
         <div>{children}</div>
       </div>

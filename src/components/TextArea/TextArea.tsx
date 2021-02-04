@@ -78,7 +78,7 @@ const TextInput: FunctionComponent<TextInputProps> = ({
               ) || Boolean(error),
             "bg-gray-200": disabled,
           },
-          "rounded-md border-gray-300 border-2 flex-grow p-2",
+          "text-area",
           inputClassName,
         )}
         value={field.value || value}

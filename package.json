@@ -61,6 +61,7 @@
     "classnames": "^2.2.6",
     "formik": "^2.2.6",
     "headlessui": "0.0.0",
-    "react-icons": "^4.1.0"
+    "react-icons": "^4.1.0",
+    "react-scrolllock": "^5.0.1"
   }
 }

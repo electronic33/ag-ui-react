@@ -3,7 +3,7 @@ import classNames from "classnames";
 
 const Tabs = ({ tabs, currentTab, setCurrentTab }) => {
   return (
-    <div className="flex flex-col bg-gray-100">
+    <div className="tabs">
       <div className="flex">
         {tabs.map((tab, index) => (
           <div
