@@ -15,6 +15,7 @@ const ErrorBaseClasses = require("./src/components/ErrorMessage/ErrorBaseClasses
 const ErrorToastBaseClasses = require("./src/components/ErrorToast/ErrorToastBaseClasses");
 const SuccessToastBaseClasses = require("./src/components/SuccessToast/SuccessToastBaseClasses");
 const TooltipBaseClasses = require("./src/components/Tooltip/TooltipBaseClasses");
+const CalendarBaseClasses = require("./src/components/Calendar/CalendarBaseClasses");
 
 module.exports = {
   purge: [],
@@ -948,6 +949,7 @@ module.exports = {
         ...ErrorToastBaseClasses(theme),
         ...SuccessToastBaseClasses(theme),
         ...TooltipBaseClasses(theme),
+        ...CalendarBaseClasses(theme),
       };
 
       addUtilities(newComponents, {
