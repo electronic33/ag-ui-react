@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Calendar, { useMultipleSelectCalendarState } from "./Calendar";
-// import "../../styles/index.css";
+import "../../styles/index.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { isSameDay } from "date-fns";
 
