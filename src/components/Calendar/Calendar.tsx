@@ -58,7 +58,7 @@ interface CalendarTypes {
   activeTilesClassName?: string | ((day: Date) => string);
   selectedTileClassName?: string | ((day: Date) => string);
   selectedDate: Date[];
-  selectHandler: React.Dispatch<React.SetStateAction<Date[] | Date>>;
+  selectHandler?: React.Dispatch<React.SetStateAction<Date[] | Date>>;
   rangeSelect?: boolean;
   CellComponent?: React.ComponentType<{ day: Date }>;
 }

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Calendar, { useMultipleSelectCalendarState } from "./Calendar";
-import "../../styles/index.css";
+// import "../../styles/index.css";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { isSameDay } from "date-fns";
 
@@ -8,7 +8,7 @@ export default {
   title: "Calendar",
 };
 
-export const Default = (): React.ReactNode => {
+export const Default = (): React.ReactElement => {
   const [selectedDates, setSelectedDates] = useState([]);
 
   // const [selectedDates, setSelectedDates] = useMultipleSelectCalendarState([]);
