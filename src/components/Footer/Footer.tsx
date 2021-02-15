@@ -1,14 +1,14 @@
 import React from "react";
 import AppGarageLogoBig from "../../resources/AppGarageLogoBig";
 
-const Footer = () => {
+const Footer = (): React.ReactElement => {
   return (
     <footer>
       {/* <div className="bg-gray-700 py-4 flex flex-col items-center px-4 768:px-10 justify-center text-white pt-5"></div> */}
       <div className="mt-auto bg-gray-800 w-full flex flex-col 768:flex-row justify-between items-center px-4 768:px-10 text-white py-5">
         <p>
           Lacul La Noroc |{" "}
-          <a className="underline" to="/politica-de-confidentialitate">
+          <a className="underline" href="/politica-de-confidentialitate">
             terms_and_conditions
           </a>
         </p>

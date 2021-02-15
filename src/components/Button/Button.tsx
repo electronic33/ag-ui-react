@@ -10,7 +10,7 @@ type ButtonProps = {
   loading?: boolean;
   text?: string;
   textClassName?: string;
-  Icon?: unknown;
+  Icon?: React.ComponentType<{ className: string }>;
   IconClassName?: string;
   iconPositionRight?: boolean;
   loadingText?: string;

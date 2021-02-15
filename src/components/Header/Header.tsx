@@ -1,22 +1,40 @@
-import React, { FC, useMemo, useState } from "react";
+import React, { FC, useState } from "react";
 // import { useLocation } from "@reach/router";
 import classNames from "classnames";
-import { AiOutlineCalendar } from "react-icons/ai";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 import Link from "../Link/Link";
 
+interface navLinkType {
+  label: string;
+  href: string;
+  Icon: React.ComponentType;
+}
 interface HeaderProps {
   originalPath: string;
-  navLinks: unknown;
-  restNavLinks: unknown;
-  alwaysShowingLinks: unknown;
+  navLinks: navLinkType[];
+  restNavLinks: navLinkType[];
+  alwaysShowingLinks: navLinkType[];
   href: string;
   onClick: unknown;
   length: unknown;
-  LinkComponent: unknown;
-  logo: unknown;
-  callToActionButton: unknown;
-  hamburgerMenu: unknown;
+  hamburgerMenu?: {
+    Icon: React.ComponentType<{ className?: string }>;
+    className?: string;
+    text?: string;
+    onClick?: () => void;
+  };
+  LogoComp: { Icon: React.ComponentType; to: string };
+  LinkComponent?: React.ComponentType<{
+    to: string;
+    className?: string;
+    onClick?: () => void;
+  }>;
+  callToActionButton?: {
+    text: string;
+    to?: string;
+    Icon?: React.ComponentType<{ className?: string }>;
+    onClick?: () => void;
+  };
 }
 
 const Header: FC<HeaderProps> = ({
@@ -29,13 +47,8 @@ const Header: FC<HeaderProps> = ({
   callToActionButton,
   hamburgerMenu,
 }) => {
-  // const { pathname } = useLocation();
   const pathname = "path/name/";
   const exactPath = pathname.split("/").pop();
-  console.log(
-    "🚀 ~ file: Header.tsx ~ line 30 ~ callToActionButton",
-    callToActionButton,
-  );
 
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
 
@@ -64,28 +77,21 @@ const Header: FC<HeaderProps> = ({
 
         <div className="flex ">
           <nav className="hidden 800:flex 800:items-center justify-end self-end mr-3">
-            {alwaysShowingLinks?.map(({ href, Icon, label, className }) => (
-              <LinkComponent
-                key={href}
-                to={href}
-                className={classNames(
-                  "flex items-center flex-shrink-0 justify-center text-lg px-1 py-3 mr-2 transition-color duration-500 hover:text-blue-500",
-                  {
-                    "text-blue-500": exactPath === href.slice(1),
-                  },
-                  className,
-                )}
-              >
-                <Icon className="mr-2" />
-                {label}
-              </LinkComponent>
-            ))}
-            <div className="hidden 1410:flex">
-              {restNavLinks?.map(({ href, Icon, label, className }) => (
+            {alwaysShowingLinks?.map(
+              ({
+                href,
+                Icon,
+                label,
+                className,
+              }: {
+                href: string;
+                label: string;
+                Icon: React.ComponentType<{ className?: string }>;
+                className?: string;
+              }) => (
                 <LinkComponent
                   key={href}
                   to={href}
-                  text={label}
                   className={classNames(
                     "flex items-center flex-shrink-0 justify-center text-lg px-1 py-3 mr-2 transition-color duration-500 hover:text-blue-500",
                     {
@@ -97,7 +103,37 @@ const Header: FC<HeaderProps> = ({
                   <Icon className="mr-2" />
                   {label}
                 </LinkComponent>
-              ))}
+              ),
+            )}
+            <div className="hidden 1410:flex">
+              {restNavLinks?.map(
+                ({
+                  href,
+                  Icon,
+                  label,
+                  className,
+                }: {
+                  href: string;
+                  label: string;
+                  Icon: React.ComponentType<{ className?: string }>;
+                  className?: string;
+                }) => (
+                  <LinkComponent
+                    key={href}
+                    to={href}
+                    className={classNames(
+                      "flex items-center flex-shrink-0 justify-center text-lg px-1 py-3 mr-2 transition-color duration-500 hover:text-blue-500",
+                      {
+                        "text-blue-500": exactPath === href.slice(1),
+                      },
+                      className,
+                    )}
+                  >
+                    <Icon className="mr-2" />
+                    {label}
+                  </LinkComponent>
+                ),
+              )}
             </div>
             {callToActionButton && (
               <LinkComponent

@@ -3,11 +3,21 @@ import { Menu, Transition } from "@headlessui/react";
 import { MdArrowDropDown } from "react-icons/md";
 import classNames from "classnames";
 
+interface menuItemTypes {
+  text?: string;
+  href?: string;
+  disabled?: boolean;
+}
+
 const DropdownButton = ({
   menuItems,
   buttonClassNames,
   itemsContainerClassNames,
-}) => {
+}: {
+  buttonClassNames?: string;
+  itemsContainerClassNames?: string;
+  menuItems: menuItemTypes[];
+}): React.ReactElement => {
   const activeItemClasses =
     "bg-gray-900 bg-opacity-60 text-white transition-all duration-200";
   const disabledItemClasses = "opacity-75 outline-none";

@@ -4,7 +4,6 @@ import "../../styles/index.css";
 
 export default {
   title: "DropdownButton",
-  component: DropdownButton,
 };
 
 export const Default = (): React.ReactNode => (

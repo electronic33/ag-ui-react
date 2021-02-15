@@ -6,8 +6,8 @@ interface AccordionProps {
   text?: string;
   className?: string;
   children?: React.ReactNode;
-  Icon: JSX.Element;
-  ArrowIcon: JSX.Element;
+  Icon?: React.ComponentType<{ className: string }>;
+  ArrowIcon?: React.ComponentType<{ className: string }>;
   DropDownClassName: string;
 }
 

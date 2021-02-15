@@ -1,27 +1,36 @@
-import React, { FC, useMemo, useState } from "react";
+import React from "react";
 // import { useLocation } from "@reach/router";
 import classNames from "classnames";
 import { AiOutlineCalendar } from "react-icons/ai";
 import Link from "../Link/Link";
 
+interface navLinkType {
+  label: string;
+  href: string;
+  Icon: React.ComponentType;
+}
 interface HamburgerProps {
   isOpen: boolean;
-  originalPath: string;
-  onHamburgerClick: unknown;
-  navLinks: unknown;
-  href: string;
-  onClick: unknown;
-  length: unknown;
-  LinkComponent: unknown;
+  originalPath?: string;
+  onHamburgerClick?: () => void;
+  navLinks?: navLinkType[];
+  restNavLinks?: navLinkType[];
+  alwaysShowingLinks?: navLinkType[];
+  href?: string;
+  length?: unknown;
+  LinkComponent?: React.ComponentType<{
+    to: string;
+    className?: string;
+    onClick?: () => void;
+  }>;
 }
 
-const HamburgerMenu: FC<HamburgerProps> = ({
+const HamburgerMenu = ({
   isOpen,
-  originalPath,
   onHamburgerClick,
   navLinks,
   LinkComponent = Link,
-}) => {
+}: HamburgerProps): React.ReactElement => {
   // const { pathname } = useLocation();
   const pathname = "path/name/";
   const exactPath = pathname.split("/").pop();
@@ -48,51 +57,77 @@ const HamburgerMenu: FC<HamburgerProps> = ({
           </LinkComponent>
           <div className="flex flex-col items-center justify-center w-auto 640:flex-row 640:w-full">
             <div className="flex flex-col w-full 640:w-64">
-              {navLinks.map(({ href, label, Icon }, index) => (
-                <div key={index} className="flex mr-5">
-                  {index < 4 && (
-                    <LinkComponent
-                      key={href}
-                      onClick={onHamburgerClick}
-                      to={href}
-                      className={classNames(
-                        "flex flex-shrink-0 items-center text-2xl max-w-lg border-b border-solid border-gray-500 px-6 py-3 mr-2 transition-color duration-700 hover:text-blue-500 w-full",
-                        {
-                          "text-blue-500": exactPath === href.slice(1),
-                          "640:mb-16 640:border-none":
-                            index === navLinksLength - 5,
-                        },
-                      )}
-                    >
-                      <Icon className="mr-2" />
-                      {label}
-                    </LinkComponent>
-                  )}
-                </div>
-              ))}
+              {navLinks.map(
+                (
+                  {
+                    href,
+                    label,
+                    Icon,
+                  }: {
+                    href: string;
+                    label: string;
+                    Icon: React.ComponentType<{ className?: string }>;
+                  },
+                  index,
+                ) => (
+                  <div key={index} className="flex mr-5">
+                    {index < 4 && (
+                      <LinkComponent
+                        key={href}
+                        onClick={onHamburgerClick}
+                        to={href}
+                        className={classNames(
+                          "flex flex-shrink-0 items-center text-2xl max-w-lg border-b border-solid border-gray-500 px-6 py-3 mr-2 transition-color duration-700 hover:text-blue-500 w-full",
+                          {
+                            "text-blue-500": exactPath === href.slice(1),
+                            "640:mb-16 640:border-none":
+                              index === navLinksLength - 5,
+                          },
+                        )}
+                      >
+                        <Icon className="mr-2" />
+                        {label}
+                      </LinkComponent>
+                    )}
+                  </div>
+                ),
+              )}
             </div>
             <div className="flex flex-col w-full 640:w-64">
-              {navLinks.map(({ href, label, Icon }, index) => (
-                <div key={index} className="flex mr-5">
-                  {index >= 4 && (
-                    <LinkComponent
-                      key={href}
-                      onClick={onHamburgerClick}
-                      to={href}
-                      className={classNames(
-                        "flex flex-shrink-0 items-center text-2xl max-w-lg border-b border-solid border-gray-500 px-6 py-3 mr-2 transition-color duration-700 hover:text-blue-500 w-full",
-                        {
-                          "text-blue-500": exactPath === href.slice(1),
-                          "mb-16 border-none": index === navLinksLength - 1,
-                        },
-                      )}
-                    >
-                      <Icon className="mr-2" />
-                      {label}
-                    </LinkComponent>
-                  )}
-                </div>
-              ))}
+              {navLinks.map(
+                (
+                  {
+                    href,
+                    label,
+                    Icon,
+                  }: {
+                    href: string;
+                    label: string;
+                    Icon: React.ComponentType<{ className?: string }>;
+                  },
+                  index,
+                ) => (
+                  <div key={index} className="flex mr-5">
+                    {index >= 4 && (
+                      <LinkComponent
+                        key={href}
+                        onClick={onHamburgerClick}
+                        to={href}
+                        className={classNames(
+                          "flex flex-shrink-0 items-center text-2xl max-w-lg border-b border-solid border-gray-500 px-6 py-3 mr-2 transition-color duration-700 hover:text-blue-500 w-full",
+                          {
+                            "text-blue-500": exactPath === href.slice(1),
+                            "mb-16 border-none": index === navLinksLength - 1,
+                          },
+                        )}
+                      >
+                        <Icon className="mr-2" />
+                        {label}
+                      </LinkComponent>
+                    )}
+                  </div>
+                ),
+              )}
             </div>
           </div>
         </div>

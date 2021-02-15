@@ -1,9 +1,8 @@
 import React, { FC } from "react";
 
 interface LinkProps {
-  className: string;
+  className?: string;
   to: string;
-  text: string;
 }
 
 const Link: FC<LinkProps> = ({ to, children, className }) => {
