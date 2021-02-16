@@ -1,6 +1,19 @@
 import React, { useMemo } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 
+interface SelectTypes {
+  options: {
+    label: string;
+    value: number | string;
+    Icon?: React.ComponentType;
+  }[];
+  selected: number | string;
+  onChange?: (item?) => void;
+  className: string;
+  label: string;
+  cursorPointer?: string;
+}
+
 const Select = ({
   options,
   selected,
@@ -8,7 +21,7 @@ const Select = ({
   className,
   label,
   cursorPointer,
-}) => {
+}: SelectTypes): React.ReactElement => {
   const selectedOption = useMemo(
     () => options.find((option) => option.value === selected),
     [selected],

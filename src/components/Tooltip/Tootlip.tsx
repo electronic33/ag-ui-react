@@ -1,6 +1,16 @@
 import React, { useState, useRef } from "react";
 import classNames from "classnames";
 
+interface TooltipTypes {
+  tipClassName?: string;
+  delay?: number;
+  children?: React.ReactNode;
+  direction?: string;
+  content: string;
+  containerClasses?: string;
+  arrowClasses?: string;
+}
+
 const Tooltip = ({
   tipClassName,
   delay,
@@ -9,7 +19,7 @@ const Tooltip = ({
   content,
   containerClasses = "bg-gray-600",
   arrowClasses = "bg-gray-600",
-}) => {
+}: TooltipTypes): React.ReactElement => {
   let timeout;
   const [active, setActive] = useState(false);
   const tooltipRef = useRef();

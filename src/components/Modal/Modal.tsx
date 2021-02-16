@@ -4,7 +4,13 @@ import ScrollLock from "react-scrolllock";
 
 const ESC_KEYCODE = 27;
 
-const Modal = ({ onClose, children }) => {
+const Modal = ({
+  onClose,
+  children,
+}: {
+  onClose?: () => void;
+  children?: React.ReactNode;
+}): React.ReactElement => {
   const handleKeydown = useCallback((event) => {
     if (event.keyCode === ESC_KEYCODE) {
       onClose();

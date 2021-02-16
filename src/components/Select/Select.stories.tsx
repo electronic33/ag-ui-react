@@ -9,7 +9,7 @@ export default {
 export const Default = (): React.ReactNode => (
   <Select
     className="max-w-sm w-64 mb-5 my-2 mr-2"
-    onChange={console.log("Changed")}
+    // onChange={}
     selected={null}
     label="Select"
     options={[

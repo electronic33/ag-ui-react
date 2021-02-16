@@ -9,21 +9,21 @@ export default {
 
 export const Top = (): React.ReactNode => (
   <Tooltip content="Hello, I'm a tooltip" direction="top">
-    <Button text="Button with tooltip">I'm a button</Button>
+    <Button text="Button with tooltip">I&apos;m a button</Button>
   </Tooltip>
 );
 export const Right = (): React.ReactNode => (
   <Tooltip content="Hello, I'm a tooltip" direction="right">
-    <Button text="Button with tooltip">I'm a button</Button>
+    <Button text="Button with tooltip">I&apos;m a button</Button>
   </Tooltip>
 );
 export const Left = (): React.ReactNode => (
   <Tooltip content="Hello, I'm a tooltip" direction="left">
-    <Button text="Button with tooltip">I'm a button</Button>
+    <Button text="Button with tooltip">I&apos;m a button</Button>
   </Tooltip>
 );
 export const Bottom = (): React.ReactNode => (
   <Tooltip content="Hello, I'm a tooltip" direction="bottom">
-    <Button text="Button with tooltip">I'm a button</Button>
+    <Button text="Button with tooltip">I&apos;m a button</Button>
   </Tooltip>
 );

@@ -6,8 +6,8 @@ const ErrorBaseClasses = (theme) => ({
     color: theme("colors.red.600"),
     padding: theme("spacing.2"),
     borderRadius: theme("borderRadius.md"),
-    width: '100%',
-    maxWidth: theme('maxWidth.sm')
+    width: "100%",
+    maxWidth: theme("maxWidth.sm"),
   },
 });
 

@@ -1,23 +1,23 @@
-import React, { FC } from "react";
+import React from "react";
 import classNames from "classnames";
 
 interface LabelProps {
   secondaryText?: string;
   className?: string;
   required?: boolean;
-  children?: unknown;
   errorText?: string;
   htmlFor?: string;
+  children?: React.ReactNode;
 }
 
-const Label: FC<LabelProps> = ({
+const Label = ({
   secondaryText,
   className,
   required = false,
   children,
   errorText,
   htmlFor,
-}) => {
+}: LabelProps): React.ReactElement => {
   return (
     <label htmlFor={htmlFor} className={classNames("label", className)}>
       {children}

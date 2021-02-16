@@ -1,8 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import classNames from "classnames";
 import Button from "../Button/Button";
 import TextInput from "../TextInput/TextInput";
 import Select from "../Select/Select";
+
+interface PaginationTypes {
+  maxCount: number;
+  itemsPerPage: number;
+  setItemsPerPage: Dispatch<SetStateAction<number>>;
+  currentPage: number;
+  setCurrentPage: Dispatch<SetStateAction<number>>;
+  firstAndLastSectionsNumber?: number;
+  initialGotoPageValue?: number;
+  selectOptions?: { label: string; value: number }[];
+}
 
 const Pagination = ({
   maxCount,
@@ -13,15 +24,17 @@ const Pagination = ({
   firstAndLastSectionsNumber = 3,
   initialGotoPageValue,
   selectOptions,
-}) => {
+}: PaginationTypes): React.ReactElement => {
   const numberOfPages = Math.ceil(maxCount / itemsPerPage);
 
-  const [firstSection, setFirstSection] = useState([]);
-  const [middleSection, setMiddleSection] = useState([]);
-  const [lastSection, setLastSection] = useState([]);
+  const [firstSection, setFirstSection] = useState<number[]>([]);
+  const [middleSection, setMiddleSection] = useState<number[]>([]);
+  const [lastSection, setLastSection] = useState<number[]>([]);
 
-  const [goToPageValue, setGoToPageValue] = useState(initialGotoPageValue);
-  const [itemsNumber, setItemsNumber] = useState(itemsPerPage);
+  const [goToPageValue, setGoToPageValue] = useState<number>(
+    initialGotoPageValue,
+  );
+  const [itemsNumber, setItemsNumber] = useState<number>(itemsPerPage);
 
   useEffect(() => {
     let i;
@@ -84,7 +97,7 @@ const Pagination = ({
           goToPageValue > 0 &&
           goToPageValue <= numberOfPages
         ) {
-          setCurrentPage(parseInt(goToPageValue));
+          setCurrentPage(goToPageValue);
         }
       }}
     >
@@ -92,7 +105,7 @@ const Pagination = ({
         <p
           onClick={() => {
             if (currentPage !== 1) {
-              setCurrentPage(currentPage - 1);
+              currentPage - 1;
             }
           }}
           className={classNames("pagination", {
@@ -192,7 +205,7 @@ const Pagination = ({
           </label>
           <TextInput
             onChange={(event) => {
-              setGoToPageValue(event.target.value);
+              setGoToPageValue(parseInt(event.target.value));
             }}
             value={goToPageValue}
             className="bg-gray-100 shadow rounded px-2 py-1"

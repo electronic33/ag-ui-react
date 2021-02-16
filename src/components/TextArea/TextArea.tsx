@@ -1,17 +1,17 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 import classNames from "classnames";
 import Label from "../Label/Label";
 import { FormikProps, FieldInputProps } from "formik";
 
-interface TextInputProps {
+interface TextAreaProps {
   label?: string;
   secondaryLabel?: string;
-  Icon?: React.FC<{ className: string }>;
+  Icon?: React.ComponentType<{ className: string }>;
   required?: boolean;
   name?: string;
   value?: string;
-  onChange?: unknown;
-  onKeyDown?: unknown;
+  onChange?: () => void;
+  onKeyDown?: () => void;
   error?: string;
   className?: string;
   inputClassName?: string;
@@ -19,17 +19,17 @@ interface TextInputProps {
   max?: string | number;
   showMax?: boolean;
   placeholder?: string;
-  field?: FieldInputProps<unknown>;
+  field?: FieldInputProps<string>;
   form?: FormikProps<unknown>;
-  onBlur?: unknown;
+  onBlur?: () => void;
   errorInLabel?: boolean;
   disabled?: boolean;
 }
 
-const TextInput: FunctionComponent<TextInputProps> = ({
+const TextArea = ({
   label = "",
   secondaryLabel = "",
-  Icon = "",
+  Icon,
   required = false,
   name = "",
   value = "",
@@ -38,16 +38,15 @@ const TextInput: FunctionComponent<TextInputProps> = ({
   error = "",
   className,
   inputClassName,
-  type = "text",
   max = undefined,
   showMax = false,
   placeholder,
-  field = {},
-  form = {},
+  field,
+  form,
   onBlur = undefined,
   errorInLabel = false,
   disabled = false,
-}) => {
+}: TextAreaProps): React.ReactElement => {
   return (
     <div className={classNames("flex flex-col relative", className)}>
       {label && (
@@ -56,12 +55,12 @@ const TextInput: FunctionComponent<TextInputProps> = ({
           required={required}
           errorText={
             errorInLabel
-              ? (form.touched?.[field.name] && form.errors?.[field.name]) ||
+              ? (form?.touched?.[field?.name] && form?.errors?.[field?.name]) ||
                 error ||
                 ""
               : undefined
           }
-          htmlFor={field.name || name ? field.name || name : undefined}
+          htmlFor={field?.name || name ? field?.name || name : undefined}
         >
           {Icon ? <Icon className="w-5 mr-2" /> : null}
           {label}
@@ -69,38 +68,36 @@ const TextInput: FunctionComponent<TextInputProps> = ({
       )}
       <textarea
         placeholder={placeholder}
-        type={type}
         className={classNames(
           {
             "border-red-700":
               Boolean(
-                form.errors?.[field.name] && form.touched?.[field.name],
+                form?.errors?.[field?.name] && form?.touched?.[field?.name],
               ) || Boolean(error),
             "bg-gray-200": disabled,
           },
           "text-area",
           inputClassName,
         )}
-        value={field.value || value}
-        onChange={field.onChange || onChange}
+        value={field?.value || value}
+        onChange={field?.onChange || onChange}
         onKeyDown={onKeyDown}
-        name={field.name || name}
-        id={field.name || name ? field.name || name : undefined}
-        max={max}
-        onBlur={field.onBlur || onBlur}
+        name={field?.name || name}
+        id={field?.name || name ? field?.name || name : undefined}
+        onBlur={field?.onBlur || onBlur}
         disabled={disabled}
       />
 
       {showMax ? (
         <p className="flex absolute right-0 bottom-0 text-gray-400 -mb-4 text-xs">
-          {`${field.value ? field.value.length : value.length}/${max}`}
+          {`${field?.value ? field?.value.length : value.length}/${max}`}
         </p>
       ) : null}
       {!errorInLabel ? (
         <>
-          {form.errors?.[field.name] && form.touched?.[field.name] ? (
+          {form?.errors?.[field?.name] && form?.touched?.[field?.name] ? (
             <p className="flex absolute inset-x-0 bottom-0 text-red-700 -mb-4 text-xs">
-              {form.errors?.[field.name]}
+              {form?.errors?.[field?.name]}
             </p>
           ) : null}
           {error ? (
@@ -114,4 +111,4 @@ const TextInput: FunctionComponent<TextInputProps> = ({
   );
 };
 
-export default TextInput;
+export default TextArea;

@@ -1,7 +1,21 @@
 import React from "react";
 import classNames from "classnames";
 
-const Tabs = ({ tabs, currentTab, setCurrentTab }) => {
+interface TabsTypes {
+  tabs: {
+    title?: string;
+    Icon?: React.ComponentType;
+    content?: React.ComponentType;
+  }[];
+  currentTab: number;
+  setCurrentTab: (index: number) => void;
+}
+
+const Tabs = ({
+  tabs,
+  currentTab,
+  setCurrentTab,
+}: TabsTypes): React.ReactElement => {
   return (
     <div className="tabs">
       <div className="flex">

@@ -1,6 +1,17 @@
 import React from "react";
 import classNames from "classnames";
 
+interface SwitchTypes {
+  value: string;
+  setValue: (prevState) => void;
+  name: string;
+  disabled: string;
+  notActiveBackGroundColorClass: string;
+  activeBackGroundColorClass: string;
+  activeDotBackgroundColorClass: string;
+  notActiveDotBackgroundColorClass: string;
+}
+
 const Switch = ({
   value,
   setValue,
@@ -10,10 +21,10 @@ const Switch = ({
   activeBackGroundColorClass = "bg-gray-200",
   activeDotBackgroundColorClass = "bg-gray-100",
   notActiveDotBackgroundColorClass = "bg-gray-100",
-}) => {
+}: SwitchTypes): React.ReactElement => {
   const handleClick = () => {
     if (setValue) {
-      setValue((prevState) => !prevState);
+      setValue((prevState: boolean) => !prevState);
     }
   };
 

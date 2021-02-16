@@ -1,3 +1,3 @@
-import initStoryShots from "@storybook/addon-storyshots";
+// import initStoryShots from "@storybook/addon-storyshots";
 
-initStoryShots();
+// initStoryShots();

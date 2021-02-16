@@ -10,20 +10,21 @@ interface navLinkType {
   Icon: React.ComponentType;
 }
 interface HeaderProps {
-  originalPath: string;
-  navLinks: navLinkType[];
-  restNavLinks: navLinkType[];
-  alwaysShowingLinks: navLinkType[];
-  href: string;
-  onClick: unknown;
-  length: unknown;
+  originalPath?: string;
+  navLinks?: navLinkType[];
+  restNavLinks?: navLinkType[];
+  alwaysShowingLinks?: navLinkType[];
+  href?: string;
+  onClick?: unknown;
+  length?: unknown;
   hamburgerMenu?: {
     Icon: React.ComponentType<{ className?: string }>;
     className?: string;
     text?: string;
     onClick?: () => void;
+    to: string;
   };
-  LogoComp: { Icon: React.ComponentType; to: string };
+  LogoComp?: { Icon: React.ComponentType; to: string };
   LinkComponent?: React.ComponentType<{
     to: string;
     className?: string;
