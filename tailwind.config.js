@@ -16,6 +16,7 @@ const ErrorToastBaseClasses = require("./src/components/ErrorToast/ErrorToastBas
 const SuccessToastBaseClasses = require("./src/components/SuccessToast/SuccessToastBaseClasses");
 const TooltipBaseClasses = require("./src/components/Tooltip/TooltipBaseClasses");
 const CalendarBaseClasses = require("./src/components/Calendar/CalendarBaseClasses");
+const SliderBaseClasses = require("./src/components/Slider/SliderBaseClasses");
 
 module.exports = {
   purge: [],
@@ -950,7 +951,10 @@ module.exports = {
         ...SuccessToastBaseClasses(theme),
         ...TooltipBaseClasses(theme),
         ...CalendarBaseClasses(theme),
+        ...SliderBaseClasses(theme),
       };
+
+      // console.log("asd");
 
       addUtilities(newComponents, {
         respectImportant: false,

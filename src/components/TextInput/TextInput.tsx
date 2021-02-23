@@ -11,6 +11,7 @@ interface TextInputProps {
   name?: string;
   value?: string | number;
   onChange?: (event) => void;
+  onClick?: (event) => void;
   onKeyDown?: () => void;
   error?: string;
   className?: string;
@@ -34,6 +35,7 @@ const TextInput = ({
   name = "",
   value = "",
   onChange = undefined,
+  onClick = undefined,
   onKeyDown = undefined,
   error = "",
   className,
@@ -83,6 +85,7 @@ const TextInput = ({
         )}
         value={field?.value || value}
         onChange={field?.onChange || onChange}
+        onClick={onClick}
         onKeyDown={onKeyDown}
         name={field?.name || name}
         id={field?.name || name ? field?.name || name : undefined}
