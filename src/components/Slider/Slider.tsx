@@ -1,5 +1,4 @@
 import React, {
-  Children,
   useEffect,
   useLayoutEffect,
   useMemo,
@@ -12,13 +11,16 @@ import Slide from "./Slide";
 import Modal from "../Modal/Modal";
 
 interface SliderTypes {
-  children: React.ReactNode[];
+  withModal?: boolean;
+  children?: React.ReactNode[];
   itemsToShow?: number;
   itemsToScroll?: number;
   breakpoints?: {
     minWidth: number;
     config: { itemsToScroll: number; itemsToShow: number };
   }[];
+  setterFn?: (index: number) => void;
+  startAtIndex?: number;
 }
 
 const Slider = ({
@@ -176,8 +178,6 @@ const Slider = ({
   const onDotClick = (index) => {
     setActiveDot(index);
     if (index + 1 === dotsNum) {
-      console.log("I run tho");
-      // if (activeIndex - 1 === children.length - currentItemsToShow) {
       setState({
         ...state,
         transition: 0.45,
@@ -253,7 +253,7 @@ const Slider = ({
   );
 };
 
-const SliderWithModal = (props) => {
+const SliderWithModal = (props: SliderTypes): React.ReactElement => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [clickedSlide, setClickedSlide] = useState(null);
 
@@ -263,7 +263,7 @@ const SliderWithModal = (props) => {
   };
   return (
     <div>
-      {isModalOpen && (
+      {props.withModal && isModalOpen && (
         <Modal onClose={() => setIsModalOpen(false)}>
           <Slider
             {...props}

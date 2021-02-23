@@ -4,6 +4,8 @@ interface slideProps {
   height: number;
   width: number;
   children: React.ReactNode;
+  setterFn?: (index: number) => void;
+  index: number;
 }
 
 const Slide = ({
@@ -15,7 +17,7 @@ const Slide = ({
 }: slideProps): React.ReactElement => {
   return (
     <div
-      onClick={() => setterFn(index, width)}
+      onClick={() => setterFn(index)}
       className="Slide flex  h-auto flex-1"
       style={{ width: `${width}`, height: `${height}` }}
     >
