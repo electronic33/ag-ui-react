@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import classNames from "../Slider/node_modules/classnames";
 
 interface TooltipTypes {
   tipClassName?: string;

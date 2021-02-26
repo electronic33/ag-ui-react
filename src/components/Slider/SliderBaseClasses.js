@@ -1,4 +1,4 @@
-const CalendarBaseClasses = (theme) => ({
+const SliderBaseClasses = (theme) => ({
   ".main-div": {
     width: theme("width.full"),
     position: "relative",
@@ -70,4 +70,4 @@ const CalendarBaseClasses = (theme) => ({
   },
 });
 
-module.exports = CalendarBaseClasses;
+module.exports = SliderBaseClasses;

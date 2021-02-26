@@ -5,4 +5,6 @@
 :root {
   --tooltip-margin: 30px;
   --tooltip-arrow-size: 6px;
+  --menu-margin: 30px;
+  --menu-arrow-size: 6px;
 }

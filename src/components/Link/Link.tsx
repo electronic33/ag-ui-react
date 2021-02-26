@@ -2,13 +2,25 @@ import React from "react";
 
 interface LinkProps {
   className?: string;
-  to: string;
+  to?: string;
   children?: React.ReactNode;
+  onClick: () => void;
 }
 
-const Link = ({ to, children, className }: LinkProps): React.ReactElement => {
+const Link = ({
+  to,
+  children,
+  className,
+  onClick,
+}: LinkProps): React.ReactElement => {
   return (
-    <a className={className} href={to} target="_blank" rel="noreferrer">
+    <a
+      className={className}
+      href={to}
+      target="_blank"
+      rel="noreferrer"
+      onClick={onClick}
+    >
       {children}
     </a>
   );

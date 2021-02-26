@@ -17,6 +17,11 @@ const SuccessToastBaseClasses = require("./src/components/SuccessToast/SuccessTo
 const TooltipBaseClasses = require("./src/components/Tooltip/TooltipBaseClasses");
 const CalendarBaseClasses = require("./src/components/Calendar/CalendarBaseClasses");
 const SliderBaseClasses = require("./src/components/Slider/SliderBaseClasses");
+const BottomNavBaseClasses = require("./src/components/BottomNav/BottomNavBaseClasses");
+const BreadCrumbsBaseClasses = require("./src/components/BreadCrumbs/BreadCrumbsBaseClasses");
+const DrawerBaseClasses = require("./src/components/Drawer/DrawerBaseClasses");
+const CheckboxBaseClasses = require("./src/components/Checkbox/CheckboxBaseClasses");
+const MenuBaseClasses = require("./src/components/Menu/MenuBaseClasses");
 
 module.exports = {
   purge: [],
@@ -934,7 +939,7 @@ module.exports = {
     zIndex: ["responsive", "focus-within", "focus"],
   },
   plugins: [
-    plugin(({ addUtilities, theme }) => {
+    plugin(({ addUtilities, theme: theme }) => {
       const newComponents = {
         ...ButtonBaseClasses(theme),
         ...ButtonSpinnerBaseClasses(theme),
@@ -952,6 +957,11 @@ module.exports = {
         ...TooltipBaseClasses(theme),
         ...CalendarBaseClasses(theme),
         ...SliderBaseClasses(theme),
+        ...BottomNavBaseClasses(theme),
+        ...BreadCrumbsBaseClasses(theme),
+        ...DrawerBaseClasses(theme),
+        ...CheckboxBaseClasses(theme),
+        ...MenuBaseClasses(theme),
       };
 
       // console.log("asd");
