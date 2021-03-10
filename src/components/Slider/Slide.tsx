@@ -1,6 +1,6 @@
 import React from "react";
 
-interface slideProps {
+export interface slideProps {
   height: number;
   width: number;
   children: React.ReactNode;
@@ -18,7 +18,7 @@ const Slide = ({
   return (
     <div
       onClick={() => setterFn(index)}
-      className="Slide flex  h-auto flex-1"
+      className="Slide flex justify-center items-center h-auto flex-1"
       style={{ width: `${width}`, height: `${height}` }}
     >
       {children}

@@ -4,6 +4,7 @@ import "../../styles/index.css";
 
 export default {
   title: "SelectWIthFilter",
+  component: SelectWIthFilter,
 };
 
 export const Default = (): React.ReactNode => {

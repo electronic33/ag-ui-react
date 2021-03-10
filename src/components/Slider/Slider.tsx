@@ -9,8 +9,10 @@ import Arrow from "./Arrow";
 import Dots from "./Dots";
 import Slide from "./Slide";
 import Modal from "../Modal/Modal";
+import classNames from "classnames";
 
-interface SliderTypes {
+export interface SliderTypes {
+  className?: string;
   withModal?: boolean;
   children?: React.ReactNode[];
   itemsToShow?: number;
@@ -24,7 +26,9 @@ interface SliderTypes {
 }
 
 const Slider = ({
+  className = "w-full",
   children,
+
   itemsToShow = 1,
   itemsToScroll = 1,
   breakpoints,
@@ -204,6 +208,15 @@ const Slider = ({
     }
   };
 
+  console.log(
+    "🚀 ~ file: Slider.tsx ~ line 216 ~ useLayoutEffect ~ children.length",
+    children.length,
+  );
+  console.log(
+    "🚀 ~ file: Slider.tsx ~ line 216 ~ useLayoutEffect ~ dotsNum",
+    dotsNum,
+  );
+
   useLayoutEffect(() => {
     let i;
     const dotsArray = [];
@@ -211,20 +224,24 @@ const Slider = ({
       if (i + 1 <= dotsNum) {
         dotsArray.push(i + 1);
       }
+    console.log(
+      "🚀 ~ file: Slider.tsx ~ line 226 ~ useLayoutEffect ~ dotsArray",
+      dotsArray,
+    );
     setDotsArr(dotsArray);
   }, []);
 
   return (
-    <div className="main-div w-full">
-      <div className="carousel-and-arrow-container">
+    <div className="main-div w-full h-full ">
+      <div className="carousel-and-arrow-container h-full">
         <Arrow direction="left" handleClick={prevSlide} />
         <div
           ref={ref}
-          className="carousel w-full"
+          className={classNames("carousel h-full", className)}
           style={{ width: `${width * 2}` }}
         >
           <div
-            className="slider-content "
+            className="slider-content h-full"
             style={{
               transform: `translate(-${translate}px, ${0}px)`,
               transition: `transform ease-out ${transition}s`,
@@ -253,7 +270,10 @@ const Slider = ({
   );
 };
 
-const SliderWithModal = (props: SliderTypes): React.ReactElement => {
+const SliderWithModal = (
+  props,
+  { withModal = false }: SliderTypes,
+): React.ReactElement => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [clickedSlide, setClickedSlide] = useState(null);
 
@@ -262,8 +282,8 @@ const SliderWithModal = (props: SliderTypes): React.ReactElement => {
     setClickedSlide(index);
   };
   return (
-    <div>
-      {props.withModal && isModalOpen && (
+    <div className="w-full h-full flex items-center justify-center">
+      {withModal && isModalOpen && (
         <Modal onClose={() => setIsModalOpen(false)}>
           <Slider
             {...props}
@@ -273,7 +293,7 @@ const SliderWithModal = (props: SliderTypes): React.ReactElement => {
           />
         </Modal>
       )}
-      <Slider {...props} setterFn={props.withModal ? setterFn : null} />
+      <Slider {...props} setterFn={withModal ? setterFn : null} />
     </div>
   );
 };

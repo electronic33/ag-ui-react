@@ -8,10 +8,12 @@ import Button from "../Button/Button";
 
 export default {
   title: "Drawer",
+  component: Drawer,
 };
 
-export const Default = (): React.ReactNode => {
+export const Default = (props): React.ReactNode => {
   const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div>
       <div className="bg-gray-700 h-20 flex justify-center items-center ">
@@ -23,10 +25,10 @@ export const Default = (): React.ReactNode => {
         </div>
       </div>
       <Drawer
-        direction="left"
+        direction="right"
         isOpen={isOpen}
         setIsOpen={setIsOpen}
-        SidebarComponent={<Button text="asd" />}
+        SidebarComponent={<Button text="asds" />}
         sidebarData={[
           {
             title: "Home",
@@ -60,10 +62,8 @@ export const Default = (): React.ReactNode => {
             Icon: IoMdHelpCircle,
           },
         ]}
+        {...props}
       />
-      <div className="w-full h-screen bg-gray-50"></div>
-      <div className="w-full h-screen bg-red-300"></div>
-      <div className="w-full h-screen bg-yellow-300"></div>
     </div>
   );
 };

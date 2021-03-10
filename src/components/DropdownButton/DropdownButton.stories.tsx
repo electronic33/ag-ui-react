@@ -4,9 +4,10 @@ import "../../styles/index.css";
 
 export default {
   title: "DropdownButton",
+  component: DropdownButton,
 };
 
-export const Default = (): React.ReactNode => (
+export const Default = (props): React.ReactNode => (
   <DropdownButton
     menuItems={[
       { text: "Item One", href: "/page" },
@@ -15,5 +16,6 @@ export const Default = (): React.ReactNode => (
       { text: "Item Four", href: "/page" },
       { text: "Item Five", href: "/page", disabled: true },
     ]}
+    {...props}
   />
 );

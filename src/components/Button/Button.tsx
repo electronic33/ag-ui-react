@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useEffect, useRef } from "react";
 
 import ButtonSpinner from "../ButtonSpinner/ButtonSpinner";
 import classNames from "classnames";
@@ -7,7 +7,7 @@ import classNames from "classnames";
 type ButtonProps = {
   className?: string;
   disabled?: boolean;
-  loading?: boolean;
+  isLoading?: boolean;
   text?: string;
   textClassName?: string;
   Icon?: React.ComponentType<{ className: string }>;
@@ -15,57 +15,76 @@ type ButtonProps = {
   iconPositionRight?: boolean;
   loadingText?: string;
   SpinnerClassName?: string;
-  noLoadingSpinner?: boolean;
+  showLoadingSpinner?: boolean;
+  /**
+   sm(small), default(normal), or lg(large)
+  */
   sizeClass?: string;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 const Button: FunctionComponent<ButtonProps> = ({
   className,
+  children,
   disabled,
-  loading,
+  isLoading,
   text,
   Icon,
   IconClassName,
   iconPositionRight,
   loadingText,
-  noLoadingSpinner = false,
+  showLoadingSpinner = true,
   SpinnerClassName,
   textClassName,
-  sizeClass = "btn",
+  sizeClass = "default",
   onClick,
 }) => {
   return (
     <button
+      onClick={onClick}
       className={classNames(
         `${sizeClass}`,
         {
-          "bg-opacity-75 cursor-default": disabled || loading,
+          "btn-sm": sizeClass === "sm",
+        },
+        {
+          "btn ": sizeClass === "default",
+        },
+        {
+          "btn-lg": sizeClass === "lg",
+        },
+        {
+          "opacity-75 pointer-events-none": disabled || isLoading,
         },
         className,
       )}
-      onClick={() => onClick("AAAAARG")}
     >
-      {loading && !noLoadingSpinner && !iconPositionRight && (
-        <ButtonSpinner
-          className={classNames("mr-2 flex-shrink-0", SpinnerClassName)}
-        />
-      )}
-      {!loading && Icon && !iconPositionRight && (
-        <Icon className={classNames("mr-2 flex-shrink-0", IconClassName)} />
-      )}
-      {loading && loadingText ? (
-        loadingText
+      {children ? (
+        children
       ) : (
-        <p className={textClassName}>{text}</p>
-      )}
-      {!loading && Icon && iconPositionRight && (
-        <Icon className={classNames("ml-2 flex-shrink-0", IconClassName)} />
-      )}
-      {loading && !noLoadingSpinner && iconPositionRight && (
-        <ButtonSpinner
-          className={classNames("ml-2 flex-shrink-0", SpinnerClassName)}
-        />
+        <>
+          {isLoading && showLoadingSpinner && !iconPositionRight && (
+            <ButtonSpinner
+              className={classNames("mr-2 flex-shrink-0", SpinnerClassName)}
+            />
+          )}
+          {!isLoading && Icon && !iconPositionRight && (
+            <Icon className={classNames("mr-2 flex-shrink-0", IconClassName)} />
+          )}
+          {isLoading && loadingText ? (
+            loadingText
+          ) : (
+            <p className={textClassName}>{text}</p>
+          )}
+          {!isLoading && Icon && iconPositionRight && (
+            <Icon className={classNames("ml-2 flex-shrink-0", IconClassName)} />
+          )}
+          {isLoading && showLoadingSpinner && iconPositionRight && (
+            <ButtonSpinner
+              className={classNames("ml-2 flex-shrink-0", SpinnerClassName)}
+            />
+          )}
+        </>
       )}
     </button>
   );

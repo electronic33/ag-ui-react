@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 
-interface TooltipTypes {
+export interface TooltipTypes {
   tipClassName?: string;
   delay?: number;
   children?: React.ReactNode;

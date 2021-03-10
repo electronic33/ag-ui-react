@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classNames from "classnames";
 
-interface TabsTypes {
+export interface TabsTypes {
+  /**
+   Array of tab objects, each taking in a title, a content component, and optionally an Icon.
+  */
   tabs: {
     title?: string;
     Icon?: React.ComponentType;
     content?: React.ComponentType;
   }[];
+  /**
+   The index of the active tab.
+  */
   currentTab: number;
-  setCurrentTab: (index: number) => void;
+  setCurrentTab: (index: number) => any;
 }
 
 const Tabs = ({
@@ -16,11 +22,29 @@ const Tabs = ({
   currentTab,
   setCurrentTab,
 }: TabsTypes): React.ReactElement => {
+  useEffect(() => {
+    function handleArrowPress(e) {
+      if (e.code === "ArrowRight" && currentTab < tabs.length - 1) {
+        setCurrentTab((prev) => prev + 1);
+      }
+      if (e.code === "ArrowLeft" && currentTab > 0) {
+        setCurrentTab((prev) => prev - 1);
+      }
+    }
+
+    document.addEventListener("keydown", handleArrowPress);
+    return () => document.removeEventListener("keydown", handleArrowPress);
+  }, [currentTab]);
+
   return (
-    <div className="tabs">
+    <div role="tablist" className="tabs">
       <div className="flex">
         {tabs.map((tab, index) => (
           <div
+            role="tab"
+            id={`tabs${tabs.length}-tab-${currentTab}`}
+            aria-controls={`tabs${tabs.length}-tabpanel-${currentTab}`}
+            arie-aria-selected={index === currentTab}
             key={index}
             className={classNames("py-5 cursor-pointer", {
               "bg-white": currentTab === index,
@@ -43,7 +67,12 @@ const Tabs = ({
       </div>
       <div>
         {tabs.map((tab, index) => (
-          <div key={index}>
+          <div
+            role="tabpanel"
+            id={`tabs${tabs.length}-tabpanel-${currentTab}`}
+            aria-labelledby={`tabs${tabs.length}-tab-${currentTab}`}
+            key={index}
+          >
             <div>{currentTab === index && <tab.content />}</div>
           </div>
         ))}

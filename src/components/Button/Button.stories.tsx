@@ -57,7 +57,7 @@ export const Loading = (): React.ReactNode => (
     className=""
     Icon={AiFillAudio}
     IconClassName=""
-    loading
+    isLoading
     SpinnerClassName=""
   />
 );

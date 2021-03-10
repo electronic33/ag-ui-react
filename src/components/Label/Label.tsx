@@ -1,8 +1,8 @@
 import React from "react";
 import classNames from "classnames";
 
-interface LabelProps {
-  secondaryText?: string;
+export interface LabelProps {
+  labelText?: string;
   className?: string;
   required?: boolean;
   errorText?: string;
@@ -11,7 +11,7 @@ interface LabelProps {
 }
 
 const Label = ({
-  secondaryText,
+  labelText,
   className,
   required = false,
   children,
@@ -26,14 +26,14 @@ const Label = ({
           *
         </span>
       )}
-      {secondaryText && (
+      {labelText && (
         <span
           className={classNames("text-sm text-gray-400", {
             "ml-1": required,
             "ml-2": !required,
           })}
         >
-          {secondaryText}
+          {labelText}
         </span>
       )}
       {errorText && (

@@ -43,13 +43,16 @@ import classNames from "classnames";
 //   }
 // `;
 
-interface CheckBoxTypes {
+export interface CheckBoxTypes {
   children: React.ReactNode;
   checkboxClassNames?: string;
   defaultSvgClassNames?: string;
   defaultSvgIfCheckedColor?: string;
   defaultSvgIfUnCheckedColor?: string;
   checked?: boolean;
+  /**
+   Controlls whether the SVG should appear even if the box is unchecked
+  */
   defaultSvgAppearIfUnchecked?: boolean;
   onChange?: (event: React.FormEvent) => void;
   unCheckedBoxColor?: string;

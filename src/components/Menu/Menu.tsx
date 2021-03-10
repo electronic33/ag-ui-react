@@ -8,7 +8,7 @@ import React, {
 import classNames from "classnames";
 import { VscTriangleRight } from "react-icons/vsc";
 
-interface MenuTypes {
+export interface MenuTypes {
   tipClassName?: string;
   delay?: number;
   children?: React.ReactNode;
@@ -24,7 +24,6 @@ const Menu = ({
   active,
   setActive,
 }: MenuTypes): React.ReactElement => {
-  console.log("🚀 ~ file: Menu.tsx ~ line 27 ~ menuData", menuData);
   const menuRef = useRef<HTMLDivElement>();
   const containerRef = useRef<HTMLDivElement>();
 

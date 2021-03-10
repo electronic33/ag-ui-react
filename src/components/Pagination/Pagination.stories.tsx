@@ -4,13 +4,15 @@ import "../../styles/index.css";
 
 export default {
   title: "Pagination",
+  component: Pagination,
 };
 
-export const Default = (): React.ReactNode => {
+export const Default = (props): React.ReactNode => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(2);
   return (
     <Pagination
+      {...props}
       maxCount={31}
       itemsPerPage={itemsPerPage}
       setItemsPerPage={setItemsPerPage}

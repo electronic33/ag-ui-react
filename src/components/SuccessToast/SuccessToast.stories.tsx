@@ -4,8 +4,9 @@ import "../../styles/index.css";
 
 export default {
   title: "SuccessToast",
+  component: SuccessToast,
 };
 
-export const Default = (): React.ReactNode => (
-  <SuccessToast message="Success toast!" />
+export const Default = (props): React.ReactNode => (
+  <SuccessToast message="Success toast!" {...props} />
 );

@@ -5,17 +5,13 @@ import { GiCheckMark } from "react-icons/gi";
 
 export default {
   title: "Checkbox",
+  component: Checkbox,
 };
 
-export const Default = (): React.ReactNode => {
-  const [checked, setChecked] = useState(false);
-
-  const handleCheckboxChange = (event) => {
-    setChecked(event.target.checked);
-  };
+export const Default = (props): React.ReactNode => {
   return (
     <label>
-      <Checkbox checked={checked} onChange={handleCheckboxChange}>
+      <Checkbox {...props}>
         {/* <GiCheckMark className="text-4xl text-red-500" /> */}
       </Checkbox>
       <span className="ml-2">Label Text</span>

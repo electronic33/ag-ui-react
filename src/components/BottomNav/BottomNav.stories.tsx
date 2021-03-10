@@ -8,15 +8,17 @@ import { MdChildFriendly } from "react-icons/md";
 AnimationEffect;
 export default {
   title: "BottomNav",
+  component: BottomNav,
 };
 
-export const Default = (): React.ReactNode => (
+export const Default = (props): React.ReactNode => (
   <div
     className=" h-16 w-96 "
     containerClassName="bg-red-500"
     linkClassName="bg-red-500"
     activeClassName="text-red-500"
     activeIndex={0}
+    {...props}
   >
     <BottomNav
       LinkComponent={Link}

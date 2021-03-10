@@ -4,10 +4,11 @@ import "../../styles/index.css";
 
 export default {
   title: "Switch",
+  component: Switch,
 };
 
-export const Default = (): React.ReactNode => {
-  const [value, setValue] = useState(false);
+export const Default = (props): React.ReactNode => {
+  const [active, setActive] = useState(false);
 
   return (
     <Switch
@@ -15,8 +16,9 @@ export const Default = (): React.ReactNode => {
       activeBackGroundColorClass="bg-blue-400"
       notActiveDotBackgroundColorClass="bg-gray-100"
       activeDotBackgroundColorClass="bg-blue-600"
-      value={value}
-      setValue={setValue}
+      active={active}
+      setActive={setActive}
+      {...props}
     />
   );
 };

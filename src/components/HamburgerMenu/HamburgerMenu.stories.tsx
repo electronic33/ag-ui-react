@@ -5,6 +5,7 @@ import { AiOutlineHome } from "react-icons/ai";
 
 export default {
   title: "HamburgerMenu",
+  component: HamburgerMenu,
 };
 
 export const Default = (): React.ReactNode => (

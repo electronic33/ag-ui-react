@@ -6,6 +6,7 @@ import { isSameDay } from "date-fns";
 
 export default {
   title: "Calendar",
+  component: Calendar,
 };
 
 export const Default = (): React.ReactElement => {

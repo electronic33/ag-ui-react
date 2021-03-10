@@ -5,11 +5,13 @@ import Link from "../Link/Link";
 
 export default {
   title: "BreadCrumbs",
+  component: BreadCrumbs,
 };
 const paths = [
   { name: "Főoldal", to: "/" },
   { name: "Rendelések", to: "/comenzi" },
 ];
-export const Default = (): React.ReactNode => (
-  <BreadCrumbs LinkComponent={Link} items={paths} />
+
+export const Default = (props): React.ReactNode => (
+  <BreadCrumbs LinkComponent={Link} items={paths} {...props} />
 );

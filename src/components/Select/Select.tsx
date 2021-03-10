@@ -1,17 +1,23 @@
 import React, { useMemo } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 
-interface SelectTypes {
+export interface SelectTypes {
+  /**
+   Array of option objects, each has a label and a value, and optionally an Icon.
+  */
   options: {
     label: string;
     value: number | string;
     Icon?: React.ComponentType;
   }[];
+  /**
+   The selected value.
+  */
   selected: number | string;
   onChange?: (item?) => void;
   className: string;
   label: string;
-  cursorPointer?: string;
+  cursorPointer?: boolean;
 }
 
 const Select = ({
@@ -48,12 +54,12 @@ const Select = ({
                   cursorPointer ? "cursor-pointer" : "cursor-default"
                 } relative w-full rounded-md border border-gray-300 bg-white pl-2 pr-8 py-2 text-left focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition ease-in-out duration-150 sm:text-sm sm:leading-5`}
               >
-                {selectedOption.Icon && (
+                {selectedOption?.Icon && (
                   <span className="flex items-center mr-1.5">
-                    {selectedOption.Icon}
+                    {selectedOption?.Icon}
                   </span>
                 )}
-                <span className="block truncate">{selectedOption.label}</span>
+                <span className="block truncate">{selectedOption?.label}</span>
                 <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                   <svg
                     className="h-5 w-5 text-gray-400"

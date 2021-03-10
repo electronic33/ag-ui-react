@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 
-interface dotTypes {
+export interface dotTypes {
   activeDot: number;
   onDotClick: (index: number) => void;
   dotsArr: number[];
@@ -24,6 +24,8 @@ const Dots = ({
   onDotClick,
   dotsArr,
 }: dotTypes): React.ReactElement => {
+  console.log("🚀 ~ file: Dots.tsx ~ line 42 ~ dotsArr", dotsArr);
+
   return (
     <div className="dots">
       {/* <div className="absolute bottom-6 w-full flex items-center justify-center "> */}

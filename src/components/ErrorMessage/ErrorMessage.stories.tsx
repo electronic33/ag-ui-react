@@ -4,10 +4,11 @@ import "../../styles/index.css";
 
 export default {
   title: "ErrorMessage",
+  component: ErrorMessage,
 };
 
-export const Default = (): React.ReactNode => (
-  <ErrorMessage>
+export const Default = (props): React.ReactNode => (
+  <ErrorMessage {...props}>
     <p>An error occured!</p>
   </ErrorMessage>
 );

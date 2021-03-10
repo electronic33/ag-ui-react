@@ -5,10 +5,16 @@ import { MdLabelOutline } from "react-icons/md";
 
 export default {
   title: "TextArea",
+  component: TextArea,
 };
 
-export const Default = (): React.ReactNode => (
-  <TextArea label="TextArea" placeholder="This is a textarea" value="" />
+export const Default = (props): React.ReactNode => (
+  <TextArea
+    label="TextArea"
+    placeholder="This is a textarea"
+    value=""
+    {...props}
+  />
 );
 export const WithIcon = (): React.ReactNode => (
   <TextArea

@@ -21,6 +21,7 @@ const SliderBaseClasses = (theme) => ({
     marginLeft: theme("spacing.2"),
     marginRight: theme("spacing.2"),
     overflow: "hidden",
+    width: theme("width.full"),
   },
   ".slider-content": {
     display: "flex",

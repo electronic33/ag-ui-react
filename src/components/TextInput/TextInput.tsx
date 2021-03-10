@@ -3,7 +3,7 @@ import classNames from "classnames";
 import Label from "../Label/Label";
 import { FormikProps, FieldInputProps } from "formik";
 
-interface TextInputProps {
+export interface TextInputProps {
   label?: string;
   secondaryLabel?: string;
   Icon?: React.ComponentType<{ className: string }>;

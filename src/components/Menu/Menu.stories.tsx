@@ -11,6 +11,7 @@ import { MdClose } from "react-icons/md";
 
 export default {
   title: "Menu",
+  component: Menu,
 };
 
 export const Top = (): React.ReactNode => {

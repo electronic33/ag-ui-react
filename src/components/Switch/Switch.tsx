@@ -1,21 +1,21 @@
 import React from "react";
 import classNames from "classnames";
 
-interface SwitchTypes {
-  value: string;
-  setValue: (prevState) => void;
-  name: string;
-  disabled: string;
-  notActiveBackGroundColorClass: string;
-  activeBackGroundColorClass: string;
-  activeDotBackgroundColorClass: string;
-  notActiveDotBackgroundColorClass: string;
+export interface SwitchTypes {
+  active: boolean;
+  setActive: (prevState) => void;
+  className?: string;
+  disabled?: boolean;
+  notActiveBackGroundColorClass?: string;
+  activeBackGroundColorClass?: string;
+  activeDotBackgroundColorClass?: string;
+  notActiveDotBackgroundColorClass?: string;
 }
 
 const Switch = ({
-  value,
-  setValue,
-  name,
+  active,
+  setActive,
+  className,
   disabled,
   notActiveBackGroundColorClass = "bg-gray-400",
   activeBackGroundColorClass = "bg-gray-200",
@@ -23,8 +23,8 @@ const Switch = ({
   notActiveDotBackgroundColorClass = "bg-gray-100",
 }: SwitchTypes): React.ReactElement => {
   const handleClick = () => {
-    if (setValue) {
-      setValue((prevState: boolean) => !prevState);
+    if (setActive) {
+      setActive((prevState: boolean) => !prevState);
     }
   };
 
@@ -35,18 +35,19 @@ const Switch = ({
         {
           "opacity-70 cursor-not-allowed ": disabled,
         },
+        className,
       )}
       onClick={disabled ? null : handleClick}
     >
-      {/* <input type="hidden" name={name} value={value} /> */}
+      {/* <input type="hidden" name={name} active={active} /> */}
       <span
         className={classNames(
           `absolute inset-0 rounded-xl`,
           {
-            [`${notActiveBackGroundColorClass} transition-colors`]: !value,
+            [`${notActiveBackGroundColorClass} transition-colors`]: !active,
           },
           {
-            [`${activeBackGroundColorClass} transition-colors`]: value,
+            [`${activeBackGroundColorClass} transition-colors`]: active,
           },
         )}
       />
@@ -55,10 +56,10 @@ const Switch = ({
         className={classNames(
           "absolute rounded-full w-5 h-5 transition-all duration-100 ease-linear",
           {
-            [`left-4 -top-1 -bottom-1 right-4 transition-all ${activeDotBackgroundColorClass}`]: value,
+            [`left-4 -top-1 -bottom-1 right-4 transition-all ${activeDotBackgroundColorClass}`]: active,
           },
           {
-            [`left-0 -top-1 -bottom-1 right-0 transition-all  ${notActiveDotBackgroundColorClass}`]: !value,
+            [`left-0 -top-1 -bottom-1 right-0 transition-all  ${notActiveDotBackgroundColorClass}`]: !active,
           },
         )}
       />

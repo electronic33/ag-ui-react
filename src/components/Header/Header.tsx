@@ -4,12 +4,12 @@ import classNames from "classnames";
 import HamburgerMenu from "../HamburgerMenu/HamburgerMenu";
 import Link from "../Link/Link";
 
-interface navLinkType {
+export interface navLinkType {
   label: string;
   href: string;
   Icon: React.ComponentType;
 }
-interface HeaderProps {
+export interface HeaderProps {
   originalPath?: string;
   navLinks?: navLinkType[];
   restNavLinks?: navLinkType[];

@@ -4,14 +4,29 @@ import Button from "../Button/Button";
 import TextInput from "../TextInput/TextInput";
 import Select from "../Select/Select";
 
-interface PaginationTypes {
+export interface PaginationTypes {
+  /**
+  Number of items.
+  */
   maxCount: number;
+  /**
+  Items to display in a single page.
+  */
   itemsPerPage: number;
   setItemsPerPage: Dispatch<SetStateAction<number>>;
   currentPage: number;
   setCurrentPage: Dispatch<SetStateAction<number>>;
+  /**
+  A number that refers to how many page tabs will be displayed at the start, in the middle and at the end of the component.
+  */
   firstAndLastSectionsNumber?: number;
+  /**
+  Starting page index.
+  */
   initialGotoPageValue?: number;
+  /**
+  Array of option objects for selecting the items per page value, each object consists of a label name and a number value.
+  */
   selectOptions?: { label: string; value: number }[];
 }
 
@@ -105,7 +120,7 @@ const Pagination = ({
         <p
           onClick={() => {
             if (currentPage !== 1) {
-              currentPage - 1;
+              setCurrentPage(currentPage - 1);
             }
           }}
           className={classNames("pagination", {

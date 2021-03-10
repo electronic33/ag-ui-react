@@ -5,6 +5,7 @@ import Button from "../Button/Button";
 
 export default {
   title: "Tooltip",
+  component: Tooltip,
 };
 
 export const Top = (): React.ReactNode => (

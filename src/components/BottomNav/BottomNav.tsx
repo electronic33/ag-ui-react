@@ -1,16 +1,31 @@
 import React from "react";
 import classNames from "classnames";
 
-interface BottomNavTypes {
+export interface BottomNavTypes {
+  /**
+   A component which redirects somewhere with the help of the 'to' property given in the items array
+  */
   LinkComponent?: React.ComponentType;
   containerClassName?: string;
+  /**
+  className for each link
+  */
   linkClassName?: string;
+  /**
+  className of the link determined by the given activeIndex
+  */
   activeClassName?: string;
+  /**
+  An array that contains each item, which can have an icon, a label, and somewhere to redirect to
+  */
   items: {
     Icon: React.ComponentType<{ className: string }>;
     label: string;
     to: string;
   }[];
+  /**
+  The index of the active item
+  */
   activeIndex?: number | (() => number);
   onClick?: () => void;
 }

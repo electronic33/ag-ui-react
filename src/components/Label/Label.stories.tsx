@@ -4,9 +4,14 @@ import "../../styles/index.css";
 
 export default {
   title: "Label",
+  component: Label,
 };
 
-export const Default = (): React.ReactNode => <Label secondaryText="Label" />;
+export const Default = (props): React.ReactNode => (
+  <Label labelText="Label" {...props}>
+    Text
+  </Label>
+);
 export const Error = (): React.ReactNode => (
-  <Label secondaryText="Label" errorText="Error" />
+  <Label labelText="Label" errorText="Error" />
 );

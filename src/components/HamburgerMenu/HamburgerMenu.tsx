@@ -4,12 +4,12 @@ import classNames from "classnames";
 import { AiOutlineCalendar } from "react-icons/ai";
 import Link from "../Link/Link";
 
-interface navLinkType {
+export interface navLinkType {
   label: string;
   href: string;
   Icon: React.ComponentType;
 }
-interface HamburgerProps {
+export interface HamburgerProps {
   isOpen: boolean;
   originalPath?: string;
   onHamburgerClick?: () => void;

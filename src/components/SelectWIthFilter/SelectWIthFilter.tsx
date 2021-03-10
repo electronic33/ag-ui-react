@@ -3,12 +3,18 @@ import { Listbox, Transition } from "@headlessui/react";
 import TextInput from "../TextInput/TextInput";
 import useDebounce from "../../hooks/useDebounce";
 
-interface SelectTypes {
+export interface SelectTypes {
+  /**
+   Array of option objects, each has a label and a value, and optionally an Icon.
+  */
   options: {
     label: string;
     value: number | string;
     Icon?: React.ComponentType;
   }[];
+  /**
+   The selected value.
+  */
   selected: number | string;
   onChange?: (item?) => void;
   className: string;

@@ -4,6 +4,11 @@ import "../../styles/index.css";
 
 export default {
   title: "Link",
+  component: Link,
 };
 
-export const Default = (): React.ReactNode => <Link to="google.com" />;
+export const Default = (props): React.ReactNode => (
+  <Link to="google.com" {...props}>
+    Link
+  </Link>
+);

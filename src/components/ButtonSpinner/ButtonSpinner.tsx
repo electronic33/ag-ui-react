@@ -1,7 +1,10 @@
 import React, { FC } from "react";
 import classNames from "classnames";
 
-interface SpinnerProps {
+export interface SpinnerProps {
+  /**
+   use width and height modifying classes for size changing, and text coloring classes for color changing. 
+  */
   className?: string;
 }
 

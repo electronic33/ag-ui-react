@@ -11,7 +11,9 @@ const ErrorToast = ({
 }): React.ReactElement => {
   return (
     <div className={classNames("error-toast", className)}>
-      <MdCancel className="mr-2 text-lg min-w-5 flex-shrink-0" />
+      <MdCancel
+        className={classNames("mr-2 text-lg min-w-5 flex-shrink-0", className)}
+      />
       {message}
     </div>
   );

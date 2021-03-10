@@ -9,9 +9,10 @@ import Button from "../Button/Button";
 
 export default {
   title: "Tabs",
+  component: Tabs,
 };
 
-export const Error = (): React.ReactNode => {
+export const Error = (props): React.ReactNode => {
   const [currentTab, setCurrentTab] = useState(0);
 
   return (
@@ -24,6 +25,7 @@ export const Error = (): React.ReactNode => {
         { title: "Tab 3", Icon: FaAccessibleIcon, content: Button },
         { title: "Tab 4", Icon: FaAccusoft, content: ButtonSpinner },
       ]}
+      {...props}
     />
   );
 };

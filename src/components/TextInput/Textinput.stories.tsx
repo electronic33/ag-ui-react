@@ -5,6 +5,7 @@ import { MdLabelOutline } from "react-icons/md";
 
 export default {
   title: "TextInput",
+  component: TextInput,
 };
 
 export const Default = (): React.ReactNode => {

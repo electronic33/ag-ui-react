@@ -1,16 +1,28 @@
-import React, { useRef, useMemo } from "react";
+import React, {
+  useRef,
+  useMemo,
+  useEffect,
+  useState,
+  useLayoutEffect,
+} from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import Link from "../Link/Link";
 import classNames from "classnames";
 import { Transition } from "@headlessui/react";
 
-interface DrawerTypes {
+export interface DrawerTypes {
+  /**
+   An array of objects, each object can have a title, an Icon, and somewhere to redirect to. It can also have a component property, in which case the component will be displayed as an item.
+  */
   sidebarData?: {
     title?: string;
     to?: string;
     Icon?: React.ComponentType<{ className: string }>;
     Component?: React.ComponentType;
   }[];
+  /**
+   A component that will be displayed in the drawer. 
+  */
   SidebarComponent?: React.ComponentType;
   isOpen: boolean;
   setIsOpen: (state: boolean | ((prevState: boolean) => boolean)) => void;
@@ -66,7 +78,7 @@ const Drawer = ({
         leave="transition ease-in duration-300"
         leaveFrom="transform opacity-100"
         leaveTo="transform opacity-0"
-        className="fixed top-0  z-10 w-full h-full bg-black bg-opacity-40  "
+        className="fixed top-0 left-0 z-10 w-screen h-full bg-black bg-opacity-40  "
       >
         {/* <div className={classNames("", {})}></div> */}
       </Transition>

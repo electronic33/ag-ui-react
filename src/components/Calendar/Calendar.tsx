@@ -44,7 +44,7 @@ export const useMultipleSelectCalendarState = (
   return [selectedDates, setSelectedDates];
 };
 
-interface CalendarTypes {
+export interface CalendarTypes {
   calendarClassName?: string;
   headerContainerClassName?: string;
   monthClassName?: string;

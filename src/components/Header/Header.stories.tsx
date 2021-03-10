@@ -7,6 +7,7 @@ import { MdLink, MdMenu, MdPayment } from "react-icons/md";
 
 export default {
   title: "Header",
+  component: Header,
 };
 
 export const Default = (): React.ReactNode => (

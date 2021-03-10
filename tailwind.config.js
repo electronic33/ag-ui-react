@@ -22,6 +22,11 @@ const BreadCrumbsBaseClasses = require("./src/components/BreadCrumbs/BreadCrumbs
 const DrawerBaseClasses = require("./src/components/Drawer/DrawerBaseClasses");
 const CheckboxBaseClasses = require("./src/components/Checkbox/CheckboxBaseClasses");
 const MenuBaseClasses = require("./src/components/Menu/MenuBaseClasses");
+const SkeletonBaseClasses = require("./src/components/Skeleton/SkeletonBaseClasses");
+const RateBaseClasses = require("./src/components/Rate/RateBaseClasses");
+const ProgressBaseClasses = require("./src/components/Progress/ProgressBaseClasses");
+const MarkdownbaseClasses = require("./src/components/Markdown/MarkdownbaseClasses");
+const ScrollToBaseClasses = require("./src/components/ScrollTo/ScrollToBaseClasses");
 
 module.exports = {
   purge: [],
@@ -962,6 +967,11 @@ module.exports = {
         ...DrawerBaseClasses(theme),
         ...CheckboxBaseClasses(theme),
         ...MenuBaseClasses(theme),
+        ...SkeletonBaseClasses(theme),
+        ...RateBaseClasses(theme),
+        ...ProgressBaseClasses(theme),
+        ...MarkdownbaseClasses(theme),
+        ...ScrollToBaseClasses(theme),
       };
 
       // console.log("asd");
