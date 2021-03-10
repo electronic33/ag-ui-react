@@ -24,6 +24,7 @@
     "@storybook/addons": "^6.0.22",
     "@storybook/react": "^6.0.22",
     "@tailwindcss/postcss7-compat": "^2.0.2",
+    "@testing-library/cypress": "^7.0.4",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.2.5",
     "@types/jest": "^26.0.20",
@@ -41,6 +42,7 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^5.0.1",
+    "cypress": "^6.6.0",
     "eslint": "^7.10.0",
     "eslint-config-prettier": "^6.12.0",
     "eslint-plugin-jest": "^24.0.2",
@@ -69,7 +71,8 @@
     "build-storybook": "build-storybook",
     "build": "rollup -c",
     "lint": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix",
-    "test": "jest"
+    "test": "jest",
+    "cy:open": "cypress open"
   },
   "dependencies": {
     "@headlessui/react": "^0.2.0",
