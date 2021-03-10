@@ -19,6 +19,7 @@
     "@rollup/plugin-commonjs": "^15.1.0",
     "@rollup/plugin-node-resolve": "^9.0.0",
     "@storybook/addon-actions": "^6.0.22",
+    "@storybook/addon-essentials": "^6.1.21",
     "@storybook/addon-links": "^6.0.22",
     "@storybook/addon-storyshots": "^6.1.17",
     "@storybook/addons": "^6.0.22",

@@ -9,29 +9,14 @@ export default {
   argTypes: { onClick: { action: "clicked" } },
 };
 
-export const Default = ({ onClick }): React.ReactNode => (
-  <Button
-    text="Button"
-    textClassName=""
-    className=""
-    Icon={AiFillAudio}
-    IconClassName=""
-    SpinnerClassName=""
-    onClick={onClick}
-  />
+export const Default = ({ onClick, ...rest }): React.ReactNode => (
+  <Button Icon={AiFillAudio} {...rest} text="Button" onClick={onClick} />
 );
 
-export const Small = (): React.ReactNode => (
-  <Button
-    text="Button"
-    textClassName=""
-    className=""
-    Icon={AiFillAudio}
-    IconClassName=""
-    SpinnerClassName=""
-    sizeClass="btn-sm"
-  />
+export const Small = (props): React.ReactNode => (
+  <Button text="Button" {...props} Icon={AiFillAudio} sizeClass="btn-sm" />
 );
+
 export const Large = (): React.ReactNode => (
   <Button
     text="Button"
