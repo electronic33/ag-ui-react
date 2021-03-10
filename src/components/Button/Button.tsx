@@ -17,6 +17,7 @@ type ButtonProps = {
   SpinnerClassName?: string;
   noLoadingSpinner?: boolean;
   sizeClass?: string;
+  onClick: () => void;
 };
 
 const Button: FunctionComponent<ButtonProps> = ({
@@ -32,6 +33,7 @@ const Button: FunctionComponent<ButtonProps> = ({
   SpinnerClassName,
   textClassName,
   sizeClass = "btn",
+  onClick,
 }) => {
   return (
     <button
@@ -42,6 +44,7 @@ const Button: FunctionComponent<ButtonProps> = ({
         },
         className,
       )}
+      onClick={() => onClick("AAAAARG")}
     >
       {loading && !noLoadingSpinner && !iconPositionRight && (
         <ButtonSpinner

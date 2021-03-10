@@ -6,9 +6,10 @@ import { AiFillAudio } from "react-icons/ai";
 export default {
   title: "Button",
   component: Button,
+  argTypes: { onClick: { action: "clicked" } },
 };
 
-export const Default = (): React.ReactNode => (
+export const Default = ({ onClick }): React.ReactNode => (
   <Button
     text="Button"
     textClassName=""
@@ -16,8 +17,10 @@ export const Default = (): React.ReactNode => (
     Icon={AiFillAudio}
     IconClassName=""
     SpinnerClassName=""
+    onClick={onClick}
   />
 );
+
 export const Small = (): React.ReactNode => (
   <Button
     text="Button"
