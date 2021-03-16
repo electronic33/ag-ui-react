@@ -1,41 +1,38 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
+import { usePopper } from "react-popper";
+import classNames from "classnames";
+import ReactDOM from "react-dom";
 
 export interface TooltipTypes {
-  tipClassName?: string;
   delay?: number;
   children?: React.ReactNode;
   direction?: string;
   content: string;
-  containerClasses?: string;
+  contentClassNames?: string;
   arrowClasses?: string;
 }
 
 const Tooltip = ({
-  tipClassName,
   delay,
   children,
-  direction,
   content,
-  containerClasses = "bg-gray-600",
-  arrowClasses = "bg-gray-600",
+  direction = "top",
+  contentClassNames,
+  arrowClasses,
 }: TooltipTypes): React.ReactElement => {
   let timeout;
   const [active, setActive] = useState(false);
-  const tooltipRef = useRef();
-
-  const bottomClass = "-top-1 margin-calc-x";
-  const topClass = "-bottom-1 margin-calc-x";
-  const leftClass = "-right-1 margin-calc-y";
-  const rightClass = "-left-1 margin-calc-y";
-  const bottomMargin = "-mb-5";
-  const topMargin = "-mt-5";
-  const leftMargin = "-ml-10";
-  const rightMargin = "-mr-10";
 
   const showTip = () => {
     timeout = setTimeout(() => {
       setActive(true);
-    }, delay || 400);
+    }, delay || 0);
+  };
+
+  const toggleTip = () => {
+    timeout = setTimeout(() => {
+      setActive((prev) => !prev);
+    }, delay || 0);
   };
 
   const hideTip = () => {
@@ -43,42 +40,62 @@ const Tooltip = ({
     setActive(false);
   };
 
-  return (
-    <div
-      className="tooltip-wrapper mt-40 ml-40"
-      onMouseEnter={showTip}
-      onMouseLeave={hideTip}
-    >
-      {children}
-      {active && (
-        <div
-          ref={tooltipRef}
-          className={`tooltip-tip ${direction || "bottom"} ${
-            tipClassName || ""
-          }`}
-        >
-          <div
-            className={`${containerClasses} p-2 rounded relative z-auto ${
-              direction === "top" ? topMargin : ""
-            } ${direction === "bottom" ? bottomMargin : ""} ${
-              direction === "left" ? leftMargin : ""
-            } ${direction === "right" ? rightMargin : ""}`}
-          >
-            <div
-              style={{ zIndex: -1 }}
-              className={`w-2 h-2 transform rotate-45 absolute ${arrowClasses} ${
-                direction === "top" ? topClass : ""
-              } ${direction === "bottom" ? bottomClass : ""} ${
-                direction === "left" ? leftClass : ""
-              } ${direction === "right" ? rightClass : ""}
-               `}
-            />
+  const child = React.Children.only(children) as React.ReactElement & {
+    ref?: React.Ref<any>;
+  };
 
-            {content}
-          </div>
-        </div>
-      )}
-    </div>
+  const trigger = React.cloneElement(child, {
+    ...child.props,
+    onMouseEnter: showTip,
+    onMouseLeave: hideTip,
+    onFocus: toggleTip,
+    onBlur: hideTip,
+  });
+
+  const [referenceElement, setReferenceElement] = useState(null);
+
+  const [popperElement, setPopperElement] = useState(null);
+
+  const { styles, attributes } = usePopper(referenceElement, popperElement, {
+    placement: direction,
+    modifiers: [
+      {
+        name: "offset",
+        enabled: true,
+        options: {
+          offset: [0, 10],
+        },
+      },
+    ],
+  });
+
+  return (
+    <>
+      <div className="tooltip-wrapper" ref={setReferenceElement}>
+        {trigger}
+      </div>
+      {active &&
+        ReactDOM.createPortal(
+          <div
+            ref={setPopperElement}
+            style={styles.popper}
+            {...attributes.popper}
+            id="tooltip"
+            data-popper-placement={direction}
+          >
+            <p className={classNames("tooltip-content", {}, contentClassNames)}>
+              {content}
+            </p>
+            <div
+              className={classNames("bg-gray-700", arrowClasses)}
+              style={styles.arrow}
+              data-popper-arrow
+              id="arrow"
+            ></div>
+          </div>,
+          document.body,
+        )}
+    </>
   );
 };
 

@@ -31,8 +31,11 @@ const DrawerBaseClasses = (theme) => ({
     paddingTop: theme("spacing.2"),
     paddingBottom: theme("spacing.2"),
     height: theme("spacing.14"),
-    marginLeft: theme("spacing.5"),
+    paddingLeft: theme("spacing.5"),
     color: theme("colors.white"),
+    "&:hover": {
+      backgroundColor: theme("colors.gray.500"),
+    },
   },
   ".drawer-link-icon": {
     marginRight: theme("spacing.2"),

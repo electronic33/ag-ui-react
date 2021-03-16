@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Drawer from "./Drawer";
 import "../../styles/index.css";
 import { AiFillHome } from "react-icons/ai";
@@ -13,19 +13,27 @@ export default {
 
 export const Default = (props): React.ReactNode => {
   const [isOpen, setIsOpen] = useState(false);
+  // const buttonRef = useRef();
+  // useEffect(() => {
+  //   if (buttonRef) {
+  //     console.log("dfdsf", buttonRef.current);
+  //     buttonRef.current.focus();
+  //   }
+  // }, [isOpen]);
 
   return (
     <div>
       <div className="bg-gray-700 h-20 flex justify-center items-center ">
-        <div
-          className="ml-8 text-3xl"
+        <button
+          // ref={buttonRef}
+          className="ml-8 text-3xl bg-blue-500 text-white px-4 py-2 rounded"
+          tabIndex={0}
           onClick={() => setIsOpen((prevState) => !prevState)}
         >
-          <Button text="OPEN ME!" />
-        </div>
+          OPEN ME!
+        </button>
       </div>
       <Drawer
-        direction="right"
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         SidebarComponent={<Button text="asds" />}

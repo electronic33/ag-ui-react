@@ -1,4 +1,4 @@
-const TooltipBaseClasses = (theme) => ({
+const PopoverBaseClasses = (theme) => ({
   ".tooltip-wrapper": {
     display: "inline-block",
   },
@@ -17,6 +17,9 @@ const TooltipBaseClasses = (theme) => ({
       width: "8px",
       height: "8px",
       background: "inherit",
+      backgroundColor: theme("colors.white"),
+      borderWidth: "1px",
+      borderColor: theme("colors.gray.200"),
     },
   },
 
@@ -31,6 +34,11 @@ const TooltipBaseClasses = (theme) => ({
   "#tooltip": {
     backgroundColor: theme("colors.gray.700"),
   },
+  "#arrow-base": {
+    backgroundColor: theme("colors.white"),
+    borderWidth: "1px",
+    borderColor: theme("colors.gray.200"),
+  },
 });
 
-module.exports = TooltipBaseClasses;
+module.exports = PopoverBaseClasses;

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { FunctionComponent, useEffect, useRef } from "react";
+import React, { FunctionComponent } from "react";
 
 import ButtonSpinner from "../ButtonSpinner/ButtonSpinner";
 import classNames from "classnames";
@@ -38,9 +38,17 @@ const Button: FunctionComponent<ButtonProps> = ({
   textClassName,
   sizeClass = "default",
   onClick,
+  onMouseEnter,
+  onMouseLeave,
+  onFocus,
+  onBlur,
 }) => {
   return (
     <button
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onFocus={onFocus}
+      onBlur={onBlur}
       onClick={onClick}
       className={classNames(
         `${sizeClass}`,

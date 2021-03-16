@@ -974,7 +974,7 @@ module.exports = {
         ...ScrollToBaseClasses(theme),
       };
 
-      // console.log("asd");
+      console.log("asd");
 
       addUtilities(newComponents, {
         respectImportant: false,
