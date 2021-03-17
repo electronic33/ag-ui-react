@@ -27,6 +27,7 @@ const RateBaseClasses = require("./src/components/Rate/RateBaseClasses");
 const ProgressBaseClasses = require("./src/components/Progress/ProgressBaseClasses");
 const MarkdownbaseClasses = require("./src/components/Markdown/MarkdownbaseClasses");
 const ScrollToBaseClasses = require("./src/components/ScrollTo/ScrollToBaseClasses");
+const PopoverBaseClasses = require("./src/components/Popover/PopoverBaseClasses");
 
 module.exports = {
   purge: [],
@@ -972,6 +973,7 @@ module.exports = {
         ...ProgressBaseClasses(theme),
         ...MarkdownbaseClasses(theme),
         ...ScrollToBaseClasses(theme),
+        ...PopoverBaseClasses(theme),
       };
 
       console.log("asd");

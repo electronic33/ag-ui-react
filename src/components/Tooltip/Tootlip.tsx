@@ -80,7 +80,7 @@ const Tooltip = ({
             ref={setPopperElement}
             style={styles.popper}
             {...attributes.popper}
-            id="tooltip"
+            className="popper-arrow-conainer"
             data-popper-placement={direction}
           >
             <p className={classNames("tooltip-content", {}, contentClassNames)}>

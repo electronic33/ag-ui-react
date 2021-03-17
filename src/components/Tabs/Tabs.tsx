@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import classNames from "classnames";
+import { useId } from "react-id-generator";
 
 export interface TabsTypes {
   /**
@@ -22,6 +23,7 @@ const Tabs = ({
   currentTab,
   setCurrentTab,
 }: TabsTypes): React.ReactElement => {
+  const id = useId();
   useEffect(() => {
     function handleArrowPress(e) {
       if (e.code === "ArrowRight" && currentTab < tabs.length - 1) {
@@ -42,8 +44,8 @@ const Tabs = ({
         {tabs.map((tab, index) => (
           <div
             role="tab"
-            id={`tabs${tabs.length}-tab-${currentTab}`}
-            aria-controls={`tabs${tabs.length}-tabpanel-${currentTab}`}
+            id={`tabs${id}-tab-${currentTab}`}
+            aria-controls={`tabs${id}-tabpanel-${currentTab}`}
             arie-aria-selected={index === currentTab}
             key={index}
             className={classNames("py-5 cursor-pointer", {
@@ -69,8 +71,8 @@ const Tabs = ({
         {tabs.map((tab, index) => (
           <div
             role="tabpanel"
-            id={`tabs${tabs.length}-tabpanel-${currentTab}`}
-            aria-labelledby={`tabs${tabs.length}-tab-${currentTab}`}
+            id={`tabs${id}-tabpanel-${currentTab}`}
+            aria-labelledby={`tabs${id}-tab-${currentTab}`}
             key={index}
           >
             <div>{currentTab === index && <tab.content />}</div>

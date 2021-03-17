@@ -7,15 +7,19 @@ import FocusLock from "../FocusTrap/FocusTrap";
 const ESC_KEYCODE = 27;
 
 const Modal = ({
+  ariaProps,
   containerClassName,
   className,
   onClose,
   children,
+  initialFocusRef,
 }: {
+  ariaProps?: unknown;
   onClose?: () => void;
   children?: React.ReactNode;
   containerClassName?: string;
   className?: string;
+  initialFocusRef?: unknown;
 }): React.ReactElement => {
   const handleKeydown = useCallback((event) => {
     if (event.keyCode === ESC_KEYCODE) {
@@ -36,9 +40,10 @@ const Modal = ({
   }, []);
 
   return (
-    <FocusLock restoreFocus={true}>
+    <FocusLock restoreFocus={true} initialFocusRef={initialFocusRef}>
       <ScrollLock>
         <div
+          {...ariaProps}
           className={classNames("modal", containerClassName)}
           onClick={onClose}
         >

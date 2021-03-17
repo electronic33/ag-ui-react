@@ -1,5 +1,5 @@
 const PopoverBaseClasses = (theme) => ({
-  ".tooltip-wrapper": {
+  ".popover-wrapper": {
     display: "inline-block",
   },
 
@@ -23,17 +23,8 @@ const PopoverBaseClasses = (theme) => ({
     },
   },
 
-  ".tooltip-content": {
-    paddingTop: theme("spacing.2"),
-    paddingBottom: theme("spacing.2"),
-    paddingLeft: theme("spacing.4"),
-    paddingRight: theme("spacing.4"),
-    color: theme("colors.white"),
-    borderRadius: theme("borderRadius.DEFAULT"),
-  },
-  "#tooltip": {
-    backgroundColor: theme("colors.gray.700"),
-  },
+  ".popover-content": {},
+
   "#arrow-base": {
     backgroundColor: theme("colors.white"),
     borderWidth: "1px",

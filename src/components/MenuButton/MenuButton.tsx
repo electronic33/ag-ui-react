@@ -16,26 +16,18 @@ export interface TooltipTypes {
   headerText?: string;
   closeOnOutsideClick?: boolean;
   closeOnEsc?: boolean;
-  withCloseButton?: boolean;
-  withArrow?: boolean;
-  containterFocus?: boolean;
 }
 
 const Tooltip = ({
   delay,
   children,
   content,
-  direction = "top",
+  direction = "bottom",
   contentClassNames,
-  arrowClasses,
-  trigger = "click",
   headerText,
   closeOnOutsideClick = true,
   closeOnEsc = true,
   initialFocusRef,
-  withCloseButton = false,
-  withArrow = false,
-  containterFocus = true,
 }: TooltipTypes): React.ReactElement => {
   let timeout;
 
@@ -90,24 +82,16 @@ const Tooltip = ({
   };
 
   const handleClick = () => {
-    if (trigger === "hover") {
-      return null;
-    } else if (trigger === "click") {
-      if (!active) {
-        return showTip();
-      } else if (active) {
-        return hideTip();
-      }
+    if (!active) {
+      return showTip();
+    } else if (active) {
+      return hideTip();
     }
   };
 
   const childrenWithProps = React.cloneElement(child, {
     ...child.props,
     onClick: handleClick,
-    onFocus: trigger === "hover" && toggleTip,
-    onMouseEnter: trigger === "hover" && showTip,
-    onMouseLeave: trigger === "hover" && delayedHideTip,
-    onBlur: trigger === "hover" && hideTip,
     ariaProps: {
       "aria-haspopup": true,
       "aria-controls": `popover-content-${id}`,
@@ -149,16 +133,12 @@ const Tooltip = ({
     ],
   });
 
-  let tabbable;
-  if (containterFocus) {
-    tabbable = { tabIndex: 1 };
-  }
   return (
     <div ref={ref}>
-      <div className="popover-wrapper" ref={setReferenceElement}>
+      <div className="tooltip-wrapper" ref={setReferenceElement}>
         {childrenWithProps}
       </div>
-      {active && trigger === "click" && (
+      {active && (
         <FocusLock
           initialFocusRef={initialFocusRef}
           isDisabled={!active}
@@ -175,11 +155,11 @@ const Tooltip = ({
             aria-labelledby={`popover-header-${id}`}
             aria-describedby={`popover-body-${id}`}
             id={`popover-content-${id}`}
-            {...tabbable}
+            tabIndex={1}
           >
             <div
               className={classNames(
-                "popover-content relative",
+                "tooltip-content relative",
                 {},
                 contentClassNames,
               )}
@@ -193,84 +173,17 @@ const Tooltip = ({
                 </div>
               )}
 
-              {withCloseButton && (
-                <button
-                  onClick={hideTip}
-                  className="absolute flex-shrink-0 top-1 right-2 text-lg text-gray-400 z-10"
-                  aria-label="close"
-                >
-                  <MdClose className="flex-shrink-0" />
-                </button>
-              )}
-
+              <button
+                onClick={hideTip}
+                className="absolute flex-shrink-0 top-1 right-2 text-lg text-gray-400 z-10"
+                aria-label="close"
+              >
+                <MdClose className="flex-shrink-0" />
+              </button>
               <div id={`popover-body-${id}`}>{content}</div>
             </div>
-            {withArrow && (
-              <div
-                className={classNames(
-                  "arrow-base bg-red-400 border border-gray-200 ",
-                  arrowClasses,
-                )}
-                style={styles.arrow}
-                data-popper-arrow
-                id="arrow"
-              ></div>
-            )}
           </div>
         </FocusLock>
-      )}
-      {active && trigger === "hover" && (
-        <div
-          ref={setPopperElement}
-          style={styles.popper}
-          onMouseEnter={() => clearTimeout(timeout)}
-          onMouseLeave={() => {
-            hideTip();
-          }}
-          {...attributes.popper}
-          className="bg-white border border-gray-200 rounded z-20"
-          data-popper-placement={direction}
-          role="tooltip"
-          aria-hidden={active}
-          aria-labelledby={`popover-header-${id}`}
-          aria-describedby={`popover-body-${id}`}
-          id={`popover-content-${id}`}
-          tabIndex={1}
-        >
-          <div
-            className={classNames(
-              "popover-content relative",
-              {},
-              contentClassNames,
-            )}
-          >
-            {headerText && (
-              <div
-                className="text-gray-700 font-semibold text-lg pb-2 border-b border-gray-200 w-full mr-10"
-                id={`popover-header-${id}`}
-              >
-                {headerText}
-              </div>
-            )}
-            <button
-              onClick={hideTip}
-              className="absolute flex-shrink-0 top-1 right-2 text-lg text-gray-400 z-10"
-              aria-label="close"
-            >
-              <MdClose className="flex-shrink-0" />
-            </button>
-            <div id={`popover-body-${id}`}>{content}</div>
-          </div>
-          <div
-            className={classNames(
-              "arrow-base bg-white border border-gray-200",
-              arrowClasses,
-            )}
-            style={styles.arrow}
-            data-popper-arrow
-            id="arrow"
-          ></div>
-        </div>
       )}
     </div>
   );

@@ -9,7 +9,6 @@ const ModalBaseClasses = (theme) => ({
     paddingTop: theme("spacing.10"),
     paddingLeft: theme("spacing.6"),
     paddingRight: theme("spacing.6"),
-    backgroundColor: theme("colors.gray.900"),
     top: "0px",
     left: "0px",
     right: "0px",

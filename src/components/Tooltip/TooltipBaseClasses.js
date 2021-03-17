@@ -25,10 +25,10 @@ const TooltipBaseClasses = (theme) => ({
     paddingBottom: theme("spacing.2"),
     paddingLeft: theme("spacing.4"),
     paddingRight: theme("spacing.4"),
-    color: theme("colors.white"),
+    color: theme("colors.black"),
     borderRadius: theme("borderRadius.DEFAULT"),
   },
-  "#tooltip": {
+  ".arrow-container": {
     backgroundColor: theme("colors.gray.700"),
   },
 });

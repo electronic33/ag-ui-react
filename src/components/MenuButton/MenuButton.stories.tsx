@@ -1,23 +1,21 @@
 import React, { useRef } from "react";
-import Popover from "./Popover";
+import MenuButton from "./MenuButton";
 import "../../styles/index.css";
 import Button from "../Button/Button";
 
 export default {
-  title: "Popover",
-  component: Popover,
+  title: "MenuButton",
+  component: MenuButton,
 };
 
 export const Default = (props): React.ReactNode => {
-  const trigger = "click";
   return (
-    <div className="w-screen h-screen flex justify-center items-center space-x-3">
+    <div className="w-screen h-48 flex justify-center items-center space-x-3">
       <Button className="bg-yellow-400" text="Button with tooltip">
         I&apos;m a button
       </Button>
-      <Popover
+      <MenuButton
         headerText="Header"
-        trigger={`${trigger}`}
         content={
           <div className="flex space-x-3">
             <Button text="button 1" className="my-5 bg-gray-500" />
@@ -27,9 +25,9 @@ export const Default = (props): React.ReactNode => {
         }
       >
         <Button className="bg-green-500" text="Button with tooltip">
-          {trigger} me
+          Menu
         </Button>
-      </Popover>
+      </MenuButton>
       <Button className="bg-yellow-400" text="Button with tooltip">
         I&apos;m a button
       </Button>

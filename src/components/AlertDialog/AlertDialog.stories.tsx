@@ -1,0 +1,28 @@
+import React, { useState } from "react";
+import AlertDialog from "./AlertDialog";
+import "../../styles/index.css";
+import Button from "../Button/Button";
+
+export default {
+  title: "AlertDialog",
+  component: AlertDialog,
+};
+
+export const Top = (): React.ReactNode => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div>
+      <Button onClick={() => setIsOpen(true)}>Alert!</Button>
+      <AlertDialog
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        onCancel={() => setIsOpen(false)}
+        onConfirm={() => setIsOpen(false)}
+        // loading={true}
+        headerText="Alert!"
+        message="Alert messages can be used to notify the user about something special: danger, success, information or warning. "
+      ></AlertDialog>
+    </div>
+  );
+};

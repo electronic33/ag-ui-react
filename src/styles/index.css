@@ -2,18 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-#tooltip[data-popper-placement^='top'] > #arrow {
+.popper-arrow-conainer[data-popper-placement^='top'] > #arrow {
   bottom: -4px;
 }
 
-#tooltip[data-popper-placement^='bottom'] > #arrow {
+.popper-arrow-conainer[data-popper-placement^='bottom'] > #arrow {
   top: -4px;
 }
 
-#tooltip[data-popper-placement^='left'] > #arrow {
+.popper-arrow-conainer[data-popper-placement^='left'] > #arrow {
   right: -4px;
 }
 
-#tooltip[data-popper-placement^='right'] > #arrow {
+.popper-arrow-conainer[data-popper-placement^='right'] > #arrow {
   left: -4px;
 }
