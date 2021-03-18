@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Popover from "../Popover/Popover";
 import MenuItem from "../MenuItem/MenuItem";
 
@@ -16,19 +16,30 @@ export default {
 
 export const Default = (props): React.ReactNode => {
   const trigger = "click";
+  const [active, setActive] = useState(false);
   return (
     <div className="w-screen h-screen flex justify-center items-center space-x-3">
       <Button className="bg-yellow-400" text="Button with tooltip">
         I&apos;m a button
       </Button>
       <Popover
+        active={active}
+        setActive={setActive}
         direction="bottom"
         contentClassNames=""
         containterFocus={false}
         content={
           <MenuList>
             <MenuGroup title="With Icon">
-              <MenuItem Icon={<MdClose />}>Item 1</MenuItem>
+              <MenuItem
+                Icon={<MdClose />}
+                // onClick={() => {
+                //   setActive(false);
+                //   alert("I was clicked");
+                // }}
+              >
+                Item 1
+              </MenuItem>
               <MenuItem Icon={<Md3DRotation />}>Item 2</MenuItem>
               <MenuItem Icon={<MdAccessAlarm />}>Item 3</MenuItem>
             </MenuGroup>

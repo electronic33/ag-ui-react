@@ -9,7 +9,7 @@ export interface TooltipTypes {
   delay?: number;
   children?: React.ReactNode;
   direction?: string;
-  content: string;
+  content?: unknown;
   contentClassNames?: string;
   arrowClasses?: string;
   trigger?: string;
@@ -19,6 +19,8 @@ export interface TooltipTypes {
   withCloseButton?: boolean;
   withArrow?: boolean;
   containterFocus?: boolean;
+  active: boolean;
+  setActive: (prevState?: boolean) => void;
 }
 
 const Tooltip = ({
@@ -36,10 +38,10 @@ const Tooltip = ({
   withCloseButton = false,
   withArrow = false,
   containterFocus = true,
+  active,
+  setActive,
 }: TooltipTypes): React.ReactElement => {
   let timeout;
-
-  const [active, setActive] = useState(false);
 
   const ref = useRef();
 
@@ -104,10 +106,10 @@ const Tooltip = ({
   const childrenWithProps = React.cloneElement(child, {
     ...child.props,
     onClick: handleClick,
-    onFocus: trigger === "hover" && toggleTip,
-    onMouseEnter: trigger === "hover" && showTip,
-    onMouseLeave: trigger === "hover" && delayedHideTip,
-    onBlur: trigger === "hover" && hideTip,
+    onFocus: trigger === "hover" ? toggleTip : undefined,
+    onMouseEnter: trigger === "hover" ? showTip : undefined,
+    onMouseLeave: trigger === "hover" ? delayedHideTip : undefined,
+    onBlur: trigger === "hover" ? hideTip : undefined,
     ariaProps: {
       "aria-haspopup": true,
       "aria-controls": `popover-content-${id}`,
