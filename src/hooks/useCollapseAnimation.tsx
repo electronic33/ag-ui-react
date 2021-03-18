@@ -1,7 +1,14 @@
 /* eslint-disable no-param-reassign */
-import { useLayoutEffect, useState, useEffect } from "react";
+import { useLayoutEffect, useState } from "react";
 
-const useCollapseAnimation = (collapseRef, initialState = false, open) => {
+const useCollapseAnimation: (
+  collapseRef: { current: HTMLElement },
+  initialState?: boolean,
+) => {
+  onToggleIsOpen: () => void;
+  isOpen: boolean;
+  isTransitioning: boolean;
+} = (collapseRef: { current: HTMLElement }, initialState = false) => {
   const [isOpen, setIsOpen] = useState(initialState);
   const [isTransitioning, setIsTransitioning] = useState(false);
 
@@ -10,14 +17,6 @@ const useCollapseAnimation = (collapseRef, initialState = false, open) => {
       collapseRef.current.style.height = `${0}px`;
     }
   }, []);
-
-  useEffect(() => {
-    if (open === true) {
-      handleOpen(collapseRef);
-    } else if (open === false) {
-      handleClose(collapseRef);
-    }
-  }, [open]);
 
   const handleOpen = (element) => {
     const sectionHeight = element.current.scrollHeight;

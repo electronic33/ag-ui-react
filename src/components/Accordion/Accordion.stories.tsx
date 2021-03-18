@@ -1,56 +1,56 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import React, { useState } from "react";
 import Accordion from "./Accordion";
 import "../../styles/index.css";
-import { FaChevronDown, FaChevronUp, FaChrome } from "react-icons/fa";
+import { FaChevronDown, FaChrome } from "react-icons/fa";
 
 export default {
   title: "Accordion",
   component: Accordion,
-  argTypes: { onClick: { action: "clicked" } },
+  argTypes: { onChange: { action: "changed" } },
 };
 
-export const Default = ({ onClick, ...rest }): React.ReactNode => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleClick = (arg) => {
-    onClick(arg);
-    setIsOpen(arg);
+export const Default = ({ onChange }): React.ReactNode => {
+  const handleChange = (arg: boolean) => {
+    onChange(arg);
   };
 
   return (
     <Accordion
-      text="Accordion Component"
       Icon={FaChrome}
       ArrowIcon={FaChevronDown}
-      DropDownClassName="bg-red-500 "
-      {...rest}
-      open={isOpen}
-      onClick={handleClick}
+      onChange={handleChange}
+      containerClassName="shadow-lg"
+      buttonClassName="bg-gray-50 hover:bg-gray-100"
+      contentClassName="text-center text-lg font-semibold bg-gray-50"
+      content={"Hello!"}
     >
-      <div className="flex justify-center items-center h-44">Hello!</div>
+      {({ isOpen }) => (isOpen ? "Close me!" : "Open me!")}
     </Accordion>
   );
 };
-export const textOnly = (): React.ReactNode => (
-  <Accordion text="Accordion Component" DropDownClassName="bg-red-500 ">
-    <div className="flex justify-center items-center h-44">Hello!</div>
-  </Accordion>
-);
-export const TextAndArrow = (): React.ReactNode => (
-  <Accordion
-    text="Accordion Component"
-    ArrowIcon={FaChevronDown}
-    DropDownClassName="bg-red-500 "
-  >
-    <div className="flex justify-center items-center h-44">Hello!</div>
-  </Accordion>
-);
-export const TextAndIcon = (): React.ReactNode => (
-  <Accordion
-    text="Accordion Component"
-    Icon={FaChrome}
-    DropDownClassName="bg-red-500 "
-  >
-    <div className="flex justify-center items-center h-44">Hello!</div>
-  </Accordion>
-);
+
+export const Controlled = ({ onChange }): React.ReactNode => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleChange = (arg: boolean) => {
+    setIsOpen((prevState) => !prevState);
+    onChange(arg);
+  };
+
+  return (
+    <Accordion
+      Icon={FaChrome}
+      ArrowIcon={FaChevronDown}
+      onChange={handleChange}
+      isControlled
+      isOpen={isOpen}
+      containerClassName="shadow-lg"
+      buttonClassName="bg-gray-50 hover:bg-gray-100"
+      contentClassName="text-center text-lg font-semibold bg-gray-50"
+      content={"Hello!"}
+    >
+      {isOpen ? "Close me!" : "Open me!"}
+    </Accordion>
+  );
+};

@@ -1,15 +1,17 @@
 const AccordionbBaseClasses = (theme) => ({
-  ".accordion": {
+  ".accordion-container": {
     display: "flex",
     flexDirection: "column",
-    borderRadius: theme("borderRadius.md"),
-    boxShadow: theme("boxShadow.lg"),
+  },
+  ".accordion-button": {
+    display: "flex",
+    alignItems: "center",
+    position: "relative",
     backgroundColor: theme("colors.coolGray.50"),
-    paddingLeft: theme("spacing.4"),
-    paddingRight: theme("spacing.4"),
-    paddingTop: theme("spacing.6"),
-    paddingBottom: theme("spacing.6"),
-    overflow: "hidden",
+    paddingLeft: theme("spacing.2"),
+    paddingRight: theme("spacing.2"),
+    paddingTop: theme("spacing.3"),
+    paddingBottom: theme("spacing.3"),
   },
   ".drop-down": {
     display: "flex",

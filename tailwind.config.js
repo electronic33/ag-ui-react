@@ -3,7 +3,7 @@ const colors = require("tailwindcss/colors");
 const plugin = require("tailwindcss/plugin");
 const ButtonBaseClasses = require("./src/components/Button/ButtonBaseClasses");
 const ButtonSpinnerBaseClasses = require("./src/components/ButtonSpinner/ButtonSpinnerBaseClasses");
-const AccordionbBaseClasses = require("./src/components/Accordion/AccordionbBaseClasses");
+const AccordionBaseClasses = require("./src/components/Accordion/AccordionBaseClasses");
 const DropdownButtonBaseClasses = require("./src/components/DropdownButton/DropdownButtonBaseClasses");
 const LabelBaseClasses = require("./src/components/Label/LabelBaseClasses");
 const PaginationBaseClasses = require("./src/components/Pagination/PaginationBaseClasses");
@@ -949,7 +949,7 @@ module.exports = {
       const newComponents = {
         ...ButtonBaseClasses(theme),
         ...ButtonSpinnerBaseClasses(theme),
-        ...AccordionbBaseClasses(theme),
+        ...AccordionBaseClasses(theme),
         ...DropdownButtonBaseClasses(theme),
         ...LabelBaseClasses(theme),
         ...PaginationBaseClasses(theme),
@@ -976,7 +976,7 @@ module.exports = {
         ...PopoverBaseClasses(theme),
       };
 
-      console.log("asd");
+      // console.log("asd");
 
       addUtilities(newComponents, {
         respectImportant: false,
