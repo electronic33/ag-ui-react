@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { ReactElement, useMemo } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 
 export interface SelectTypes {
@@ -8,14 +8,14 @@ export interface SelectTypes {
   options: {
     label: string;
     value: number | string;
-    Icon?: React.ComponentType;
+    Icon?: ReactElement<{ className?: string }>;
   }[];
   /**
    The selected value.
   */
   selected: number | string;
   onChange?: (item?) => void;
-  className: string;
+  containerClassName: string;
   label: string;
   cursorPointer?: boolean;
 }
@@ -24,7 +24,7 @@ const Select = ({
   options,
   selected,
   onChange,
-  className,
+  containerClassName,
   label,
   cursorPointer,
 }: SelectTypes): React.ReactElement => {
@@ -36,7 +36,7 @@ const Select = ({
   return (
     <Listbox
       as="div"
-      className={className}
+      className={containerClassName}
       value={selected}
       onChange={onChange}
     >

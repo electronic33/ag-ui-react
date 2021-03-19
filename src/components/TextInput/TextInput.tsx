@@ -14,7 +14,7 @@ export interface TextInputProps {
   onClick?: (event) => void;
   onKeyDown?: () => void;
   error?: string;
-  className?: string;
+  containerClassName?: string;
   inputClassName?: string;
   type?: string;
   max?: string | number;
@@ -38,7 +38,7 @@ const TextInput = ({
   onClick = undefined,
   onKeyDown = undefined,
   error = "",
-  className,
+  containerClassName,
   inputClassName,
   type = "text",
   max = undefined,
@@ -51,7 +51,7 @@ const TextInput = ({
   disabled = false,
 }: TextInputProps): React.ReactElement => {
   return (
-    <div className={classNames("flex flex-col relative", className)}>
+    <div className={classNames("flex flex-col relative", containerClassName)}>
       {label && (
         <Label
           secondaryText={secondaryLabel}

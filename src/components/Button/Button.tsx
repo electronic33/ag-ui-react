@@ -17,6 +17,7 @@ export interface ButtonProps {
   loadingText?: string;
   SpinnerClassName?: string;
   showLoadingSpinner?: boolean;
+  type?: string;
   /**
    sm(small), default(normal), or lg(large)
   */
@@ -44,6 +45,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       showLoadingSpinner = true,
       SpinnerClassName,
       textClassName,
+      type = "button",
       sizeClass = "default",
       onClick,
       onMouseEnter,
@@ -57,6 +59,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         ref={ref}
+        type={type}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
         onFocus={onFocus}

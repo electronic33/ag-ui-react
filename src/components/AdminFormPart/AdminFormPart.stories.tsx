@@ -36,7 +36,6 @@ export const Default = (): React.ReactNode => {
               dirty,
               isSubmitting,
               handleSubmit,
-              handleReset,
               touched,
               errors,
             } = props;
@@ -48,11 +47,7 @@ export const Default = (): React.ReactNode => {
                   className={classNames("", classNames)}
                 >
                   <div className="flex justify-center mt-2 640:mt-0">
-                    <Button
-                      type="button"
-                      className="mr-4 text-lg"
-                      onClick={handleReset}
-                    >
+                    <Button type="button" className="mr-4 text-lg">
                       Reset
                     </Button>
                     <Button
