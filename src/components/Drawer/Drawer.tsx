@@ -1,10 +1,13 @@
-import React, { useRef, useMemo, useEffect, useState } from "react";
+import React, { useEffect, useMemo } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import ReactScrollLock from "react-scrolllock";
+
 import Link from "../Link/Link";
 import classNames from "classnames";
-import { Transition } from "@headlessui/react";
 import FocusLock from "../FocusTrap/FocusTrap";
 import { useTransition, animated, config } from "react-spring";
+import useStopPropagation from "../../hooks/useStopPropagation";
+import Button from "../Button/Button";
 
 export interface DrawerTypes {
   /**
@@ -14,17 +17,17 @@ export interface DrawerTypes {
     title?: string;
     to?: string;
     Icon?: React.ComponentType<{ className: string }>;
-    Component?: React.ComponentType;
+    Component?: React.ReactNode;
   }[];
   /**
    A component that will be displayed in the drawer. 
   */
-  SidebarComponent?: React.ComponentType;
+  SidebarComponent?: React.ReactNode;
   isOpen: boolean;
-  setIsOpen: (state: boolean | ((prevState: boolean) => boolean)) => void;
-  direction?: string;
-  iconClassNames?: string;
-  textClassNames?: string;
+  onClose: () => void;
+  direction?: "top" | "right" | "bottom" | "left";
+  iconClassName?: string;
+  textClassName?: string;
   drawerClassNames?: string;
   linkClassNames?: string;
 }
@@ -32,22 +35,20 @@ export interface DrawerTypes {
 const Drawer = ({
   sidebarData,
   SidebarComponent,
-  direction = "f",
+  direction = "left",
   isOpen,
-  setIsOpen,
-  iconClassNames,
-  textClassNames,
+  onClose,
+  iconClassName,
+  textClassName,
   drawerClassNames,
   linkClassNames,
-}: DrawerTypes): React.ReactElement => {
-  let alternate;
-  if (direction === "left" || direction === "right") alternate = "top";
-  if (direction === "top" || direction === "bottom") alternate = "left";
+}: DrawerTypes) => {
+  const stopPropagation = useStopPropagation();
 
   useEffect(() => {
-    const handleSpacebarPress = (e) => {
-      if (e.code === "Escape") {
-        setIsOpen(false);
+    const handleSpacebarPress = (event: React.KeyboardEvent) => {
+      if (event.code === "Escape") {
+        onClose();
       }
     };
 
@@ -55,163 +56,170 @@ const Drawer = ({
     return () => document.removeEventListener("keydown", handleSpacebarPress);
   }, [isOpen]);
 
-  const leftD = {
-    from: {
-      top: "0%",
-      left: "-100%",
-    },
-    enter: {
-      left: "-0%",
-      top: "0%",
-    },
-    leave: {
-      left: "-100%",
-      top: "0%",
-    },
-    unique: true,
-    config: config.default,
-  };
+  const springConfig = useMemo(() => {
+    switch (direction) {
+      case "top":
+        return {
+          from: {
+            opacity: "0",
+            top: "-100%",
+            left: "0%",
+          },
+          enter: {
+            opacity: "1",
+            left: "0%",
+            top: "0%",
+          },
+          leave: {
+            opacity: "0",
+            left: "0%",
+            top: "-100%",
+          },
+          unique: true,
+          config: config.default,
+        };
+      case "right":
+        return {
+          from: {
+            opacity: "0",
+            top: "0%",
+            right: "-100%",
+          },
+          enter: {
+            opacity: "1",
+            right: "-0%",
+            top: "0%",
+          },
+          leave: {
+            opacity: "0",
+            right: "-100%",
+            top: "0%",
+          },
+          unique: true,
+          config: config.default,
+        };
+      case "bottom":
+        return {
+          from: {
+            opacity: "0",
+            bottom: "-100%",
+            left: "0%",
+          },
+          enter: {
+            opacity: "1",
+            left: "0%",
+            bottom: "0%",
+          },
+          leave: {
+            opacity: "0",
+            left: "0%",
+            bottom: "-100%",
+          },
+          unique: true,
+          config: config.default,
+        };
+      case "left":
+        return {
+          from: {
+            opacity: "0",
+            top: "0%",
+            left: "-100%",
+          },
+          enter: {
+            opacity: "1",
+            left: "-0%",
+            top: "0%",
+          },
+          leave: {
+            opacity: "0",
+            left: "-100%",
+            top: "0%",
+          },
+          unique: true,
+          config: config.default,
+        };
+    }
+  }, []);
 
-  const rightD = {
-    from: {
-      top: "0%",
-      right: "-100%",
-    },
-    enter: {
-      right: "-0%",
-      top: "0%",
-    },
-    leave: {
-      right: "-100%",
-      top: "0%",
-    },
-    unique: true,
-    config: config.default,
-  };
-  const topD = {
-    from: {
-      top: "-100%",
-      left: "0%",
-    },
-    enter: {
-      left: "0%",
-      top: "0%",
-    },
-    leave: {
-      left: "0%",
-      top: "-100%",
-    },
-    unique: true,
-    config: config.default,
-  };
-
-  const bottomD = {
-    from: {
-      bottom: "-100%",
-      left: "0%",
-    },
-    enter: {
-      left: "0%",
-      bottom: "0%",
-    },
-    leave: {
-      left: "0%",
-      bottom: "-100%",
-    },
-    unique: true,
-    config: config.default,
-  };
-
-  const selector = () => {
-    if (direction === "top") return topD;
-    if (direction === "bottom") return bottomD;
-    if (direction === "left") return leftD;
-    if (direction === "right") return rightD;
-  };
-
-  const transition = useTransition(isOpen, null, selector());
+  const transitions = useTransition(isOpen, null, springConfig);
 
   return (
-    <FocusLock isDisabled={!isOpen} restoreFocus={true}>
-      <div className="w-screen h-screen">
-        <Transition
-          show={isOpen}
-          enter="transition ease-out duration-200"
-          enterFrom="transform opacity-0"
-          enterTo="transform opacity-100"
-          leave="transition ease-in duration-300"
-          leaveFrom="transform opacity-100"
-          leaveTo="transform opacity-0 s"
-          className="fixed top-0 left-0 z-10 w-screen h-full bg-black bg-opacity-40"
-          onClick={() => setIsOpen(false)}
-        ></Transition>
-
-        {transition.map(
-          ({ item, key, props }) =>
-            item && (
-              <animated.nav
-                key={key}
-                style={props}
-                className={classNames(
-                  "drawer z-20",
-                  {
-                    "h-auto w-full ": alternate === "left",
-                  },
-                  drawerClassNames,
-                )}
-              >
-                <ul className="drawer-ul ">
-                  <li
-                    className={classNames("drawer-li-1", {
-                      "justify-start": direction === "left",
-                      "justify-end": direction === "right",
-                    })}
+    <>
+      {transitions.map(
+        ({ item, key, props }) =>
+          item && (
+            <FocusLock key={key} isDisabled={!isOpen} restoreFocus={true}>
+              <ReactScrollLock>
+                <animated.div
+                  className="fixed top-0 left-0 z-10 w-screen h-screen bg-black bg-opacity-40"
+                  onClick={onClose}
+                  style={{ opacity: props.opacity }}
+                >
+                  <animated.nav
+                    style={{ ...props, opacity: 1 }}
+                    onClick={stopPropagation}
+                    className={classNames(
+                      "drawer",
+                      {
+                        "drawer-vertical":
+                          direction === "left" || direction === "right",
+                        "drawer-horizontal":
+                          direction === "top" || direction === "bottom",
+                      },
+                      drawerClassNames,
+                    )}
                   >
-                    <button
-                      className={classNames("close-button-container", {
-                        "pl-8": direction === "left",
-                        "pr-8": direction === "right",
-                      })}
-                      onClick={() => setIsOpen((prevState) => !prevState)}
-                    >
-                      <AiOutlineClose />
-                    </button>
-                  </li>
-                  {SidebarComponent && SidebarComponent}
-                  {sidebarData &&
-                    sidebarData.map(({ title, Icon, to, Component }, index) => (
-                      <li key={index} className="">
-                        <Link
-                          onClick={() => setIsOpen((prevState) => !prevState)}
-                          className={classNames(
-                            "drawer-link",
-                            {
-                              // "ml-5": left,
-                              // "mr-5": right,
-                            },
-                            linkClassNames,
-                          )}
-                          to={to}
+                    <ul className="drawer-ul ">
+                      <li
+                        className={classNames("drawer-li-1", {
+                          "justify-start": direction === "left",
+                          "justify-end": direction === "right",
+                        })}
+                      >
+                        <Button
+                          className={classNames("close-button-container", {
+                            "pl-8": direction === "left",
+                            "pr-8": direction === "right",
+                          })}
+                          onClick={onClose}
                         >
-                          <Icon
-                            className={classNames(
-                              "drawer-link-icon",
-                              iconClassNames,
-                            )}
-                          />
-                          <div className={classNames(textClassNames)}>
-                            {title}
-                          </div>
-                        </Link>
-                        {Component && Component}
+                          <AiOutlineClose />
+                        </Button>
                       </li>
-                    ))}
-                </ul>
-              </animated.nav>
-            ),
-        )}
-      </div>
-    </FocusLock>
+                      {SidebarComponent}
+                      {sidebarData &&
+                        sidebarData.map(
+                          ({ title, Icon, to, Component }, index) => (
+                            <li key={index} className="">
+                              <Link
+                                className={classNames(
+                                  "drawer-link",
+                                  linkClassNames,
+                                )}
+                                to={to}
+                              >
+                                <Icon
+                                  className={classNames(
+                                    "drawer-link-icon",
+                                    iconClassName,
+                                  )}
+                                />
+                                <div className={classNames(textClassName)}>
+                                  {title}
+                                </div>
+                              </Link>
+                              {Component}
+                            </li>
+                          ),
+                        )}
+                    </ul>
+                  </animated.nav>
+                </animated.div>
+              </ReactScrollLock>
+            </FocusLock>
+          ),
+      )}
+    </>
   );
 };
 

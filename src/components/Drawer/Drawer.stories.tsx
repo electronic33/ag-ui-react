@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import Drawer from "./Drawer";
 import "../../styles/index.css";
 import { AiFillHome } from "react-icons/ai";
@@ -11,21 +11,13 @@ export default {
   component: Drawer,
 };
 
-export const Default = (props): React.ReactNode => {
+export const Default = () => {
   const [isOpen, setIsOpen] = useState(false);
-  // const buttonRef = useRef();
-  // useEffect(() => {
-  //   if (buttonRef) {
-  //     console.log("dfdsf", buttonRef.current);
-  //     buttonRef.current.focus();
-  //   }
-  // }, [isOpen]);
 
   return (
     <div>
       <div className="bg-gray-700 h-20 flex justify-center items-center ">
         <button
-          // ref={buttonRef}
           className="ml-8 text-3xl bg-blue-500 text-white px-4 py-2 rounded"
           tabIndex={0}
           onClick={() => setIsOpen((prevState) => !prevState)}
@@ -35,8 +27,9 @@ export const Default = (props): React.ReactNode => {
       </div>
       <Drawer
         isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        SidebarComponent={<Button text="asds" />}
+        onClose={() => setIsOpen(false)}
+        direction="bottom"
+        SidebarComponent={<Button>asd</Button>}
         sidebarData={[
           {
             title: "Home",
@@ -47,7 +40,7 @@ export const Default = (props): React.ReactNode => {
             title: "Reports",
             to: "/reports",
             Icon: IoIosPaper,
-            Component: <Button text="asd" />,
+            Component: <Button>asd</Button>,
           },
           {
             title: "Products",
@@ -70,7 +63,6 @@ export const Default = (props): React.ReactNode => {
             Icon: IoMdHelpCircle,
           },
         ]}
-        {...props}
       />
     </div>
   );

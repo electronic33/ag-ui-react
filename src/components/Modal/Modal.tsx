@@ -53,38 +53,42 @@ const Modal = ({
     event.stopPropagation();
   }, []);
 
-  return (transitions.map(
-    ({ item, key, props }) =>
-      item &&
-      ReactDOM.createPortal(
-        <FocusLock restoreFocus={true} initialFocusRef={initialFocusRef}>
-          <ScrollLock>
-            <animated.div
-              key={key}
-              {...ariaProps}
-              className={classNames("overlay", overlayClassName)}
-              onClick={onClose}
-              style={{ opacity: props.opacity }}
-            >
-              <animated.div
-                className={classNames("modal", modalClassName)}
-                onClick={stopPropagation}
-                style={{ transform: props.transform }}
-              >
-                {children}
-              </animated.div>
-              <Button
-                onClick={onClose}
-                className="fixed top-4 right-4 z-50 text-5xl text-gray-50"
-              >
-                <IoIosClose />
-              </Button>
-            </animated.div>
-          </ScrollLock>
-        </FocusLock>,
-        document.body,
-      ),
-  ) as unknown) as React.ReactElement;
+  return (
+    <>
+      {transitions.map(
+        ({ item, key, props }) =>
+          item &&
+          ReactDOM.createPortal(
+            <FocusLock restoreFocus={true} initialFocusRef={initialFocusRef}>
+              <ScrollLock>
+                <animated.div
+                  key={key}
+                  {...ariaProps}
+                  className={classNames("overlay", overlayClassName)}
+                  onClick={onClose}
+                  style={{ opacity: props.opacity }}
+                >
+                  <animated.div
+                    className={classNames("modal", modalClassName)}
+                    onClick={stopPropagation}
+                    style={{ transform: props.transform }}
+                  >
+                    {children}
+                  </animated.div>
+                  <Button
+                    onClick={onClose}
+                    className="fixed top-4 right-4 z-50 text-5xl text-gray-50"
+                  >
+                    <IoIosClose />
+                  </Button>
+                </animated.div>
+              </ScrollLock>
+            </FocusLock>,
+            document.body,
+          ),
+      )}
+    </>
+  );
 };
 
 export default Modal;

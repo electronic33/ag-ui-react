@@ -1,11 +1,18 @@
 const DrawerBaseClasses = (theme) => ({
   ".drawer": {
     backgroundColor: theme("colors.gray.700"),
-    width: theme("spacing.64"),
-    height: theme("height.screen"),
     position: "fixed",
     display: "flex",
     justifyContent: "center",
+    zIndex: 20,
+  },
+  ".drawer-horizontal": {
+    width: "100%",
+    height: "auto",
+  },
+  ".drawer-vertical": {
+    width: theme("spacing.64"),
+    height: theme("height.screen"),
   },
   ".drawer-ul": {
     width: theme("width.full"),

@@ -4,7 +4,7 @@ export interface LinkProps {
   className?: string;
   to: string;
   children: React.ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const Link = ({

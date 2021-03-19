@@ -82,8 +82,6 @@ export const FocusLock: React.FC<FocusLockProps> = (props) => {
 
   const returnFocus = restoreFocus && !finalFocusRef;
 
-  console.log("I RENDER FOCUS TRAP");
-
   return (
     <ReactFocusLock
       crossFrame={lockFocusAcrossFrames}
