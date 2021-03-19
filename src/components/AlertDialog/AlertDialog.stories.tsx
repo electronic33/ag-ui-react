@@ -17,12 +17,10 @@ export const Top = (): React.ReactNode => {
       <AlertDialog
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
-        onCancel={() => setIsOpen(false)}
         onConfirm={() => setIsOpen(false)}
-        // loading={true}
         headerText="Alert!"
         message="Alert messages can be used to notify the user about something special: danger, success, information or warning. "
-      ></AlertDialog>
+      />
     </div>
   );
 };

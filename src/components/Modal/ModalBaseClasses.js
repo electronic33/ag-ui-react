@@ -1,10 +1,10 @@
 const ModalBaseClasses = (theme) => ({
-  ".modal": {
+  ".overlay": {
     position: "fixed",
     zIndex: "40",
     display: "flex",
     justifyContent: "center",
-    itemsAlign: "center",
+    alignItems: "center",
     paddingBottom: theme("spacing.10"),
     paddingTop: theme("spacing.10"),
     paddingLeft: theme("spacing.6"),
@@ -13,7 +13,12 @@ const ModalBaseClasses = (theme) => ({
     left: "0px",
     right: "0px",
     bottom: "0px",
-    // backgroundOpacity: theme("backgroundOpacity.60"),
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
+  },
+  ".modal": {
+    backgroundColor: theme("colors.gray.50"),
+    borderRadius: theme("borderRadius.lg"),
+    padding: theme("spacing.6"),
   },
 });
 

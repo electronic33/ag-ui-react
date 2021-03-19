@@ -76,6 +76,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           {
             "opacity-75 pointer-events-none": isDisabled || isLoading,
           },
+          "focus:ring-4 focus:ring-blue:500 focus:ring-opacity:50",
           className,
         )}
         {...ariaProps}
