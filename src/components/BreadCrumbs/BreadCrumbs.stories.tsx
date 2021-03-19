@@ -7,11 +7,13 @@ export default {
   title: "BreadCrumbs",
   component: BreadCrumbs,
 };
+
 const paths = [
-  { name: "Főoldal", to: "/" },
-  { name: "Rendelések", to: "/comenzi" },
+  { label: "App" },
+  { label: "Főoldal", to: "/" },
+  { label: "Rendelések", to: "/comenzi" },
 ];
 
-export const Default = (props): React.ReactNode => (
-  <BreadCrumbs LinkComponent={Link} items={paths} {...props} />
+export const Default = (): React.ReactNode => (
+  <BreadCrumbs LinkComponent={Link} items={paths} />
 );
