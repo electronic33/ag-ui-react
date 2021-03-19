@@ -118,12 +118,11 @@ const AdminForm = ({
               </Button>
               <Button
                 type="submit"
-                onClick={handleSubmit}
-                loadingText="Submitting"
+                onClick={() => handleSubmit()}
                 isLoading={isSubmitting}
-                disabled={isSubmitDisabled}
+                isDisabled={isSubmitDisabled}
               >
-                Submit
+                {isSubmitting ? "Submitting" : "Submit"}
               </Button>
             </div>
             <div className="grid grid-cols-3 gap-5 row-span-full ">

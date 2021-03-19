@@ -10,54 +10,25 @@ export default {
 };
 
 export const Default = ({ onClick, ...rest }): React.ReactNode => (
-  <Button Icon={AiFillAudio} {...rest} text="Button" onClick={onClick} />
+  <Button Icon={AiFillAudio} {...rest} onClick={onClick}>
+    Button
+  </Button>
 );
 
 export const Small = (props): React.ReactNode => (
-  <Button text="Button" {...props} Icon={AiFillAudio} sizeClass="btn-sm" />
+  <Button {...props} Icon={AiFillAudio} size="sm">
+    Button
+  </Button>
 );
 
 export const Large = (): React.ReactNode => (
-  <Button
-    text="Button"
-    textClassName=""
-    className=""
-    Icon={AiFillAudio}
-    IconClassName=""
-    SpinnerClassName=""
-    sizeClass="btn-lg"
-  />
+  <Button Icon={AiFillAudio} size="lg">
+    Button
+  </Button>
 );
-export const IconRight = (): React.ReactNode => (
-  <Button
-    text="Button"
-    textClassName=""
-    className=""
-    Icon={AiFillAudio}
-    IconClassName=""
-    iconPositionRight
-    SpinnerClassName=""
-  />
-);
-export const Disabled = (): React.ReactNode => (
-  <Button
-    text="Button"
-    textClassName=""
-    className=""
-    Icon={AiFillAudio}
-    IconClassName=""
-    SpinnerClassName=""
-    disabled
-  />
-);
+
 export const Loading = (): React.ReactNode => (
-  <Button
-    text="Button"
-    textClassName=""
-    className=""
-    Icon={AiFillAudio}
-    IconClassName=""
-    isLoading
-    SpinnerClassName=""
-  />
+  <Button Icon={AiFillAudio} isLoading>
+    Button
+  </Button>
 );

@@ -1,33 +1,37 @@
 /* eslint-disable react/display-name */
-/* eslint-disable react/prop-types */
-import React, { FunctionComponent } from "react";
+import React, { ReactNode } from "react";
 
 import ButtonSpinner from "../ButtonSpinner/ButtonSpinner";
 import classNames from "classnames";
 
 export interface ButtonProps {
   className?: string;
-  disabled?: boolean;
+  isDisabled?: boolean;
   isLoading?: boolean;
-  text?: string;
-  textClassName?: string;
   Icon?: React.ComponentType<{ className: string }>;
-  IconClassName?: string;
-  iconPositionRight?: boolean;
-  loadingText?: string;
-  SpinnerClassName?: string;
-  showLoadingSpinner?: boolean;
-  type?: string;
+  iconPosition?: "left" | "right";
+  type?: "button" | "submit" | "reset";
   /**
    sm(small), default(normal), or lg(large)
   */
-  sizeClass?: string;
-  onClick?: () => void;
-  onMouseEnter?: () => void;
-  onMouseLeave?: () => void;
-  onFocus?: () => void;
-  onBlur?: () => void;
-  ariaProps?: { "aria-haspopup"?: string };
+  size?: "sm" | "default" | "lg";
+  onClick?: (event?: React.MouseEvent<HTMLButtonElement>) => void;
+  onMouseEnter?: (event?: React.MouseEvent<HTMLButtonElement>) => void;
+  onMouseLeave?: (event?: React.MouseEvent<HTMLButtonElement>) => void;
+  onFocus?: (event?: React.FocusEvent<HTMLButtonElement>) => void;
+  onBlur?: (event?: React.FocusEvent<HTMLButtonElement>) => void;
+  children: ReactNode;
+  ariaProps?: {
+    "aria-haspopup":
+      | boolean
+      | "dialog"
+      | "menu"
+      | "false"
+      | "true"
+      | "listbox"
+      | "tree"
+      | "grid";
+  };
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -35,24 +39,18 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     {
       className,
       children,
-      disabled,
+      isDisabled,
       isLoading,
-      text,
       Icon,
-      IconClassName,
-      iconPositionRight,
-      loadingText,
-      showLoadingSpinner = true,
-      SpinnerClassName,
-      textClassName,
+      iconPosition = "left",
       type = "button",
-      sizeClass = "default",
+      size = "default",
       onClick,
       onMouseEnter,
       onMouseLeave,
       onFocus,
       onBlur,
-      ariaProps,
+      ariaProps = {},
     },
     ref,
   ) => {
@@ -66,54 +64,37 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         onBlur={onBlur}
         onClick={onClick}
         className={classNames(
-          `${sizeClass}`,
           {
-            "btn-sm": sizeClass === "sm",
+            "btn-sm": size === "sm",
           },
           {
-            "btn ": sizeClass === "default",
+            btn: size === "default",
           },
           {
-            "btn-lg": sizeClass === "lg",
+            "btn-lg": size === "lg",
           },
           {
-            "opacity-75 pointer-events-none": disabled || isLoading,
+            "opacity-75 pointer-events-none": isDisabled || isLoading,
           },
           className,
         )}
         {...ariaProps}
       >
-        {children ? (
-          children
-        ) : (
-          <>
-            {isLoading && showLoadingSpinner && !iconPositionRight && (
-              <ButtonSpinner
-                className={classNames("mr-2 flex-shrink-0", SpinnerClassName)}
-              />
-            )}
-            {!isLoading && Icon && !iconPositionRight && (
-              <Icon
-                className={classNames("mr-2 flex-shrink-0", IconClassName)}
-              />
-            )}
-            {isLoading && loadingText ? (
-              loadingText
-            ) : (
-              <p className={textClassName}>{text}</p>
-            )}
-            {!isLoading && Icon && iconPositionRight && (
-              <Icon
-                className={classNames("ml-2 flex-shrink-0", IconClassName)}
-              />
-            )}
-            {isLoading && showLoadingSpinner && iconPositionRight && (
-              <ButtonSpinner
-                className={classNames("ml-2 flex-shrink-0", SpinnerClassName)}
-              />
-            )}
-          </>
-        )}
+        <>
+          {isLoading && !iconPosition && (
+            <ButtonSpinner className={classNames("mr-2 flex-shrink-0")} />
+          )}
+          {!isLoading && Icon && iconPosition === "left" && (
+            <Icon className={classNames("mr-2 flex-shrink-0")} />
+          )}
+          {children}
+          {!isLoading && Icon && iconPosition === "right" && (
+            <Icon className={classNames("ml-2 flex-shrink-0")} />
+          )}
+          {isLoading && iconPosition === "right" && (
+            <ButtonSpinner className={classNames("ml-2 flex-shrink-0")} />
+          )}
+        </>
       </button>
     );
   },
