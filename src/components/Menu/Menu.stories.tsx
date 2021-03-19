@@ -10,7 +10,7 @@ import { FaCartPlus, FaEnvelopeOpenText } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 
 export default {
-  title: "Menu",
+  title: "OVERLAY/Menu",
   component: Menu,
 };
 

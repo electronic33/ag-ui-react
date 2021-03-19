@@ -6,7 +6,7 @@ import { IoLogoChrome } from "react-icons/io";
 import { MdLink, MdMenu, MdPayment } from "react-icons/md";
 
 export default {
-  title: "Header",
+  title: "OTHERS/Header",
   component: Header,
 };
 

@@ -4,7 +4,7 @@ import "../../styles/index.css";
 import { AiOutlineHome } from "react-icons/ai";
 
 export default {
-  title: "HamburgerMenu",
+  title: "OTHERS/HamburgerMenu",
   component: HamburgerMenu,
 };
 

@@ -3,7 +3,7 @@ import "../../styles/index.css";
 import Slider from "./Slider";
 
 export default {
-  title: "Slider",
+  title: "OTHERS/Slider",
   component: Slider,
 };
 const images = [

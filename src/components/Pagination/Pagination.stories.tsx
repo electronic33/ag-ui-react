@@ -3,7 +3,7 @@ import Pagination from "./Pagination";
 import "../../styles/index.css";
 
 export default {
-  title: "Pagination",
+  title: "OTHERS/Pagination",
   component: Pagination,
 };
 

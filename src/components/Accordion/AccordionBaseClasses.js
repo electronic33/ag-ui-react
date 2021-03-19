@@ -13,7 +13,7 @@ const AccordionbBaseClasses = (theme) => ({
     paddingTop: theme("spacing.3"),
     paddingBottom: theme("spacing.3"),
   },
-  ".drop-down": {
+  ".accordion-content": {
     display: "flex",
     flexDirection: "column",
     overflow: "hidden",

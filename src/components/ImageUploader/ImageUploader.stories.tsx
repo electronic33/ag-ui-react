@@ -3,7 +3,7 @@ import ImageUploader from "./ImageUploader";
 import "../../styles/index.css";
 
 export default {
-  title: "ImageUploader",
+  title: "OTHERS/ImageUploader",
   component: ImageUploader,
 };
 

@@ -8,7 +8,7 @@ import Spinner from "../ButtonSpinner/ButtonSpinner";
 import Button from "../Button/Button";
 
 export default {
-  title: "AdminFormPart",
+  title: "FORMS/AdminFormPart",
   component: AdminFormPart,
 };
 

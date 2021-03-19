@@ -3,7 +3,7 @@ import Footer from "./Footer";
 import "../../styles/index.css";
 
 export default {
-  title: "Footer",
+  title: "OTHERS/Footer",
   component: Footer,
 };
 

@@ -10,7 +10,7 @@ import MenuGroup from "./MenuGroup";
 import MenuDivider from "./MenuDivider";
 
 export default {
-  title: "PopoverMenu",
+  title: "OVERLAY/PopoverMenu",
   component: MenuItem,
 };
 
@@ -18,7 +18,7 @@ export const Default = (props): React.ReactNode => {
   const trigger = "click";
   const [active, setActive] = useState(false);
   return (
-    <div className="w-screen h-screen flex justify-center items-center space-x-3">
+    <div className=" flex justify-center items-center space-x-3">
       <Button className="bg-yellow-400" text="Button with tooltip">
         I&apos;m a button
       </Button>

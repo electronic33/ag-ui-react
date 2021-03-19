@@ -4,7 +4,7 @@ import "../../styles/index.css";
 import { FaStar } from "react-icons/fa";
 
 export default {
-  title: "Rate",
+  title: "OTHERS/Rate",
   component: Rate,
 };
 

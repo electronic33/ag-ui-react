@@ -4,7 +4,7 @@ import "../../styles/index.css";
 import Link from "../Link/Link";
 
 export default {
-  title: "BreadCrumbs",
+  title: "NAVIGATION/Breadcrumbs",
   component: BreadCrumbs,
 };
 

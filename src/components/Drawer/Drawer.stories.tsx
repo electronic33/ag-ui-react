@@ -7,7 +7,7 @@ import { FaCartPlus, FaEnvelopeOpenText } from "react-icons/fa";
 import Button from "../Button/Button";
 
 export default {
-  title: "Drawer",
+  title: "OVERLAY/Drawer",
   component: Drawer,
 };
 

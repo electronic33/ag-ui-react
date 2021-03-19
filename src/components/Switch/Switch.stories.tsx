@@ -3,7 +3,7 @@ import Switch from "./Switch";
 import "../../styles/index.css";
 
 export default {
-  title: "Switch",
+  title: "FORMS/Switch",
   component: Switch,
 };
 

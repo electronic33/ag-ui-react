@@ -5,7 +5,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { isSameDay } from "date-fns";
 
 export default {
-  title: "Calendar",
+  title: "OTHERS/Calendar",
   component: Calendar,
 };
 

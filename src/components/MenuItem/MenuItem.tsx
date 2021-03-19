@@ -8,25 +8,15 @@ const MenuItem = ({ children, Icon, onClick }) => {
     ? ref.current.attributes.getNamedItem("data-is-tabbed")?.value === "active"
     : false;
 
-  console.log(
-    "🚀 ~ file: MenuItem.tsx ~ line 27 ~ MenuItem ~ ref.current.attributes",
-    ref?.current,
-  );
-  console.log(
-    "🚀 ~ file: MenuItem.tsx ~ line 27 ~ MenuItem ~ isFocused",
-    ref?.current?.dataset,
-  );
-
   console.log("I RENDER MENU ITEM");
 
   return (
     <button
       role="menuitem"
       ref={ref}
-      className={classNames(
-        "flex items-center outline-none hover:bg-gray-100 focus:bg-gray-100 py-1 w-full",
-        { "bg-red-500": isFocused },
-      )}
+      className={classNames("flex items-center  py-1 w-full", {
+        "bg-red-500": isFocused,
+      })}
       onClick={onClick}
     >
       <div className="flex items-center justify-center ml-2">{Icon}</div>

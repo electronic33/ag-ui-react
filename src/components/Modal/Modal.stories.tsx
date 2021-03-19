@@ -4,7 +4,7 @@ import "../../styles/index.css";
 import Button from "../Button/Button";
 
 export default {
-  title: "Modal",
+  title: "OVERLAY/Modal",
   component: Modal,
 };
 

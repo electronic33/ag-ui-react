@@ -3,7 +3,7 @@ import Label from "./Label";
 import "../../styles/index.css";
 
 export default {
-  title: "Label",
+  title: "OTHERS/Label",
   component: Label,
 };
 

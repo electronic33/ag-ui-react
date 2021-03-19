@@ -3,7 +3,7 @@ import ButtonSpinner from "./ButtonSpinner";
 import "../../styles/index.css";
 
 export default {
-  title: "ButtonSpinner",
+  title: "OTHERS/ButtonSpinner",
   component: ButtonSpinner,
 };
 

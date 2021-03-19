@@ -3,7 +3,7 @@ import DropdownButton from "./DropdownButton";
 import "../../styles/index.css";
 
 export default {
-  title: "DropdownButton",
+  title: "OTHERS/DropdownButton",
   component: DropdownButton,
 };
 

@@ -3,7 +3,7 @@ import ErrorToast from "./ErrorToast";
 import "../../styles/index.css";
 
 export default {
-  title: "ErrorToast",
+  title: "FEEDBACK/ErrorToast",
   component: ErrorToast,
 };
 

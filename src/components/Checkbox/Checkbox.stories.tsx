@@ -4,7 +4,7 @@ import "../../styles/index.css";
 import { GiCheckMark } from "react-icons/gi";
 
 export default {
-  title: "Checkbox",
+  title: "FORMS/Checkbox",
   component: Checkbox,
 };
 

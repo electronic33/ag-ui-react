@@ -5,7 +5,7 @@ import "../../styles/index.css";
 import { FaChevronDown, FaChrome } from "react-icons/fa";
 
 export default {
-  title: "Accordion",
+  title: "DISCLOSURE/Accordion",
   component: Accordion,
   argTypes: { onChange: { action: "changed" } },
 };

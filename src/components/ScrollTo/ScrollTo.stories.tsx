@@ -4,7 +4,7 @@ import "../../styles/index.css";
 import { FaArrowUp } from "react-icons/fa";
 
 export default {
-  title: "ScrollTo",
+  title: "OTHERS/ScrollTo",
   component: ScrollTo,
 };
 

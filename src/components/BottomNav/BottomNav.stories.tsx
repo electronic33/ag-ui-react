@@ -5,7 +5,7 @@ import { IoIosAdd, IoMdAlarm } from "react-icons/io";
 import { MdChildFriendly } from "react-icons/md";
 
 export default {
-  title: "BottomNav",
+  title: "OTHERS/BottomNav",
   component: BottomNav,
 };
 

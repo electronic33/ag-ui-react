@@ -3,7 +3,7 @@ import Test from "./Test";
 import "../../styles/index.css";
 
 export default {
-  title: "Test",
+  title: "OTHERS/MDXTest",
   component: Test,
 };
 

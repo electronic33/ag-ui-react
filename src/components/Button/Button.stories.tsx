@@ -4,7 +4,7 @@ import "../../styles/index.css";
 import { AiFillAudio } from "react-icons/ai";
 
 export default {
-  title: "Button",
+  title: "FORMS/Button",
   component: Button,
   argTypes: { onClick: { action: "clicked" } },
 };

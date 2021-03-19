@@ -3,7 +3,7 @@ import SuccessToast from "./SuccessToast";
 import "../../styles/index.css";
 
 export default {
-  title: "SuccessToast",
+  title: "FEEDBACK/SuccessToast",
   component: SuccessToast,
 };
 

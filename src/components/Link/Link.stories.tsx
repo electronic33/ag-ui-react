@@ -3,7 +3,7 @@ import Link from "./Link";
 import "../../styles/index.css";
 
 export default {
-  title: "Link",
+  title: "NAVIGATION/Link",
   component: Link,
 };
 

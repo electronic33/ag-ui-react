@@ -4,7 +4,7 @@ import "../../styles/index.css";
 import { MdLabelOutline } from "react-icons/md";
 
 export default {
-  title: "TextArea",
+  title: "FORMS/TextArea",
   component: TextArea,
 };
 

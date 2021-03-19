@@ -113,7 +113,7 @@ const Accordion = ({
         id={accordionId}
         ref={collapseRef}
         style={springStyles}
-        className={classNames("drop-down", contentClassName)}
+        className={classNames("accordion-content", contentClassName)}
       >
         {content}
       </animated.div>

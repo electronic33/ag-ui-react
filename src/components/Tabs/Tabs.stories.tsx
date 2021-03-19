@@ -8,7 +8,7 @@ import ButtonSpinner from "../ButtonSpinner/ButtonSpinner";
 import Button from "../Button/Button";
 
 export default {
-  title: "Tabs",
+  title: "DISCLOSURE/Tabs",
   component: Tabs,
 };
 

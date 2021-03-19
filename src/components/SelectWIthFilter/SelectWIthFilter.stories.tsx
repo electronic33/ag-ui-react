@@ -3,7 +3,7 @@ import SelectWIthFilter from "./SelectWIthFilter";
 import "../../styles/index.css";
 
 export default {
-  title: "SelectWIthFilter",
+  title: "OTHERS/SelectWIthFilter",
   component: SelectWIthFilter,
 };
 

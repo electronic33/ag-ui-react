@@ -3,7 +3,7 @@ import AriaTest from "./AriaTest";
 import "../../styles/index.css";
 
 export default {
-  title: "AriaTest",
+  title: "OTHERS/AriaTest",
   component: AriaTest,
 };
 

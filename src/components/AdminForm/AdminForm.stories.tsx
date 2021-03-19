@@ -4,7 +4,7 @@ import "../../styles/index.css";
 import * as Yup from "yup";
 
 export default {
-  title: "AdminForm",
+  title: "FORMS/AdminForm",
   component: AdminForm,
 };
 

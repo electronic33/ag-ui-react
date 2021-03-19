@@ -29,12 +29,18 @@ const MenuList = ({ children }) => {
     fillArrWithMenuItems(ref.current.children[2]);
   }, []);
 
+  console.log(
+    "🚀 ~ file: MenuList.tsx ~ line 34 ~ fillArrWithMenuItems ~ arr",
+    arr,
+  );
   useEffect(() => {
     const handleKeydown = (e) => {
       if (e.code === "ArrowDown") {
         if (arr.length > 0) {
           if (arr.length - 1 === activeIndex) {
-            arr[0].focus();
+            // arr[0].focus();
+            arr[activeIndex].setAttribute("data-is-tabbed", "inactive");
+            arr[0].setAttribute("data-is-tabbed", "active");
             setActiveIndex(0);
           } else {
             arr[activeIndex].setAttribute("data-is-tabbed", "inactive");
@@ -49,7 +55,9 @@ const MenuList = ({ children }) => {
       if (e.code === "ArrowUp") {
         if (arr.length > 0) {
           if (activeIndex === 0) {
-            arr[arr.length - 1].focus();
+            // arr[arr.length - 1].focus();
+            arr[activeIndex].setAttribute("data-is-tabbed", "inactive");
+            arr[arr.length - 1].setAttribute("data-is-tabbed", "active");
             setActiveIndex(arr.length - 1);
           } else {
             arr[activeIndex].setAttribute("data-is-tabbed", "inactive");

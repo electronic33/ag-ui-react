@@ -3,7 +3,7 @@ import Spinner from "./Spinner";
 import "../../styles/index.css";
 
 export default {
-  title: "Spinner",
+  title: "FEEDBACK/Spinner",
   component: Spinner,
 };
 

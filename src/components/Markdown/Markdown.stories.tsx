@@ -3,7 +3,7 @@ import Markdown from "./Markdown";
 import "../../styles/index.css";
 
 export default {
-  title: "Markdown",
+  title: "OTHERS/Markdown",
   component: Markdown,
 };
 

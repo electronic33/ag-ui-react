@@ -3,7 +3,7 @@ import Progress from "./Progress";
 import "../../styles/index.css";
 
 export default {
-  title: "Progress",
+  title: "FEEDBACK/Progress",
   component: Progress,
 };
 
