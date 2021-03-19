@@ -1,11 +1,15 @@
 import React from "react";
 import classNames from "classnames";
 
-export interface BottomNavTypes {
+type BottomNavProps = {
   /**
    A component which redirects somewhere with the help of the 'to' property given in the items array
   */
-  LinkComponent?: React.ComponentType;
+  LinkComponent?: React.ComponentType<{
+    className?: string;
+    to: string;
+    onClick?: () => void;
+  }>;
   containerClassName?: string;
   /**
   className for each link
@@ -28,7 +32,7 @@ export interface BottomNavTypes {
   */
   activeIndex?: number | (() => number);
   onClick?: () => void;
-}
+};
 
 const BottomNav = ({
   LinkComponent,
@@ -38,7 +42,7 @@ const BottomNav = ({
   items,
   activeIndex,
   onClick,
-}: BottomNavTypes): React.ReactElement => {
+}: BottomNavProps): React.ReactElement => {
   return (
     <div className={classNames("bottom-nav-container", containerClassName)}>
       {items.map(({ Icon, label, to }, index) => {

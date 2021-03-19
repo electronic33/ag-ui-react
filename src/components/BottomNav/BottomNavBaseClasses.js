@@ -21,7 +21,6 @@ const AccordionbBaseClasses = (theme) => ({
   ".bottom-nav-icon": {
     fontSize: theme("fontSize.xl"),
     lineHeight: theme("lineHeight.7"),
-    color: theme("colors.gray.500"),
   },
 });
 

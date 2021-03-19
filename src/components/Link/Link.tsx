@@ -2,8 +2,8 @@ import React from "react";
 
 export interface LinkProps {
   className?: string;
-  to?: string;
-  children?: React.ReactNode;
+  to: string;
+  children: React.ReactNode;
   onClick: () => void;
 }
 
