@@ -2,38 +2,72 @@ import React from "react";
 import classNames from "classnames";
 
 export interface LabelProps {
-  labelText?: string;
+  secondaryText?: string;
   className?: string;
   required?: boolean;
   errorText?: string;
   htmlFor?: string;
   children?: React.ReactNode;
+  as?: "label" | "span";
 }
 
 const Label = ({
-  labelText,
+  secondaryText,
   className,
   required = false,
   children,
   errorText,
   htmlFor,
+  as = "label",
 }: LabelProps): React.ReactElement => {
-  return (
-    <label htmlFor={htmlFor} className={classNames("label", className)}>
+  const content = (
+    <>
       {children}
       {required && (
         <span className="ml-px self-start text-xs font-thin text-red-600">
           *
         </span>
       )}
-      {labelText && (
+      {secondaryText && (
         <span
           className={classNames("text-sm text-gray-400", {
             "ml-1": required,
             "ml-2": !required,
           })}
         >
-          {labelText}
+          {secondaryText}
+        </span>
+      )}
+      {errorText && (
+        <span className="ml-1 text-red-600 text-sm">- {errorText}</span>
+      )}
+    </>
+  );
+
+  const wrapperProps = {
+    className: classNames("label", className),
+  };
+
+  if (as === "span") {
+    return <span {...wrapperProps}>{content}</span>;
+  }
+
+  return (
+    <label htmlFor={htmlFor} {...wrapperProps}>
+      {children}
+      {required && (
+        <span className="ml-px self-start text-xs font-thin text-red-600">
+          *
+        </span>
+      )}
+      {secondaryText && (
+        <span
+          className={classNames("text-sm text-gray-400", {
+            "ml-1": required,
+            "ml-2": !required,
+          })}
+        >
+          {secondaryText}
         </span>
       )}
       {errorText && (

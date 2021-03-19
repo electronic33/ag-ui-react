@@ -1,83 +1,90 @@
-import React, { Children } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import classNames from "classnames";
+import { useId } from "react-id-generator";
+import Label from "../Label/Label";
 
-// const CheckboxContainer = styled.div`
-//   display: inline-block;
-//   vertical-align: middle;
-// `;
-
-// const Icon = styled.svg`
-//   fill: none;
-//   stroke: white;
-//   stroke-width: 2px;
-// `;
-// Hide checkbox visually but remain accessible to screen readers.
-// Source: https://polished.js.org/docs/#hidevisually
-// const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })`
-//   border: 0;
-//   clip: rect(0 0 0 0);
-//   clippath: inset(50%);
-//   height: 1px;
-//   margin: -1px;
-//   overflow: hidden;
-//   padding: 0;
-//   position: absolute;
-//   white-space: nowrap;
-//   width: 1px;
-// `;
-
-// const StyledCheckbox = styled.div`
-//   display: inline-block;
-//   width: 16px;
-//   height: 16px;
-//   background: ${(props) => (props.checked ? "salmon" : "papayawhip")}
-//   border-radius: 3px;
-//   transition: all 150ms;
-
-//   ${HiddenCheckbox}:focus + & {
-//     box-shadow: 0 0 0 3px pink;
-//   }
-
-//   ${Icon} {
-//     visibility: ${(props) => (props.checked ? "visible" : "hidden")}
-//   }
-// `;
-
-export interface CheckBoxTypes {
-  children: React.ReactNode;
+type CheckBoxProps = {
   checkboxClassNames?: string;
-  defaultSvgClassNames?: string;
-  defaultSvgIfCheckedColor?: string;
-  defaultSvgIfUnCheckedColor?: string;
-  checked?: boolean;
-  /**
-   Controlls whether the SVG should appear even if the box is unchecked
-  */
-  defaultSvgAppearIfUnchecked?: boolean;
-  onChange?: (event: React.FormEvent) => void;
-  unCheckedBoxColor?: string;
-  checkedBoxColor?: string;
-}
+  tickCheckedClassName?: string;
+  isChecked?: boolean;
+  containerClassName?: string;
+  label?: string;
+  labelClassName?: string;
+  labelPosition?: "top" | "right" | "bottom" | "left";
+  onChange?: (checked: boolean) => void;
+  unCheckedBgClassName?: string;
+  checkedBgClassName?: string;
+};
+
+// TODO: come up with solution to import tw colors to js so we can use it here
 
 const Checkbox = ({
-  children,
   checkboxClassNames,
-  unCheckedBoxColor = "white",
-  checkedBoxColor = "bg-blue-400",
-  defaultSvgClassNames,
-  defaultSvgIfCheckedColor = "white",
-  defaultSvgIfUnCheckedColor = "blue",
-  checked,
-  defaultSvgAppearIfUnchecked = false,
-  ...props
-}: CheckBoxTypes): React.ReactElement => {
+  unCheckedBgClassName = "bg-gray-50",
+  checkedBgClassName = "bg-blue-400",
+  tickCheckedClassName = "text-gray-50",
+  isChecked,
+  label,
+  labelPosition = "right",
+  labelClassName,
+  containerClassName,
+  onChange,
+}: CheckBoxProps) => {
+  const [isFocused, setIsFocused] = useState(false);
+  const [checkboxId] = useId(1, "checkbox");
+
+  const { defaultContainerClassName, defaultLabelClassName } = useMemo(() => {
+    switch (labelPosition) {
+      case "top":
+        return {
+          defaultContainerClassName: "label-top-container",
+          defaultLabelClassName: "label-top",
+        };
+      case "right":
+        return {
+          defaultContainerClassName: "label-right-container",
+          defaultLabelClassName: "label-right",
+        };
+      case "bottom":
+        return {
+          defaultContainerClassName: "label-bottom-container",
+          defaultLabelClassName: "label-bottom",
+        };
+      case "left":
+        return {
+          defaultContainerClassName: "label-left-container",
+          defaultLabelClassName: "label-left",
+        };
+    }
+  }, [labelPosition]);
+
+  const setFocusTrue = useCallback(() => {
+    setIsFocused(true);
+  }, []);
+
+  const setFocusFalse = useCallback(() => {
+    setIsFocused(false);
+  }, []);
+
   return (
-    <div className="container-div-checkbox">
+    <label
+      htmlFor={checkboxId}
+      className={classNames(defaultContainerClassName, containerClassName)}
+    >
+      <Label
+        as="span"
+        className={classNames(defaultLabelClassName, labelClassName)}
+      >
+        {label}
+      </Label>
       <input
+        id={checkboxId}
         type="checkbox"
-        checked={checked}
-        {...props}
+        checked={isChecked}
+        onFocus={setFocusTrue}
+        onBlur={setFocusFalse}
         className="hidden-input-checkbox"
+        onChange={(event) => onChange(event.target.checked)}
         style={{
           clip: "rect(0 0 0 0)",
           clipPath: "inset(50%)",
@@ -88,39 +95,28 @@ const Checkbox = ({
       />
       <div
         className={classNames(
-          "main-div-checkbox ",
+          "checkbox",
           {
-            [`${unCheckedBoxColor}`]: !checked,
-            [`${checkedBoxColor}`]: checked,
+            [unCheckedBgClassName]: !isChecked,
+            [checkedBgClassName]: isChecked,
+            [tickCheckedClassName]: isChecked,
+            "ring-2 ring-blue-500": isFocused,
           },
           checkboxClassNames,
         )}
       >
-        {children ? (
-          children
-        ) : (
-          <svg
-            className={classNames(
-              `stroke-2 ${
-                !defaultSvgAppearIfUnchecked && !checked && "hidden"
-              }`,
-              defaultSvgClassNames,
-            )}
-            viewBox="0 0 24 24"
-            style={{
-              fill: "none",
-              stroke: `${
-                checked
-                  ? `${defaultSvgIfCheckedColor}`
-                  : `${defaultSvgIfUnCheckedColor}`
-              }`,
-            }}
-          >
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-        )}
+        <svg
+          className="stroke-2"
+          viewBox="0 0 24 24"
+          style={{
+            fill: "none",
+            stroke: !isChecked ? "transparent" : "inherit",
+          }}
+        >
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
       </div>
-    </div>
+    </label>
   );
 };
 

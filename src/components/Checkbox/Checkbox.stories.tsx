@@ -1,20 +1,42 @@
 import React, { useState } from "react";
 import Checkbox from "./Checkbox";
+
 import "../../styles/index.css";
-import { GiCheckMark } from "react-icons/gi";
 
 export default {
   title: "FORMS/Checkbox",
   component: Checkbox,
 };
 
-export const Default = (props): React.ReactNode => {
+export const Default = (): React.ReactNode => {
+  const [checked, setChecked] = useState(false);
+
   return (
-    <label>
-      <Checkbox {...props}>
-        {/* <GiCheckMark className="text-4xl text-red-500" /> */}
-      </Checkbox>
-      <span className="ml-2">Label Text</span>
-    </label>
+    <div className="w-48 space-y-8">
+      <Checkbox
+        isChecked={checked}
+        onChange={setChecked}
+        label="Label for checkbox"
+        labelPosition="top"
+      />
+      <Checkbox
+        isChecked={checked}
+        onChange={setChecked}
+        label="Label for checkbox"
+        labelPosition="right"
+      />
+      <Checkbox
+        isChecked={checked}
+        onChange={setChecked}
+        label="Label for checkbox"
+        labelPosition="bottom"
+      />
+      <Checkbox
+        isChecked={checked}
+        onChange={setChecked}
+        label="Label for checkbox"
+        labelPosition="left"
+      />
+    </div>
   );
 };

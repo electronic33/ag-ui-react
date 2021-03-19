@@ -21,6 +21,8 @@ const BreadCrumbs = ({
   items,
   LinkComponent,
 }: BreadCrumbsTypes): React.ReactElement => {
+  // TODO: add menu ... when overflow
+
   return (
     <nav className="bread-crumbs" aria-label="breadcrumb">
       {items.map(({ label, to, onClick }, i) => (
