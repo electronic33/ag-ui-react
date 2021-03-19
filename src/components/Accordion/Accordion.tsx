@@ -99,13 +99,10 @@ const Accordion = ({
             })}
         {ArrowIcon && (
           <ArrowIcon
-            className={classNames(
-              "transform transition-transform duration-300 ml-auto",
-              {
-                "rotate-180": !isOpenState,
-                "rotate-0": isOpenState,
-              },
-            )}
+            className={classNames("accordion-arrow-icon transform", {
+              "rotate-180": !isOpenState,
+              "rotate-0": isOpenState,
+            })}
           />
         )}
       </button>

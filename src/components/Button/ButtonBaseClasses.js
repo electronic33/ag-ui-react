@@ -11,10 +11,7 @@ const ButtonBaseClasses = (theme) => ({
     paddingTop: theme("spacing.2"),
     paddingBottom: theme("spacing.2"),
     fontSize: theme("fontSize.xl"),
-
     color: theme("colors.white"),
-    // outline: theme("outline.none"),
-    // outlineOffset: theme("outline.none"),
   },
   ".btn-sm": {
     display: "flex",
@@ -29,8 +26,6 @@ const ButtonBaseClasses = (theme) => ({
     paddingBottom: theme("spacing.2"),
     fontSize: theme("fontSize.sm"),
     color: theme("colors.white"),
-    // outline: theme("outline.none"),
-    // outlineOffset: theme("outline.none"),
   },
   ".btn-lg": {
     display: "flex",
@@ -45,8 +40,18 @@ const ButtonBaseClasses = (theme) => ({
     paddingBottom: theme("spacing.2"),
     fontSize: theme("fontSize.3xl"),
     color: theme("colors.white"),
-    // outline: theme("outline.none"),
-    // outlineOffset: theme("outline.none"),
+  },
+  ".btn-disabled": {
+    opacity: theme("opacity.75"),
+    pointerEvents: "none",
+  },
+  ".btn-icon-spinner-left": {
+    marginRight: "spacing.2",
+    flexShrink: 0,
+  },
+  ".btn-icon-spinner-right": {
+    marginLeft: "spacing.2",
+    flexShrink: 0,
   },
 });
 

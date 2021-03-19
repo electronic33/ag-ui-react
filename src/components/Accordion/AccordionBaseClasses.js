@@ -19,6 +19,12 @@ const AccordionbBaseClasses = (theme) => ({
     overflow: "hidden",
     transition: "height 0.3s ease-out",
   },
+  ".accordion-arrow-icon": {
+    transitionProperty: theme("transitionProperty.transform"),
+    transitionTimingFunction: theme("transitionTimingFunction.in"),
+    transitionDuration: theme("transitionDuration.300"),
+    marginLeft: "auto",
+  },
 });
 
 module.exports = AccordionbBaseClasses;

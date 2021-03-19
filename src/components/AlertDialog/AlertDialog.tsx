@@ -45,29 +45,26 @@ const AlertDialog = ({
       initialFocusRef={cancelRef}
       ariaProps={{ role: "alertdialog", "aria-modal": "true" }}
       onClose={onClose}
-      modalClassName={classNames(
-        "bg-white px-7 py-5 shadow-xl max-w-lg rounded-lg",
-        modalClassName,
-      )}
+      modalClassName={classNames("alert-dialog-modal ", modalClassName)}
     >
       {headerText && (
         <header
           id={`alert-dialog-header-${id}`}
-          className="font-bold text-xl mb-5"
+          className="alert-dialog-header"
         >
           {headerText}
         </header>
       )}
       <div id={`alert-dialog-body-${id}`}>
-        {message && <p className="text-lg text-gray-700">{message}</p>}
+        {message && <p className="alert-dialog-body">{message}</p>}
         {children}
-        <div className="flex justify-end mt-5">
+        <div className="alert-dialog-buttons-container">
           <Button
             ref={cancelRef}
             isDisabled={isLoading}
             onClick={onCancel || onClose}
             className={classNames(
-              "mr-5 bg-blue-50 text-gray-600 font-bold text-lg rounded-lg",
+              "alert-dialog-cancel-button",
               cancelButtonClassName,
             )}
           >
@@ -77,7 +74,7 @@ const AlertDialog = ({
             onClick={onConfirm}
             isLoading={isLoading}
             className={classNames(
-              "font-bold text-lg bg-red-500 rounded-lg",
+              "alert-dialog-confirm-button",
               confirmButtonClassName,
             )}
           >

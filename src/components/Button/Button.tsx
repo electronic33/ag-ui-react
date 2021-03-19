@@ -74,7 +74,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             "btn-lg": size === "lg",
           },
           {
-            "opacity-75 pointer-events-none": isDisabled || isLoading,
+            "btn-disabled": isDisabled || isLoading,
           },
           "focus:ring-4 focus:ring-blue:500 focus:ring-opacity:50",
           className,
@@ -83,17 +83,17 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         <>
           {isLoading && !iconPosition && (
-            <ButtonSpinner className={classNames("mr-2 flex-shrink-0")} />
+            <ButtonSpinner className={classNames("btn-icon-spinner-left")} />
           )}
           {!isLoading && Icon && iconPosition === "left" && (
-            <Icon className={classNames("mr-2 flex-shrink-0")} />
+            <Icon className={classNames("btn-icon-spinner-left")} />
           )}
           {children}
           {!isLoading && Icon && iconPosition === "right" && (
-            <Icon className={classNames("ml-2 flex-shrink-0")} />
+            <Icon className={classNames("btn-icon-spinner-right")} />
           )}
           {isLoading && iconPosition === "right" && (
-            <ButtonSpinner className={classNames("ml-2 flex-shrink-0")} />
+            <ButtonSpinner className={classNames("btn-icon-spinner-right")} />
           )}
         </>
       </button>

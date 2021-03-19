@@ -26,7 +26,7 @@ const BreadCrumbs = ({
   return (
     <nav className="bread-crumbs" aria-label="breadcrumb">
       {items.map(({ label, to, onClick }, i) => (
-        <div className="bread-crumb flex items-center mr-2" key={i}>
+        <div className="bread-crumb" key={i}>
           {i ? (
             <FaChevronRight role="presentation" className="bread-crumb-icon" />
           ) : null}

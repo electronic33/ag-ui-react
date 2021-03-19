@@ -28,6 +28,7 @@ const ProgressBaseClasses = require("./src/components/Progress/ProgressBaseClass
 const MarkdownbaseClasses = require("./src/components/Markdown/MarkdownbaseClasses");
 const ScrollToBaseClasses = require("./src/components/ScrollTo/ScrollToBaseClasses");
 const PopoverBaseClasses = require("./src/components/Popover/PopoverBaseClasses");
+const AlertDialogBaseClasses = require("./src/components/AlertDialog/AlertDialogBaseClasses");
 
 module.exports = {
   purge: [],
@@ -974,6 +975,7 @@ module.exports = {
         ...MarkdownbaseClasses(theme),
         ...ScrollToBaseClasses(theme),
         ...PopoverBaseClasses(theme),
+        ...AlertDialogBaseClasses(theme),
       };
 
       console.log("asd");
