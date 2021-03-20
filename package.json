@@ -3,10 +3,11 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/electronic33"
   },
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "./build/index.js",
   "module": "./build/index.es.js",
-  "author": "Dennis Schneider",
+  "files": ["./build/index.js", "./build/index.es.js"],
+  "author": "Matyas Furtos",
   "license": "MIT",
   "peerDependencies": {
     "react": "16.13.1",
