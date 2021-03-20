@@ -4,11 +4,10 @@
     "registry": "https://npm.pkg.github.com/electronic33"
   },
   "version": "1.0.3",
-  "main": "./build/index.js",
-  "module": "./build/index.es.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.es.js",
   "files": [
-    "./build/index.js",
-    "./build/index.es.js"
+    "dist"
   ],
   "author": "Matyas Furtos",
   "license": "MIT",
