@@ -4,7 +4,7 @@ import React, { ReactNode } from "react";
 import ButtonSpinner from "../ButtonSpinner/ButtonSpinner";
 import classNames from "classnames";
 
-export interface ButtonProps {
+type ButtonProps = {
   className?: string;
   isDisabled?: boolean;
   isLoading?: boolean;
@@ -32,7 +32,7 @@ export interface ButtonProps {
       | "tree"
       | "grid";
   };
-}
+};
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (

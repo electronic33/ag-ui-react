@@ -6,12 +6,16 @@
   "version": "1.0.2",
   "main": "./build/index.js",
   "module": "./build/index.es.js",
-  "files": ["./build/index.js", "./build/index.es.js"],
+  "files": [
+    "./build/index.js",
+    "./build/index.es.js"
+  ],
   "author": "Matyas Furtos",
   "license": "MIT",
   "peerDependencies": {
     "react": "16.13.1",
-    "react-dom": "16.13.1"
+    "react-dom": "16.13.1",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -65,37 +69,32 @@
     "rollup-plugin-peer-deps-external": "^2.2.3",
     "rollup-plugin-typescript2": "^0.27.3",
     "style-loader": "^2.0.0",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
     "ts-jest": "^26.4.0",
     "ts-loader": "^8.0.4",
     "typescript": "^4.0.3",
-    "yarn": "^1.22.10"
+    "@storybook/addon-a11y": "^6.1.21",
+    "@storybook/addon-console": "^1.2.3",
+    "@storybook/addon-docs": "^6.1.21",
+    "rollup-plugin-delete": "^2.0.0",
+    "react-icons": "^4.1.0"
   },
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build": "rollup -c",
-    "lint": "eslint 'src/**/*.{js,ts,tsx}' --quiet --fix",
     "test": "jest",
     "cy:open": "cypress open"
   },
   "dependencies": {
     "@headlessui/react": "^0.2.0",
     "@popperjs/core": "^2.9.1",
-    "@storybook/addon-a11y": "^6.1.21",
-    "@storybook/addon-console": "^1.2.3",
-    "@storybook/addon-docs": "^6.1.21",
-    "@storybook/addon-essentials": "^6.1.21",
     "classnames": "^2.2.6",
     "date-fns": "^2.16.1",
     "formik": "^2.2.6",
-    "headlessui": "0.0.0",
     "react-anchor-link-smooth-scroll": "^1.0.12",
-    "react-aria": "^3.4.0",
     "react-dropzone": "^11.3.1",
     "react-easy-crop": "^3.3.1",
     "react-focus-lock": "^2.5.0",
-    "react-icons": "^4.1.0",
     "react-id-generator": "^3.0.1",
     "react-markdown": "^5.0.3",
     "react-popper": "^2.2.4",

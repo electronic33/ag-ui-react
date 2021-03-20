@@ -1,14 +1,14 @@
-import React, { FC } from "react";
+import React from "react";
 import classNames from "classnames";
 
-export interface SpinnerProps {
+type SpinnerProps = {
   /**
    use width and height modifying classes for size changing, and text coloring classes for color changing. 
   */
   className?: string;
-}
+};
 
-const ButtonSpinner: FC<SpinnerProps> = ({ className }: SpinnerProps) => {
+const ButtonSpinner = ({ className }: SpinnerProps) => {
   return (
     <svg
       className={classNames("btn-spinner", className)}
