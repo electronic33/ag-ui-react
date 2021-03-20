@@ -3,7 +3,7 @@
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/electronic33"
   },
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "./dist/index.js",
   "module": "./dist/index.es.js",
   "files": [
