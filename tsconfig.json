@@ -13,6 +13,6 @@
     "typeRoots": ["node_modules/@types/", ".src/declarations/"],
     "types": ["cypress", "node", "@testing-library/cypress"]
   },
-  "include": ["./src/**/*", "./cypress/**/*.ts"],
+  "include": ["./src/**/*", "./packages/**/*", "./cypress/**/*.ts"],
   "exclude": ["node_modules", "build"]
 }

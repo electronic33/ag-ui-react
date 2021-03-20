@@ -1,0 +1,19 @@
+{
+  "packages": ["packages/*"],
+  "version": "independent",
+  "npmClient": "npm",
+  "useWorkspaces": true,
+  "command": {
+    "version": { "exact": true },
+    "publish": {
+      "conventionalCommits": true,
+      "message": "chore(release): publish",
+      "ignoreChanges": ["**/stories/**", "**/tests/**"],
+      "allowBranch": "master",
+      "registry": "https://npm.pkg.github.com/@electronic33"
+    },
+    "bootstrap": {
+      "npmClientArgs": ["--production"]
+    }
+  }
+}

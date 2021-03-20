@@ -23,14 +23,13 @@
     "plugin:import/typescript",
     "plugin:react-hooks/recommended",
     "airbnb-typescript",
-    "prettier",
-    "prettier/react",
-    "prettier/@typescript-eslint"
+    "prettier"
   ],
   "plugins": [
     "react-hooks",
     "@typescript-eslint/eslint-plugin",
-    "testing-library"
+    "testing-library",
+    "prettier"
   ],
   "rules": {
     "prettier/prettier": ["error", {
@@ -40,7 +39,9 @@
     "endOfLine":"auto"
     }],
     "react/prop-types": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off"
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "react/jsx-props-no-spreading": "off",
+    "import/prefer-default-export": "off"
   },
   "overrides": [
     {
