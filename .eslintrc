@@ -1,7 +1,8 @@
 {
+  "root": true,
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 2020,
+    "ecmaVersion": 10,
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
@@ -12,15 +13,24 @@
       "version": "detect"
     }
   },
-  "plugins": ["jest"],
   "env": {
-    "jest/globals": true
+    "es6": true,
+    "browser": true,
+    "node": true
   },
   "extends": [
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
-    "plugin:prettier/recommended"
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+    "plugin:react-hooks/recommended",
+    "airbnb-typescript",
+    "prettier",
+    "prettier/react",
+    "prettier/@typescript-eslint"
+  ],
+  "plugins": [
+    "react-hooks",
+    "@typescript-eslint/eslint-plugin",
+    "testing-library"
   ],
   "rules": {
     "prettier/prettier": ["error", {
@@ -31,5 +41,13 @@
     }],
     "react/prop-types": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "parserOptions": {
+        "project": ["tsconfig.json"]
+      }
+    }
+  ]
 }
