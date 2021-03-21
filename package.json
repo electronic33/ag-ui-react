@@ -33,6 +33,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "test": "jest",
+    "publish": "lerna publish",
     "cy:open": "cypress open",
     "commit": "npx git-cz",
     "build": "lerna run build --stream",
