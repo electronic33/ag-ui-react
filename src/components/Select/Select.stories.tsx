@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Select from "./Select";
-import "../../styles/index.css";
 
 export default {
   title: "FORMS/Select",

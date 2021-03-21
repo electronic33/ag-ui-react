@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import Popover from "./Popover";
-import "../../styles/index.css";
+
 import Button from "../Button/Button";
 
 export default {

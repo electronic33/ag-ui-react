@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Pagination from "./Pagination";
-import "../../styles/index.css";
 
 export default {
   title: "OTHERS/Pagination",

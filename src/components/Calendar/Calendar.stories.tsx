@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Calendar, { useMultipleSelectCalendarState } from "./Calendar";
-import "../../styles/index.css";
+
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { isSameDay } from "date-fns";
+import Calendar, { useMultipleSelectCalendarState } from "./Calendar";
 
 export default {
   title: "OTHERS/Calendar",
@@ -29,7 +29,7 @@ export const Default = (): React.ReactElement => {
       RightArrowIcon={FaChevronRight}
       selectedDate={selectedDates}
       selectHandler={setSelectedDates}
-      rangeSelect={true}
+      rangeSelect
       // CellComponent={({ day }) => (
       //   <div>
       //     {isSameDay(currentdDate, day) ? "-------- currentDay -------" : "nah"}

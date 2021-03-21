@@ -1,6 +1,5 @@
 import React from "react";
 import SuccessToast from "./SuccessToast";
-import "../../styles/index.css";
 
 export default {
   title: "FEEDBACK/SuccessToast",

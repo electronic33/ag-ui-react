@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React, { useState } from "react";
-import Accordion from "./Accordion";
-import "../../styles/index.css";
 import { FaChevronDown, FaChrome } from "react-icons/fa";
+import Accordion from "./Accordion";
 
 export default {
   title: "DISCLOSURE/Accordion",
@@ -23,7 +22,7 @@ export const Default = ({ onChange }): React.ReactNode => {
       containerClassName="shadow-lg"
       buttonClassName="bg-gray-50 hover:bg-gray-100"
       contentClassName="text-center text-lg font-semibold bg-gray-50"
-      content={"Hello!"}
+      content="Hello!"
     >
       {({ isOpen }) => (isOpen ? "Close me!" : "Open me!")}
     </Accordion>
@@ -48,7 +47,7 @@ export const Controlled = ({ onChange }): React.ReactNode => {
       containerClassName="shadow-lg"
       buttonClassName="bg-gray-50 hover:bg-gray-100"
       contentClassName="text-center text-lg font-semibold bg-gray-50"
-      content={"Hello!"}
+      content="Hello!"
     >
       {isOpen ? "Close me!" : "Open me!"}
     </Accordion>

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import Drawer from "./Drawer";
-import "../../styles/index.css";
+
 import { AiFillHome } from "react-icons/ai";
 import { IoIosPaper, IoMdHelpCircle, IoMdPeople } from "react-icons/io";
 import { FaCartPlus, FaEnvelopeOpenText } from "react-icons/fa";
+import Drawer from "./Drawer";
 import Button from "../Button/Button";
 
 export default {

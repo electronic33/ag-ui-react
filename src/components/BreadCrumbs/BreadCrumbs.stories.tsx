@@ -1,6 +1,6 @@
 import React from "react";
 import BreadCrumbs from "./BreadCrumbs";
-import "../../styles/index.css";
+
 import Link from "../Link/Link";
 
 export default {

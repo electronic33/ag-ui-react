@@ -1,7 +1,6 @@
 import React from "react";
-import TextArea from "./TextArea";
-import "../../styles/index.css";
 import { MdLabelOutline } from "react-icons/md";
+import TextArea from "./TextArea";
 
 export default {
   title: "FORMS/TextArea",

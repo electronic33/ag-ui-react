@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Skeleton from "./Skeleton";
-import "../../styles/index.css";
+
 import Button from "../Button/Button";
 
 export default {
@@ -35,7 +35,7 @@ export const Default = (): React.ReactNode => {
         </div>
       )}
       <div onClick={() => setIsLoading((prevState) => !prevState)}>
-        <Button text="TRIGGER"></Button>
+        <Button text="TRIGGER" />
       </div>
     </div>
   );

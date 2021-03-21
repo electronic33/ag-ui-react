@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import TextInput from "./TextInput";
-import "../../styles/index.css";
 import { MdLabelOutline } from "react-icons/md";
+import TextInput from "./TextInput";
 
 export default {
   title: "FORMS/TextInput",

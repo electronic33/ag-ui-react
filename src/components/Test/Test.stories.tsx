@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Test from "./Test";
-import "../../styles/index.css";
 
 export default {
   title: "OTHERS/MDXTest",

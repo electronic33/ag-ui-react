@@ -1,6 +1,5 @@
 import React from "react";
 import ButtonSpinner from "./ButtonSpinner";
-import "../../styles/index.css";
 
 export default {
   title: "OTHERS/ButtonSpinner",

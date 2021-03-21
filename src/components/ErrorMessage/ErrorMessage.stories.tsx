@@ -1,6 +1,5 @@
 import React from "react";
 import ErrorMessage from "./ErrorMessage";
-import "../../styles/index.css";
 
 export default {
   title: "FEEDBACK/ErrorMessage",

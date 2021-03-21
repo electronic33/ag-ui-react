@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "./Link";
-import "../../styles/index.css";
 
 export default {
   title: "NAVIGATION/Link",

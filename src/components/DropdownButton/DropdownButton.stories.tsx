@@ -1,6 +1,5 @@
 import React from "react";
 import DropdownButton from "./DropdownButton";
-import "../../styles/index.css";
 
 export default {
   title: "OTHERS/DropdownButton",

@@ -1,6 +1,6 @@
 import React from "react";
 import Tooltip from "./Tootlip";
-import "../../styles/index.css";
+
 import Button from "../Button/Button";
 
 export default {

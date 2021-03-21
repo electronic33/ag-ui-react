@@ -1,9 +1,8 @@
 import React from "react";
-import Header from "./Header";
-import "../../styles/index.css";
 import { AiOutlineHome } from "react-icons/ai";
 import { IoLogoChrome } from "react-icons/io";
 import { MdLink, MdMenu, MdPayment } from "react-icons/md";
+import Header from "./Header";
 
 export default {
   title: "OTHERS/Header",

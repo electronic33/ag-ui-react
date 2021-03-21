@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Progress from "./Progress";
-import "../../styles/index.css";
 
 export default {
   title: "FEEDBACK/Progress",

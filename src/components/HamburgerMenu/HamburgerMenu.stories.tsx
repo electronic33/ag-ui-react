@@ -1,7 +1,6 @@
 import React from "react";
-import HamburgerMenu from "./HamburgerMenu";
-import "../../styles/index.css";
 import { AiOutlineHome } from "react-icons/ai";
+import HamburgerMenu from "./HamburgerMenu";
 
 export default {
   title: "OTHERS/HamburgerMenu",

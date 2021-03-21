@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import Menu from "./Menu";
-import MenuItem from "./MenuItem";
 
-import "../../styles/index.css";
-import Button from "../Button/Button";
 import { AiFillHome } from "react-icons/ai";
 import { IoIosPaper, IoMdHelpCircle, IoMdPeople } from "react-icons/io";
 import { FaCartPlus, FaEnvelopeOpenText } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
+import Button from "../Button/Button";
+import MenuItem from "./MenuItem";
+import Menu from "./Menu";
 
 export default {
   title: "OVERLAY/Menu",
@@ -19,7 +18,7 @@ export const Top = (): React.ReactNode => {
 
   return (
     <div className="h-full w-screen flex flex-col justify-center items-center">
-      <div className="w-full h-screen bg-yellow-300"></div>
+      <div className="w-full h-screen bg-yellow-300" />
       <Menu
         active={active}
         setActive={setActive}
@@ -44,10 +43,10 @@ export const Top = (): React.ReactNode => {
         }
       >
         <div>
-          <Button text="Button with tooltip"></Button>
+          <Button text="Button with tooltip" />
         </div>
       </Menu>
-      <div className="w-full h-screen bg-red-300"></div>
+      <div className="w-full h-screen bg-red-300" />
     </div>
   );
 };

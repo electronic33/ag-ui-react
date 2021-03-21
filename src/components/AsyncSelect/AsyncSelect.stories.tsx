@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import AsyncSelect from "./AsyncSelect";
-import { useFetch } from "./AsyncSelect";
-import "../../styles/index.css";
+import AsyncSelect, { useFetch } from "./AsyncSelect";
 
 export default {
   title: "OTHERS/AsyncSelect",
@@ -19,7 +17,7 @@ export const Top = (): React.ReactNode => {
         setSelected={setSelected}
         labelKey="email"
         valueKey="cell"
-      ></AsyncSelect>
+      />
     </div>
   );
 };

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Switch from "./Switch";
-import "../../styles/index.css";
 
 export default {
   title: "FORMS/Switch",

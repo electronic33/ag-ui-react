@@ -1,7 +1,6 @@
 import React from "react";
-import Rate from "./Rate";
-import "../../styles/index.css";
 import { FaStar } from "react-icons/fa";
+import Rate from "./Rate";
 
 export default {
   title: "OTHERS/Rate",

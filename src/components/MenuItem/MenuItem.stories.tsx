@@ -1,11 +1,10 @@
 import React, { useRef, useState } from "react";
+import { Md3DRotation, MdAccessAlarm, MdClose } from "react-icons/md";
 import Popover from "../Popover/Popover";
-import MenuItem from "../MenuItem/MenuItem";
+import MenuItem from "./MenuItem";
 
-import "../../styles/index.css";
 import Button from "../Button/Button";
 import MenuList from "./MenuList";
-import { Md3DRotation, MdAccessAlarm, MdClose } from "react-icons/md";
 import MenuGroup from "./MenuGroup";
 import MenuDivider from "./MenuDivider";
 

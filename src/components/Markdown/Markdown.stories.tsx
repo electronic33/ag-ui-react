@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Markdown from "./Markdown";
-import "../../styles/index.css";
 
 export default {
   title: "OTHERS/Markdown",

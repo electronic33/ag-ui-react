@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Tabs from "./Tabs";
-import "../../styles/index.css";
 import { FaAccessibleIcon, FaAccusoft, FaChrome, FaFire } from "react-icons/fa";
+import Tabs from "./Tabs";
+
 import TextArea from "../TextArea/TextArea";
 import Footer from "../Footer/Footer";
 import ButtonSpinner from "../ButtonSpinner/ButtonSpinner";
