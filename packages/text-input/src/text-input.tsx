@@ -121,7 +121,9 @@ export const TextInput = ({
 
     {showMax ? (
       <p className="flex absolute right-0 bottom-0 text-gray-400 -mb-4 text-xs">
-        {`${field?.value ? field?.value.length : value.length}/${max}`}
+        {`${
+          field?.value ? field?.value.length : (value as string).length
+        }/${max}`}
       </p>
     ) : null}
     {!errorInLabel ? (
