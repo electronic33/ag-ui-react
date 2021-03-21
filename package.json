@@ -37,8 +37,8 @@
     "dedup": "yarn-deduplicate --strategy highest yarn.lock",
     "postinstall": "yarn check:pkgs",
     "release": "changeset publish",
-    "version": "lerna version --conventional-commits --yes",
-    "publish": "lerna publish"
+    "version:lerna": "lerna version --conventional-commits --yes",
+    "publish:lerna": "lerna publish"
   },
   "dependencies": {
     "@babel/core": "^7.13.10",
