@@ -1,22 +1,18 @@
 {
-  "name": "@electronic33/ag-ui-react",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/electronic33"
-  },
+  "name": "ag-ui-react",
   "private": true,
   "version": "1.0.4",
   "main": "./dist/index.js",
   "module": "./dist/index.es.js",
-  "repository": {
-    "type": "git",
-    "url": "ssh://git@github.com:electronic33/ag-ui-react.git",
-    "directory": "@electronic33/ag-ui-react"
-  },
   "files": [
     "dist"
   ],
   "author": "Matyas Furtos",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/electronic33/ag-ui-react.git"
+  },
   "config": {
     "commitizen": {
       "path": "git-cz"
