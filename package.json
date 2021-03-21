@@ -2,11 +2,6 @@
   "name": "ag-ui-react",
   "private": true,
   "version": "1.0.4",
-  "main": "./dist/index.js",
-  "module": "./dist/index.es.js",
-  "files": [
-    "dist"
-  ],
   "author": "Matyas Furtos",
   "license": "MIT",
   "repository": {
