@@ -23,6 +23,6 @@ export default (input = "./index.ts") => ({
     peerDepsExternal(),
     resolve(),
     commonjs(),
-    typescript(),
+    typescript({ clean: true }),
   ],
 });
