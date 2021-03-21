@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { MdLabelOutline } from "react-icons/md";
-import TextInput from "../src/text-input";
+import { TextInput } from "../src/text-input";
 
 export default {
   title: "LERNA/TextInput",
