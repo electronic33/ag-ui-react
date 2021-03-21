@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.popper-arrow-conainer[data-popper-placement^='top'] > #arrow {
+  bottom: -4px;
+}
+
+.popper-arrow-conainer[data-popper-placement^='bottom'] > #arrow {
+  top: -4px;
+}
+
+.popper-arrow-conainer[data-popper-placement^='left'] > #arrow {
+  right: -4px;
+}
+
+.popper-arrow-conainer[data-popper-placement^='right'] > #arrow {
+  left: -4px;
+}

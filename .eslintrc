@@ -1,7 +1,8 @@
 {
+  "root": true,
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 2020,
+    "ecmaVersion": 10,
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
@@ -12,15 +13,42 @@
       "version": "detect"
     }
   },
-  "plugins": ["jest"],
   "env": {
-    "jest/globals": true
+    "es6": true,
+    "browser": true,
+    "node": true
   },
   "extends": [
-    "plugin:react/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "prettier/@typescript-eslint",
-    "plugin:prettier/recommended"
+    "plugin:import/recommended",
+    "plugin:import/typescript",
+    "plugin:react-hooks/recommended",
+    "airbnb-typescript",
+    "prettier"
   ],
-  "rules": {}
+  "plugins": [
+    "react-hooks",
+    "@typescript-eslint/eslint-plugin",
+    "testing-library",
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": ["error", {
+    "semi": true,
+    "trailingComma": "all",
+    "printWidth": 80,
+    "endOfLine":"auto"
+    }],
+    "react/prop-types": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "react/jsx-props-no-spreading": "off",
+    "import/prefer-default-export": "off"
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js"],
+      "parserOptions": {
+        "project": ["tsconfig.json"]
+      }
+    }
+  ]
 }

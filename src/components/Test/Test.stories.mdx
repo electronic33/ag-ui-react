@@ -1,0 +1,20 @@
+import { Meta, Story, Canvas,ArgsTable  } from '@storybook/addon-docs/blocks';
+import Test from './Test';
+
+<Meta title='MDX/Test' component={Test} />
+
+# Test
+
+With `MDX` we can define a story for right in the middle of our Markdown documentation.
+~~assd fsaff sfsf fsf s fsa~~
+
+
+ <ArgsTable of={Test} /> 
+
+<Canvas>
+  <Story name='all checkboxes'>
+    <form>
+      <Test />
+    </form>
+  </Story>
+</Canvas>

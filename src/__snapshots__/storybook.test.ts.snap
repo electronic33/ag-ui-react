@@ -1,0 +1,1165 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Button Default 1`] = `
+<button
+  className="btn"
+>
+  <svg
+    className="mr-2 flex-shrink-0"
+    fill="currentColor"
+    height="1em"
+    stroke="currentColor"
+    strokeWidth="0"
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+    viewBox="0 0 1024 1024"
+    width="1em"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M512 624c93.9 0 170-75.2 170-168V232c0-92.8-76.1-168-170-168s-170 75.2-170 168v224c0 92.8 76.1 168 170 168zm330-170c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 140.3-113.7 254-254 254S258 594.3 258 454c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 168.7 126.6 307.9 290 327.6V884H326.7c-13.7 0-24.7 14.3-24.7 32v36c0 4.4 2.8 8 6.2 8h407.6c3.4 0 6.2-3.6 6.2-8v-36c0-17.7-11-32-24.7-32H548V782.1c165.3-18 294-158 294-328.1z"
+    />
+  </svg>
+  <p
+    className=""
+  >
+    Button
+  </p>
+</button>
+`;
+
+exports[`Storyshots Button Disabled 1`] = `
+<button
+  className="btn bg-opacity-75 cursor-default"
+>
+  <svg
+    className="mr-2 flex-shrink-0"
+    fill="currentColor"
+    height="1em"
+    stroke="currentColor"
+    strokeWidth="0"
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+    viewBox="0 0 1024 1024"
+    width="1em"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M512 624c93.9 0 170-75.2 170-168V232c0-92.8-76.1-168-170-168s-170 75.2-170 168v224c0 92.8 76.1 168 170 168zm330-170c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 140.3-113.7 254-254 254S258 594.3 258 454c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 168.7 126.6 307.9 290 327.6V884H326.7c-13.7 0-24.7 14.3-24.7 32v36c0 4.4 2.8 8 6.2 8h407.6c3.4 0 6.2-3.6 6.2-8v-36c0-17.7-11-32-24.7-32H548V782.1c165.3-18 294-158 294-328.1z"
+    />
+  </svg>
+  <p
+    className=""
+  >
+    Button
+  </p>
+</button>
+`;
+
+exports[`Storyshots Button Icon Right 1`] = `
+<button
+  className="btn"
+>
+  <p
+    className=""
+  >
+    Button
+  </p>
+  <svg
+    className="ml-2 flex-shrink-0"
+    fill="currentColor"
+    height="1em"
+    stroke="currentColor"
+    strokeWidth="0"
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+    viewBox="0 0 1024 1024"
+    width="1em"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M512 624c93.9 0 170-75.2 170-168V232c0-92.8-76.1-168-170-168s-170 75.2-170 168v224c0 92.8 76.1 168 170 168zm330-170c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 140.3-113.7 254-254 254S258 594.3 258 454c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 168.7 126.6 307.9 290 327.6V884H326.7c-13.7 0-24.7 14.3-24.7 32v36c0 4.4 2.8 8 6.2 8h407.6c3.4 0 6.2-3.6 6.2-8v-36c0-17.7-11-32-24.7-32H548V782.1c165.3-18 294-158 294-328.1z"
+    />
+  </svg>
+</button>
+`;
+
+exports[`Storyshots Button Large 1`] = `
+<button
+  className="btn-lg"
+>
+  <svg
+    className="mr-2 flex-shrink-0"
+    fill="currentColor"
+    height="1em"
+    stroke="currentColor"
+    strokeWidth="0"
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+    viewBox="0 0 1024 1024"
+    width="1em"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M512 624c93.9 0 170-75.2 170-168V232c0-92.8-76.1-168-170-168s-170 75.2-170 168v224c0 92.8 76.1 168 170 168zm330-170c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 140.3-113.7 254-254 254S258 594.3 258 454c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 168.7 126.6 307.9 290 327.6V884H326.7c-13.7 0-24.7 14.3-24.7 32v36c0 4.4 2.8 8 6.2 8h407.6c3.4 0 6.2-3.6 6.2-8v-36c0-17.7-11-32-24.7-32H548V782.1c165.3-18 294-158 294-328.1z"
+    />
+  </svg>
+  <p
+    className=""
+  >
+    Button
+  </p>
+</button>
+`;
+
+exports[`Storyshots Button Loading 1`] = `
+<button
+  className="btn bg-opacity-75 cursor-default"
+>
+  <svg
+    className="btn-spinner mr-2 flex-shrink-0"
+    fill="none"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle
+      className="opacity-25"
+      cx="12"
+      cy="12"
+      r="10"
+      stroke="currentColor"
+      strokeWidth="4"
+    />
+    <path
+      className="opacity-75"
+      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+      fill="currentColor"
+    />
+  </svg>
+  <p
+    className=""
+  >
+    Button
+  </p>
+</button>
+`;
+
+exports[`Storyshots Button Small 1`] = `
+<button
+  className="btn-sm"
+>
+  <svg
+    className="mr-2 flex-shrink-0"
+    fill="currentColor"
+    height="1em"
+    stroke="currentColor"
+    strokeWidth="0"
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+    viewBox="0 0 1024 1024"
+    width="1em"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M512 624c93.9 0 170-75.2 170-168V232c0-92.8-76.1-168-170-168s-170 75.2-170 168v224c0 92.8 76.1 168 170 168zm330-170c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 140.3-113.7 254-254 254S258 594.3 258 454c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 168.7 126.6 307.9 290 327.6V884H326.7c-13.7 0-24.7 14.3-24.7 32v36c0 4.4 2.8 8 6.2 8h407.6c3.4 0 6.2-3.6 6.2-8v-36c0-17.7-11-32-24.7-32H548V782.1c165.3-18 294-158 294-328.1z"
+    />
+  </svg>
+  <p
+    className=""
+  >
+    Button
+  </p>
+</button>
+`;
+
+exports[`Storyshots ButtonSpinner Default 1`] = `
+<svg
+  className="btn-spinner"
+  fill="none"
+  viewBox="0 0 24 24"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <circle
+    className="opacity-25"
+    cx="12"
+    cy="12"
+    r="10"
+    stroke="currentColor"
+    strokeWidth="4"
+  />
+  <path
+    className="opacity-75"
+    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+    fill="currentColor"
+  />
+</svg>
+`;
+
+exports[`Storyshots Calendar Default 1`] = `
+<div
+  className="calendar "
+>
+  <div
+    className="header  "
+  >
+    <div
+      className="left-arrow-container "
+    >
+      <div
+        className="arrow-div  "
+        onClick={[Function]}
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+          viewBox="0 0 320 512"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      className="month-container "
+    >
+      <span
+        className="month-class "
+      >
+        February 2021
+      </span>
+    </div>
+    <div
+      className="right-arrow-container "
+      onClick={[Function]}
+    >
+      <div
+        className="arrow-div "
+      >
+        <svg
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+          viewBox="0 0 320 512"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div
+    className="days-container "
+  >
+    <div
+      className="days-class "
+    >
+      Su
+    </div>
+    <div
+      className="days-class "
+    >
+      Mo
+    </div>
+    <div
+      className="days-class "
+    >
+      Tu
+    </div>
+    <div
+      className="days-class "
+    >
+      We
+    </div>
+    <div
+      className="days-class "
+    >
+      Th
+    </div>
+    <div
+      className="days-class "
+    >
+      Fr
+    </div>
+    <div
+      className="days-class "
+    >
+      Sa
+    </div>
+  </div>
+  <div
+    className="rows"
+  >
+    <div
+      className="row-item "
+    >
+      <div
+        className="tile-class  hover:bg-gray-100   fa text-gray-300 pointer-events-none"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          31
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          1
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          2
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          3
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          4
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          5
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          6
+        </span>
+      </div>
+    </div>
+    <div
+      className="row-item "
+    >
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          7
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          8
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          9
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          10
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          11
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          12
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          13
+        </span>
+      </div>
+    </div>
+    <div
+      className="row-item "
+    >
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          14
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          15
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          16
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          17
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          18
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          19
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          20
+        </span>
+      </div>
+    </div>
+    <div
+      className="row-item "
+    >
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          21
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          22
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          23
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          24
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          25
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          26
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          27
+        </span>
+      </div>
+    </div>
+    <div
+      className="row-item "
+    >
+      <div
+        className="tile-class  hover:bg-gray-100    cursor-pointer"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          28
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100   fa text-gray-300 pointer-events-none"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          1
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100   fa text-gray-300 pointer-events-none"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          2
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100   fa text-gray-300 pointer-events-none"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          3
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100   fa text-gray-300 pointer-events-none"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          4
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100   fa text-gray-300 pointer-events-none"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          5
+        </span>
+      </div>
+      <div
+        className="tile-class  hover:bg-gray-100   fa text-gray-300 pointer-events-none"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        style={
+          Object {
+            "paddingTop": "15%",
+          }
+        }
+      >
+        <span
+          className="tile-characters-class  "
+        >
+          6
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots DropdownButton Default 1`] = `
+<button
+  aria-haspopup={true}
+  className="menu-button bg-opacity-25"
+  id="headlessui-menu-button-1"
+  onBlur={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onPointerUp={[Function]}
+  type="button"
+>
+  <p
+    className="flex items-center text-lg"
+  >
+    DropdownButton
+    <svg
+      className="flex-shrink-0 text-4xl"
+      fill="currentColor"
+      height="1em"
+      stroke="currentColor"
+      strokeWidth="0"
+      style={
+        Object {
+          "color": undefined,
+        }
+      }
+      viewBox="0 0 24 24"
+      width="1em"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M7 10l5 5 5-5z"
+      />
+    </svg>
+  </p>
+</button>
+`;
+
+exports[`Storyshots ErrorMessage Default 1`] = `
+<div
+  className="error-message"
+>
+  <svg
+    className="mr-2 text-lg min-w-5 flex-shrink-0"
+    fill="currentColor"
+    height="1em"
+    stroke="currentColor"
+    strokeWidth="0"
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+    viewBox="0 0 24 24"
+    width="1em"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"
+    />
+  </svg>
+  <span>
+    <p>
+      An error occured!
+    </p>
+  </span>
+</div>
+`;
+
+exports[`Storyshots ErrorToast Default 1`] = `
+<div
+  className="error-toast"
+>
+  <svg
+    className="mr-2 text-lg min-w-5 flex-shrink-0"
+    fill="currentColor"
+    height="1em"
+    stroke="currentColor"
+    strokeWidth="0"
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
+    viewBox="0 0 24 24"
+    width="1em"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm5 13.59L15.59 17 12 13.41 8.41 17 7 15.59 10.59 12 7 8.41 8.41 7 12 10.59 15.59 7 17 8.41 13.41 12 17 15.59z"
+    />
+  </svg>
+  Error toast!
+</div>
+`;
+
+exports[`Storyshots HamburgerMenu Default 1`] = `
+<div
+  className="1410:hidden bg-gray-50 flex justify-center fixed top-16 w-screen left-0 overflow-hidden transition-all duration-500 h-screen"
+>
+  <nav
+    className="flex flex-shrink-0 flex-col items-center text-center w-full h-full overflow-y-auto"
+  >
+    <div
+      className="flex flex-col w-full items-center"
+    >
+      <a
+        className="flex flex-shrink-0 items-center justify-center text-2xl max-w-lg border bg-blue-600 text-gray-50 border-solid border-gray-500 rounded-md shadow px-6 py-3 mr-2 transition-color duration-700 hover:bg-blue-500 mb-5"
+        href="/rezervare"
+        rel="noreferrer"
+        target="_blank"
+      >
+        <svg
+          className="mr-2 flex-shrink-0"
+          fill="currentColor"
+          height="1em"
+          stroke="currentColor"
+          strokeWidth="0"
+          style={
+            Object {
+              "color": undefined,
+            }
+          }
+          viewBox="0 0 1024 1024"
+          width="1em"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"
+          />
+        </svg>
+        make_a_reservation
+      </a>
+      <div
+        className="flex flex-col items-center justify-center w-auto 640:flex-row 640:w-full"
+      >
+        <div
+          className="flex flex-col w-full 640:w-64"
+        >
+          <div
+            className="flex mr-5"
+          >
+            <a
+              className="flex flex-shrink-0 items-center text-2xl max-w-lg border-b border-solid border-gray-500 px-6 py-3 mr-2 transition-color duration-700 hover:text-blue-500 w-full text-blue-500"
+              href="/"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <svg
+                className="mr-2"
+                fill="currentColor"
+                height="1em"
+                stroke="currentColor"
+                strokeWidth="0"
+                style={
+                  Object {
+                    "color": undefined,
+                  }
+                }
+                viewBox="0 0 1024 1024"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M946.5 505L560.1 118.8l-25.9-25.9a31.5 31.5 0 0 0-44.4 0L77.5 505a63.9 63.9 0 0 0-18.8 46c.4 35.2 29.7 63.3 64.9 63.3h42.5V940h691.8V614.3h43.4c17.1 0 33.2-6.7 45.3-18.8a63.6 63.6 0 0 0 18.7-45.3c0-17-6.7-33.1-18.8-45.2zM568 868H456V664h112v204zm217.9-325.7V868H632V640c0-22.1-17.9-40-40-40H432c-22.1 0-40 17.9-40 40v228H238.1V542.3h-96l370-369.7 23.1 23.1L882 542.3h-96.1z"
+                />
+              </svg>
+              Egy
+            </a>
+          </div>
+        </div>
+        <div
+          className="flex flex-col w-full 640:w-64"
+        >
+          <div
+            className="flex mr-5"
+          />
+        </div>
+      </div>
+    </div>
+  </nav>
+</div>
+`;
+
+exports[`Storyshots Label Default 1`] = `
+<label
+  className="label"
+>
+  <span
+    className="text-sm text-gray-400 ml-2"
+  >
+    Label
+  </span>
+</label>
+`;
+
+exports[`Storyshots Label Error 1`] = `
+<label
+  className="label"
+>
+  <span
+    className="text-sm text-gray-400 ml-2"
+  >
+    Label
+  </span>
+  <span
+    className="ml-1 text-red-600 text-sm"
+  >
+    - 
+    Error
+  </span>
+</label>
+`;
+
+exports[`Storyshots Link Default 1`] = `
+<a
+  href="google.com"
+  rel="noreferrer"
+  target="_blank"
+/>
+`;
