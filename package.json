@@ -7,6 +7,11 @@
   "version": "1.0.4",
   "main": "./dist/index.js",
   "module": "./dist/index.es.js",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:electronic33/ag-ui-react.git",
+    "directory": "@electronic33/ag-ui-react"
+  },
   "files": [
     "dist"
   ],
@@ -24,6 +29,7 @@
   },
   "scripts": {
     "pkg": "manypkg run",
+    "prestart": "yarn && yarn bootstrap && yarn dedup",
     "check:pkgs": "manypkg check",
     "fix:pkgs": "manypkg fix",
     "version:pkgs": "changeset version",
@@ -36,7 +42,10 @@
     "build": "lerna run build --stream",
     "build:types": "lerna run build:types --stream",
     "bootstrap": "lerna bootstrap --use-workspaces",
-    "dedup": "yarn-deduplicate --strategy highest yarn.lock"
+    "clean": "lerna clean --yes && rm -rf node_modules",
+    "dedup": "yarn-deduplicate --strategy highest yarn.lock",
+    "postinstall": "yarn check:pkgs",
+    "release": "changeset publish"
   },
   "dependencies": {
     "@babel/core": "^7.13.10",
