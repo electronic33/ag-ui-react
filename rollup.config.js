@@ -10,12 +10,12 @@ export default (input = "./index.ts") => ({
     {
       file: "dist/index.js",
       format: "cjs",
-      sourcemap: true,
+      sourcemap: false,
     },
     {
       file: "dist/index.es.js",
       format: "esm",
-      sourcemap: true,
+      sourcemap: false,
     },
   ],
   plugins: [
