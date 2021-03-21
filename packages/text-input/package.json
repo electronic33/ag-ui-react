@@ -1,5 +1,5 @@
 {
-  "name": "@app-garage/label",
+  "name": "@app-garage/text-input",
   "version": "1.1.8",
   "author": "Matyas Furtos",
   "license": "MIT",
@@ -28,11 +28,13 @@
     "build": "rollup -c",
     "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
   },
-  "devDependencies": {
-    "react": "^17.0.1"
-  },
   "dependencies": {
+    "@app-garage/label": "1.1.8",
     "classnames": "^2.2.6"
+  },
+  "devDependencies": {
+    "react": "^17.0.1",
+    "react-icons": "^4.2.0"
   },
   "peerDependencies": {
     "react": ">=16.8.6"
