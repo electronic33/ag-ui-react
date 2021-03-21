@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import Label from "@app-garage/label";
+import { Label } from "@app-garage/label";
 
 type FieldInputProps = {
   value: string;
