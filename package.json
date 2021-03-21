@@ -33,7 +33,6 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "test": "jest",
-    "publish": "lerna publish",
     "cy:open": "cypress open",
     "commit": "npx git-cz",
     "build": "lerna run build --stream",
@@ -42,7 +41,9 @@
     "clean": "lerna clean --yes && rm -rf node_modules",
     "dedup": "yarn-deduplicate --strategy highest yarn.lock",
     "postinstall": "yarn check:pkgs",
-    "release": "changeset publish"
+    "release": "changeset publish",
+    "version": "lerna version",
+    "publish": "lerna publish"
   },
   "dependencies": {
     "@babel/core": "^7.13.10",
