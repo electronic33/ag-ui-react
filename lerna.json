@@ -1,7 +1,7 @@
 {
   "packages": ["packages/*"],
   "version": "independent",
-  "npmClient": "npm",
+  "npmClient": "yarn",
   "useWorkspaces": true,
   "command": {
     "version": { "exact": true },
@@ -11,9 +11,6 @@
       "ignoreChanges": ["**/stories/**", "**/tests/**"],
       "allowBranch": "master",
       "registry": "https://npm.pkg.github.com/@electronic33"
-    },
-    "bootstrap": {
-      "npmClientArgs": ["--production"]
     }
   }
 }
