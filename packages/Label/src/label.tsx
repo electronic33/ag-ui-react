@@ -1,7 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 
-export interface LabelProps {
+type LabelProps {
   secondaryText?: string;
   className?: string;
   required?: boolean;

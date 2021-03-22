@@ -20,7 +20,7 @@
   "overrides": [
     {
       "parser": "@typescript-eslint/parser",
-      "files": ["*.ts", "*.tsx"],
+      "files": [".ts", ".tsx"],
       "extends": [
         "plugin:import/recommended",
         "plugin:import/typescript",
@@ -57,7 +57,7 @@
     },
     {
       "files": ["*.js"],
-      "excludedFiles": ["*.ts", "*.tsx"],
+      "excludedFiles": [".ts", ".tsx"],
       "parser": "babel-eslint",
       "extends": [
         "plugin:import/recommended",

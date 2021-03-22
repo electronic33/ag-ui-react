@@ -1,0 +1,43 @@
+{
+  "name": "@app-garage/async-select",
+  "version": "1.0.1",
+  "author": "Matyas Furtos",
+  "license": "MIT",
+  "sideEffects": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/electronic33/ag-ui-react.git"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.es.js",
+  "types": "dist/index.d.ts",
+  "typings": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "default": "./dist/index.es.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rollup -c",
+    "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
+  },
+  "dependencies": {
+    "@app-garage/label": "^1.1.9",
+    "classnames": "^2.2.6"
+  },
+  "devDependencies": {
+    "react": "^17.0.1",
+    "react-icons": "^4.2.0",
+    "yup": "^0.32.9"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.6"
+  }
+}

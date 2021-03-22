@@ -85,6 +85,7 @@ const Accordion = ({
 
   return (
     <div className={classNames("accordion-container", containerClassName)}>
+      {/* eslint-disable-next-line react/button-has-type */}
       <button
         aria-expanded={isOpenState}
         aria-controls={accordionId}
