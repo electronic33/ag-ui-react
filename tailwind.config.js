@@ -1,34 +1,5 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 const colors = require("tailwindcss/colors");
-const plugin = require("tailwindcss/plugin");
-const ButtonBaseClasses = require("./src/components/Button/ButtonBaseClasses");
-const ButtonSpinnerBaseClasses = require("./src/components/ButtonSpinner/ButtonSpinnerBaseClasses");
-const AccordionBaseClasses = require("./src/components/Accordion/AccordionBaseClasses");
-const DropdownButtonBaseClasses = require("./src/components/DropdownButton/DropdownButtonBaseClasses");
-const LabelBaseClasses = require("./src/components/Label/LabelBaseClasses");
-const PaginationBaseClasses = require("./src/components/Pagination/PaginationBaseClasses");
-const TabsBaseClasses = require("./src/components/Tabs/TabsBaseClasses");
-const TextAreaBaseClasses = require("./src/components/TextArea/TextAreaBaseClasses");
-const TextInputBaseClasses = require("./src/components/TextInput/TextInputBaseClasses");
-const ModalBaseClasses = require("./src/components/Modal/ModalBaseClasses");
-const ErrorBaseClasses = require("./src/components/ErrorMessage/ErrorBaseClasses");
-const ErrorToastBaseClasses = require("./src/components/ErrorToast/ErrorToastBaseClasses");
-const SuccessToastBaseClasses = require("./src/components/SuccessToast/SuccessToastBaseClasses");
-const TooltipBaseClasses = require("./src/components/Tooltip/TooltipBaseClasses");
-const CalendarBaseClasses = require("./src/components/Calendar/CalendarBaseClasses");
-const SliderBaseClasses = require("./src/components/Slider/SliderBaseClasses");
-const BottomNavBaseClasses = require("./src/components/BottomNav/BottomNavBaseClasses");
-const BreadCrumbsBaseClasses = require("./src/components/BreadCrumbs/BreadCrumbsBaseClasses");
-const DrawerBaseClasses = require("./src/components/Drawer/DrawerBaseClasses");
-const CheckboxBaseClasses = require("./src/components/Checkbox/CheckboxBaseClasses");
-const MenuBaseClasses = require("./src/components/Menu/MenuBaseClasses");
-const SkeletonBaseClasses = require("./src/components/Skeleton/SkeletonBaseClasses");
-const RateBaseClasses = require("./src/components/Rate/RateBaseClasses");
-const ProgressBaseClasses = require("./src/components/Progress/ProgressBaseClasses");
-const MarkdownbaseClasses = require("./src/components/Markdown/MarkdownbaseClasses");
-const ScrollToBaseClasses = require("./src/components/ScrollTo/ScrollToBaseClasses");
-const PopoverBaseClasses = require("./src/components/Popover/PopoverBaseClasses");
-const AlertDialogBaseClasses = require("./src/components/AlertDialog/AlertDialogBaseClasses");
+const agUiCore = require("./tw-plugins/core/src");
 
 module.exports = {
   purge: [],
@@ -945,55 +916,5 @@ module.exports = {
     wordBreak: ["responsive"],
     zIndex: ["responsive", "focus-within", "focus"],
   },
-  plugins: [
-    plugin(({ addUtilities, addBase, theme }) => {
-      const newComponents = {
-        ...ButtonBaseClasses(theme),
-        ...ButtonSpinnerBaseClasses(theme),
-        ...AccordionBaseClasses(theme),
-        ...DropdownButtonBaseClasses(theme),
-        ...LabelBaseClasses(theme),
-        ...PaginationBaseClasses(theme),
-        ...TabsBaseClasses(theme),
-        ...TextAreaBaseClasses(theme),
-        ...TextInputBaseClasses(theme),
-        ...ModalBaseClasses(theme),
-        ...ErrorBaseClasses(theme),
-        ...ErrorToastBaseClasses(theme),
-        ...SuccessToastBaseClasses(theme),
-        ...TooltipBaseClasses(theme),
-        ...CalendarBaseClasses(theme),
-        ...SliderBaseClasses(theme),
-        ...BottomNavBaseClasses(theme),
-        ...BreadCrumbsBaseClasses(theme),
-        ...DrawerBaseClasses(theme),
-        ...CheckboxBaseClasses(theme),
-        ...MenuBaseClasses(theme),
-        ...SkeletonBaseClasses(theme),
-        ...RateBaseClasses(theme),
-        ...ProgressBaseClasses(theme),
-        ...MarkdownbaseClasses(theme),
-        ...ScrollToBaseClasses(theme),
-        ...PopoverBaseClasses(theme),
-        ...AlertDialogBaseClasses(theme),
-      };
-
-      console.log("asd");
-
-      addUtilities(newComponents, {
-        respectImportant: false,
-      });
-
-      addBase({
-        button: {
-          "&:focus": {
-            outline: "none",
-            // "box-shadow": `var(--tw-ring-inset) 0 0 0 calc(1px + var(${theme(
-            //   "ringOffsetWidth.2",
-            // )})) var(${theme("ringColor.DEFAULT")})`,
-          },
-        },
-      });
-    }),
-  ],
+  plugins: [agUiCore],
 };
