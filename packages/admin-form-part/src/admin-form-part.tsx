@@ -81,7 +81,7 @@ export const AdminFormPart = ({ items, values, setFieldValue, className }) => (
         {item.type === "select" && (
           <div className="flex justify-center items-center">
             <Select
-              className={item.className}
+              containerClassName={item.className}
               onChange={(selected) => setFieldValue(`${item.name}`, selected)}
               selected={values[item.name]}
               label={item.label}

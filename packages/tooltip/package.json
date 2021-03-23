@@ -34,11 +34,12 @@
   },
   "devDependencies": {
     "react": "^17.0.1",
+    "react-dom": "17.0.1",
     "react-icons": "^4.2.0",
     "react-popper": "^2.2.4"
   },
   "peerDependencies": {
     "react": ">=16.8.6",
-    "react-dom": ">=16.8.6" 
+    "react-dom": ">=16.8.6"
   }
 }

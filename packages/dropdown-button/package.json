@@ -33,9 +33,9 @@
     "classnames": "^2.2.6"
   },
   "devDependencies": {
+    "@headlessui/react": "^0.3.1",
     "react": "^17.0.1",
-    "react-icons": "^4.2.0",
-    "@headlessui/react": "^0.3.1"
+    "react-icons": "^4.2.0"
   },
   "peerDependencies": {
     "react": ">=16.8.6"

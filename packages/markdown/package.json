@@ -34,7 +34,7 @@
   },
   "devDependencies": {
     "react": "^17.0.1",
-    "react-icons": "^4.2.0", 
+    "react-icons": "^4.2.0",
     "react-markdown": "^5.0.3"
   },
   "peerDependencies": {
