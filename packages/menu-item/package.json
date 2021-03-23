@@ -32,8 +32,8 @@
     "classnames": "^2.2.6"
   },
   "devDependencies": {
-    "@app-garage/popover": "^1.0.1",
     "@app-garage/button": "^1.1.5",
+    "@app-garage/popover": "^1.0.1",
     "react": "^17.0.1",
     "react-icons": "^4.2.0"
   },

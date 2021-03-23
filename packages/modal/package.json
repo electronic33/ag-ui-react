@@ -29,8 +29,8 @@
     "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
   },
   "dependencies": {
-    "@app-garage/focus-trap": "^1.0.1",
     "@app-garage/button": "^1.1.5",
+    "@app-garage/focus-trap": "^1.0.1",
     "classnames": "^2.2.6"
   },
   "devDependencies": {

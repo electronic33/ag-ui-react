@@ -29,12 +29,11 @@
     "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
   },
   "dependencies": {
-    "@app-garage/link": "^1.0.1",
     "@app-garage/focus-trap": "^1.0.1",
+    "@app-garage/link": "^1.0.1",
     "@app-garage/utils": "^1.0.1",
     "classnames": "^2.2.6",
-    "react-scrolllock":"^5.0.1"
-
+    "react-scrolllock": "^5.0.1"
   },
   "devDependencies": {
     "@app-garage/button": "^1.1.5",
