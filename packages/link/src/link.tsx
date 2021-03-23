@@ -1,6 +1,6 @@
 import React from "react";
 
-type LinkProps {
+type LinkProps = {
   className?: string;
   to: string;
   children: React.ReactNode;

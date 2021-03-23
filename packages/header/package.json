@@ -34,7 +34,8 @@
   },
   "devDependencies": {
     "react": "^17.0.1",
-    "react-icons": "^4.2.0"
+    "react-icons": "^4.2.0",
+    "@app-garage/text-input": "^1.0.1"
   },
   "peerDependencies": {
     "react": ">=16.8.6"

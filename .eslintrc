@@ -20,7 +20,7 @@
   "overrides": [
     {
       "parser": "@typescript-eslint/parser",
-      "files": [".ts", ".tsx"],
+      "files": ["*.ts", "*.tsx"],
       "extends": [
         "plugin:import/recommended",
         "plugin:import/typescript",
@@ -40,10 +40,10 @@
       },
       "rules": {
         "prettier/prettier": ["error", {
-        "semi": true,
-        "trailingComma": "all",
-        "printWidth": 80,
-        "endOfLine":"auto"
+          "semi": true,
+          "trailingComma": "all",
+          "printWidth": 80,
+          "endOfLine":"auto"
         }],
         "react/prop-types": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
@@ -52,12 +52,12 @@
         "react/require-default-props": "off",
         "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
         "@typescript-eslint/no-unused-vars": ["error", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }],
-        "@typescript-eslint/naming-convention": ["error", { "leadingUnderscore": "allow" }]
+        "@typescript-eslint/naming-convention": ["error", { "format": null, "selector": "default", "leadingUnderscore": "allow" }]
       }    
     },
     {
       "files": ["*.js"],
-      "excludedFiles": [".ts", ".tsx"],
+      "excludedFiles": ["*.ts", "*.tsx"],
       "parser": "babel-eslint",
       "extends": [
         "plugin:import/recommended",
@@ -71,10 +71,10 @@
       ],
       "rules": {
         "prettier/prettier": ["error", {
-        "semi": true,
-        "trailingComma": "all",
-        "printWidth": 80,
-        "endOfLine":"auto"
+          "semi": true,
+          "trailingComma": "all",
+          "printWidth": 80,
+          "endOfLine":"auto"
         }],
         "react/prop-types": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
