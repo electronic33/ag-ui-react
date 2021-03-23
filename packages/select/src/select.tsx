@@ -1,4 +1,4 @@
-import React, { ReactElement, useMemo } from "react";
+import React, { useMemo } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import classNames from "classnames";
 import { ButtonSpinner } from "@app-garage/button-spinner";
@@ -11,7 +11,7 @@ type SelectTypes = {
   options: {
     label: string;
     value: number | string;
-    Icon?: ReactElement<{ className?: string }>;
+    Icon?: React.ComponentType<{ className?: string }>;
   }[];
   /**
    The selected value.
@@ -45,8 +45,8 @@ export const Select = ({
     () =>
       !isLoading
         ? options?.find((option) => option.value === selected)
-        : { label: "No selected option" },
-    [selected, isLoading],
+        : { label: "No selected option", Icon: undefined, value: "" },
+    [selected, isLoading, options],
   );
 
   return (

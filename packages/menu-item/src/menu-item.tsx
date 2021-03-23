@@ -1,17 +1,16 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import classNames from "classnames";
 
 export const MenuItem = ({ children, Icon, onClick }) => {
-  const ref = useRef();
+  const ref = useRef<HTMLButtonElement>();
 
   const isFocused = ref?.current
     ? ref.current.attributes.getNamedItem("data-is-tabbed")?.value === "active"
     : false;
 
-  console.log("I RENDER MENU ITEM");
-
   return (
     <button
+      type="button"
       role="menuitem"
       ref={ref}
       className={classNames("flex items-center  py-1 w-full", {
@@ -30,4 +29,3 @@ export const MenuItem = ({ children, Icon, onClick }) => {
     </button>
   );
 };
-

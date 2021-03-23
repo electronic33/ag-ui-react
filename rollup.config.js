@@ -3,6 +3,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import typescript from "rollup-plugin-typescript2";
 import del from "rollup-plugin-delete";
+import json from "@rollup/plugin-json";
 
 export default (input = "./index.ts") => ({
   input,
@@ -23,6 +24,7 @@ export default (input = "./index.ts") => ({
     peerDepsExternal(),
     resolve(),
     commonjs(),
+    json(),
     typescript({ clean: true }),
   ],
 });

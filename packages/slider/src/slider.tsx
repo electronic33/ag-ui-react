@@ -8,7 +8,7 @@ import React, {
 import { Modal } from "@app-garage/modal";
 import classNames from "classnames";
 import { Arrow } from "./arrow";
-import { Dot } from "./dots";
+import { Dots } from "./dots";
 import { Slide } from "./slide";
 
 type SliderTypes = {
@@ -131,9 +131,6 @@ const Slider = ({
   };
 
   const prevSlide = () => {
-    console.log("activeIndex / itemsToScroll", activeIndex / itemsToScroll);
-    console.log("activeDot", activeDot);
-    console.log("dotsNum", dotsNum);
     if (activeIndex === 0) {
       return (
         setActiveDot(
@@ -200,26 +197,14 @@ const Slider = ({
     }
   };
 
-  console.log(
-    "🚀 ~ file: Slider.tsx ~ line 216 ~ useLayoutEffect ~ children.length",
-    children.length,
-  );
-  console.log(
-    "🚀 ~ file: Slider.tsx ~ line 216 ~ useLayoutEffect ~ dotsNum",
-    dotsNum,
-  );
-
   useLayoutEffect(() => {
     let i;
-    const dotsArray = [];
-    for (i = 0; i < children.length; i++)
+    const dotsArray: number[] = [];
+    for (i = 0; i < children.length; i += 1)
       if (i + 1 <= dotsNum) {
         dotsArray.push(i + 1);
       }
-    console.log(
-      "🚀 ~ file: Slider.tsx ~ line 226 ~ useLayoutEffect ~ dotsArray",
-      dotsArray,
-    );
+
     setDotsArr(dotsArray);
   }, []);
 
@@ -255,7 +240,7 @@ const Slider = ({
         </div>
         <Arrow direction="right" handleClick={nextSlide} />
       </div>
-      <Dot activeDot={activeDot} onDotClick={onDotClick} dotsArr={dotsArr} />
+      <Dots activeDot={activeDot} onDotClick={onDotClick} dotsArr={dotsArr} />
     </div>
   );
 };
@@ -273,8 +258,8 @@ export const SliderWithModal = (
   };
   return (
     <div className="w-full h-full flex items-center justify-center">
-      {withModal && isModalOpen && (
-        <Modal onClose={() => setIsModalOpen(false)}>
+      {withModal && (
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
           <Slider
             {...props}
             itemsToShow={1}

@@ -8,7 +8,7 @@ import { useId } from "react-id-generator";
 type TooltipTypes = {
   delay?: number;
   children?: React.ReactNode;
-  direction?: string;
+  direction?: "top" | "bottom" | "right" | "left";
   content?: unknown;
   contentClassNames?: string;
   arrowClasses?: string;
@@ -20,7 +20,8 @@ type TooltipTypes = {
   withArrow?: boolean;
   containterFocus?: boolean;
   active: boolean;
-  setActive: (prevState?: boolean) => void;
+  setActive: (prev?: boolean | ((arg: boolean) => boolean)) => void;
+  initialFocusRef?: { current: HTMLElement };
 };
 
 export const Popover = ({
@@ -199,6 +200,7 @@ export const Popover = ({
 
               {withCloseButton && (
                 <button
+                  type="button"
                   onClick={hideTip}
                   className="absolute flex-shrink-0 top-1 right-2 text-lg text-gray-400 z-10"
                   aria-label="close"

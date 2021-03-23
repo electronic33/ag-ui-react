@@ -31,7 +31,7 @@ export const useScrollBelowElementHook = (
   return showScroll;
 };
 
-type PropsType = {
+type ScrollToProps = {
   className: string;
   /**
    Scroll offset in pixels.
@@ -42,36 +42,40 @@ type PropsType = {
    When to show the scrollTo component.
   */
   showScroll: boolean;
-
-  ref: HTMLElement;
+  scrollToRef: { current: HTMLElement };
 };
 
-export const ScrollTo = React.forwardRef<HTMLInputElement, PropsType>(
-  ({ className, offset = 0, Icon, showScroll = false }, ref) => {
-    const executeScroll = () => {
-      const offsetTop =
-        ref.current.getBoundingClientRect().top + window.pageYOffset;
+export const ScrollTo = ({
+  className,
+  offset = 0,
+  Icon,
+  showScroll = false,
+  scrollToRef,
+}: ScrollToProps) => {
+  const executeScroll = () => {
+    const offsetTop =
+      scrollToRef.current.getBoundingClientRect().top + window.pageYOffset;
 
-      window.scroll({
-        top: offsetTop - offset,
-        behavior: "smooth",
-      });
-    };
+    window.scroll({
+      top: offsetTop - offset,
+      behavior: "smooth",
+    });
+  };
 
-    return (
-      <div
-        onClick={executeScroll}
-        className={classNames(
-          "main-div-scroll",
-          {
-            "opacity-0 pointer-events-none": showScroll === false,
-            "opacity-1": showScroll === true,
-          },
-          className,
-        )}
-      >
-        {Icon}
-      </div>
-    );
-  },
-);
+  return (
+    <button
+      type="button"
+      onClick={executeScroll}
+      className={classNames(
+        "main-div-scroll",
+        {
+          "opacity-0 pointer-events-none": showScroll === false,
+          "opacity-1": showScroll === true,
+        },
+        className,
+      )}
+    >
+      {Icon}
+    </button>
+  );
+};

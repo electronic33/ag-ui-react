@@ -55,7 +55,7 @@ export const Pagination = ({
     let i;
     const arrayFirst = [];
 
-    for (i = 0; i < firstAndLastSectionsNumber; i++) {
+    for (i = 0; i < firstAndLastSectionsNumber; i += 1) {
       if (i + 1 <= numberOfPages) {
         arrayFirst.push(i + 1);
       }
@@ -68,7 +68,7 @@ export const Pagination = ({
     for (
       j = numberOfPages - firstAndLastSectionsNumber;
       j < numberOfPages;
-      j++
+      j += 1
     ) {
       arrayLast.push(j + 1);
     }
@@ -80,7 +80,7 @@ export const Pagination = ({
     for (
       k = currentPage - Math.floor(firstAndLastSectionsNumber / 2);
       k <= currentPage + Math.floor(firstAndLastSectionsNumber / 2);
-      k++
+      k += 1
     ) {
       arrayMiddle.push(k);
     }
@@ -117,7 +117,8 @@ export const Pagination = ({
       }}
     >
       <div className="flex">
-        <p
+        <button
+          type="button"
           onClick={() => {
             if (currentPage !== 1) {
               setCurrentPage(currentPage - 1);
@@ -128,11 +129,12 @@ export const Pagination = ({
           })}
         >
           Previous Page
-        </p>
+        </button>
         <div className="flex">
           <div className="flex">
             {firstSection.map((firstSectionItem, index) => (
-              <div
+              <button
+                type="button"
                 key={index}
                 className={classNames(
                   "pagination",
@@ -146,7 +148,7 @@ export const Pagination = ({
                 onClick={() => setCurrentPage(firstSectionItem)}
               >
                 {firstSectionItem}
-              </div>
+              </button>
             ))}
             <div className="flex">
               {middleSection.length &&
@@ -156,7 +158,8 @@ export const Pagination = ({
                 ""
               )}
               {middleSection.map((middleSectionItem, index) => (
-                <div
+                <button
+                  type="button"
                   key={index}
                   className={classNames(
                     "pagination",
@@ -171,7 +174,7 @@ export const Pagination = ({
                   onClick={() => setCurrentPage(middleSectionItem)}
                 >
                   {middleSectionItem}
-                </div>
+                </button>
               ))}
               {lastSection[0] !== firstSection[firstSection.length - 1] + 1 &&
               lastSection[0] &&
@@ -182,7 +185,8 @@ export const Pagination = ({
               )}
             </div>
             {lastSection.map((lastSectionItem, index) => (
-              <div
+              <button
+                type="button"
                 key={index}
                 className={classNames(
                   "pagination",
@@ -196,11 +200,12 @@ export const Pagination = ({
                 onClick={() => setCurrentPage(lastSectionItem)}
               >
                 {lastSectionItem}
-              </div>
+              </button>
             ))}
           </div>
         </div>
-        <p
+        <button
+          type="button"
           onClick={() => {
             if (currentPage !== numberOfPages) {
               setCurrentPage(currentPage + 1);
@@ -211,7 +216,7 @@ export const Pagination = ({
           })}
         >
           Next Page
-        </p>
+        </button>
       </div>
       {initialGotoPageValue && (
         <div className="flex items-baseline">
@@ -219,11 +224,12 @@ export const Pagination = ({
             Go To Page Number:
           </label>
           <TextInput
+            id="goToPageValue"
             onChange={(event) => {
-              setGoToPageValue(parseInt(event.target.value));
+              setGoToPageValue(Number(event.target.value));
             }}
             value={goToPageValue}
-            className="bg-gray-100 shadow rounded px-2 py-1"
+            containerClassName="bg-gray-100 shadow rounded px-2 py-1"
             type="number"
           />
         </div>
@@ -232,7 +238,7 @@ export const Pagination = ({
       {selectOptions && (
         <Select
           label="Items per page:"
-          className="max-w-16 w-64 mb-5 my-4 mr-2"
+          containerClassName="max-w-16 w-64 mb-5 my-4 mr-2"
           onChange={(selectedItemsNumber) =>
             setItemsNumber(selectedItemsNumber)
           }
@@ -246,8 +252,9 @@ export const Pagination = ({
             "cursor-default bg-opacity-70 hover:bg-opacity-75":
               goToPageValue <= 0 || goToPageValue > numberOfPages,
           })}
-          text="Button"
-        />
+        >
+          Button
+        </Button>
       )}
     </form>
   );

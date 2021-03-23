@@ -1,5 +1,5 @@
 {
-  "name": "@app-garage/markdown",
+  "name": "@app-garage/custom-select",
   "version": "1.0.1",
   "author": "Matyas Furtos",
   "license": "MIT",
@@ -29,11 +29,11 @@
     "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
   },
   "dependencies": {
-    "@app-garage/text-area": "^1.0.1",
-    "classnames": "^2.2.6",
-    "react-markdown": "^5.0.3"
+    "@app-garage/label": "^1.1.9",
+    "classnames": "^2.2.6"
   },
   "devDependencies": {
+    "@app-garage/text-input": "^1.0.1",
     "react": "^17.0.1",
     "react-icons": "^4.2.0"
   },

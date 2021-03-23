@@ -5,21 +5,19 @@ type dotTypes = {
   activeDot: number;
   onDotClick: (index: number) => void;
   dotsArr: number[];
-}
-
-export const Dot = ({ activeDot, index, onDotClick }) => {
-  return (
-    <span
-      onClick={() => onDotClick(index)}
-      className={classNames("dot", {
-        "bg-blue-600": index === activeDot,
-        "bg-blue-400": index !== activeDot,
-      })}
-    />
-  );
 };
 
-const Dots = ({
+const Dot = ({ activeDot, index, onDotClick }) => (
+  <span
+    onClick={() => onDotClick(index)}
+    className={classNames("dot", {
+      "bg-blue-600": index === activeDot,
+      "bg-blue-400": index !== activeDot,
+    })}
+  />
+);
+
+export const Dots = ({
   activeDot,
   onDotClick,
   dotsArr,
@@ -40,4 +38,3 @@ const Dots = ({
     </div>
   );
 };
-

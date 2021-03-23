@@ -45,7 +45,7 @@ export const Drawer = ({
   const stopPropagation = useStopPropagation();
 
   useEffect(() => {
-    const handleSpacebarPress = (event: React.KeyboardEvent) => {
+    const handleSpacebarPress = (event: KeyboardEvent) => {
       if (event.code === "Escape") {
         onClose();
       }

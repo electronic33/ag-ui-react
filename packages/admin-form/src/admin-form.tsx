@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import React from "react";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import classNames from "classnames";
@@ -23,19 +23,19 @@ type FormItemConditionalProps =
       type: "text";
       initialValue: string;
       placeholder?: string;
-      Icon?: ReactElement<{ className?: string }>;
+      Icon?: React.ComponentType<{ className?: string }>;
     }
   | {
       type: "number";
       initialValue: number | string;
       placeholder?: string;
-      Icon?: ReactElement<{ className?: string }>;
+      Icon?: React.ComponentType<{ className?: string }>;
     }
   | {
       type: "textarea";
       initialValue: string;
       placeholder?: string;
-      Icon?: ReactElement<{ className?: string }>;
+      Icon?: React.ComponentType<{ className?: string }>;
     }
   | {
       type: "checkbox";
@@ -59,7 +59,7 @@ type FormItemConditionalProps =
       options: {
         label: string;
         value: string | number;
-        Icon?: ReactElement<{ className?: string }>;
+        Icon?: React.ComponentType<{ className?: string }>;
       }[];
     }
   | {

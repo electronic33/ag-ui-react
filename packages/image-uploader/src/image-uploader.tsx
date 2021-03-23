@@ -10,7 +10,7 @@ import { SliderWithModal } from "@app-garage/slider";
 
 const initialCropPosition = { x: 0, y: 0 };
 
-const createImage = (url) =>
+const createImage = (url: string): Promise<HTMLImageElement> =>
   new Promise((resolve, reject) => {
     const image = new Image();
     image.addEventListener("load", () => resolve(image));
@@ -34,8 +34,9 @@ const getCroppedImg = async (
   pixelCrop: { width: number; height: number; x: number; y: number },
   rotation = 0,
   type = "image/jpeg",
-) => {
+): Promise<string> => {
   const image = await createImage(imageSrc);
+  console.log("🚀 ~ file: image-uploader.tsx ~ line 39 ~ image", image);
   const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
 
@@ -280,10 +281,11 @@ export const ImageUploader = ({
       {imageSources ? (
         <>
           <div className=" mb-3 flex flex-col items-center h-full ">
-            {!withoutCrop && isModalOpen ? (
+            {!withoutCrop ? (
               <Modal
+                isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
-                className="flex flex-col items-center justify-center h-full"
+                modalClassName="flex flex-col items-center justify-center h-full"
               >
                 {multipleImages ? (
                   <SliderWithModal

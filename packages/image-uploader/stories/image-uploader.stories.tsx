@@ -11,7 +11,7 @@ export const Default = (props): React.ReactNode => {
   return (
     <ImageUploader
       {...props}
-      setImages={(images) => setImages(images)}
+      setImages={(newImages) => setImages(newImages)}
       images={images}
       // error={touched?.newImages && errors?.newImages}
     />

@@ -15,8 +15,8 @@ type TabsTypes = {
    The index of the active tab.
   */
   currentTab: number;
-  setCurrentTab: (index: number) => any;
-}
+  setCurrentTab: (index: number | ((arg: number) => void)) => void;
+};
 
 export const Tabs = ({
   tabs,
@@ -82,5 +82,3 @@ export const Tabs = ({
     </div>
   );
 };
-
-

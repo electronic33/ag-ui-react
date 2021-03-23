@@ -8,7 +8,7 @@ import { useId } from "react-id-generator";
 type MenuButtonTypes = {
   delay?: number;
   children?: React.ReactNode;
-  direction?: string;
+  direction?: "top" | "bottom" | "right" | "left";
   content: string;
   contentClassNames?: string;
   arrowClasses?: string;
@@ -16,6 +16,7 @@ type MenuButtonTypes = {
   headerText?: string;
   closeOnOutsideClick?: boolean;
   closeOnEsc?: boolean;
+  initialFocusRef?: { current: HTMLElement };
 };
 
 export const MenuButton = ({
