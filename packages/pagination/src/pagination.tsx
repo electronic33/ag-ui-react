@@ -28,7 +28,7 @@ type PaginationTypes = {
   Array of option objects for selecting the items per page value, each object consists of a label name and a number value.
   */
   selectOptions?: { label: string; value: number }[];
-}
+};
 
 export const Pagination = ({
   maxCount,
@@ -252,5 +252,3 @@ export const Pagination = ({
     </form>
   );
 };
-
-

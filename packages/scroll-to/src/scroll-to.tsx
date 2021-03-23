@@ -42,9 +42,11 @@ type PropsType = {
    When to show the scrollTo component.
   */
   showScroll: boolean;
-}
 
-export const ScrollTo = React.forwardRef<any, PropsType>(
+  ref: HTMLElement;
+};
+
+export const ScrollTo = React.forwardRef<HTMLInputElement, PropsType>(
   ({ className, offset = 0, Icon, showScroll = false }, ref) => {
     const executeScroll = () => {
       const offsetTop =
@@ -73,5 +75,3 @@ export const ScrollTo = React.forwardRef<any, PropsType>(
     );
   },
 );
-
-

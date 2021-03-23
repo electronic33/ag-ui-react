@@ -33,6 +33,7 @@
     "classnames": "^2.2.6"
   },
   "devDependencies": {
+    "@app-garage/text-input": "^1.0.1",
     "react": "^17.0.1",
     "react-icons": "^4.2.0"
   },

@@ -2,7 +2,7 @@ import React, { ReactElement, useMemo } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import classNames from "classnames";
 import { ButtonSpinner } from "@app-garage/button-spinner";
-import{ Button } from "@app-garage/button";
+import { Button } from "@app-garage/button";
 
 type SelectTypes = {
   /**
@@ -26,7 +26,7 @@ type SelectTypes = {
   error?: string;
   retryFn?: () => void;
   loadingText?: string;
-}
+};
 
 export const Select = ({
   options,
@@ -182,5 +182,3 @@ export const Select = ({
     </Listbox>
   );
 };
-
-

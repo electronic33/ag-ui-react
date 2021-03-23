@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import  { Calendar, useMultipleSelectCalendarState } from "../src";
+import { Calendar } from "../src";
+// import { Calendar, useMultipleSelectCalendarState } from "../src";
 
 export default {
   title: "OTHERS/Calendar",
@@ -12,7 +13,6 @@ export const Default = (): React.ReactElement => {
   const [selectedDates, setSelectedDates] = useState([]);
 
   // const [selectedDates, setSelectedDates] = useMultipleSelectCalendarState([]);
-  const currentdDate = new Date();
   return (
     <Calendar
       calendarClassName=""

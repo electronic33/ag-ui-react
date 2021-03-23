@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Skeleton } from "../src";
-
 import { Button } from "@app-garage/button";
+import { Skeleton } from "../src";
 
 export default {
   title: "FEEDBACK/Skeleton",

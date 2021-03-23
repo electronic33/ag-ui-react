@@ -1,7 +1,6 @@
 import React from "react";
-import { BreadCrumbs } from "../src";
-
 import { Link } from "@app-garage/link";
+import { BreadCrumbs } from "../src";
 
 export default {
   title: "NAVIGATION/Breadcrumbs",

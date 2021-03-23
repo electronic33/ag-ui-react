@@ -1,8 +1,8 @@
 import React from "react";
-import { BottomNav } from "../src";
 import { Link } from "@app-garage/link";
 import { IoIosAdd, IoMdAlarm } from "react-icons/io";
 import { MdChildFriendly } from "react-icons/md";
+import { BottomNav } from "../src";
 
 export default {
   title: "OTHERS/BottomNav",

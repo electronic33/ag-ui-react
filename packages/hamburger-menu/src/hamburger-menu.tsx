@@ -8,7 +8,7 @@ type navLinkType = {
   label: string;
   href: string;
   Icon: React.ComponentType;
-}
+};
 type HamburgerProps = {
   isOpen: boolean;
   originalPath?: string;
@@ -23,7 +23,7 @@ type HamburgerProps = {
     className?: string;
     onClick?: () => void;
   }>;
-}
+};
 
 export const HamburgerMenu = ({
   isOpen,
@@ -135,4 +135,3 @@ export const HamburgerMenu = ({
     </div>
   );
 };
-

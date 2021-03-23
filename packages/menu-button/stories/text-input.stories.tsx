@@ -1,7 +1,6 @@
-import React, { useRef } from "react";
-import { MenuButton } from "../src";
-
+import React from "react";
 import { Button } from "@app-garage/button";
+import { MenuButton } from "../src";
 
 export default {
   title: "OTHERS/MenuButton",

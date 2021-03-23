@@ -8,15 +8,11 @@ export const ErrorToast = ({
 }: {
   message: string;
   className?: string;
-}): React.ReactElement => {
-  return (
-    <div className={classNames("error-toast", className)}>
-      <MdCancel
-        className={classNames("mr-2 text-lg min-w-5 flex-shrink-0", className)}
-      />
-      {message}
-    </div>
-  );
-};
-
-
+}): React.ReactElement => (
+  <div className={classNames("error-toast", className)}>
+    <MdCancel
+      className={classNames("mr-2 text-lg min-w-5 flex-shrink-0", className)}
+    />
+    {message}
+  </div>
+);

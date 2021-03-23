@@ -6,7 +6,7 @@ import { AiFillEye } from "react-icons/ai";
 import { useDropzone } from "react-dropzone";
 import { Button } from "@app-garage/button";
 import { Modal } from "@app-garage/modal";
-import { Slider } from "@app-garage/slider";
+import { SliderWithModal } from "@app-garage/slider";
 
 const initialCropPosition = { x: 0, y: 0 };
 
@@ -31,7 +31,7 @@ function getRadianAngle(degreeValue) {
  */
 const getCroppedImg = async (
   imageSrc: string,
-  pixelCrop: { width: number; height: number; x: number; y: number},
+  pixelCrop: { width: number; height: number; x: number; y: number },
   rotation = 0,
   type = "image/jpeg",
 ) => {
@@ -80,7 +80,7 @@ const getCroppedImg = async (
       resolve(URL.createObjectURL(file));
     }, type);
   });
-}
+};
 
 export async function getRotatedImage(imageSrc, rotation = 0) {
   const image = await createImage(imageSrc);
@@ -111,13 +111,12 @@ export async function getRotatedImage(imageSrc, rotation = 0) {
   });
 }
 
-const readFile = (file) => {
-  return new Promise((resolve) => {
+const readFile = (file) =>
+  new Promise((resolve) => {
     const reader = new FileReader();
     reader.addEventListener("load", () => resolve(reader.result), false);
     reader.readAsDataURL(file);
   });
-};
 type ImageUploaderTypes = {
   images: string[];
   setImages: (images: string[]) => void;
@@ -126,7 +125,7 @@ type ImageUploaderTypes = {
   withoutCrop?: boolean;
   onlyWithCrop?: boolean;
   error?: string;
-}
+};
 
 export const ImageUploader = ({
   /**
@@ -279,7 +278,7 @@ export const ImageUploader = ({
       </div>
 
       {imageSources ? (
-        <Fragment>
+        <>
           <div className=" mb-3 flex flex-col items-center h-full ">
             {!withoutCrop && isModalOpen ? (
               <Modal
@@ -287,7 +286,7 @@ export const ImageUploader = ({
                 className="flex flex-col items-center justify-center h-full"
               >
                 {multipleImages ? (
-                  <Slider
+                  <SliderWithModal
                     startAtIndex={0}
                     itemsToShow={1}
                     itemsToScroll={1}
@@ -361,7 +360,7 @@ export const ImageUploader = ({
                         </div>
                       </div>
                     ))}
-                  </Slider>
+                  </SliderWithModal>
                 ) : (
                   <>
                     {imageSources.map((image, index) => (
@@ -446,7 +445,7 @@ export const ImageUploader = ({
                 </p>
               </div>
               {multipleImages ? (
-                <Slider
+                <SliderWithModal
                   startAtIndex={0}
                   itemsToShow={1}
                   itemsToScroll={1}
@@ -455,18 +454,20 @@ export const ImageUploader = ({
                   {images.map((image) => (
                     <div key={image} className={classNames("")}>
                       <img
+                        alt=""
                         className="object-contain"
                         style={{ width: 384, height: 216 }}
                         src={image}
                       />
                     </div>
                   ))}
-                </Slider>
+                </SliderWithModal>
               ) : (
                 <>
                   {images.map((image) => (
                     <div key={image} className={classNames("")}>
                       <img
+                        alt=""
                         className="object-contain"
                         style={{ width: 384, height: 216 }}
                         src={image}
@@ -477,10 +478,8 @@ export const ImageUploader = ({
               )}
             </>
           )}
-        </Fragment>
+        </>
       ) : null}
     </div>
   );
 };
-
-

@@ -10,7 +10,7 @@ type ProgressTypes = {
   */
   withTracker: boolean;
   trackerClassNames: string;
-}
+};
 
 export const Progress = ({
   progressValue,
@@ -18,33 +18,27 @@ export const Progress = ({
   progressBarClassNames,
   withTracker,
   trackerClassNames,
-}: ProgressTypes): React.ReactElement => {
-  return (
+}: ProgressTypes): React.ReactElement => (
+  <div
+    className="main-div-progress"
+    role="progressbar"
+    aria-valuenow={progressValue}
+  >
     <div
-      className="main-div-progress"
-      role="progressbar"
-      aria-valuenow={progressValue}
+      className={classNames("progress-container ", progressContainerClassNames)}
     >
       <div
-        className={classNames(
-          "progress-container ",
-          progressContainerClassNames,
-        )}
-      >
-        <div
-          className={classNames("progress-bar ", progressBarClassNames)}
-          style={{ width: `${progressValue}%` }}
-        ></div>
-      </div>
-      {withTracker && (
-        <p
-          style={{ minWidth: "40px" }}
-          className={classNames("progress-tracker", trackerClassNames)}
-        >
-          {progressValue}%
-        </p>
-      )}
+        className={classNames("progress-bar ", progressBarClassNames)}
+        style={{ width: `${progressValue}%` }}
+      />
     </div>
-  );
-};
-
+    {withTracker && (
+      <p
+        style={{ minWidth: "40px" }}
+        className={classNames("progress-tracker", trackerClassNames)}
+      >
+        {progressValue}%
+      </p>
+    )}
+  </div>
+);

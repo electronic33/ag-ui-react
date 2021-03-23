@@ -1,7 +1,6 @@
 import React from "react";
-import { Tooltip } from "../src";
-
 import { Button } from "@app-garage/button";
+import { Tooltip } from "../src";
 
 export default {
   title: "OVERLAY/Tooltip",

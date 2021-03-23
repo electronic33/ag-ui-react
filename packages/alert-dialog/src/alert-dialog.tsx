@@ -19,7 +19,7 @@ type AlertDialogProps = {
   modalClassName?: string;
   cancelButtonClassName?: string;
   confirmButtonClassName?: string;
-}
+};
 
 export const AlertDialog = ({
   isOpen,
@@ -85,4 +85,3 @@ export const AlertDialog = ({
     </Modal>
   );
 };
-

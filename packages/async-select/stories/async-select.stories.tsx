@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import  {AsyncSelect, useFetch } from "../src";
+import { AsyncSelect, useFetch } from "../src";
 
 export default {
   title: "OTHERS/AsyncSelect",
@@ -19,5 +19,5 @@ export const Top = (): React.ReactNode => {
         valueKey="cell"
       />
     </div>
-  ); 
+  );
 };

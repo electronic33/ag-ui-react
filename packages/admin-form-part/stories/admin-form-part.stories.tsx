@@ -3,9 +3,9 @@ import React from "react";
 import * as Yup from "yup";
 import { Form, Formik } from "formik";
 import classNames from "classnames";
-import {AdminFormPart} from "../src";
-import {Spinner} from "@app-garage/spinner";
-import {Button} from "@app-garage/button";
+import { Spinner } from "@app-garage/spinner";
+import { Button } from "@app-garage/button";
+import { AdminFormPart } from "../src";
 
 export default {
   title: "FORMS/AdminFormPart",

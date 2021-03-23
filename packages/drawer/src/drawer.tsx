@@ -1,12 +1,11 @@
 import React, { useEffect, useMemo } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import ReactScrollLock from "react-scrolllock";
-
-import { Link } from "@app-garage/link";
 import classNames from "classnames";
+import { Link } from "@app-garage/link";
 import { FocusLock } from "@app-garage/focus-trap";
-import { useTransition, animated, config } from "react-spring";
 import { useStopPropagation } from "@app-garage/utils";
+import { useTransition, animated, config } from "react-spring";
 import { Button } from "@app-garage/button";
 
 type DrawerTypes = {
@@ -30,7 +29,7 @@ type DrawerTypes = {
   textClassName?: string;
   drawerClassNames?: string;
   linkClassNames?: string;
-}
+};
 
 export const Drawer = ({
   sidebarData,
@@ -148,7 +147,7 @@ export const Drawer = ({
       {transitions.map(
         ({ item, key, props }) =>
           item && (
-            <FocusLock key={key} isDisabled={!isOpen} restoreFocus={true}>
+            <FocusLock key={key} isDisabled={!isOpen} restoreFocus>
               <ReactScrollLock>
                 <animated.div
                   className="fixed top-0 left-0 z-10 w-screen h-screen bg-black bg-opacity-40"
@@ -222,5 +221,3 @@ export const Drawer = ({
     </>
   );
 };
-
-

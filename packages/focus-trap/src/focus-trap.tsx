@@ -5,7 +5,7 @@ import { focus } from "./focus";
 
 type FocusableElement = {
   focus(options?: FocusOptions): void;
-}
+};
 
 export interface FocusLockProps {
   /**
@@ -62,6 +62,7 @@ export const FocusLock: React.FC<FocusLockProps> = (props) => {
     isDisabled,
     autoFocus,
     lockFocusAcrossFrames,
+    persistentFocus,
   } = props;
 
   const onActivation = React.useCallback(() => {
@@ -99,5 +100,3 @@ export const FocusLock: React.FC<FocusLockProps> = (props) => {
 // if (__DEV__) {
 //   FocusLock.displayName = "FocusLock";
 // }
-
-

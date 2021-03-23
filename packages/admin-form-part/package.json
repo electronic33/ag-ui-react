@@ -29,10 +29,18 @@
     "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
   },
   "dependencies": {
+    "@app-garage/text-input": "^1.0.1",
+    "@app-garage/image-uploader": "^1.0.1",
+    "@app-garage/button": "^1.1.5",
+    "@app-garage/switch": "^1.0.1",
+    "@app-garage/select": "^1.0.1",
+    "@app-garage/text-area": "^1.0.1",
     "@app-garage/label": "^1.1.9",
     "classnames": "^2.2.6"
   },
-  "devDependencies": {
+  "devDependencies": { 
+    "@app-garage/button": "^1.1.5",
+    "@app-garage/spinner": "^1.0.1",
     "formik": "^2.2.6",
     "react": "^17.0.1",
     "react-icons": "^4.2.0",

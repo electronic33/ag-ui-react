@@ -1,6 +1,6 @@
 import React from "react";
 import * as Yup from "yup";
-import {AdminForm} from "../src";
+import { AdminForm } from "../src";
 
 export default {
   title: "FORMS/AdminForm",

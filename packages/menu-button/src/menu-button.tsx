@@ -1,11 +1,11 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { usePopper } from "react-popper";
 import classNames from "classnames";
 import { MdClose } from "react-icons/md";
 import { FocusLock } from "@app-garage/focus-trap";
 import { useId } from "react-id-generator";
 
-type TooltipTypes = {
+type MenuButtonTypes = {
   delay?: number;
   children?: React.ReactNode;
   direction?: string;
@@ -16,9 +16,9 @@ type TooltipTypes = {
   headerText?: string;
   closeOnOutsideClick?: boolean;
   closeOnEsc?: boolean;
-}
+};
 
-export const Tooltip = ({
+export const MenuButton = ({
   delay,
   children,
   content,
@@ -28,7 +28,7 @@ export const Tooltip = ({
   closeOnOutsideClick = true,
   closeOnEsc = true,
   initialFocusRef,
-}: TooltipTypes): React.ReactElement => {
+}: MenuButtonTypes): React.ReactElement => {
   let timeout;
 
   const [active, setActive] = useState(false);
@@ -84,7 +84,8 @@ export const Tooltip = ({
   const handleClick = () => {
     if (!active) {
       return showTip();
-    } else if (active) {
+    }
+    if (active) {
       return hideTip();
     }
   };
@@ -142,7 +143,7 @@ export const Tooltip = ({
         <FocusLock
           initialFocusRef={initialFocusRef}
           isDisabled={!active}
-          restoreFocus={true}
+          restoreFocus
         >
           <div
             ref={setPopperElement}
@@ -188,4 +189,3 @@ export const Tooltip = ({
     </div>
   );
 };
-

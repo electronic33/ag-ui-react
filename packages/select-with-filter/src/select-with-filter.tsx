@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { TextInput } from "@app-garage/text-input";
 import { useDebounce } from "@app-garage/utils";
@@ -21,7 +21,7 @@ type SelectTypes = {
   label: string;
   cursorPointer?: string;
   setSelected: () => void;
-}
+};
 
 export const SelectWIthFilter = ({
   options,
@@ -39,13 +39,12 @@ export const SelectWIthFilter = ({
   const updatedList = useMemo(
     () =>
       filterValue
-        ? options.filter((item) => {
-            return (
+        ? options.filter(
+            (item) =>
               item.label
                 .toLowerCase()
-                .search(debouncedFilterValue.toLowerCase()) !== -1
-            );
-          })
+                .search(debouncedFilterValue.toLowerCase()) !== -1,
+          )
         : options,
     [filterValue],
   );
@@ -152,5 +151,3 @@ export const SelectWIthFilter = ({
     </Listbox>
   );
 };
-
-

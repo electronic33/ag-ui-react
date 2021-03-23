@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { usePopper } from "react-popper";
 import classNames from "classnames";
 import { MdClose } from "react-icons/md";
@@ -21,7 +21,7 @@ type TooltipTypes = {
   containterFocus?: boolean;
   active: boolean;
   setActive: (prevState?: boolean) => void;
-}
+};
 
 export const Popover = ({
   delay,
@@ -94,10 +94,12 @@ export const Popover = ({
   const handleClick = () => {
     if (trigger === "hover") {
       return null;
-    } else if (trigger === "click") {
+    }
+    if (trigger === "click") {
       if (!active) {
         return showTip();
-      } else if (active) {
+      }
+      if (active) {
         return hideTip();
       }
     }
@@ -164,7 +166,7 @@ export const Popover = ({
         <FocusLock
           initialFocusRef={initialFocusRef}
           isDisabled={!active}
-          restoreFocus={true}
+          restoreFocus
         >
           <div
             ref={setPopperElement}
@@ -216,7 +218,7 @@ export const Popover = ({
                 style={styles.arrow}
                 data-popper-arrow
                 id="arrow"
-              ></div>
+              />
             )}
           </div>
         </FocusLock>
@@ -271,10 +273,9 @@ export const Popover = ({
             style={styles.arrow}
             data-popper-arrow
             id="arrow"
-          ></div>
+          />
         </div>
       )}
     </div>
   );
 };
-

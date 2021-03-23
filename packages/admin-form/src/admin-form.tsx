@@ -3,12 +3,12 @@ import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import classNames from "classnames";
 
-import {TextInput} from "@app-garage/text-input";
-import {ImageUploader} from "@app-garage/image-uploader";
-import {Button} from "@app-garage/button";
-import {Switch} from "@app-garage/switch";
-import {Select} from "@app-garage/select";
-import {TextArea} from "@app-garage/text-area";
+import { TextInput } from "@app-garage/text-input";
+import { ImageUploader } from "@app-garage/image-uploader";
+import { Button } from "@app-garage/button";
+import { Switch } from "@app-garage/switch";
+import { Select } from "@app-garage/select";
+import { TextArea } from "@app-garage/text-area";
 
 type FormItemCommonProps = {
   name: string;

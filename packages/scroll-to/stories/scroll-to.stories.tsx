@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { FaArrowUp } from "react-icons/fa";
-import  {ScrollTo, useScrollBelowElementHook } from "../src";
+import { ScrollTo, useScrollBelowElementHook } from "../src";
 
 export default {
   title: "OTHERS/ScrollTo",

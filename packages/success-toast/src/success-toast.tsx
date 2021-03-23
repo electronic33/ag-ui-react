@@ -8,11 +8,9 @@ export const SuccessToast = ({
 }: {
   message: string;
   className?: string;
-}): React.ReactElement => {
-  return (
-    <div className={classNames("success-toast", className)}>
-      <MdCheckCircle className="mr-2 text-lg min-w-5 flex-shrink-0" />
-      {message}
-    </div>
-  );
-};
+}): React.ReactElement => (
+  <div className={classNames("success-toast", className)}>
+    <MdCheckCircle className="mr-2 text-lg min-w-5 flex-shrink-0" />
+    {message}
+  </div>
+);

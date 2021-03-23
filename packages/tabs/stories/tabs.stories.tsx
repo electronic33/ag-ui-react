@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { FaAccessibleIcon, FaAccusoft, FaChrome, FaFire } from "react-icons/fa";
-import { Tabs } from "../src";
 import { ButtonSpinner } from "@app-garage/button-spinner";
 import { Button } from "@app-garage/button";
+import { Tabs } from "../src";
 
 export default {
   title: "DISCLOSURE/Tabs",

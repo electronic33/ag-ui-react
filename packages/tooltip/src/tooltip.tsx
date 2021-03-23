@@ -6,11 +6,11 @@ import ReactDOM from "react-dom";
 type TooltipTypes = {
   delay?: number;
   children?: React.ReactNode;
-  direction?: string;
+  direction?: "top" | "bottom" | "right" | "left";
   content: string;
   contentClassNames?: string;
   arrowClasses?: string;
-}
+};
 
 export const Tooltip = ({
   delay,
@@ -91,11 +91,10 @@ export const Tooltip = ({
               style={styles.arrow}
               data-popper-arrow
               id="arrow"
-            ></div>
+            />
           </div>,
           document.body,
         )}
     </>
   );
 };
-

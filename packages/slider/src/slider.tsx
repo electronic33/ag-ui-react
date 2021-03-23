@@ -5,11 +5,11 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { Modal } from "@app-garage/modal";
+import classNames from "classnames";
 import { Arrow } from "./arrow";
 import { Dot } from "./dots";
 import { Slide } from "./slide";
-import { Modal } from "@app-garage/modal";
-import classNames from "classnames";
 
 type SliderTypes = {
   className?: string;
@@ -23,7 +23,7 @@ type SliderTypes = {
   }[];
   setterFn?: (index: number) => void;
   startAtIndex?: number;
-}
+};
 
 const Slider = ({
   className = "w-full",
@@ -85,10 +85,6 @@ const Slider = ({
   const { translate, transition, activeIndex } = state;
 
   const nextSlide = () => {
-    console.log("activeIndex / itemsToScroll", activeIndex / itemsToScroll);
-    console.log("activeDot", activeDot);
-    console.log("dotsNum", dotsNum);
-    console.log("activeIndex", activeIndex);
     if (activeIndex / itemsToScroll === dotsNum - 1) {
       // if (activeIndex === children.length - currentItemsToShow) {
       return (
@@ -104,9 +100,7 @@ const Slider = ({
     if (activeIndex / itemsToScroll === dotsNum - 2) {
       const index = (activeIndex + itemsToScroll) / itemsToScroll;
       return (
-        setActiveDot((prevActiveDot) => {
-          return prevActiveDot + 1;
-        }),
+        setActiveDot((prevActiveDot) => prevActiveDot + 1),
         setState({
           ...state,
           transition: 0.45,
@@ -133,9 +127,7 @@ const Slider = ({
       transition: 0.45,
     });
 
-    setActiveDot((prevActiveDot) => {
-      return prevActiveDot + 1;
-    });
+    setActiveDot((prevActiveDot) => prevActiveDot + 1);
   };
 
   const prevSlide = () => {
@@ -248,19 +240,17 @@ const Slider = ({
               width: `${(width * children.length) / currentItemsToShow}px`,
             }}
           >
-            {React.Children.map(children || null, (child, i) => {
-              return (
-                <Slide
-                  key={i}
-                  height={height}
-                  width={width}
-                  setterFn={setterFn}
-                  index={i}
-                >
-                  {child}
-                </Slide>
-              );
-            })}
+            {React.Children.map(children || null, (child, i) => (
+              <Slide
+                key={i}
+                height={height}
+                width={width}
+                setterFn={setterFn}
+                index={i}
+              >
+                {child}
+              </Slide>
+            ))}
           </div>
         </div>
         <Arrow direction="right" handleClick={nextSlide} />
@@ -297,4 +287,3 @@ export const SliderWithModal = (
     </div>
   );
 };
-

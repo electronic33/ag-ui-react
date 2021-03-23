@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
 
 type RateTypes = {
@@ -10,7 +10,7 @@ type RateTypes = {
    Array of strings representing the labels of the stars at the same indexes.
   */
   labels: string[];
-}
+};
 
 export const Rate = ({
   numberOfStars,
@@ -125,5 +125,3 @@ export const Rate = ({
     </div>
   );
 };
-
-

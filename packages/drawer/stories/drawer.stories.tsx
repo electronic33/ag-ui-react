@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { IoIosPaper, IoMdHelpCircle, IoMdPeople } from "react-icons/io";
 import { FaCartPlus, FaEnvelopeOpenText } from "react-icons/fa";
-import { Drawer } from "../src";
 import { Button } from "@app-garage/button";
+import { Drawer } from "../src";
 
 export default {
   title: "OVERLAY/Drawer",

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import React, { useState } from "react";
 import { FaChevronDown, FaChrome } from "react-icons/fa";
-import {Accordion} from "../src";
+import { Accordion } from "../src";
 
 export default {
   title: "DISCLOSURE/Accordion",

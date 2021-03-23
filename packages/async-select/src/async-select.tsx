@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { string } from "yup/lib/locale";
 import { Select } from "@app-garage/select";
-import { Spinner } from "@app-garage/spinner";
+// import { Spinner } from "@app-garage/spinner";
 
 export const useFetch = (url, options) => {
   const [response, setResponse] = React.useState(null);
@@ -50,12 +49,12 @@ export const useFetch = (url, options) => {
   return { response, error, isLoading, refetch: fetchData };
 };
 
-type AsyncSelectTypes =  {
+type AsyncSelectTypes = {
   selected: string;
   setSelected: () => void;
   labelKey: string;
   valueKey: string;
-}
+};
 
 export const AsyncSelect = ({
   selected,
@@ -75,7 +74,7 @@ export const AsyncSelect = ({
         loadingText="Loading.."
         retryFn={refetch}
         error={error ? "Error loading the resources" : ""}
-        className="max-w-sm w-64 mb-5 my-2 mr-2"
+        containerClassName="max-w-sm w-64 mb-5 my-2 mr-2"
         onChange={setSelected}
         selected={selected}
         label="Select"
@@ -87,4 +86,3 @@ export const AsyncSelect = ({
     </div>
   );
 };
-

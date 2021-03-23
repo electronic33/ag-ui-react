@@ -1,7 +1,6 @@
-import React, { useRef } from "react";
-import { Popover } from "../src";
-
+import React from "react";
 import { Button } from "@app-garage/button";
+import { Popover } from "../src";
 
 export default {
   title: "OVERLAY/Popover",

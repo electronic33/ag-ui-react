@@ -58,7 +58,7 @@ export const Modal = ({
         ({ item, key, props }) =>
           item &&
           ReactDOM.createPortal(
-            <FocusLock restoreFocus={true} initialFocusRef={initialFocusRef}>
+            <FocusLock restoreFocus initialFocusRef={initialFocusRef}>
               <ScrollLock>
                 <animated.div
                   key={key}
@@ -89,4 +89,3 @@ export const Modal = ({
     </>
   );
 };
-

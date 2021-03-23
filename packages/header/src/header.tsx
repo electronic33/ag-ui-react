@@ -8,7 +8,7 @@ type navLinkType = {
   label: string;
   href: string;
   Icon: React.ComponentType;
-}
+};
 type HeaderProps = {
   originalPath?: string;
   navLinks?: navLinkType[];
@@ -36,7 +36,7 @@ type HeaderProps = {
     Icon?: React.ComponentType<{ className?: string }>;
     onClick?: () => void;
   };
-}
+};
 
 export const Header: FC<HeaderProps> = ({
   originalPath,

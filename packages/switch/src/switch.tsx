@@ -1,5 +1,6 @@
 import React from "react";
 import classNames from "classnames";
+
 type SwitchTypes = {
   active: boolean;
   setActive: (prevState) => void;
@@ -9,7 +10,7 @@ type SwitchTypes = {
   activeBackGroundColorClass?: string;
   activeDotBackgroundColorClass?: string;
   notActiveDotBackgroundColorClass?: string;
-}
+};
 
 export const Switch = ({
   active,

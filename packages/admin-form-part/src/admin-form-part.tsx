@@ -1,11 +1,11 @@
 import React from "react";
 import classNames from "classnames";
 import { Field } from "formik";
-import {TextInput} from "@app-garage/text-input";
-import {Switch} from "@app-garage/switch";
-import {Select} from "@app-garage/select";
-import {ImageUploader} from "@app-garage/image-uploader";
-import {TextArea} from "@app-garage/text-area";
+import { TextInput } from "@app-garage/text-input";
+import { Switch } from "@app-garage/switch";
+import { Select } from "@app-garage/select";
+import { ImageUploader } from "@app-garage/image-uploader";
+import { TextArea } from "@app-garage/text-area";
 
 export const AdminFormPart = ({ items, values, setFieldValue, className }) => (
   <div

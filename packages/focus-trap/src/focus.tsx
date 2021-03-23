@@ -4,7 +4,7 @@ export function getOwnerDocument(node?: HTMLElement | null) {
 
 type FocusableElement = {
   focus(options?: FocusOptions): void;
-}
+};
 
 function getActiveElement(element: FocusableElement) {
   const doc =
@@ -36,7 +36,7 @@ type ScrollableElement = {
   element: HTMLElement;
   scrollTop: number;
   scrollLeft: number;
-}
+};
 
 function getScrollableElements(element: HTMLElement): ScrollableElement[] {
   const doc = getOwnerDocument(element);

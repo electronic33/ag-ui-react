@@ -9,7 +9,7 @@ type LabelProps = {
   htmlFor?: string;
   children?: React.ReactNode;
   as?: "label" | "span";
-}
+};
 
 export const Label = ({
   secondaryText,
