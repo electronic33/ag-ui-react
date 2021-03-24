@@ -38,7 +38,7 @@
     "dedup": "yarn-deduplicate --strategy highest yarn.lock",
     "postinstall": "yarn check:pkgs",
     "release": "changeset publish",
-    "version:lerna": "lerna version --conventional-commits --yes",
+    "version:lerna": "lerna version",
     "publish:lerna": "lerna publish"
   },
   "dependencies": {
