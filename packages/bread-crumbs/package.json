@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/bread-crumbs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
@@ -33,7 +33,7 @@
     "classnames": "^2.2.6"
   },
   "devDependencies": {
-    "@app-garage/link": "^1.0.1",
+    "@app-garage/link": "^1.0.2",
     "react": "^17.0.1",
     "react-icons": "^4.2.0"
   },

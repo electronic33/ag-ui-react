@@ -5,12 +5,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 1.0.2 (2021-03-24)
 
-**Note:** Version bump only for package @app-garage/admin-form
-
-
-
-
-
-## 1.0.1 (2021-03-21)
-
-**Note:** Version bump only for package @app-garage/text-input
+**Note:** Version bump only for package @app-garage/utils

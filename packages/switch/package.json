@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/switch",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
