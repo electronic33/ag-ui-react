@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/admin-form-part",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
@@ -35,7 +35,7 @@
     "@app-garage/select": "^1.0.2",
     "@app-garage/switch": "^1.0.2",
     "@app-garage/text-area": "^1.0.2",
-    "@app-garage/text-input": "^1.0.2",
+    "@app-garage/text-input": "^1.0.3",
     "classnames": "^2.2.6"
   },
   "devDependencies": {

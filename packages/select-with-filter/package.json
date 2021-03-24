@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/select-with-filter",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
@@ -29,7 +29,7 @@
     "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
   },
   "dependencies": {
-    "@app-garage/text-input": "^1.0.2",
+    "@app-garage/text-input": "^1.0.3",
     "@app-garage/utils": "^1.0.2",
     "classnames": "^2.2.6"
   },

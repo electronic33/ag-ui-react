@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/header",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
@@ -34,7 +34,7 @@
     "classnames": "^2.2.6"
   },
   "devDependencies": {
-    "@app-garage/text-input": "^1.0.2",
+    "@app-garage/text-input": "^1.0.3",
     "react": "^17.0.1",
     "react-icons": "^4.2.0"
   },
