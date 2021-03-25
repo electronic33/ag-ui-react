@@ -8,11 +8,6 @@
     "type": "git",
     "url": "git+https://github.com/electronic33/ag-ui-react.git"
   },
-  "config": {
-    "commitizen": {
-      "path": "git-cz"
-    }
-  },
   "workspaces": {
     "packages": [
       "packages/*",
@@ -27,10 +22,12 @@
   },
   "lint-staged": {
     "**/*.{ts,tsx,js,jsx}": [
-      "eslint", "eslint --fix"
+      "eslint",
+      "eslint --fix"
     ],
     "**/*.{md,yml,json,babelrc,eslintrc,prettierrc}": [
-      "eslint", "eslint --fix"
+      "eslint",
+      "eslint --fix"
     ]
   },
   "scripts": {
@@ -44,7 +41,7 @@
     "build-storybook": "build-storybook",
     "test": "jest",
     "cy:open": "cypress open",
-    "commit": "npx git-cz",
+    "commit": "commit",
     "build": "lerna run build --stream",
     "build:types": "lerna run build:types --stream",
     "bootstrap": "lerna bootstrap --use-workspaces",
@@ -67,6 +64,8 @@
     "@commitlint/cli": "^12.0.1",
     "@commitlint/config-conventional": "^12.0.1",
     "@commitlint/config-lerna-scopes": "^12.0.1",
+    "@commitlint/prompt": "^12.0.1",
+    "@commitlint/prompt-cli": "^12.0.1",
     "@headlessui/react": "^0.3.1",
     "@manypkg/cli": "^0.17.0",
     "@popperjs/core": "^2.9.1",
