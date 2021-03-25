@@ -222,17 +222,15 @@ export const Select = ({
               type="button"
               ref={selectButtonRef}
               onClick={() => {
-                if (transitions.length === 1) {
-                  setIsOpen((prev) => {
-                    setActiveIndex(
-                      options.findIndex(
-                        (element) => element.value === selectedOption.value,
-                      ),
-                    );
+                setIsOpen((prev) => {
+                  setActiveIndex(
+                    options.findIndex(
+                      (element) => element.value === selectedOption.value,
+                    ),
+                  );
 
-                    return !prev;
-                  });
-                }
+                  return !prev;
+                });
               }}
               className="inline-flex w-full rounded-md shadow-sm focus:ring-2 focus:ring-blue-500"
             >
