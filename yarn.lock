@@ -1317,10 +1317,10 @@
   dependencies:
     conventional-changelog-conventionalcommits "^4.3.1"
 
-"@commitlint/config-lerna-scopes@^12.0.1":
-  version "12.0.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/config-lerna-scopes/-/config-lerna-scopes-12.0.1.tgz#3ae4fe71efbecc49dc92a4c801ea66c00f397f1d"
-  integrity sha512-k3xT6ey3nyGYFl3xGlzivmuE+/rLJEBWg7wn+3XPRVLdovwxgA3fCqSrK17mJRCKcjcJbto70Uwmj27VDG0Kng==
+"@commitlint/config-lerna-scopes@^12.1.0":
+  version "12.1.0"
+  resolved "https://registry.yarnpkg.com/@commitlint/config-lerna-scopes/-/config-lerna-scopes-12.1.0.tgz#6e7fdf6848487a1142ab969f48adef0a6747a3ed"
+  integrity sha512-mZ4DhMMdWcPrR0m2jxWXvCUP3Aq8xG25Wk+uboeSZyYW96QJJvvqXx9qGK5/3WNc+0hm/Af+mth+sl3IRwRAiw==
   dependencies:
     globby "^11.0.1"
     import-from "3.0.0"
@@ -8120,6 +8120,20 @@ cz-conventional-changelog@3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/cz-conventional-changelog/-/cz-conventional-changelog-3.2.0.tgz#6aef1f892d64113343d7e455529089ac9f20e477"
   integrity sha512-yAYxeGpVi27hqIilG1nh4A9Bnx4J3Ov+eXy4koL3drrR+IO9GaWPsKjik20ht608Asqi8TQPf0mczhEeyAtMzg==
+  dependencies:
+    chalk "^2.4.1"
+    commitizen "^4.0.3"
+    conventional-commit-types "^3.0.0"
+    lodash.map "^4.5.1"
+    longest "^2.0.1"
+    word-wrap "^1.0.3"
+  optionalDependencies:
+    "@commitlint/load" ">6.1.1"
+
+cz-conventional-changelog@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/cz-conventional-changelog/-/cz-conventional-changelog-3.3.0.tgz#9246947c90404149b3fe2cf7ee91acad3b7d22d2"
+  integrity sha512-U466fIzU5U22eES5lTNiNbZ+d8dfcHcssH4o7QsdWaCcRs/feIPCxKYSWkYBNs5mny7MvEfwpTLWjvbm94hecw==
   dependencies:
     chalk "^2.4.1"
     commitizen "^4.0.3"

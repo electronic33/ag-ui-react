@@ -6,7 +6,6 @@
   "command": {
     "version": {    
       "conventionalCommits": true,
-      "message": "chore(release): publish (version)",
       "ignoreChanges": ["**/stories/**", "**/tests/**", "**/rollup.config.js", "**/*.md"],
       "allowBranch": "main"
     },
