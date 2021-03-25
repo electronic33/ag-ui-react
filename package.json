@@ -17,20 +17,17 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "commit-msg": "commitlint"
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "lint-staged": {
     "**/*.{ts,tsx,js,jsx}": [
       "eslint",
       "eslint --fix"
-    ],
-    "**/*.{md,yml,json,babelrc,eslintrc,prettierrc}": [
-      "eslint",
-      "eslint --fix"
     ]
   },
   "scripts": {
+    "prepare": "husky install",
     "pkg": "manypkg run",
     "prestart": "yarn && yarn bootstrap && yarn dedup",
     "check:pkgs": "manypkg check",
@@ -120,7 +117,7 @@
     "fork-ts-checker-webpack-plugin": "^6.2.0",
     "formik": "^2.2.6",
     "git-cz": "^4.7.6",
-    "husky": "^5.1.3",
+    "husky": "4",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.6.3",
     "jest-transform-css": "^2.1.0",
