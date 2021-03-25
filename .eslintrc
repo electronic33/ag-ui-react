@@ -83,7 +83,7 @@
         "react/require-default-props": "off",
         "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
         "global-require": "off",
-        "eslint/no-unused-vars": ["error", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }]
+        "no-unused-vars": ["error", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }]
       } 
     }
   ]
