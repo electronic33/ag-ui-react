@@ -41,7 +41,7 @@
     "build-storybook": "build-storybook",
     "test": "jest",
     "cy:open": "cypress open",
-    "commit": "commit",
+    "commit": "git-cz",
     "build": "lerna run build --stream",
     "build:types": "lerna run build:types --stream",
     "bootstrap": "lerna bootstrap --use-workspaces",
