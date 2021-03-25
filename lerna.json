@@ -5,12 +5,15 @@
   "useWorkspaces": true,
   "command": {
     "version": {    
-      "message": "chore(release): publish (version)"
+      "conventionalCommits": true,
+      "message": "chore(release): publish (version)",
+      "ignoreChanges": ["**/stories/**", "**/tests/**", "**/rollup.config.js", "**/*.md"],
+      "allowBranch": "main"
     },
     "publish": {
       "conventionalCommits": true,
       "message": "chore(release): publish",
-      "ignoreChanges": ["**/stories/**", "**/tests/**", "**/rollup.config.js"],
+      "ignoreChanges": ["**/stories/**", "**/tests/**", "**/rollup.config.js", "**/*.md"],
       "allowBranch": "main"
     }
   }
