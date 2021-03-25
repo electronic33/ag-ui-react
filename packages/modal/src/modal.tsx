@@ -28,11 +28,14 @@ export const Modal = ({
   children,
   isOpen,
 }: ModalProps): React.ReactElement => {
-  const handleKeydown = useCallback((event) => {
-    if (event.keyCode === ESC_KEYCODE) {
-      onClose();
-    }
-  }, []);
+  const handleKeydown = useCallback(
+    (event) => {
+      if (event.keyCode === ESC_KEYCODE) {
+        onClose();
+      }
+    },
+    [onClose],
+  );
 
   const transitions = useTransition(isOpen, null, {
     from: { opacity: 0, transform: "translateY(10px)" },
@@ -46,7 +49,7 @@ export const Modal = ({
     return () => {
       document.removeEventListener("keydown", handleKeydown);
     };
-  }, []);
+  }, [handleKeydown]);
 
   const stopPropagation = useCallback((event) => {
     event.stopPropagation();

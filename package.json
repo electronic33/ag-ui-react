@@ -144,7 +144,7 @@
     "react-markdown": "^5.0.3",
     "react-popper": "^2.2.4",
     "react-scrolllock": "^5.0.1",
-    "react-spring": "^8.0.27",
+    "react-spring": "8",
     "rollup": "^2.42.1",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",

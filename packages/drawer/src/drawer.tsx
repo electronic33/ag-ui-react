@@ -53,7 +53,7 @@ export const Drawer = ({
 
     document.addEventListener("keydown", handleSpacebarPress);
     return () => document.removeEventListener("keydown", handleSpacebarPress);
-  }, [isOpen]);
+  }, [isOpen, onClose]);
 
   const springConfig = useMemo(() => {
     switch (direction) {
@@ -137,8 +137,10 @@ export const Drawer = ({
           unique: true,
           config: config.default,
         };
+      default:
+        return {};
     }
-  }, []);
+  }, [direction]);
 
   const transitions = useTransition(isOpen, null, springConfig);
 
@@ -187,30 +189,28 @@ export const Drawer = ({
                       </li>
                       {SidebarComponent}
                       {sidebarData &&
-                        sidebarData.map(
-                          ({ title, Icon, to, Component }, index) => (
-                            <li key={index} className="">
-                              <Link
+                        sidebarData.map(({ title, Icon, to, Component }) => (
+                          <li key={title} className="">
+                            <Link
+                              className={classNames(
+                                "drawer-link",
+                                linkClassNames,
+                              )}
+                              to={to}
+                            >
+                              <Icon
                                 className={classNames(
-                                  "drawer-link",
-                                  linkClassNames,
+                                  "drawer-link-icon",
+                                  iconClassName,
                                 )}
-                                to={to}
-                              >
-                                <Icon
-                                  className={classNames(
-                                    "drawer-link-icon",
-                                    iconClassName,
-                                  )}
-                                />
-                                <div className={classNames(textClassName)}>
-                                  {title}
-                                </div>
-                              </Link>
-                              {Component}
-                            </li>
-                          ),
-                        )}
+                              />
+                              <div className={classNames(textClassName)}>
+                                {title}
+                              </div>
+                            </Link>
+                            {Component}
+                          </li>
+                        ))}
                     </ul>
                   </animated.nav>
                 </animated.div>

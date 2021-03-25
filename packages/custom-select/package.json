@@ -33,7 +33,7 @@
     "@app-garage/button-spinner": "^1.0.1",
     "@app-garage/focus-trap": "^1.0.1",
     "classnames": "^2.2.6",
-    "react-spring": "^9.0.0"
+    "react-spring": "8"
   },
   "devDependencies": {
     "react": "^17.0.1",
