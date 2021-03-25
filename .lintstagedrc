@@ -1,8 +1,0 @@
-{
-  "**/*.{ts,tsx,js,jsx}": [
-    "eslint", "eslint --fix"
-  ],
-  "**/*.{md,yml,json,babelrc,eslintrc,prettierrc}": [
-    "eslint", "eslint --fix"
-  ]
-}

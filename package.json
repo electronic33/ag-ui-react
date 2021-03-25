@@ -21,10 +21,18 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint"
     }
   },
-  "lint-staged": {},
+  "lint-staged": {
+    "**/*.{ts,tsx,js,jsx}": [
+      "eslint", "eslint --fix"
+    ],
+    "**/*.{md,yml,json,babelrc,eslintrc,prettierrc}": [
+      "eslint", "eslint --fix"
+    ]
+  },
   "scripts": {
     "pkg": "manypkg run",
     "prestart": "yarn && yarn bootstrap && yarn dedup",
@@ -58,6 +66,7 @@
     "@changesets/cli": "^2.14.1",
     "@commitlint/cli": "^12.0.1",
     "@commitlint/config-conventional": "^12.0.1",
+    "@commitlint/config-lerna-scopes": "^12.0.1",
     "@headlessui/react": "^0.3.1",
     "@manypkg/cli": "^0.17.0",
     "@popperjs/core": "^2.9.1",
