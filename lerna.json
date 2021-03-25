@@ -4,10 +4,13 @@
   "npmClient": "yarn",
   "useWorkspaces": true,
   "command": {
+    "version": {    
+      "message": "chore(release): publish (version)"
+    },
     "publish": {
       "conventionalCommits": true,
       "message": "chore(release): publish",
-      "ignoreChanges": ["**/stories/**", "**/tests/**"],
+      "ignoreChanges": ["**/stories/**", "**/tests/**", "**/rollup.config.js"],
       "allowBranch": "main"
     }
   }
