@@ -1,7 +1,7 @@
-import React, { useRef, useState, useCallback, useMemo } from "react";
-import classNames from "classnames";
-import { useId } from "react-id-generator";
-import { animated, useSpring } from "react-spring";
+import React, { useRef, useState, useCallback, useMemo } from 'react';
+import classNames from 'classnames';
+import { useId } from 'react-id-generator';
+import { animated, useSpring } from 'react-spring';
 
 type CommonProps = {
   content: React.ReactNode;
@@ -17,7 +17,7 @@ type ConditionalProps =
       isControlled?: false;
       isOpen?: never;
       onChange?: (isOpen: boolean) => void;
-      children: ({ isOpen }: { isOpen: boolean }) => React.ReactNode;
+      children: (isOpen: boolean) => React.ReactNode;
     }
   | {
       isControlled: true;
@@ -39,9 +39,9 @@ export const Accordion = ({
   onChange,
   isOpen = false,
   isControlled = false,
-}: AccordionProps): React.ReactElement => {
+}: AccordionProps) => {
   const collapseRef = useRef<HTMLDivElement>();
-  const [accordionId] = useId(1, "accordion");
+  const [accordionId] = useId(1, 'accordion');
 
   const [internalIsOpen, setInternalIsOpen] = useState(false);
 
@@ -61,15 +61,18 @@ export const Accordion = ({
     },
   }));
 
-  const animateSpring = useCallback((isOpenStatus) => {
-    if (isOpenStatus) {
-      const height = collapseRef.current.scrollHeight;
+  const animateSpring = useCallback(
+    (isOpenStatus) => {
+      if (isOpenStatus) {
+        const height = collapseRef.current.scrollHeight;
 
-      setSpringProperties({ opacity: 1, height });
-    } else {
-      setSpringProperties({ opacity: 0, height: 0 });
-    }
-  }, []);
+        setSpringProperties({ opacity: 1, height });
+      } else {
+        setSpringProperties({ opacity: 0, height: 0 });
+      }
+    },
+    [setSpringProperties],
+  );
 
   const handleAccordionButtonClick = useCallback(() => {
     animateSpring(!isOpenState);
@@ -81,28 +84,26 @@ export const Accordion = ({
     if (onChange) {
       onChange(!isOpenState);
     }
-  }, [isOpenState, onChange]);
+  }, [isOpenState, onChange, isControlled, animateSpring]);
 
   return (
-    <div className={classNames("accordion-container", containerClassName)}>
+    <div className={classNames('accordion-container', containerClassName)}>
       {/* eslint-disable-next-line react/button-has-type */}
       <button
         aria-expanded={isOpenState}
         aria-controls={accordionId}
-        className={classNames("accordion-button", buttonClassName)}
+        className={classNames('accordion-button', buttonClassName)}
         onClick={handleAccordionButtonClick}
       >
         {Icon && <Icon className="mr-2" />}
         {isControlled
           ? children
-          : (children as ({ isOpen }: { isOpen: boolean }) => React.ReactNode)({
-              isOpen: internalIsOpen,
-            })}
+          : (children as (isOpen: boolean) => React.ReactNode)(internalIsOpen)}
         {ArrowIcon && (
           <ArrowIcon
-            className={classNames("accordion-arrow-icon transform", {
-              "rotate-180": !isOpenState,
-              "rotate-0": isOpenState,
+            className={classNames('accordion-arrow-icon transform', {
+              'rotate-180': !isOpenState,
+              'rotate-0': isOpenState,
             })}
           />
         )}
@@ -111,7 +112,7 @@ export const Accordion = ({
         id={accordionId}
         ref={collapseRef}
         style={springStyles}
-        className={classNames("accordion-content", contentClassName)}
+        className={classNames('accordion-content', contentClassName)}
       >
         {content}
       </animated.div>

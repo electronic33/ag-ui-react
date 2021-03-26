@@ -1,17 +1,22 @@
 module.exports = {
-  roots: ["<rootDir>/src"],
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
+  testMatch: [
+    '**/tests/**/*.+(ts|tsx|js)',
+    '**/?(*.)+(spec|test).+(ts|tsx|js)',
+  ],
   transform: {
-    "^.+\\.(ts|tsx)?$": "ts-jest",
-    // "^.+\\.(js|jsx)$": "babel-jest",
-    "^.+\\.[tj]sx?$": "babel-jest",
-    "^.+\\.mdx$": "@storybook/addon-docs/jest-transform-mdx",
+    '^.+\\.(ts|tsx)$': 'ts-jest',
   },
-  preset: "ts-jest",
-  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
-  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
-  transformIgnorePatterns: ["<rootDir>/node_modules/"],
-  testPathIgnorePatterns: ["/node_modules/", "/.storybook/"],
+  transformIgnorePatterns: ['[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$'],
+  // setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
+  globals: {
+    'ts-jest': {
+      tsconfig: 'tsconfig.json',
+    },
+  },
   moduleNameMapper: {
-    "\\.css$": "jest-transform-css",
+    '\\.css$': 'jest-transform-css',
   },
 };

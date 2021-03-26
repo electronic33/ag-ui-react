@@ -22,17 +22,18 @@
   },
   "lint-staged": {
     "**/*.{ts,tsx,js,jsx}": [
-      "eslint",
       "eslint --fix"
+    ],
+    "**/*.{md,yml,json,eslintrc,prettierrc}": [
+      "prettier --write"
     ]
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
+      "path": "cz-conventional-changelog"
     }
   },
   "scripts": {
-    "prepare": "husky install",
     "pkg": "manypkg run",
     "prestart": "yarn && yarn bootstrap && yarn dedup",
     "check:pkgs": "manypkg check",
@@ -43,7 +44,7 @@
     "build-storybook": "build-storybook",
     "test": "jest",
     "cy:open": "cypress open",
-    "commit": "git-cz",
+    "commit": "cz",
     "build": "lerna run build --stream",
     "build:types": "lerna run build:types --stream",
     "bootstrap": "lerna bootstrap --use-workspaces",

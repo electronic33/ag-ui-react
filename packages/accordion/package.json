@@ -26,7 +26,8 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
+    "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc",
+    "test": "jest"
   },
   "dependencies": {
     "@app-garage/label": "^1.1.9",

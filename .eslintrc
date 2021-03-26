@@ -39,52 +39,53 @@
         "project": ["tsconfig.json"]
       },
       "rules": {
-        "prettier/prettier": ["error", {
-          "semi": true,
-          "trailingComma": "all",
-          "printWidth": 80,
-          "endOfLine":"auto"
-        }],
+        "prettier/prettier": "error",
         "react/prop-types": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "react/jsx-props-no-spreading": "off",
         "import/prefer-default-export": "off",
         "react/require-default-props": "off",
-        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
-        "@typescript-eslint/no-unused-vars": ["error", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }],
-        "@typescript-eslint/naming-convention": ["error", { "format": null, "selector": "default", "leadingUnderscore": "allow" }]
-      }    
+        "import/no-extraneous-dependencies": [
+          "error",
+          { "devDependencies": true }
+        ],
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }
+        ],
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "format": null,
+            "selector": "default",
+            "leadingUnderscore": "allow"
+          }
+        ]
+      }
     },
     {
       "files": ["*.js"],
       "excludedFiles": ["*.ts", "*.tsx"],
       "parser": "babel-eslint",
-      "extends": [
-        "plugin:import/recommended",
-        "airbnb", 
-        "prettier"
-      ],
-      "plugins": [
-        "react-hooks",
-        "testing-library",
-        "prettier"
-      ],
+      "extends": ["plugin:import/recommended", "airbnb", "prettier"],
+      "plugins": ["react-hooks", "testing-library", "prettier"],
       "rules": {
-        "prettier/prettier": ["error", {
-          "semi": true,
-          "trailingComma": "all",
-          "printWidth": 80,
-          "endOfLine":"auto"
-        }],
+        "prettier/prettier": "error",
         "react/prop-types": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "react/jsx-props-no-spreading": "off",
         "import/prefer-default-export": "off",
         "react/require-default-props": "off",
-        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+        "import/no-extraneous-dependencies": [
+          "error",
+          { "devDependencies": true }
+        ],
         "global-require": "off",
-        "no-unused-vars": ["error", { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }]
-      } 
+        "no-unused-vars": [
+          "error",
+          { "varsIgnorePattern": "^_", "argsIgnorePattern": "^_" }
+        ]
+      }
     }
   ]
 }
