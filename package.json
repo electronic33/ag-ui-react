@@ -42,7 +42,7 @@
     "gen:pkg": "ts-node scripts/plopfile.ts",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "test": "jest",
+    "test": "lerna run test",
     "cy:open": "cypress open",
     "commit": "cz",
     "build": "lerna run build --stream",
