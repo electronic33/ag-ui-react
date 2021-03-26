@@ -16,7 +16,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && check:pkgs",
+      "pre-commit": "lint-staged && manypkg check",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
