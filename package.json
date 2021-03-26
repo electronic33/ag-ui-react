@@ -16,7 +16,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
+      "pre-commit": "lint-staged && check:pkgs",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
@@ -34,7 +34,6 @@
     }
   },
   "scripts": {
-    "pkg": "manypkg run",
     "prestart": "yarn && yarn bootstrap && yarn dedup",
     "check:pkgs": "manypkg check",
     "fix:pkgs": "manypkg fix",
