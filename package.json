@@ -52,7 +52,7 @@
     "postinstall": "yarn check:pkgs",
     "release": "changeset publish",
     "version:lerna": "lerna version",
-    "publish:lerna": "lerna publish"
+    "publish:lerna": "lerna publish --from-git"
   },
   "dependencies": {
     "@babel/core": "^7.13.10",
