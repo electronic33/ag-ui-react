@@ -1,5 +1,6 @@
 node_modules
 dist
 storybook-static
+cypress
 *.log
 *.logs

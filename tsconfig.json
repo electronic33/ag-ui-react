@@ -11,8 +11,9 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "declarationMap": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "types": ["cypress", "@testing-library/cypress"]
   },
   "include": ["./packages/**/*"],
-  "exclude": ["node_modules", "dist", "../*/cypress/**/*"]
+  "exclude": ["node_modules", "dist"]
 }
