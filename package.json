@@ -16,7 +16,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged && manypkg check && yarn test",
+      "pre-commit": "lint-staged && manypkg check",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
@@ -37,7 +37,6 @@
     "prestart": "yarn && yarn bootstrap && yarn dedup",
     "check:pkgs": "manypkg check",
     "fix:pkgs": "manypkg fix",
-    "version:pkgs": "changeset version",
     "gen:pkg": "ts-node scripts/plopfile.ts",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
@@ -51,7 +50,6 @@
     "clean": "lerna clean --yes && rm -rf node_modules",
     "dedup": "yarn-deduplicate --strategy highest yarn.lock",
     "postinstall": "yarn check:pkgs",
-    "release": "changeset publish",
     "version:lerna": "lerna version",
     "publish:lerna": "lerna publish --from-git"
   },
@@ -62,8 +60,6 @@
     "@babel/preset-flow": "^7.12.13",
     "@babel/preset-react": "^7.12.13",
     "@babel/preset-typescript": "^7.13.0",
-    "@changesets/changelog-github": "^0.3.0",
-    "@changesets/cli": "^2.14.1",
     "@commitlint/cli": "^12.0.1",
     "@commitlint/config-conventional": "^12.0.1",
     "@commitlint/config-lerna-scopes": "^12.1.0",

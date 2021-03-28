@@ -11,5 +11,6 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '14.x'
+      - run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
       - run: yarn prestart
       - run: yarn run test
