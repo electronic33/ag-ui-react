@@ -13,14 +13,34 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+        with:
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+          fetch-depth: 0
+
+      - name: Setup Node.js 12.x
       - uses: actions/setup-node@v2
         with:
-          node-version: '14.x'
+          node-version: '12.x'
+
       - run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-      - run: yarn prestart
-      - run: yarn run test
-      - name: Publish packages
+
+      - name: Install Dependencies
+        run: yarn prestart
+
+      - name: Run Tests
+        run: yarn run test
+
+      - name: Setup CI Git User
+        run: |
+          git config --global user.email "matyas.furtos@gmail.com"
+          git config --global user.name "Mátyás Fürtös"
+
+      - name: Build Packages
+        run: yarn build
+
+      - name: Publish Packages
         uses: changesets/action@master
         with:
           publish: yarn release
