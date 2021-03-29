@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import React, { useState } from "react";
-import { FaChevronDown, FaChrome } from "react-icons/fa";
-import { Accordion } from "../src";
+import React, { useState } from 'react';
+import { FaChevronDown, FaChrome } from 'react-icons/fa';
+import { Accordion } from '../src';
 
 export default {
-  title: "DISCLOSURE/Accordion",
+  title: 'DISCLOSURE/Accordion',
   component: Accordion,
-  argTypes: { onChange: { action: "changed" } },
+  argTypes: { onChange: { action: 'changed' } },
 };
 
 export const Default = ({ onChange }): React.ReactNode => {
@@ -24,7 +24,7 @@ export const Default = ({ onChange }): React.ReactNode => {
       contentClassName="text-center text-lg font-semibold bg-gray-50"
       content="Hello!"
     >
-      {({ isOpen }) => (isOpen ? "Close me!" : "Open me!")}
+      {(isOpen) => (isOpen ? 'Close me!' : 'Open me!')}
     </Accordion>
   );
 };
@@ -49,7 +49,7 @@ export const Controlled = ({ onChange }): React.ReactNode => {
       contentClassName="text-center text-lg font-semibold bg-gray-50"
       content="Hello!"
     >
-      {isOpen ? "Close me!" : "Open me!"}
+      {isOpen ? 'Close me!' : 'Open me!'}
     </Accordion>
   );
 };
