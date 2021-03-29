@@ -39,8 +39,9 @@
     "fix:pkgs": "manypkg fix",
     "gen:pkg": "ts-node scripts/plopfile.ts",
     "storybook": "start-storybook -p 6006",
+    "storybook:ci": "start-storybook --quiet --ci -p 6006",
     "build-storybook": "build-storybook",
-    "test": "start-server-and-test 'yarn storybook' http://localhost:6006 'yarn test:lerna'",
+    "test": "start-server-and-test 'yarn storybook:ci' http://localhost:6006 'yarn test:lerna'",
     "test:lerna": "lerna run test",
     "cy:open": "cypress open",
     "commit": "cz",
@@ -50,8 +51,8 @@
     "clean": "lerna clean --yes && rm -rf node_modules",
     "dedup": "yarn-deduplicate --strategy highest yarn.lock",
     "postinstall": "yarn check:pkgs",
-    "version:lerna": "lerna version",
-    "publish:lerna": "lerna publish --from-git"
+    "version:pkgs": "changeset version",
+    "release": "changeset publish"
   },
   "dependencies": {
     "@babel/core": "^7.13.10",
@@ -60,6 +61,8 @@
     "@babel/preset-flow": "^7.12.13",
     "@babel/preset-react": "^7.12.13",
     "@babel/preset-typescript": "^7.13.0",
+    "@changesets/changelog-github": "^0.3.0",
+    "@changesets/cli": "^2.14.1",
     "@commitlint/cli": "^12.0.1",
     "@commitlint/config-conventional": "^12.0.1",
     "@commitlint/config-lerna-scopes": "^12.1.0",
