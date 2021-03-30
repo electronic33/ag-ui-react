@@ -2,14 +2,6 @@
 
 describe('MultiSelect', () => {
   it('Opens, adds an option, closes, removes an option', () => {
-    cy.visit('http://localhost:6006/iframe.html?id=forms-multiselect--default');
-    cy.findByTestId('select-button').should('exist').click();
-    cy.findByText('Option 3').click();
-    cy.findByTestId('select-button').should('exist').click();
-    cy.findByTestId('second-option-close').click();
-  });
-
-  it('Opens, adds an option, closes, removes an option', () => {
     cy.findByTestId('select-button')
       .focus()
       .trigger('keydown', { code: 'ArrowDown' })
