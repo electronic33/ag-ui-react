@@ -39,7 +39,12 @@
         "project": ["tsconfig.json"]
       },
       "rules": {
-        "prettier/prettier": "error",
+        // "prettier/prettier": "error",
+        "prettier/prettier": [
+          "error",
+          { "endOfLine": "auto" },
+          { "usePrettierrc": true }
+        ], // Use our .prettierrc file as source
         "react/prop-types": "off",
         "@typescript-eslint/explicit-module-boundary-types": "off",
         "react/jsx-props-no-spreading": "off",

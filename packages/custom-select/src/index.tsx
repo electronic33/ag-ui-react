@@ -1,1 +1,2 @@
-export * from "./custom-select";
+export * from './custom-select';
+export * from './select-hooks';

@@ -1,5 +1,5 @@
 {
-  "name": "@app-garage/select-with-filter",
+  "name": "@app-garage/multi-select",
   "version": "1.0.3",
   "author": "Matyas Furtos",
   "license": "MIT",
@@ -26,15 +26,24 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
+    "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc",
+    "test": "cypress run",
+    "cy:open": "cypress open"
   },
   "dependencies": {
-    "@app-garage/text-input": "^1.0.3",
-    "@app-garage/utils": "^1.0.2",
-    "classnames": "^2.2.6"
+    "@app-garage/button": "^1.1.5",
+    "@app-garage/button-spinner": "^1.0.1",
+    "@app-garage/custom-select": "^1.0.3",
+    "@app-garage/focus-trap": "^1.0.1",
+    "@app-garage/spinner": "^1.0.1",
+    "@app-garage/text-input": "^1.0.1",
+    "@app-garage/utils": "^1.0.1",
+    "classnames": "^2.2.6",
+    "react-spring": "8"
   },
   "devDependencies": {
-    "@headlessui/react": "^0.3.1",
+    "@testing-library/cypress": "^7.0.4",
+    "cypress": "^6.8.0",
     "react": "^17.0.1",
     "react-icons": "^4.2.0"
   },

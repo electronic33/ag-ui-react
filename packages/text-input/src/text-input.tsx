@@ -1,6 +1,6 @@
-import React from "react";
-import classNames from "classnames";
-import { Label } from "@app-garage/label";
+import React, { forwardRef } from 'react';
+import classNames from 'classnames';
+import { Label } from '@app-garage/label';
 
 type FieldInputProps = {
   value: string;
@@ -39,7 +39,7 @@ type TextInputProps = {
   value?: string | number;
   onChange?: (event) => void | (() => void);
   onClick?: (event) => void;
-  onKeyDown?: (event) => void;
+  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   error?: string;
   containerClassName?: string;
   inputClassName?: string;
@@ -54,93 +54,99 @@ type TextInputProps = {
   disabled?: boolean;
 };
 
-export const TextInput = ({
-  id,
-  label = "",
-  secondaryLabel = "",
-  Icon,
-  required = false,
-  name = "",
-  value = "",
-  onChange = undefined,
-  onClick = undefined,
-  onKeyDown = undefined,
-  error = "",
-  containerClassName,
-  inputClassName,
-  type = "text",
-  max = undefined,
-  showMax = false,
-  placeholder,
-  field,
-  form,
-  onBlur = undefined,
-  errorInLabel = false,
-  disabled = false,
-}: TextInputProps) => (
-  <div className={classNames("flex flex-col relative", containerClassName)}>
-    {label && (
-      <Label
-        secondaryText={secondaryLabel}
-        required={required}
-        errorText={
-          errorInLabel
-            ? (form?.touched?.[field?.name] && form?.errors?.[field?.name]) ||
-              error ||
-              ""
-            : undefined
-        }
-        htmlFor={field?.name || name ? field?.name || name : undefined}
-      >
-        {Icon ? <Icon className="w-5 mr-2" /> : null}
-        {label}
-      </Label>
-    )}
-    <input
-      placeholder={placeholder}
-      type={type}
-      className={classNames(
-        {
-          "border-red-700":
-            Boolean(
-              form?.errors?.[field?.name] && form?.touched?.[field?.name],
-            ) || Boolean(error),
-          "bg-gray-200 cursor-not-allowed": disabled,
-        },
-        "text-input",
-        inputClassName,
+export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
+  (
+    {
+      id,
+      label = '',
+      secondaryLabel = '',
+      Icon,
+      required = false,
+      name = '',
+      value = '',
+      onChange = undefined,
+      onClick = undefined,
+      onKeyDown = undefined,
+      error = '',
+      containerClassName,
+      inputClassName,
+      type = 'text',
+      max = undefined,
+      showMax = false,
+      placeholder,
+      field,
+      form,
+      onBlur = undefined,
+      errorInLabel = false,
+      disabled = false,
+    },
+    ref,
+  ) => (
+    <div className={classNames('flex flex-col relative', containerClassName)}>
+      {label && (
+        <Label
+          secondaryText={secondaryLabel}
+          required={required}
+          errorText={
+            errorInLabel
+              ? (form?.touched?.[field?.name] && form?.errors?.[field?.name]) ||
+                error ||
+                ''
+              : undefined
+          }
+          htmlFor={field?.name || name ? field?.name || name : undefined}
+        >
+          {Icon ? <Icon className="w-5 mr-2" /> : null}
+          {label}
+        </Label>
       )}
-      value={field?.value || value}
-      onChange={field?.onChange || onChange}
-      onClick={onClick}
-      onKeyDown={onKeyDown}
-      name={field?.name || name}
-      id={id || field?.name || name ? field?.name || name : undefined}
-      max={max}
-      onBlur={field?.onBlur || onBlur}
-      disabled={disabled}
-    />
+      <input
+        ref={ref}
+        placeholder={placeholder}
+        type={type}
+        className={classNames(
+          {
+            'border-red-700':
+              Boolean(
+                form?.errors?.[field?.name] && form?.touched?.[field?.name],
+              ) || Boolean(error),
+            'bg-gray-200 cursor-not-allowed': disabled,
+          },
+          'text-input',
+          inputClassName,
+        )}
+        value={field?.value || value}
+        onChange={field?.onChange || onChange}
+        onClick={onClick}
+        onKeyDown={onKeyDown}
+        name={field?.name || name}
+        id={id || field?.name || name ? field?.name || name : undefined}
+        max={max}
+        onBlur={field?.onBlur || onBlur}
+        disabled={disabled}
+      />
 
-    {showMax ? (
-      <p className="flex absolute right-0 bottom-0 text-gray-400 -mb-4 text-xs">
-        {`${
-          field?.value ? field?.value.length : (value as string).length
-        }/${max}`}
-      </p>
-    ) : null}
-    {!errorInLabel ? (
-      <>
-        {form?.errors?.[field?.name] && form?.touched?.[field?.name] ? (
-          <p className="flex absolute inset-x-0 bottom-0 text-red-700 -mb-4 text-xs">
-            {form?.errors?.[field?.name]}
-          </p>
-        ) : null}
-        {error ? (
-          <p className="flex absolute inset-x-0 bottom-0 text-red-700 -mb-4 text-xs">
-            {error}
-          </p>
-        ) : null}
-      </>
-    ) : null}
-  </div>
+      {showMax ? (
+        <p className="flex absolute right-0 bottom-0 text-gray-400 -mb-4 text-xs">
+          {`${
+            field?.value ? field?.value.length : (value as string).length
+          }/${max}`}
+        </p>
+      ) : null}
+      {!errorInLabel ? (
+        <>
+          {form?.errors?.[field?.name] && form?.touched?.[field?.name] ? (
+            <p className="flex absolute inset-x-0 bottom-0 text-red-700 -mb-4 text-xs">
+              {form?.errors?.[field?.name]}
+            </p>
+          ) : null}
+          {error ? (
+            <p className="flex absolute inset-x-0 bottom-0 text-red-700 -mb-4 text-xs">
+              {error}
+            </p>
+          ) : null}
+        </>
+      ) : null}
+    </div>
+  ),
 );

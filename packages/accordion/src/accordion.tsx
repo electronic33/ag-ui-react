@@ -90,6 +90,7 @@ export const Accordion = ({
     <div className={classNames('accordion-container', containerClassName)}>
       {/* eslint-disable-next-line react/button-has-type */}
       <button
+        data-testid="asd"
         aria-expanded={isOpenState}
         aria-controls={accordionId}
         className={classNames('accordion-button', buttonClassName)}

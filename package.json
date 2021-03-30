@@ -51,7 +51,8 @@
     "dedup": "yarn-deduplicate --strategy highest yarn.lock",
     "postinstall": "yarn check:pkgs",
     "version:pkgs": "changeset version",
-    "release": "changeset publish"
+    "release": "changeset publish",
+    "lint-staged": "lint-staged"
   },
   "dependencies": {
     "@babel/core": "^7.13.10",
