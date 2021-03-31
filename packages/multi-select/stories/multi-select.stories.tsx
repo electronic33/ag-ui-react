@@ -16,7 +16,6 @@ export const Default = (): React.ReactNode => {
       selected={value}
       label="MultiSelect"
       withFilter
-      optionsError="An error occured!"
       options={[
         { label: 'None', value: 0, Icon: <FaChrome /> },
         { label: 'Option 1', value: 1 },

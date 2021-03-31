@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { MdLabelOutline } from "react-icons/md";
-import { TextInput } from "../src/text-input";
+import React, { useState } from 'react';
+import { MdLabelOutline } from 'react-icons/md';
+import { TextInput } from '../src/text-input';
 
 export default {
-  title: "LERNA/TextInput",
+  title: 'LERNA/TextInput',
   component: TextInput,
 };
 
 export const Default = (): React.ReactNode => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -17,6 +17,8 @@ export const Default = (): React.ReactNode => {
     <TextInput
       label="Textinput"
       placeholder="This is a textinput"
+      withButton
+      buttonText="Search"
       value={value}
       onChange={(event) => handleChange(event)}
     />

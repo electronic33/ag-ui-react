@@ -29,6 +29,7 @@
     "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
   },
   "dependencies": {
+    "@app-garage/button": "^1.1.6",
     "@app-garage/label": "^1.1.9",
     "classnames": "^2.2.6"
   },
