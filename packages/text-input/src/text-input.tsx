@@ -93,21 +93,57 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   ) => {
     const [isFocused, setIsFocused] = useState(false);
 
+    let formikCompatibleValue: string | number | undefined = '';
+
+    if (value) {
+      formikCompatibleValue = value;
+    } else if (field) {
+      formikCompatibleValue = field.value;
+    }
+
+    let formikCompatibleError: string | undefined = '';
+
+    if (error) {
+      formikCompatibleError = error;
+    } else if (form && field) {
+      formikCompatibleError =
+        form.errors?.[field.name] && form.touched?.[field.name]
+          ? (form.errors?.[field?.name] as string | undefined)
+          : '';
+    }
+
+    let formikCompatibleName: string | undefined = '';
+
+    if (name) {
+      formikCompatibleName = name;
+    } else if (field) {
+      formikCompatibleName = field.name;
+    }
+
+    let formikCompatibleOnChange;
+
+    if (onChange) {
+      formikCompatibleOnChange = onChange;
+    } else if (field) {
+      formikCompatibleOnChange = field.onChange as () => any;
+    }
+
+    let formikCompatibleOnBlur;
+
+    if (onBlur) {
+      formikCompatibleOnBlur = onBlur;
+    } else if (field) {
+      formikCompatibleOnBlur = field.onBlur as () => any;
+    }
+
     return (
       <div className={classNames('flex flex-col relative', containerClassName)}>
         {label && (
           <Label
             secondaryText={secondaryLabel}
             required={required}
-            errorText={
-              errorInLabel
-                ? (form?.touched?.[field?.name] &&
-                    form?.errors?.[field?.name]) ||
-                  error ||
-                  ''
-                : undefined
-            }
-            htmlFor={field?.name || name ? field?.name || name : undefined}
+            errorText={errorInLabel ? formikCompatibleError : undefined}
+            htmlFor={formikCompatibleName}
           >
             {Icon ? <Icon className="w-5 mr-2" /> : null}
             {label}
@@ -125,7 +161,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             onFocus={() => setIsFocused(true)}
             onBlur={() => {
               setIsFocused(false);
-              onBlur();
+              formikCompatibleOnBlur();
             }}
             ref={ref}
             placeholder={placeholder}
@@ -133,17 +169,13 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             className={classNames(
               'w-full outline-none ml-2',
               {
-                'border-red-700 ':
-                  Boolean(
-                    form?.errors?.[field?.name] && form?.touched?.[field?.name],
-                  ) || Boolean(error),
+                'border-red-700': Boolean(formikCompatibleError),
                 'bg-gray-200 cursor-not-allowed': disabled,
               },
-              // 'text-input',
               inputClassName,
             )}
-            value={field?.value || value}
-            onChange={field?.onChange || onChange}
+            value={formikCompatibleValue}
+            onChange={formikCompatibleOnChange}
             onClick={onClick}
             onKeyDown={(event) => {
               if (event.code === 'Enter') {
@@ -153,8 +185,8 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
                 onKeyDown(event);
               }
             }}
-            name={field?.name || name}
-            id={id || field?.name || name ? field?.name || name : undefined}
+            name={formikCompatibleName}
+            id={id || formikCompatibleName}
             max={max}
             disabled={disabled}
           />
@@ -169,28 +201,16 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             </Button>
           )}
         </div>
-
-        {showMax ? (
+        {showMax && (
           <p className="flex absolute right-0 bottom-0 text-gray-400 -mb-4 text-xs">
-            {`${
-              field?.value ? field?.value.length : (value as string).length
-            }/${max}`}
+            {`${String(formikCompatibleValue).length}/${max}`}
           </p>
-        ) : null}
-        {!errorInLabel ? (
-          <>
-            {form?.errors?.[field?.name] && form?.touched?.[field?.name] ? (
-              <p className="flex absolute inset-x-0 bottom-0 text-red-700 -mb-4 text-xs">
-                {form?.errors?.[field?.name]}
-              </p>
-            ) : null}
-            {error ? (
-              <p className="flex absolute inset-x-0 bottom-0 text-red-700 -mb-4 text-xs">
-                {error}
-              </p>
-            ) : null}
-          </>
-        ) : null}
+        )}
+        {!errorInLabel && formikCompatibleError && (
+          <p className="flex absolute inset-x-0 bottom-0 text-red-700 -mb-4 text-xs">
+            {formikCompatibleError}
+          </p>
+        )}
       </div>
     );
   },

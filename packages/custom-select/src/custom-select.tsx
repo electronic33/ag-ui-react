@@ -77,7 +77,6 @@ export const Select = ({
     activeIndex,
     setActiveIndex,
     options,
-    onChange,
     onSpaceOrEnterPress,
   });
 

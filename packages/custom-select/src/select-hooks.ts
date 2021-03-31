@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 const getNextItemFromSearch = <T>(
   items: T[],
@@ -50,6 +50,19 @@ const getNextItemFromSearch = <T>(
   return currentItem;
 };
 
+type UseSelectProps = {
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
+  selectOptionsRef: { current: HTMLElement };
+  selectButtonRef: { current: HTMLElement };
+  inputRef?: { current: HTMLElement };
+  withFilter?: boolean;
+  activeIndex: number;
+  onSpaceOrEnterPress: (event?: any) => void;
+  setActiveIndex: React.Dispatch<React.SetStateAction<number>>;
+  options: { label: string; value: string | number }[];
+};
+
 export const useSelect = ({
   isOpen,
   setIsOpen,
@@ -61,7 +74,7 @@ export const useSelect = ({
   onSpaceOrEnterPress,
   inputRef,
   withFilter,
-}) => {
+}: UseSelectProps) => {
   useEffect(() => {
     function handleClickOutside(event) {
       if (

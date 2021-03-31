@@ -69,6 +69,7 @@ export const MultiSelect = ({
   const [filterValue, setFilterValue] = useState('');
 
   const selectedOptions = useMemo(
+    // @ts-ignore
     () => selected.map((val) => options?.find((o) => o?.value === val)),
     [options, selected],
   );
