@@ -179,7 +179,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             onClick={onClick}
             onKeyDown={(event) => {
               if (event.code === 'Enter') {
-                onEnterPress(field?.value || value);
+                onEnterPress(formikCompatibleValue);
               }
               if (onKeyDown) {
                 onKeyDown(event);
