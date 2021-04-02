@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   addDays,
   addMonths,
@@ -10,7 +10,6 @@ import {
   isSameDay,
   isSameMonth,
   startOfMonth,
-  subMonths,
 } from 'date-fns';
 import startOfWeek from 'date-fns/startOfWeek';
 import classNames from 'classnames';
@@ -44,15 +43,22 @@ export const useMultipleSelectCalendarState = (
   return [selectedDates, setSelectedDates];
 };
 
-export interface CalendarTypes {
+type CalendarTypes = {
   calendarClassName?: string;
   headerContainerClassName?: string;
   monthClassName?: string;
   monthTitle?: (currentMonth: Date) => string;
   weekDaysClassName?: string;
   weekDays?: string[];
-  LeftArrowIcon?: React.ComponentType;
-  RightArrowIcon?: React.ComponentType;
+  LeftArrowIcon?: React.ComponentType<{ className: string }>;
+  RightArrowIcon?: React.ComponentType<{ className: string }>;
+  arrowsClassName?: string;
+  hoveredTileClassName?: string;
+  selectedAndHoveredTileClassName?: string;
+  rangeHoverClassName?: string;
+  firstDayInRangeClassName?: string;
+  lastDayInRangeClassName?: string;
+  firstDayOfRangeWhereIsNoEndDateClassName?: string;
   allTilesClassName?: string;
   disabledTilesClassName?: string | ((day: Date) => string);
   activeTilesClassName?: string | ((day: Date) => string);
@@ -61,7 +67,7 @@ export interface CalendarTypes {
   selectHandler?: React.Dispatch<React.SetStateAction<Date[] | Date>>;
   rangeSelect?: boolean;
   CellComponent?: React.ComponentType<{ day: Date }>;
-}
+};
 
 export const Calendar = ({
   calendarClassName = '',
@@ -69,17 +75,16 @@ export const Calendar = ({
   monthClassName,
   monthTitle,
   weekDaysClassName,
-  weekDays = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ],
+  weekDays = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
   LeftArrowIcon,
   RightArrowIcon,
+  arrowsClassName,
+  hoveredTileClassName,
+  selectedAndHoveredTileClassName,
+  rangeHoverClassName,
+  firstDayInRangeClassName,
+  lastDayInRangeClassName,
+  firstDayOfRangeWhereIsNoEndDateClassName,
   allTilesClassName = '',
   disabledTilesClassName = '',
   activeTilesClassName = '',
@@ -94,15 +99,48 @@ export const Calendar = ({
   );
   const [rangeStart, setRangeStart] = useState<Date>();
   const [hoveredDay, setHoveredDay] = useState<Date>();
-  const nextMonth = () => {
+  const [isFocusInHeader, setIsFocusInHeader] = useState<Boolean>();
+  const goToNextMonth = () => {
     setCurrentMonth(addMonths(currentMonth, 1));
+    if (hoveredDay) {
+      setHoveredDay(addMonths(hoveredDay, 1));
+    }
   };
 
-  const prevMonth = () => {
-    setCurrentMonth(subMonths(currentMonth, 1));
+  useEffect(() => {
+    if (!rangeSelect && selectedDate) {
+      setCurrentMonth(selectedDate as Date);
+    }
+    if (rangeSelect && (selectedDate as Date[]).length > 0) {
+      setCurrentMonth(selectedDate[0]);
+    }
+  }, [rangeSelect, selectedDate]);
+
+  const goToPrevMonth = () => {
+    setCurrentMonth(addMonths(currentMonth, -1));
+    if (hoveredDay) {
+      setHoveredDay(addMonths(hoveredDay, -1));
+    }
   };
 
   const monthStart = startOfMonth(currentMonth);
+
+  const calendarRef = useRef<HTMLDivElement>();
+  const daysContainerRef = useRef<HTMLDivElement>();
+  const selectedDateButtonRef = useRef<HTMLButtonElement>();
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (calendarRef.current && !calendarRef.current.contains(event.target)) {
+        setHoveredDay(undefined);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const rangeSelectHandler = useCallback(
     (day) => {
@@ -134,108 +172,216 @@ export const Calendar = ({
     [rangeStart, selectHandler, selectedDate],
   );
 
+  // eslint-disable-next-line consistent-return
   useEffect(() => {
-    const added7Days = addDays(hoveredDay, 7);
-    const removed7Days = addDays(hoveredDay, -7);
-    const added1Day = addDays(hoveredDay, 1);
-    const nextMonthHover = addMonths(hoveredDay, 1);
-    const removed1Day = addDays(hoveredDay, -1);
-    const prevMonthHover = addMonths(hoveredDay, -1);
-    const handleKeydown = (event: KeyboardEvent) => {
-      switch (event.code) {
-        case 'Escape':
-          if (rangeSelect) {
-            setRangeStart(null);
-            selectHandler([]);
-          } else {
-            selectHandler(new Date());
+    if (
+      // calendarRef.current &&
+      // calendarRef.current.contains(document.activeElement) &&
+      // daysContainerRef.current &&
+      // !daysContainerRef.current.contains(document.activeElement)
+      isFocusInHeader
+    ) {
+      const handleKeydown = (event: KeyboardEvent) => {
+        switch (event.code) {
+          // case 'ArrowDown':
+          //   setCurrentMonth(addMonths(currentMonth, -1));
+          //   if (hoveredDay) {
+          //     setHoveredDay(addMonths(hoveredDay, -1));
+          //   }
+          //   break;
+          // case 'ArrowUp':
+          //   setCurrentMonth(addMonths(currentMonth, -1));
+          //   if (hoveredDay) {
+          //     setHoveredDay(addMonths(hoveredDay, -1));
+          //   }
+          //   break;
+          case 'ArrowRight':
+            setCurrentMonth(addMonths(currentMonth, 1));
+            if (hoveredDay) {
+              setHoveredDay(addMonths(hoveredDay, 1));
+            }
+            break;
+          case 'ArrowLeft':
+            setCurrentMonth(addMonths(currentMonth, -1));
+            if (hoveredDay) {
+              setHoveredDay(addMonths(hoveredDay, -1));
+            }
+            break;
+          default: {
+            // no default
           }
-          break;
-        case 'ArrowDown':
-          if (isSameMonth(added7Days, monthStart)) {
-            setHoveredDay(added7Days);
-          } else {
-            setHoveredDay(added7Days);
-            setCurrentMonth(nextMonthHover);
-          }
-          setHoveredDay(added7Days);
-          break;
-        case 'ArrowUp':
-          if (isSameMonth(removed7Days, monthStart)) {
-            setHoveredDay(removed7Days);
-          } else {
-            setHoveredDay(removed7Days);
-            setCurrentMonth(prevMonthHover);
-          }
-          setHoveredDay(removed7Days);
-          break;
-        case 'ArrowRight':
-          if (isSameMonth(added1Day, monthStart)) {
-            setHoveredDay(added1Day);
-          } else {
-            setHoveredDay(added1Day);
-            setCurrentMonth(nextMonthHover);
-          }
-          break;
-        case 'ArrowLeft':
-          if (isSameMonth(removed1Day, monthStart)) {
-            setHoveredDay(removed1Day);
-          } else {
-            setCurrentMonth(prevMonthHover);
-            setHoveredDay(removed1Day);
-          }
-          break;
-        case 'Enter':
-        case 'Space':
-          if (rangeSelect) {
-            rangeSelectHandler(hoveredDay);
-          } else {
-            selectHandler(hoveredDay);
-          }
-          break;
-
-        default: {
-          // no default
         }
-      }
-    };
+      };
 
-    window.addEventListener('keydown', handleKeydown);
+      window.addEventListener('keydown', handleKeydown);
 
-    return () => {
-      window.removeEventListener('keydown', handleKeydown);
-    };
+      return () => {
+        window.removeEventListener('keydown', handleKeydown);
+      };
+    }
+    if (
+      daysContainerRef.current &&
+      daysContainerRef.current.contains(document.activeElement)
+    ) {
+      const added7Days = addDays(hoveredDay, 7);
+      const removed7Days = addDays(hoveredDay, -7);
+      const added1Day = addDays(hoveredDay, 1);
+      const nextMonthHover = addMonths(hoveredDay, 1);
+      const removed1Day = addDays(hoveredDay, -1);
+      const prevMonthHover = addMonths(hoveredDay, -1);
+      const handleKeydown = (event: KeyboardEvent) => {
+        switch (event.code) {
+          case 'Escape':
+            if (rangeSelect) {
+              setRangeStart(null);
+              selectHandler([]);
+            } else {
+              selectHandler(undefined);
+            }
+            break;
+          case 'ArrowDown':
+            if (!hoveredDay) {
+              if (rangeSelect && (selectedDate as Date[]).length > 0) {
+                setHoveredDay(selectedDate[0]);
+              } else if (!rangeSelect && selectedDate) {
+                setHoveredDay(selectedDate as Date);
+              } else {
+                setHoveredDay(startOfMonth(currentMonth));
+              }
+            } else {
+              if (isSameMonth(added7Days, monthStart)) {
+                setHoveredDay(added7Days);
+              } else {
+                daysContainerRef.current.focus();
+                setHoveredDay(added7Days);
+                setCurrentMonth(nextMonthHover);
+              }
+              setHoveredDay(added7Days);
+            }
+            break;
+          case 'ArrowUp':
+            if (!hoveredDay) {
+              if (rangeSelect && (selectedDate as Date[]).length > 0) {
+                setHoveredDay(selectedDate[0]);
+              } else if (!rangeSelect && selectedDate) {
+                setHoveredDay(selectedDate as Date);
+              } else {
+                setHoveredDay(endOfMonth(currentMonth));
+              }
+            } else {
+              if (isSameMonth(removed7Days, monthStart)) {
+                setHoveredDay(removed7Days);
+              } else {
+                daysContainerRef.current.focus();
+                setHoveredDay(removed7Days);
+                setCurrentMonth(prevMonthHover);
+              }
+              setHoveredDay(removed7Days);
+            }
+            break;
+          case 'ArrowRight':
+            if (!hoveredDay) {
+              if (rangeSelect && (selectedDate as Date[]).length > 0) {
+                setHoveredDay(selectedDate[0]);
+              } else if (!rangeSelect && selectedDate) {
+                setHoveredDay(selectedDate as Date);
+              } else {
+                setHoveredDay(startOfMonth(currentMonth));
+              }
+            } else if (isSameMonth(added1Day, monthStart)) {
+              setHoveredDay(added1Day);
+            } else {
+              daysContainerRef.current.focus();
+              setHoveredDay(added1Day);
+              setCurrentMonth(nextMonthHover);
+            }
+            break;
+          case 'ArrowLeft':
+            if (!hoveredDay) {
+              if (rangeSelect && (selectedDate as Date[]).length > 0) {
+                setHoveredDay(selectedDate[0]);
+              } else if (!rangeSelect && selectedDate) {
+                setHoveredDay(selectedDate as Date);
+              } else {
+                setHoveredDay(endOfMonth(currentMonth));
+              }
+            } else if (isSameMonth(removed1Day, monthStart)) {
+              setHoveredDay(removed1Day);
+            } else {
+              daysContainerRef.current.focus();
+              setCurrentMonth(prevMonthHover);
+              setHoveredDay(removed1Day);
+            }
+            break;
+          case 'Enter':
+          case 'Space':
+            if (rangeSelect) {
+              rangeSelectHandler(hoveredDay);
+            } else {
+              selectHandler(hoveredDay);
+              daysContainerRef.current.focus();
+            }
+            break;
+
+          default: {
+            // no default
+          }
+        }
+      };
+
+      window.addEventListener('keydown', handleKeydown);
+
+      return () => {
+        window.removeEventListener('keydown', handleKeydown);
+      };
+    }
   }, [
     currentMonth,
     hoveredDay,
+    isFocusInHeader,
     monthStart,
     rangeSelect,
     rangeSelectHandler,
     selectHandler,
+    selectedDate,
   ]);
 
   const renderHeader = () => {
-    const dateFormat = 'MMMM yyyy';
+    const dateFormat = 'yyyy MMMM';
 
     return (
-      <div className={classNames('header  ', headerContainerClassName)}>
-        <div className="left-arrow-container  ">
-          <button type="button" className="arrow-div  " onClick={prevMonth}>
-            {LeftArrowIcon ? <LeftArrowIcon /> : '<'}
-          </button>
-        </div>
-        <div className="month-container ">
-          <span className={classNames('month-class ', monthClassName)}>
-            {monthTitle
-              ? monthTitle(currentMonth)
-              : format(currentMonth, dateFormat)}
-          </span>
-        </div>
-        <div className="right-arrow-container ">
-          <button type="button" className="arrow-div " onClick={nextMonth}>
-            {RightArrowIcon ? <RightArrowIcon /> : '>'}
-          </button>
-        </div>
+      <div className={classNames('calendar-header', headerContainerClassName)}>
+        <button
+          onFocus={() => setIsFocusInHeader(true)}
+          onBlur={() => setIsFocusInHeader(false)}
+          type="button"
+          className={classNames(
+            'calendar-arrow-container focus:ring-2 ring-blue-400',
+            arrowsClassName,
+          )}
+          onClick={goToPrevMonth}
+        >
+          {LeftArrowIcon ? <LeftArrowIcon className="flex-shrink-0" /> : '<'}
+        </button>
+
+        <span className={classNames('month-class', monthClassName)}>
+          {monthTitle
+            ? monthTitle(currentMonth)
+            : format(currentMonth, dateFormat)}
+        </span>
+
+        <button
+          onFocus={() => setIsFocusInHeader(true)}
+          onBlur={() => setIsFocusInHeader(false)}
+          type="button"
+          className={classNames(
+            'calendar-arrow-container focus:ring-2 ring-blue-400',
+            arrowsClassName,
+          )}
+          onClick={goToNextMonth}
+        >
+          {RightArrowIcon ? <RightArrowIcon className="flex-shrink-0" /> : '>'}
+        </button>
       </div>
     );
   };
@@ -243,7 +389,7 @@ export const Calendar = ({
   const renderDays = () => (
     <div className={classNames('days-container ', weekDaysClassName)}>
       {weekDays.map((day) => (
-        <div className="days-class " key={day}>
+        <div className="days-class" key={day}>
           {day}
         </div>
       ))}
@@ -266,18 +412,12 @@ export const Calendar = ({
     while (day <= endDate) {
       for (let i = 0; i < 7; i += 1) {
         formattedDate = format(day, dateFormat);
+
         const cloneDay = day;
 
         let isSelected = false;
 
         if (Array.isArray(selectedDate)) {
-          // isSelected = selectedDate?.some((currentSelectedDate) =>
-          //   isSameDay(day, currentSelectedDate),
-          // );
-          // console.log(
-          //   '🚀 ~ file: calendar.tsx ~ line 280 ~ renderCells ~ isSelected',
-          //   isSelected,
-          // );
           for (let current = 0; current < selectedDate.length; current += 1) {
             if (isSameDay(day, selectedDate[current])) {
               isSelected = true;
@@ -287,89 +427,89 @@ export const Calendar = ({
           isSelected = isSameDay(day, selectedDate);
         }
 
-        // selectedDate
-        //               ?.slice(1, -1)
-        //               .some((date) => isSameDay(day, date)),
+        // let spliceSelected = false;
 
-        let spliceSelected = false;
-
-        if (Array.isArray(selectedDate)) {
-          for (
-            let current = 0;
-            current < selectedDate.slice(1, -1).length;
-            current += 1
-          ) {
-            if (isSameDay(day, selectedDate[current])) {
-              spliceSelected = true;
-            }
-          }
-        }
+        // if (Array.isArray(selectedDate)) {
+        //   for (
+        //     let current = 0;
+        //     current < selectedDate.slice(1, -1).length;
+        //     current += 1
+        //   ) {
+        //     if (isSameDay(day, selectedDate[current])) {
+        //       spliceSelected = true;
+        //     }
+        //   }
+        // }
 
         days.push(
           <button
             type="button"
             role="option"
             aria-selected={isSelected}
+            // tabIndex={isSelected ? 0 : -1}
+            tabIndex={-1}
+            ref={isSelected ? selectedDateButtonRef : undefined}
             onMouseEnter={() => setHoveredDay(cloneDay)}
             // onMouseLeave={() => setHoveredDay(undefined)}
             className={classNames(
-              'tile-class  0  ',
+              'tile-class focus:ring-4 ring-blue-400',
               {
-                'bg-gray-100  ': isSameDay(day, hoveredDay),
-                'bg-gray-100':
+                [`${hoveredTileClassName} hovered-tile`]: isSameDay(
+                  day,
+                  hoveredDay,
+                ),
+                [`${rangeHoverClassName} hovered-tile-calendar`]:
                   rangeStart && day >= rangeStart && day <= hoveredDay,
 
-                'rounded-l-full':
+                [`${firstDayInRangeClassName} rounded-full-left-side`]:
                   rangeSelect === true && isSameDay(day, selectedDate[0]),
 
-                'rounded-r-full':
+                [`${lastDayInRangeClassName} rounded-full-right-side`]:
                   rangeSelect === true &&
                   isSameDay(
                     day,
                     selectedDate[(selectedDate as Date[])?.length - 1],
                   ),
 
-                'rounded-none ':
-                  rangeSelect === true && spliceSelected === true,
-                // &&
-                // selectedDate
-                //   ?.slice(1, -1)
-                //   .some((date) => isSameDay(day, date)),
+                // 'rounded-none': rangeSelect === true && spliceSelected === true,
 
                 [typeof disabledTilesClassName === 'string'
-                  ? `${disabledTilesClassName} text-gray-300 pointer-events-none`
+                  ? `${disabledTilesClassName} disabled-tiles`
                   : `${disabledTilesClassName(
                       day,
-                    )} text-gray-300 pointer-events-none`]: !isSameMonth(
-                  day,
-                  monthStart,
-                ),
+                    )} disabled-tiles`]: !isSameMonth(day, monthStart),
 
                 [typeof activeTilesClassName === 'string'
-                  ? `${activeTilesClassName} cursor-pointer`
-                  : `${activeTilesClassName(day)} cursor-pointer`]: isSameMonth(
+                  ? `${activeTilesClassName} active-tiles`
+                  : `${activeTilesClassName(day)} active-tiles`]: isSameMonth(
                   day,
                   monthStart,
                 ),
                 [typeof selectedTileClassName === 'string'
-                  ? `${selectedTileClassName} bg-blue-100  border-blue-400 shadow-inner`
-                  : `${selectedTileClassName(
-                      day,
-                    )} bg-blue-100  border-blue-400 shadow-inner`]: isSelected,
-                'bg-blue-500': isSelected && isSameDay(day, hoveredDay),
-                ' border-2 shadow-inner': isSameDay(day, rangeStart),
+                  ? `${selectedTileClassName} selected-tiles`
+                  : `${selectedTileClassName(day)} selected-tiles`]: isSelected,
+                [`${selectedAndHoveredTileClassName} selected-and-hovered-tiles`]:
+                  isSelected && isSameDay(day, hoveredDay),
+                [`${firstDayOfRangeWhereIsNoEndDateClassName} first-day-in-range-no-selected-end-date`]: isSameDay(
+                  day,
+                  rangeStart,
+                ),
               },
               allTilesClassName,
             )}
             style={{ paddingTop: '15%' }}
             key={day.valueOf()}
-            onMouseDown={() =>
-              rangeSelect
-                ? rangeSelectHandler(cloneDay)
-                : selectHandler(cloneDay)
-            }
+            onMouseDown={(e) => {
+              e.preventDefault();
+              if (rangeSelect) {
+                rangeSelectHandler(cloneDay);
+              } else {
+                selectHandler(cloneDay);
+              }
+              daysContainerRef.current.focus();
+            }}
           >
-            <span className="tile-characters-class  ">
+            <span className={classNames('tile-characters-class')}>
               {CellComponent ? <CellComponent day={day} /> : formattedDate}
             </span>
           </button>,
@@ -378,17 +518,30 @@ export const Calendar = ({
         day = addDays(day, 1);
       }
       rows.push(
-        <div className="row-item " key={day.valueOf()}>
+        <div className="row-item" key={day.valueOf()}>
           {days}
         </div>,
       );
       days = [];
     }
-    return <div className="rows">{rows}</div>;
+    return (
+      <div
+        className="rows focus:ring-2 ring-blue-400 outline-none "
+        onMouseLeave={() => setHoveredDay(undefined)}
+        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+        tabIndex={0}
+        ref={daysContainerRef}
+      >
+        {rows}
+      </div>
+    );
   };
 
   return (
-    <div className={classNames('calendar ', calendarClassName)}>
+    <div
+      className={classNames('calendar', calendarClassName)}
+      ref={calendarRef}
+    >
       {renderHeader()}
       {renderDays()}
       {renderCells()}

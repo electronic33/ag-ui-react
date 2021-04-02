@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { usePopper } from "react-popper";
-import classNames from "classnames";
-import ReactDOM from "react-dom";
+import React, { useState } from 'react';
+import { usePopper } from 'react-popper';
+import classNames from 'classnames';
+import ReactDOM from 'react-dom';
 
 type TooltipTypes = {
   delay?: number;
   children?: React.ReactNode;
-  direction?: "top" | "bottom" | "right" | "left";
+  direction?: 'top' | 'bottom' | 'right' | 'left';
   content: string;
   contentClassNames?: string;
   arrowClasses?: string;
@@ -16,7 +16,7 @@ export const Tooltip = ({
   delay,
   children,
   content,
-  direction = "top",
+  direction = 'top',
   contentClassNames,
   arrowClasses,
 }: TooltipTypes): React.ReactElement => {
@@ -60,7 +60,7 @@ export const Tooltip = ({
     placement: direction,
     modifiers: [
       {
-        name: "offset",
+        name: 'offset',
         enabled: true,
         options: {
           offset: [0, 10],
@@ -83,11 +83,11 @@ export const Tooltip = ({
             className="popper-arrow-conainer"
             data-popper-placement={direction}
           >
-            <p className={classNames("tooltip-content", {}, contentClassNames)}>
+            <p className={classNames('tooltip-content', {}, contentClassNames)}>
               {content}
             </p>
             <div
-              className={classNames("bg-gray-700", arrowClasses)}
+              className={classNames('bg-gray-700', arrowClasses)}
               style={styles.arrow}
               data-popper-arrow
               id="arrow"

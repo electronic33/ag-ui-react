@@ -53,6 +53,7 @@ type TextInputProps = {
   field?: FieldInputProps;
   form?: FormikProps;
   onBlur?: () => void;
+  onFocus?: () => void;
   errorInLabel?: boolean;
   disabled?: boolean;
   withButton?: boolean;
@@ -84,6 +85,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       field,
       form,
       onBlur = undefined,
+      onFocus = undefined,
       errorInLabel = false,
       disabled = false,
       withButton = false,
@@ -158,7 +160,10 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           )}
         >
           <input
-            onFocus={() => setIsFocused(true)}
+            onFocus={() => {
+              setIsFocused(true);
+              onFocus();
+            }}
             onBlur={() => {
               setIsFocused(false);
               formikCompatibleOnBlur();

@@ -1,36 +1,20 @@
 const CalendarBaseClasses = (theme) => ({
   /// / RENDER HEADER ////
-  '.header': {
-    width: theme('width.full'),
-    paddingTop: theme('spacing.7'),
-    paddingBottom: theme('spacing.7'),
-    borderBottomWidth: theme('borderWidth.DEFAULT'),
-    borderColor: theme('colors.gray.200'),
+  '.calendar-header': {
     display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   ///
-  '.left-arrow-container': {
-    display: 'flex',
-    justifyContent: 'flex-start',
-    flexGrow: theme('flexGrow.DEFAULT'),
-    maxWidth: theme('maxWidth.full'),
-    verticalAlign: 'middle',
-    marginLeft: theme('spacing.10'),
-    fontSize: theme('fontSize.2xl'),
-    lineHeight: theme('lineHeight.8'),
-    fontWeight: theme('fontWeight.bold'),
-    color: theme('colors.gray.500'),
+  '.calendar-arrow-container': {
+    borderRadius: theme('borderRadius.full'),
+    padding: theme('spacing.1'),
+    margin: theme('spacing.2'),
+    transitionProperty: theme('transitionProperty.all'),
+    transitionTimingFunction: theme('transitionTimingFunction.in-out'),
+    transitionDuration: theme('transitionDuration.300'),
   },
-  '.arrow-div': {
-    display: 'inline-block',
-    verticalAlign: 'middle',
-    whiteSpace: 'nowrap',
-    WebkitFontSmoothing: 'antialiased',
-    MozOsxFontSmoothing: 'grayscale',
-    cursor: theme('cursor.pointer'),
-  },
+
   '.month-container': {
     display: 'flex',
     maxWidth: theme('maxWidth.full'),
@@ -38,26 +22,18 @@ const CalendarBaseClasses = (theme) => ({
     textAlign: 'center',
   },
   '.month-class': {
-    fontSize: theme('fontSize.xl'),
-    lineHeight: theme('lineHeight.7'),
+    fontSize: theme('fontSize.sm'),
+    lineHeight: theme('lineHeight.5'),
     fontWeight: theme('fontWeight.bold'),
     color: theme('colors.gray.500'),
     textTransform: 'uppercase',
+    textAlign: 'center',
   },
-  '.right-arrow-container': {
-    display: 'flex',
-    justifyContent: 'flex-end',
-    flexGrow: theme('flexGrow.DEFAULT'),
-    maxWidth: theme('maxWidth.full'),
-    textAlign: 'right',
-    marginRight: theme('spacing.10'),
-    marginLeft: theme('spacing.10'),
-    fontSize: theme('fontSize.2xl'),
-    fontWeight: theme('fontWeight.bold'),
-    color: theme('colors.gray.500'),
-  },
+
   /// / RENDER DAYS ////
   '.days-container': {
+    fontSize: theme('fontSize.xs'),
+    lineHeight: theme('lineHeight.4'),
     textTransform: 'uppercase',
     color: theme('colors.gray.400'),
     fontWeight: theme('fontWeight.medium'),
@@ -77,6 +53,8 @@ const CalendarBaseClasses = (theme) => ({
     textAlign: 'center',
   },
   '.tile-class': {
+    fontSize: theme('fontSize.sm'),
+    lineHeight: theme('lineHeight.5'),
     display: 'flex',
     flexGrow: theme('flexGrow.DEFAULT'),
     position: 'relative',
@@ -86,13 +64,51 @@ const CalendarBaseClasses = (theme) => ({
     transitionTimingFunction: theme('transitionTimingFunction.DEFAULT'),
     transitionDuration: theme('transitionDuration.300'),
     maxWidth: theme('maxWidth.full'),
-    /// hover:bg-gray-100
   },
+  '.hovered-tile': {
+    backgroundColor: theme('colors.gray.100'),
+  },
+  '.rounded-full-left-side': {
+    borderTopLeftRadius: '9999px',
+    borderBottomLeftRadius: '9999px',
+  },
+  '.rounded-full-right-side': {
+    borderTopRightRadius: '9999px',
+    borderBottomRightRadius: '9999px',
+  },
+  '.first-day-in-range-no-selected-end-date': {
+    backgroundColor: theme('colors.gray.200'),
+    boxShadow: theme('boxShadow.inner'),
+  },
+  '.disabled-tiles': {
+    color: theme('colors.gray.300'),
+    pointerEvents: 'none',
+  },
+  '.active-tiles': {
+    cursor: 'pointer',
+  },
+  '.selected-tiles': {
+    backgroundColor: theme('colors.blue.200'),
+    boxShadow: theme('boxShadow.inner'),
+  },
+  '.selected-and-hovered-tiles': {
+    backgroundColor: theme('colors.blue.500'),
+  },
+
+  'focus-blue': {
+    '--tw-ring-offset-shadow':
+      'var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)',
+    '--tw-ring-shadow':
+      'var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)',
+    '--tw-ring-opacity': '1',
+    '--tw-ring-color': 'rgba(96, 165, 250, var(--tw-ring-opacity))',
+    boxShadow: theme('boxShadow.DEFAULT'),
+    // 'var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)',
+  },
+
   '.tile-characters-class': {
     display: 'flex',
     justifyContent: 'center',
-    fontSize: theme('fontSize.lg'),
-    lineHeight: theme('lineHeight.7'),
     alignItems: 'center',
     inset: theme('inset.0'),
     fontWeight: theme('fontWeight.bold'),
