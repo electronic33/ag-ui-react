@@ -1,13 +1,13 @@
-import React from "react";
-import classNames from "classnames";
-import { Label } from "@app-garage/label";
-import { FormikProps, FieldInputProps } from "formik";
+import React from 'react';
+import classNames from 'classnames';
+import { Label } from '@app-garage/label';
+import { FormikProps, FieldInputProps } from 'formik';
 
 type TextAreaProps = {
   label?: string;
   secondaryLabel?: string;
   Icon?: React.ComponentType<{ className: string }>;
-  required?: boolean;
+  withRequiredIndicator?: boolean;
   name?: string;
   value?: string;
   onChange?: () => void;
@@ -15,7 +15,6 @@ type TextAreaProps = {
   error?: string;
   className?: string;
   inputClassName?: string;
-  type?: string;
   max?: string | number;
   showMax?: boolean;
   placeholder?: string;
@@ -27,36 +26,36 @@ type TextAreaProps = {
 };
 
 export const TextArea = ({
-  label = "",
-  secondaryLabel = "",
+  label = '',
+  secondaryLabel = '',
   Icon,
-  required = false,
-  name = "",
-  value = "",
-  onChange = undefined,
-  onKeyDown = undefined,
-  error = "",
+  withRequiredIndicator,
+  name = '',
+  value = '',
+  onChange,
+  onKeyDown,
+  error = '',
   className,
   inputClassName,
-  max = undefined,
-  showMax = false,
+  max,
+  showMax,
   placeholder,
   field,
   form,
-  onBlur = undefined,
-  errorInLabel = false,
-  disabled = false,
+  onBlur,
+  errorInLabel,
+  disabled,
 }: TextAreaProps): React.ReactElement => (
-  <div className={classNames("flex flex-col relative", className)}>
+  <div className={classNames('flex flex-col relative', className)}>
     {label && (
       <Label
         secondaryText={secondaryLabel}
-        required={required}
+        withRequiredIndicator={withRequiredIndicator}
         errorText={
           errorInLabel
             ? (form?.touched?.[field?.name] && form?.errors?.[field?.name]) ||
               error ||
-              ""
+              ''
             : undefined
         }
         htmlFor={field?.name || name ? field?.name || name : undefined}
@@ -69,13 +68,13 @@ export const TextArea = ({
       placeholder={placeholder}
       className={classNames(
         {
-          "border-red-700":
+          'border-red-700':
             Boolean(
               form?.errors?.[field?.name] && form?.touched?.[field?.name],
             ) || Boolean(error),
-          "bg-gray-200": disabled,
+          'bg-gray-200': disabled,
         },
-        "text-area",
+        'text-area',
         inputClassName,
       )}
       value={field?.value || value}

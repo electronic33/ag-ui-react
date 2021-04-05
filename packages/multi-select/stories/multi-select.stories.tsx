@@ -8,12 +8,13 @@ export default {
 };
 
 export const Default = (): React.ReactNode => {
-  const [value, setValue] = useState<number[] | string[]>([0]);
+  const [value, setValue] = useState([0]);
+
   return (
     <MultiSelect
       containerClassName="max-w-lg mb-5 my-2 mr-2"
-      onChange={setValue}
-      selected={value}
+      onChange={(val) => setValue(val)}
+      value={value}
       label="MultiSelect"
       withFilter
       options={[

@@ -1,75 +1,78 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { ButtonSpinner } from '@app-garage/button-spinner';
 import { Button } from '@app-garage/button';
 import { FocusLock } from '@app-garage/focus-trap';
-import { useTransition, animated } from 'react-spring';
+import { animated } from 'react-spring';
+import { Label } from '@app-garage/label';
 import { useSelect } from './select-hooks';
 
-type SelectTypes = {
-  /**
-   Array of option objects, each has a label and a value, and optionally an Icon.
-  */
+type OptionValue = number | string;
+
+type SelectProps<T extends OptionValue> = {
   options: {
     label: string;
-    value: number | string;
+    value: T;
     Icon?: React.ComponentType<{ className?: string }>;
   }[];
-  /**
-   The selected value.
-  */
-  selected: number | string;
-  onChange?: (item?: number | string) => void;
-  containerClassName: string;
-  cursorPointer?: boolean;
-  label: string;
+  value: T;
+  onChange?: (value: T) => void;
+  containerClassName?: string;
+  labelClassName?: string;
+  selectClassName?: string;
+  optionClassName?: (value?: T) => string;
+  optionsContainerClassName?: string;
+  label?: string;
+  secondaryLabel?: string;
+  withRequiredIndicator?: boolean;
+  placeholder?: string;
   isLoading?: boolean;
-  spinnerClassName?: string;
   error?: string;
+  spinnerClassName?: string;
   retryFn?: () => void;
   loadingText?: string;
 };
 
-export const Select = ({
+export function Select<T extends OptionValue>({
   options,
-  selected,
+  value,
   onChange,
   containerClassName,
+  labelClassName,
+  selectClassName,
+  optionClassName,
+  optionsContainerClassName,
   label,
-  cursorPointer,
-  isLoading = false,
+  secondaryLabel,
+  withRequiredIndicator,
+  placeholder = 'Select...',
+  isLoading,
   spinnerClassName,
   error,
   retryFn,
   loadingText,
-}: SelectTypes): React.ReactElement => {
+}: SelectProps<T>) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number>();
 
   const selectOptionsRef = useRef<HTMLDivElement>();
   const selectButtonRef = useRef<HTMLButtonElement>();
+
   const selectedOption = useMemo(
     () =>
       !isLoading
-        ? options?.find((option) => option.value === selected)
-        : { label: 'No selected option', Icon: undefined, value: '' },
-    [selected, isLoading, options],
+        ? options.find((option) => option.value === value)
+        : { label: placeholder, Icon: undefined, value: undefined },
+    [value, isLoading, options, placeholder],
   );
 
-  const transitions = useTransition(isOpen, null, {
-    // @ts-ignore
-    from: { opacity: 0, transform: 'translateY(0px)' },
-    enter: { opacity: 1, transform: 'translateY(10px)' },
-    leave: { opacity: 0, transform: 'translateY(0px)' },
-  });
-
-  const onSpaceOrEnterPress = () => {
+  const onSpaceOrEnterPress = useCallback(() => {
     if (isOpen) {
       onChange(options[activeIndex].value);
     }
-  };
+  }, [isOpen, options, onChange, activeIndex]);
 
-  useSelect({
+  const { transitions, status } = useSelect({
     isOpen,
     setIsOpen,
     selectOptionsRef,
@@ -78,86 +81,67 @@ export const Select = ({
     setActiveIndex,
     options,
     onSpaceOrEnterPress,
+    isLoading,
+    error,
   });
 
   return (
     <FocusLock restoreFocus isDisabled={!isOpen}>
       <div className={containerClassName}>
-        <>
-          {label && (
-            <div className="block text-sm leading-5 font-medium text-gray-700 mb-2">
-              <p className={classNames('', { 'text-red-600': error })}>
-                {label}
-              </p>
-            </div>
-          )}
-          <div className="relative">
-            <button
-              type="button"
-              ref={selectButtonRef}
-              onClick={() => {
-                setIsOpen((prev) => {
-                  setActiveIndex(
-                    options.findIndex(
-                      (element) => element.value === selectedOption.value,
-                    ),
-                  );
+        {label && (
+          <Label
+            className={labelClassName}
+            secondaryText={secondaryLabel}
+            withRequiredIndicator={withRequiredIndicator}
+          >
+            {label}
+          </Label>
+        )}
+        <button
+          type="button"
+          ref={selectButtonRef}
+          onClick={() => {
+            setIsOpen((prev) => {
+              setActiveIndex(
+                options.findIndex(
+                  (element) => element.value === selectedOption.value,
+                ),
+              );
 
-                  return !prev;
-                });
-              }}
-              className="inline-flex w-full rounded-md shadow-sm focus:ring-2 focus:ring-blue-500"
-            >
-              <div
-                className={`flex items-center ${
-                  cursorPointer ? 'cursor-pointer' : 'cursor-default'
-                } ${isLoading ? 'justify-between' : 'justify-start'} ${
-                  error
-                    ? 'border border-red-600 justify-between pr-2'
-                    : 'border border-gray-300 focus:border-blue-300 pr-8'
-                } relative w-full rounded-md border border-gray-300 bg-white pl-2 py-2 text-left focus:outline-none focus:shadow-outline-blue  transition ease-in-out duration-150 sm:text-sm sm:leading-5`}
-              >
-                {isLoading ? (
-                  <ButtonSpinner
-                    className={classNames('flex-shrink-0', spinnerClassName)}
-                  />
-                ) : (
-                  <>
-                    {error ? (
-                      <p className="text-red-600 ">{error}</p>
-                    ) : (
-                      <>
-                        {selectedOption?.Icon && (
-                          <span className="flex items-center mr-1.5">
-                            {selectedOption?.Icon}
-                          </span>
-                        )}
-                        <span className="block truncate">
-                          {selectedOption?.label}
-                        </span>
-                        <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
-                          <svg
-                            className="h-5 w-5 text-gray-400"
-                            viewBox="0 0 20 20"
-                            fill="none"
-                            stroke="currentColor"
-                          >
-                            <path
-                              d="M7 7l3-3 3 3m0 6l-3 3-3-3"
-                              strokeWidth="1.5"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                        </span>
-                      </>
-                    )}
-                  </>
-                )}
-                {isLoading && loadingText && (
-                  <p className=" text-gray-400">{loadingText}</p>
-                )}
-                {error && retryFn && (
+              return !prev;
+            });
+          }}
+          // TODO: extract classes
+          className={classNames(
+            'inline-flex w-full rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 relative',
+            selectClassName,
+          )}
+        >
+          <div
+            // TODO: extract classes
+            className={classNames(
+              'flex items-center relative w-full rounded-md border border-gray-300 bg-white pl-2 py-2 text-left focus:outline-none focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5',
+              {
+                'justify-between': status === 'loading',
+                'justify-start': status !== 'loading',
+                'border-red-600 justify-between pr-2': status === 'error',
+                'border-gray-300 focus:border-blue-300 pr-8':
+                  status !== 'error',
+              },
+            )}
+          >
+            {status === 'loading' && (
+              <>
+                <ButtonSpinner
+                  className={classNames('flex-shrink-0', spinnerClassName)}
+                />
+                {loadingText && <p className="text-gray-400">{loadingText}</p>}
+              </>
+            )}
+            {status === 'error' && (
+              <>
+                <p className="text-red-600">{error}</p>
+                {retryFn && (
                   <Button
                     className="text-white font-semibold bg-red-400 hover:bg-red-500 text-base focus:bg-red-500 px-2 py-1 rounded"
                     onClick={retryFn}
@@ -165,73 +149,98 @@ export const Select = ({
                     Try again
                   </Button>
                 )}
-              </div>
-            </button>
-            {/* @ts-ignore */}
-            {transitions.map(({ item, key, props }) =>
-              item && !error && !isLoading ? (
-                <animated.div
-                  key={key}
-                  style={props}
-                  ref={selectOptionsRef}
-                  className="max-h-60 rounded-md py-1 text-base leading-6 shadow-lg overflow-auto focus:outline-none sm:text-sm sm:leading-5"
-                >
-                  {!isLoading &&
-                    options.map((option, index) => (
-                      <div
-                        role="button"
-                        tabIndex={-1}
-                        className="w-full"
-                        onMouseEnter={() => setActiveIndex(index)}
-                        onMouseLeave={() => setActiveIndex(undefined)}
-                        onClick={() => {
-                          onChange(option.value);
-                          setIsOpen(false);
-                        }}
-                        onKeyDown={() => {
-                          // TODO
-                        }}
-                        key={option.value}
-                      >
-                        {/* TODO refactor to use classnames */}
-                        <div
-                          className={`${
-                            activeIndex === index
-                              ? 'text-white bg-blue-600'
-                              : 'text-gray-900'
-                          } ${
-                            cursorPointer ? 'cursor-pointer' : 'cursor-default'
-                          } select-none relative py-2 px-2 flex items-center`}
-                        >
-                          {option.Icon && (
-                            <span
-                              className={`${
-                                activeIndex === index
-                                  ? 'text-white'
-                                  : 'text-blue-600'
-                              } flex items-center mr-1.5`}
-                            >
-                              {option.Icon}
-                            </span>
-                          )}
-                          <span
-                            className={`${
-                              option.value === selectedOption.value
-                                ? 'font-semibold'
-                                : 'font-normal'
-                            } block truncate`}
-                          >
-                            {option.label}
-                          </span>
-                        </div>
-                      </div>
-                    ))}
-                </animated.div>
-              ) : null,
+              </>
+            )}
+            {status === 'ready' && (
+              <>
+                {selectedOption.Icon && (
+                  <span className="flex items-center mr-1.5">
+                    {selectedOption.Icon}
+                  </span>
+                )}
+                <span className="block truncate">{selectedOption.label}</span>
+                <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                  <svg
+                    className="h-5 w-5 text-gray-400"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    stroke="currentColor"
+                  >
+                    <path
+                      d="M7 7l3-3 3 3m0 6l-3 3-3-3"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+              </>
             )}
           </div>
-        </>
+        </button>
+        {transitions.map(
+          ({ item, key, props }) =>
+            item && (
+              <animated.div
+                key={key}
+                style={props}
+                ref={selectOptionsRef}
+                // TODO: extract in classes
+                className={classNames(
+                  'max-h-60 rounded-md py-1 text-base leading-6 shadow-lg overflow-auto focus:outline-none sm:text-sm sm:leading-5',
+                  optionsContainerClassName,
+                )}
+              >
+                {!isLoading &&
+                  options.map((option, index) => (
+                    <div
+                      role="button"
+                      tabIndex={-1}
+                      // TODO: extract in classes
+                      className={classNames(
+                        'w-full select-none relative py-2 px-2 flex items-center',
+                        {
+                          'text-white bg-blue-600': activeIndex === index,
+                          'text-gray-900': activeIndex !== index,
+                        },
+                        optionClassName ? optionClassName(option.value) : '',
+                      )}
+                      onMouseEnter={() => setActiveIndex(index)}
+                      onMouseLeave={() => setActiveIndex(undefined)}
+                      onClick={() => {
+                        onChange(option.value);
+                        setIsOpen(false);
+                      }}
+                      onKeyDown={() => {
+                        // TODO
+                      }}
+                      key={option.value}
+                    >
+                      {option.Icon && (
+                        <span
+                          className={classNames('flex items-center mr-1.5', {
+                            'text-white': activeIndex === index,
+                            'text-blue-600': activeIndex !== index,
+                          })}
+                        >
+                          {option.Icon}
+                        </span>
+                      )}
+                      <span
+                        className={classNames('block truncate', {
+                          'font-semibold':
+                            option.value === selectedOption.value,
+                          'font-normal': option.value !== selectedOption.value,
+                        })}
+                      >
+                        {option.label}
+                      </span>
+                    </div>
+                  ))}
+              </animated.div>
+            ),
+        )}
       </div>
     </FocusLock>
   );
-};
+}

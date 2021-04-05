@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
+import { useTransition } from 'react-spring';
 
 const getNextItemFromSearch = <T>(
   items: T[],
@@ -52,6 +53,8 @@ const getNextItemFromSearch = <T>(
 
 type UseSelectProps = {
   isOpen: boolean;
+  isLoading: boolean;
+  error: string;
   setIsOpen: (isOpen: boolean) => void;
   selectOptionsRef: { current: HTMLElement };
   selectButtonRef: { current: HTMLElement };
@@ -74,43 +77,29 @@ export const useSelect = ({
   onSpaceOrEnterPress,
   inputRef,
   withFilter,
+  isLoading,
+  error,
 }: UseSelectProps) => {
+  // Listen for outside click
   useEffect(() => {
-    function handleClickOutside(event) {
+    const handleClickOutside = (event) => {
       if (
         isOpen &&
-        selectOptionsRef.current &&
         !selectOptionsRef.current.contains(event.target) &&
-        selectButtonRef.current &&
         !selectButtonRef.current.contains(event.target)
       ) {
         setIsOpen(false);
       }
-    }
+    };
 
     document.addEventListener('mousedown', handleClickOutside);
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isOpen, setIsOpen, selectOptionsRef, selectButtonRef]);
 
-  // const onArrowDown = () => {
-  //   if (!isOpen && document.activeElement === selectButtonRef.current) {
-  //     setIsOpen(true);
-  //     setActiveIndex(-1);
-  //   } else if (isOpen && activeIndex === undefined) {
-  //     setActiveIndex(-1);
-  //   }
-
-  //   if (isOpen && options.length > 0) {
-  //     if (options.length - 1 === activeIndex) {
-  //       setActiveIndex(0);
-  //     } else {
-  //       setActiveIndex((prev) => prev + 1);
-  //     }
-  //   }
-  // };
-
+  // Listen for keydown
   useEffect(() => {
     const handleKeydown = (event: KeyboardEvent) => {
       switch (event.code) {
@@ -118,9 +107,11 @@ export const useSelect = ({
           if (isOpen) {
             setIsOpen(false);
           }
+
           break;
         case 'ArrowDown':
           event.preventDefault();
+
           if (!isOpen && document.activeElement === selectButtonRef.current) {
             setIsOpen(true);
             setActiveIndex(-1);
@@ -138,6 +129,8 @@ export const useSelect = ({
 
           break;
         case 'ArrowUp':
+          event.preventDefault();
+
           if (!isOpen && document.activeElement === selectButtonRef.current) {
             setIsOpen(true);
             setActiveIndex(options.length);
@@ -152,16 +145,22 @@ export const useSelect = ({
               setActiveIndex((prev) => prev - 1);
             }
           }
+
           break;
         case 'Enter':
-        case `${withFilter ? 'sda' : 'Space'}`:
+        case 'Space':
+          if (!withFilter) {
+            break;
+          }
+
           if (isOpen) {
             event.preventDefault();
             event.stopPropagation();
           }
-          onSpaceOrEnterPress();
-          break;
 
+          onSpaceOrEnterPress();
+
+          break;
         default: {
           const nextItem = getNextItemFromSearch(
             options.map((element) => element.label),
@@ -177,6 +176,8 @@ export const useSelect = ({
 
             setActiveIndex(index);
           }
+
+          break;
         }
       }
     };
@@ -198,5 +199,23 @@ export const useSelect = ({
     withFilter,
   ]);
 
-  return { isOpen, setIsOpen };
+  const transitions = useTransition(isOpen, null, {
+    from: { opacity: 0, transform: 'translateY(0px)' },
+    enter: { opacity: 1, transform: 'translateY(10px)' },
+    leave: { opacity: 0, transform: 'translateY(0px)' },
+  });
+
+  const status = useMemo(() => {
+    if (isLoading) {
+      return 'loading';
+    }
+
+    if (error) {
+      return 'error';
+    }
+
+    return 'ready';
+  }, [isLoading, error]);
+
+  return { transitions, status };
 };

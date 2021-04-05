@@ -1,38 +1,38 @@
-import React from "react";
-import classNames from "classnames";
+import React from 'react';
+import classNames from 'classnames';
 
 type LabelProps = {
   secondaryText?: string;
   className?: string;
-  required?: boolean;
+  withRequiredIndicator?: boolean;
   errorText?: string;
   htmlFor?: string;
   children?: React.ReactNode;
-  as?: "label" | "span";
+  as?: 'label' | 'span';
 };
 
 export const Label = ({
   secondaryText,
   className,
-  required = false,
+  withRequiredIndicator,
   children,
   errorText,
   htmlFor,
-  as = "label",
+  as = 'label',
 }: LabelProps): React.ReactElement => {
   const content = (
     <>
       {children}
-      {required && (
+      {withRequiredIndicator && (
         <span className="ml-px self-start text-xs font-thin text-red-600">
           *
         </span>
       )}
       {secondaryText && (
         <span
-          className={classNames("text-sm text-gray-400", {
-            "ml-1": required,
-            "ml-2": !required,
+          className={classNames('text-sm text-gray-400', {
+            'ml-1': withRequiredIndicator,
+            'ml-2': !withRequiredIndicator,
           })}
         >
           {secondaryText}
@@ -45,26 +45,26 @@ export const Label = ({
   );
 
   const wrapperProps = {
-    className: classNames("label", className),
+    className: classNames('label', className),
   };
 
-  if (as === "span") {
+  if (as === 'span') {
     return <span {...wrapperProps}>{content}</span>;
   }
 
   return (
     <label htmlFor={htmlFor} {...wrapperProps}>
       {children}
-      {required && (
+      {withRequiredIndicator && (
         <span className="ml-px self-start text-xs font-thin text-red-600">
           *
         </span>
       )}
       {secondaryText && (
         <span
-          className={classNames("text-sm text-gray-400", {
-            "ml-1": required,
-            "ml-2": !required,
+          className={classNames('text-sm text-gray-400', {
+            'ml-1': withRequiredIndicator,
+            'ml-2': !withRequiredIndicator,
           })}
         >
           {secondaryText}

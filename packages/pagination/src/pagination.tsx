@@ -1,8 +1,8 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
-import classNames from "classnames";
-import { Button } from "@app-garage/button";
-import { TextInput } from "@app-garage/text-input";
-import { Select } from "@app-garage/select";
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import classNames from 'classnames';
+import { Button } from '@app-garage/button';
+import { TextInput } from '@app-garage/text-input';
+import { Select } from '@app-garage/select';
 
 type PaginationTypes = {
   /**
@@ -30,6 +30,8 @@ type PaginationTypes = {
   selectOptions?: { label: string; value: number }[];
 };
 
+const geToPageId = 'goToPage';
+
 export const Pagination = ({
   maxCount,
   itemsPerPage,
@@ -52,21 +54,19 @@ export const Pagination = ({
   const [itemsNumber, setItemsNumber] = useState<number>(itemsPerPage);
 
   useEffect(() => {
-    let i;
     const arrayFirst = [];
 
-    for (i = 0; i < firstAndLastSectionsNumber; i += 1) {
+    for (let i = 0; i < firstAndLastSectionsNumber; i += 1) {
       if (i + 1 <= numberOfPages) {
         arrayFirst.push(i + 1);
       }
     }
     setFirstSection(arrayFirst);
 
-    let j;
     const arrayLast = [];
 
     for (
-      j = numberOfPages - firstAndLastSectionsNumber;
+      let j = numberOfPages - firstAndLastSectionsNumber;
       j < numberOfPages;
       j += 1
     ) {
@@ -74,11 +74,10 @@ export const Pagination = ({
     }
     setLastSection(arrayLast);
 
-    let k;
     const arrayMiddle = [];
 
     for (
-      k = currentPage - Math.floor(firstAndLastSectionsNumber / 2);
+      let k = currentPage - Math.floor(firstAndLastSectionsNumber / 2);
       k <= currentPage + Math.floor(firstAndLastSectionsNumber / 2);
       k += 1
     ) {
@@ -97,7 +96,7 @@ export const Pagination = ({
     setLastSection(
       arrayLast.filter((val) => !arrayFirst.includes(val) && val > 0),
     );
-  }, [currentPage, itemsPerPage]);
+  }, [currentPage, itemsPerPage, firstAndLastSectionsNumber, numberOfPages]);
 
   return (
     <form
@@ -124,25 +123,25 @@ export const Pagination = ({
               setCurrentPage(currentPage - 1);
             }
           }}
-          className={classNames("pagination", {
-            "cursor-default bg-gray-100": currentPage === 1,
+          className={classNames('pagination', {
+            'cursor-default bg-gray-100': currentPage === 1,
           })}
         >
           Previous Page
         </button>
         <div className="flex">
           <div className="flex">
-            {firstSection.map((firstSectionItem, index) => (
+            {firstSection.map((firstSectionItem) => (
               <button
                 type="button"
-                key={index}
+                key={firstSectionItem}
                 className={classNames(
-                  "pagination",
+                  'pagination',
                   {
-                    "bg-blue-400 text-white": firstSectionItem === currentPage,
+                    'bg-blue-400 text-white': firstSectionItem === currentPage,
                   },
                   {
-                    "text-blue-400": firstSectionItem !== currentPage,
+                    'text-blue-400': firstSectionItem !== currentPage,
                   },
                 )}
                 onClick={() => setCurrentPage(firstSectionItem)}
@@ -155,20 +154,20 @@ export const Pagination = ({
               middleSection[0] !== firstSection[firstSection.length - 1] + 1 ? (
                 <p className="text-xl self-end mx-2">...</p>
               ) : (
-                ""
+                ''
               )}
-              {middleSection.map((middleSectionItem, index) => (
+              {middleSection.map((middleSectionItem) => (
                 <button
                   type="button"
-                  key={index}
+                  key={middleSectionItem}
                   className={classNames(
-                    "pagination",
+                    'pagination',
                     {
-                      "bg-blue-400 text-white":
+                      'bg-blue-400 text-white':
                         middleSectionItem === currentPage,
                     },
                     {
-                      "text-blue-400": middleSectionItem !== currentPage,
+                      'text-blue-400': middleSectionItem !== currentPage,
                     },
                   )}
                   onClick={() => setCurrentPage(middleSectionItem)}
@@ -181,20 +180,20 @@ export const Pagination = ({
               lastSection[0] !== middleSection[middleSection.length - 1] + 1 ? (
                 <p className="text-xl self-end mx-2">...</p>
               ) : (
-                ""
+                ''
               )}
             </div>
-            {lastSection.map((lastSectionItem, index) => (
+            {lastSection.map((lastSectionItem) => (
               <button
                 type="button"
-                key={index}
+                key={lastSectionItem}
                 className={classNames(
-                  "pagination",
+                  'pagination',
                   {
-                    "bg-blue-400 text-white": lastSectionItem === currentPage,
+                    'bg-blue-400 text-white': lastSectionItem === currentPage,
                   },
                   {
-                    "text-blue-400": lastSectionItem !== currentPage,
+                    'text-blue-400': lastSectionItem !== currentPage,
                   },
                 )}
                 onClick={() => setCurrentPage(lastSectionItem)}
@@ -211,28 +210,24 @@ export const Pagination = ({
               setCurrentPage(currentPage + 1);
             }
           }}
-          className={classNames("pagination", {
-            "cursor-default bg-gray-100": currentPage === numberOfPages,
+          className={classNames('pagination', {
+            'cursor-default bg-gray-100': currentPage === numberOfPages,
           })}
         >
           Next Page
         </button>
       </div>
       {initialGotoPageValue && (
-        <div className="flex items-baseline">
-          <label className="mr-2" htmlFor="goToPageValue">
-            Go To Page Number:
-          </label>
-          <TextInput
-            id="goToPageValue"
-            onChange={(event) => {
-              setGoToPageValue(Number(event.target.value));
-            }}
-            value={goToPageValue}
-            containerClassName="bg-gray-100 shadow rounded px-2 py-1"
-            type="number"
-          />
-        </div>
+        <TextInput
+          label="Go to page number:"
+          id={geToPageId}
+          onChange={(event) => {
+            setGoToPageValue(Number(event.target.value));
+          }}
+          value={goToPageValue}
+          containerClassName="bg-gray-100 shadow rounded px-2 py-1"
+          type="number"
+        />
       )}
 
       {selectOptions && (
@@ -248,8 +243,8 @@ export const Pagination = ({
       )}
       {(initialGotoPageValue || selectOptions) && (
         <Button
-          className={classNames("font-medium cursor-pointer bg-gray-500", {
-            "cursor-default bg-opacity-70 hover:bg-opacity-75":
+          className={classNames('font-medium cursor-pointer bg-gray-500', {
+            'cursor-default bg-opacity-70 hover:bg-opacity-75':
               goToPageValue <= 0 || goToPageValue > numberOfPages,
           })}
         >

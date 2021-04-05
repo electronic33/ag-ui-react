@@ -2,44 +2,24 @@ import React, { forwardRef, useState } from 'react';
 import classNames from 'classnames';
 import { Label } from '@app-garage/label';
 import { Button } from '@app-garage/button';
-
-type FieldInputProps = {
-  value: string;
-  name: string;
-  multiple?: boolean;
-  checked?: boolean;
-  onChange: {
-    (e: React.ChangeEvent<any>): void;
-    <T = string | React.ChangeEvent<any>>(
-      field: T,
-    ): T extends React.ChangeEvent<any>
-      ? void
-      : (e: string | React.ChangeEvent<any>) => void;
-  };
-
-  onBlur: {
-    (e: React.FocusEvent<any>): void;
-    <T = string | any>(fieldOrEvent: T): T extends string
-      ? (e: any) => void
-      : void;
-  };
-};
-
-type FormikProps = {
-  touched?: Record<string, string>;
-  errors?: Record<string, string>;
-};
+import {
+  FieldInputProps,
+  FormikProps,
+  useFormikCompatibleValues,
+} from './input-hooks';
 
 type TextInputProps = {
   id?: string;
   label?: string;
   secondaryLabel?: string;
   Icon?: React.ComponentType<{ className: string }>;
-  required?: boolean;
+  withRequiredIndicator?: boolean;
   name?: string;
   value?: string | number;
-  onChange?: (event) => void | (() => void);
-  onClick?: (event) => void;
+  onChange?: (
+    event?: React.ChangeEvent<HTMLInputElement>,
+  ) => void | (() => void);
+  onClick?: (event?: React.MouseEvent<HTMLInputElement>) => void;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   onEnterPress?: (value: string | number) => void;
   onButtonClick?: () => void;
@@ -52,9 +32,9 @@ type TextInputProps = {
   placeholder?: string;
   field?: FieldInputProps;
   form?: FormikProps;
-  onBlur?: () => void;
-  onFocus?: () => void;
-  errorInLabel?: boolean;
+  onBlur?: (event?: React.FocusEvent<any>) => void;
+  onFocus?: (event?: React.FocusEvent<any>) => void;
+  withErrorInLabel?: boolean;
   disabled?: boolean;
   withButton?: boolean;
   buttonText?: string;
@@ -64,87 +44,60 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (
     {
       id,
-      label = '',
-      secondaryLabel = '',
+      label,
+      secondaryLabel,
       Icon,
-      required = false,
-      name = '',
-      value = '',
-      onChange = undefined,
-      onClick = undefined,
-      onKeyDown = undefined,
-      onEnterPress = undefined,
-      onButtonClick = undefined,
-      error = '',
+      withRequiredIndicator,
+      name,
+      value,
+      onChange,
+      onClick,
+      onKeyDown,
+      onEnterPress,
+      onButtonClick,
+      error,
       containerClassName,
       inputClassName,
       type = 'text',
-      max = undefined,
-      showMax = false,
+      max,
+      showMax,
       placeholder,
       field,
       form,
-      onBlur = undefined,
-      onFocus = undefined,
-      errorInLabel = false,
-      disabled = false,
-      withButton = false,
+      onBlur,
+      onFocus,
+      withErrorInLabel,
+      disabled,
+      withButton,
       buttonText = 'Text',
     },
     ref,
   ) => {
     const [isFocused, setIsFocused] = useState(false);
 
-    let formikCompatibleValue: string | number | undefined = '';
-
-    if (value) {
-      formikCompatibleValue = value;
-    } else if (field) {
-      formikCompatibleValue = field.value;
-    }
-
-    let formikCompatibleError: string | undefined = '';
-
-    if (error) {
-      formikCompatibleError = error;
-    } else if (form && field) {
-      formikCompatibleError =
-        form.errors?.[field.name] && form.touched?.[field.name]
-          ? (form.errors?.[field?.name] as string | undefined)
-          : '';
-    }
-
-    let formikCompatibleName: string | undefined = '';
-
-    if (name) {
-      formikCompatibleName = name;
-    } else if (field) {
-      formikCompatibleName = field.name;
-    }
-
-    let formikCompatibleOnChange;
-
-    if (onChange) {
-      formikCompatibleOnChange = onChange;
-    } else if (field) {
-      formikCompatibleOnChange = field.onChange as () => any;
-    }
-
-    let formikCompatibleOnBlur;
-
-    if (onBlur) {
-      formikCompatibleOnBlur = onBlur;
-    } else if (field) {
-      formikCompatibleOnBlur = field.onBlur as () => any;
-    }
+    const {
+      formikCompatibleValue,
+      formikCompatibleError,
+      formikCompatibleOnBlur,
+      formikCompatibleOnChange,
+      formikCompatibleName,
+    } = useFormikCompatibleValues({
+      field,
+      form,
+      value,
+      error,
+      name,
+      onChange,
+      onBlur,
+    });
 
     return (
       <div className={classNames('flex flex-col relative', containerClassName)}>
         {label && (
           <Label
             secondaryText={secondaryLabel}
-            required={required}
-            errorText={errorInLabel ? formikCompatibleError : undefined}
+            withRequiredIndicator={withRequiredIndicator}
+            errorText={withErrorInLabel ? formikCompatibleError : undefined}
             htmlFor={formikCompatibleName}
           >
             {Icon ? <Icon className="w-5 mr-2" /> : null}
@@ -211,7 +164,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             {`${String(formikCompatibleValue).length}/${max}`}
           </p>
         )}
-        {!errorInLabel && formikCompatibleError && (
+        {!withErrorInLabel && formikCompatibleError && (
           <p className="flex absolute inset-x-0 bottom-0 text-red-700 -mb-4 text-xs">
             {formikCompatibleError}
           </p>

@@ -1,27 +1,20 @@
-name: Test + Release
+name: PR QA
 
 on:
-  push:
-    paths:
-      - '.changeset/**'
-      - 'tw-plugins/**'
-      - 'packages/**'
+  pull_request:
     branches:
       - main
-      - next
+
 jobs:
-  release:
-    name: Release
+  build:
     runs-on: ubuntu-latest
     steps:
-      - id: yarn-cache
-        name: Get Yarn cache path
+      - name: Get Yarn cache path
+        id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: Checkout Repo
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
 
       - name: Setup Node.js 12.x
         uses: actions/setup-node@v2
@@ -39,25 +32,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: yarn install --frozen-lockfile && yarn bootstrap
-
-      - name: Run Tests
-        run: yarn run test
-
-      - name: Setup CI Git User
-        run: |
-          git config --global user.email "matyas.furtos@gmail.com"
-          git config --global user.name "Mátyás Fürtös"
 
       - name: Build Packages
         run: yarn build
 
-      - name: Publish Packages
-        uses: changesets/action@master
-        with:
-          publish: yarn release
-          commit: 'chore(release): version packages'
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
-          GITHUB_TOKEN: ${{secrets.GH_AUTH_TOKEN}}
+      - name: Run Tests
+        run: yarn run test
