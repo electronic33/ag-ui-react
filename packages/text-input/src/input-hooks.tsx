@@ -31,7 +31,9 @@ type UseFormikCompatibleValuesParams = {
   value: string | number;
   error?: string;
   name?: string;
-  onChange: (event?: React.FormEvent<HTMLInputElement>) => void | (() => void);
+  onChange: (
+    event?: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void | (() => void);
   onBlur: (event?: React.FocusEvent<any>) => void;
 };
 
@@ -72,7 +74,7 @@ export const useFormikCompatibleValues = ({
   }
 
   let formikCompatibleOnChange: (
-    event?: React.FormEvent<HTMLInputElement>,
+    event?: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void | (() => void);
 
   if (onChange) {
@@ -82,7 +84,7 @@ export const useFormikCompatibleValues = ({
   }
 
   let formikCompatibleOnBlur: (
-    event?: React.FormEvent<HTMLInputElement>,
+    event?: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void | (() => void);
 
   if (onBlur) {
