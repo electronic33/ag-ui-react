@@ -1,7 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
 import { Label } from '@app-garage/label';
-import { FormikProps, FieldInputProps } from 'formik';
+import {
+  useFormikCompatibleValues,
+  FormikProps,
+  FieldInputProps,
+} from '@app-garage/text-input';
 
 type TextAreaProps = {
   label?: string;
@@ -10,100 +14,98 @@ type TextAreaProps = {
   withRequiredIndicator?: boolean;
   name?: string;
   value?: string;
-  onChange?: () => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: () => void;
   error?: string;
   className?: string;
   inputClassName?: string;
   max?: string | number;
-  showMax?: boolean;
+  withMax?: boolean;
   placeholder?: string;
-  field?: FieldInputProps<string>;
-  form?: FormikProps<unknown>;
+  field?: FieldInputProps;
+  form?: FormikProps;
   onBlur?: () => void;
-  errorInLabel?: boolean;
-  disabled?: boolean;
+  withErrorInLabel?: boolean;
+  isDisabled?: boolean;
 };
 
 export const TextArea = ({
-  label = '',
-  secondaryLabel = '',
+  label,
+  secondaryLabel,
   Icon,
   withRequiredIndicator,
-  name = '',
-  value = '',
+  name,
+  value,
   onChange,
   onKeyDown,
-  error = '',
+  error,
   className,
   inputClassName,
   max,
-  showMax,
+  withMax,
   placeholder,
   field,
   form,
   onBlur,
-  errorInLabel,
-  disabled,
-}: TextAreaProps): React.ReactElement => (
-  <div className={classNames('flex flex-col relative', className)}>
-    {label && (
-      <Label
-        secondaryText={secondaryLabel}
-        withRequiredIndicator={withRequiredIndicator}
-        errorText={
-          errorInLabel
-            ? (form?.touched?.[field?.name] && form?.errors?.[field?.name]) ||
-              error ||
-              ''
-            : undefined
-        }
-        htmlFor={field?.name || name ? field?.name || name : undefined}
-      >
-        {Icon ? <Icon className="w-5 mr-2" /> : null}
-        {label}
-      </Label>
-    )}
-    <textarea
-      placeholder={placeholder}
-      className={classNames(
-        {
-          'border-red-700':
-            Boolean(
-              form?.errors?.[field?.name] && form?.touched?.[field?.name],
-            ) || Boolean(error),
-          'bg-gray-200': disabled,
-        },
-        'text-area',
-        inputClassName,
-      )}
-      value={field?.value || value}
-      onChange={field?.onChange || onChange}
-      onKeyDown={onKeyDown}
-      name={field?.name || name}
-      id={field?.name || name ? field?.name || name : undefined}
-      onBlur={field?.onBlur || onBlur}
-      disabled={disabled}
-    />
+  withErrorInLabel,
+  isDisabled,
+}: TextAreaProps) => {
+  const {
+    formikCompatibleError,
+    formikCompatibleName,
+    formikCompatibleOnBlur,
+    formikCompatibleOnChange,
+    formikCompatibleValue,
+  } = useFormikCompatibleValues({
+    field,
+    form,
+    value,
+    error,
+    onChange,
+    onBlur,
+  });
 
-    {showMax ? (
-      <p className="flex absolute right-0 bottom-0 text-gray-400 -mb-4 text-xs">
-        {`${field?.value ? field?.value.length : value.length}/${max}`}
-      </p>
-    ) : null}
-    {!errorInLabel ? (
-      <>
-        {form?.errors?.[field?.name] && form?.touched?.[field?.name] ? (
-          <p className="flex absolute inset-x-0 bottom-0 text-red-700 -mb-4 text-xs">
-            {form?.errors?.[field?.name]}
-          </p>
-        ) : null}
-        {error ? (
-          <p className="flex absolute inset-x-0 bottom-0 text-red-700 -mb-4 text-xs">
-            {error}
-          </p>
-        ) : null}
-      </>
-    ) : null}
-  </div>
-);
+  return (
+    <div className={classNames('flex flex-col relative', className)}>
+      {label && (
+        <Label
+          secondaryText={secondaryLabel}
+          withRequiredIndicator={withRequiredIndicator}
+          errorText={withErrorInLabel ? formikCompatibleError : undefined}
+          htmlFor={formikCompatibleName}
+        >
+          {Icon ? <Icon className="w-5 mr-2" /> : null}
+          {label}
+        </Label>
+      )}
+      <textarea
+        placeholder={placeholder}
+        className={classNames(
+          {
+            'border-red-700': !!formikCompatibleError,
+            'bg-gray-200': isDisabled,
+          },
+          'text-area',
+          inputClassName,
+        )}
+        value={field?.value || value}
+        onChange={formikCompatibleOnChange}
+        onKeyDown={onKeyDown}
+        name={field?.name || name}
+        id={field?.name || name ? field?.name || name : undefined}
+        onBlur={formikCompatibleOnBlur}
+        disabled={isDisabled}
+      />
+      {withMax && (
+        <p className="flex absolute right-0 bottom-0 text-gray-400 -mb-4 text-xs">
+          {`${String(formikCompatibleValue).length}/${max}`}
+        </p>
+      )}
+      {!withErrorInLabel && formikCompatibleError && (
+        <p className="flex absolute inset-x-0 bottom-0 text-red-700 -mb-4 text-xs">
+          {formikCompatibleError}
+        </p>
+      )}
+    </div>
+  );
+};

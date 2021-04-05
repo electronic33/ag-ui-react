@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@app-garage/label": "^1.1.9",
+    "@app-garage/text-input": "^1.0.3",
     "classnames": "^2.2.6"
   },
   "devDependencies": {
