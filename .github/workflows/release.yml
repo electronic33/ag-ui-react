@@ -1,4 +1,4 @@
-name: Test + Release
+name: Test + Publish
 
 on:
   push:
@@ -9,6 +9,7 @@ on:
     branches:
       - main
       - next
+
 jobs:
   release:
     name: Release
@@ -59,5 +60,5 @@ jobs:
           publish: yarn release
           commit: 'chore(release): version packages'
         env:
-          NPM_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+          NPM_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
           GITHUB_TOKEN: ${{secrets.GH_AUTH_TOKEN}}
