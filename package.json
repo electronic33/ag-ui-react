@@ -44,7 +44,7 @@
     "test": "start-server-and-test 'yarn storybook:ci' http://localhost:6006 'yarn test:lerna'",
     "test:lerna": "lerna run test",
     "cy:open": "cypress open",
-    "commit": "cz",
+    "commit": "git-cz",
     "build": "lerna run build --npm-client=yarn",
     "bootstrap": "lerna bootstrap --use-workspaces",
     "clean": "lerna clean --yes && rm -rf node_modules",
@@ -52,6 +52,7 @@
     "postinstall": "yarn check:pkgs",
     "version:pkgs": "changeset version",
     "release": "changeset publish",
+    "changeset": "changeset",
     "lint-staged": "lint-staged"
   },
   "dependencies": {

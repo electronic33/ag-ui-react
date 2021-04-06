@@ -1,68 +1,111 @@
-import React from "react";
-import classNames from "classnames";
+import React from 'react';
+import classNames from 'classnames';
+import { Label } from '@app-garage/label';
+import {
+  useFormikCompatibleValues,
+  FieldInputProps,
+  FormikProps,
+} from './boolean-input-hooks';
 
-type SwitchTypes = {
-  active: boolean;
-  setActive: (prevState) => void;
-  className?: string;
-  disabled?: boolean;
+type SwitchProps = {
+  value: boolean;
+  label: string;
+  onChange: (value: boolean) => void;
+  onBlur: (event: React.FocusEvent<HTMLButtonElement>) => void;
+  containerClassName?: string;
+  isDisabled?: boolean;
   notActiveBackGroundColorClass?: string;
   activeBackGroundColorClass?: string;
   activeDotBackgroundColorClass?: string;
   notActiveDotBackgroundColorClass?: string;
+  name?: string;
+  field?: FieldInputProps;
+  form?: FormikProps;
 };
 
 export const Switch = ({
-  active,
-  setActive,
-  className,
-  disabled,
-  notActiveBackGroundColorClass = "bg-gray-400",
-  activeBackGroundColorClass = "bg-gray-200",
-  activeDotBackgroundColorClass = "bg-gray-100",
-  notActiveDotBackgroundColorClass = "bg-gray-100",
-}: SwitchTypes): React.ReactElement => {
-  const handleClick = () => {
-    if (setActive) {
-      setActive((prevState: boolean) => !prevState);
-    }
-  };
+  value,
+  label,
+  onChange,
+  onBlur,
+  containerClassName,
+  isDisabled,
+  notActiveBackGroundColorClass = 'bg-gray-400',
+  activeBackGroundColorClass = 'bg-gray-200',
+  activeDotBackgroundColorClass = 'bg-gray-100',
+  notActiveDotBackgroundColorClass = 'bg-gray-100',
+  name,
+  field,
+  form,
+}: SwitchProps) => {
+  const {
+    formikCompatibleOnChange,
+    formikCompatibleError,
+    formikCompatibleName,
+    formikCompatibleOnBlur,
+    formikCompatibleValue,
+  } = useFormikCompatibleValues({
+    value,
+    field,
+    form,
+    name,
+    onBlur,
+    onChange,
+  });
 
   return (
-    <label
-      className={classNames(
-        " flex items-center relative align-middle cursor-pointer select-none w-8 h-3",
-        {
-          "opacity-70 cursor-not-allowed ": disabled,
-        },
-        className,
-      )}
-      onClick={disabled ? null : handleClick}
-    >
-      {/* <input type="hidden" name={name} active={active} /> */}
-      <span
+    <div className="flex flex-col">
+      {label && <Label>{label}</Label>}
+      <button
+        type="button"
         className={classNames(
-          `absolute inset-0 rounded-xl`,
+          ' flex items-center relative align-middle cursor-pointer select-none w-8 h-3',
           {
-            [`${notActiveBackGroundColorClass} transition-colors`]: !active,
+            'opacity-70 cursor-not-allowed ': isDisabled,
           },
-          {
-            [`${activeBackGroundColorClass} transition-colors`]: active,
-          },
+          containerClassName,
         )}
-      />
+        disabled={isDisabled}
+        onClick={() => {
+          formikCompatibleOnChange(!formikCompatibleValue);
+        }}
+        onBlur={formikCompatibleOnBlur}
+      >
+        <input
+          type="checkbox"
+          // TODO: implement this class
+          className="ag-visually-hidden"
+          id={formikCompatibleName}
+          name={formikCompatibleName}
+          checked={formikCompatibleValue}
+        />
+        <span
+          className={classNames(
+            'absolute inset-0 rounded-xl',
+            {
+              [`${notActiveBackGroundColorClass} transition-colors`]: !formikCompatibleValue,
+            },
+            {
+              [`${activeBackGroundColorClass} transition-colors`]: formikCompatibleValue,
+            },
+          )}
+        />
 
-      <span
-        className={classNames(
-          "absolute rounded-full w-5 h-5 transition-all duration-100 ease-linear",
-          {
-            [`left-4 -top-1 -bottom-1 right-4 transition-all ${activeDotBackgroundColorClass}`]: active,
-          },
-          {
-            [`left-0 -top-1 -bottom-1 right-0 transition-all  ${notActiveDotBackgroundColorClass}`]: !active,
-          },
-        )}
-      />
-    </label>
+        <span
+          className={classNames(
+            'absolute rounded-full w-5 h-5 transition-all duration-100 ease-linear',
+            {
+              [`left-4 -top-1 -bottom-1 right-4 transition-all ${activeDotBackgroundColorClass}`]: formikCompatibleValue,
+            },
+            {
+              [`left-0 -top-1 -bottom-1 right-0 transition-all  ${notActiveDotBackgroundColorClass}`]: !formikCompatibleValue,
+            },
+          )}
+        />
+      </button>
+      {formikCompatibleError && (
+        <span className="">{formikCompatibleError}</span>
+      )}
+    </div>
   );
 };
