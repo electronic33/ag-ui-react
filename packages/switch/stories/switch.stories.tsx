@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { Switch } from "../src";
+import React, { useState } from 'react';
+import { Switch } from '../src';
 
 export default {
-  title: "FORMS/Switch",
+  title: 'FORMS/Switch',
   component: Switch,
 };
 
-export const Default = (props): React.ReactNode => {
-  const [active, setActive] = useState(false);
+export const Default = () => {
+  const [value, setValue] = useState(false);
 
   return (
     <Switch
@@ -15,9 +15,8 @@ export const Default = (props): React.ReactNode => {
       activeBackGroundColorClass="bg-blue-400"
       notActiveDotBackgroundColorClass="bg-gray-100"
       activeDotBackgroundColorClass="bg-blue-600"
-      active={active}
-      setActive={setActive}
-      {...props}
+      value={value}
+      onChange={setValue}
     />
   );
 };

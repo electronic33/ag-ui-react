@@ -9,9 +9,9 @@ import {
 
 type SwitchProps = {
   value: boolean;
-  label: string;
+  label?: string;
   onChange: (value: boolean) => void;
-  onBlur: (event: React.FocusEvent<HTMLButtonElement>) => void;
+  onBlur?: (event: React.FocusEvent<HTMLButtonElement>) => void;
   containerClassName?: string;
   isDisabled?: boolean;
   notActiveBackGroundColorClass?: string;
@@ -67,7 +67,9 @@ export const Switch = ({
         )}
         disabled={isDisabled}
         onClick={() => {
-          formikCompatibleOnChange(!formikCompatibleValue);
+          if (formikCompatibleValue !== undefined && formikCompatibleOnChange) {
+            formikCompatibleOnChange(!formikCompatibleValue);
+          }
         }}
         onBlur={formikCompatibleOnBlur}
       >
