@@ -5,44 +5,43 @@ import ReactDOM from 'react-dom';
 
 type TooltipTypes = {
   delay?: number;
-  children?: React.ReactNode;
+  children: React.ReactNode;
   direction?: 'top' | 'bottom' | 'right' | 'left';
-  content: string;
-  contentClassNames?: string;
-  arrowClasses?: string;
+  content: string | React.ReactNode;
+  contentClassName?: string;
+  arrowClassName?: string;
 };
 
 export const Tooltip = ({
-  delay,
+  delay = 0,
   children,
   content,
   direction = 'top',
-  contentClassNames,
-  arrowClasses,
+  contentClassName,
+  arrowClassName,
 }: TooltipTypes): React.ReactElement => {
-  let timeout;
+  let timeout: number;
+
   const [active, setActive] = useState(false);
 
   const showTip = () => {
     timeout = setTimeout(() => {
       setActive(true);
-    }, delay || 0);
+    }, delay);
   };
 
   const toggleTip = () => {
     timeout = setTimeout(() => {
       setActive((prev) => !prev);
-    }, delay || 0);
+    }, delay);
   };
 
   const hideTip = () => {
-    clearInterval(timeout);
+    clearTimeout(timeout);
     setActive(false);
   };
 
-  const child = React.Children.only(children) as React.ReactElement & {
-    ref?: React.Ref<any>;
-  };
+  const child = React.Children.only(children) as React.ReactElement;
 
   const trigger = React.cloneElement(child, {
     ...child.props,
@@ -52,9 +51,13 @@ export const Tooltip = ({
     onBlur: hideTip,
   });
 
-  const [referenceElement, setReferenceElement] = useState(null);
-
-  const [popperElement, setPopperElement] = useState(null);
+  const [
+    referenceElement,
+    setReferenceElement,
+  ] = useState<HTMLDivElement | null>(null);
+  const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(
+    null,
+  );
 
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
     placement: direction,
@@ -83,11 +86,11 @@ export const Tooltip = ({
             className="popper-arrow-conainer"
             data-popper-placement={direction}
           >
-            <p className={classNames('tooltip-content', {}, contentClassNames)}>
+            <p className={classNames('tooltip-content', contentClassName)}>
               {content}
             </p>
             <div
-              className={classNames('bg-gray-700', arrowClasses)}
+              className={classNames('bg-gray-700', arrowClassName)}
               style={styles.arrow}
               data-popper-arrow
               id="arrow"

@@ -1,29 +1,26 @@
-import React from "react";
-import { MdLabelOutline } from "react-icons/md";
-import { TextArea } from "../src";
+import React from 'react';
+import { MdLabelOutline } from 'react-icons/md';
+import { TextArea } from '../src';
 
 export default {
-  title: "FORMS/TextArea",
+  title: 'FORMS/TextArea',
   component: TextArea,
 };
 
-export const Default = (props): React.ReactNode => (
-  <TextArea
-    label="TextArea"
-    placeholder="This is a textarea"
-    value=""
-    {...props}
-  />
+export const Default = () => (
+  <TextArea label="TextArea" placeholder="This is a textarea" value="" />
 );
-export const WithIcon = (): React.ReactNode => (
+
+export const WithIcon = () => (
   <TextArea
     label="TextArea"
     Icon={MdLabelOutline}
     placeholder="This is a textarea"
-    value=""
+    value="Such a nice textarea"
   />
 );
-export const Error = (): React.ReactNode => (
+
+export const Error = () => (
   <TextArea
     label="TextArea"
     Icon={MdLabelOutline}
@@ -31,12 +28,13 @@ export const Error = (): React.ReactNode => (
     error="Error"
   />
 );
-export const ErrorInLabel = (): React.ReactNode => (
+
+export const ErrorInLabel = () => (
   <TextArea
     label="TextArea"
     Icon={MdLabelOutline}
     placeholder="This is a textarea"
     error="Error"
-    errorInLabel
+    withErrorInLabel
   />
 );

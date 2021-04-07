@@ -1,28 +1,27 @@
-import React, { useState } from "react";
-import { FaAccessibleIcon, FaAccusoft, FaChrome, FaFire } from "react-icons/fa";
-import { ButtonSpinner } from "@app-garage/button-spinner";
-import { Button } from "@app-garage/button";
-import { Tabs } from "../src";
+import React, { useState } from 'react';
+import { FaAccessibleIcon, FaAccusoft, FaChrome, FaFire } from 'react-icons/fa';
+import { ButtonSpinner } from '@app-garage/button-spinner';
+import { Button } from '@app-garage/button';
+import { Tabs } from '../src';
 
 export default {
-  title: "DISCLOSURE/Tabs",
+  title: 'DISCLOSURE/Tabs',
   component: Tabs,
 };
 
-export const Error = (props): React.ReactNode => {
+export const Error = () => {
   const [currentTab, setCurrentTab] = useState(0);
 
   return (
     <Tabs
-      currentTab={currentTab}
-      setCurrentTab={setCurrentTab}
+      activeIndex={currentTab}
+      setActiveIndex={setCurrentTab}
       tabs={[
-        { title: "Tab 1", Icon: FaChrome, content: Button },
-        { title: "Tab 2", Icon: FaFire, content: ButtonSpinner },
-        { title: "Tab 3", Icon: FaAccessibleIcon, content: Button },
-        { title: "Tab 4", Icon: FaAccusoft, content: ButtonSpinner },
+        { label: 'Tab 1', Icon: FaChrome, content: Button },
+        { label: 'Tab 2', Icon: FaFire, content: ButtonSpinner },
+        { label: 'Tab 3', Icon: FaAccessibleIcon, content: Button },
+        { label: 'Tab 4', Icon: FaAccusoft, content: ButtonSpinner },
       ]}
-      {...props}
     />
   );
 };

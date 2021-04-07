@@ -16,26 +16,25 @@ type TextInputProps = {
   withRequiredIndicator?: boolean;
   name?: string;
   value?: string | number;
-  onChange?: (
-    event?: React.ChangeEvent<HTMLInputElement>,
-  ) => void | (() => void);
-  onClick?: (event?: React.MouseEvent<HTMLInputElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onClick?: () => void;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   onEnterPress?: (value: string | number) => void;
   onButtonClick?: () => void;
   error?: string;
   containerClassName?: string;
   inputClassName?: string;
-  type?: string;
+  labelClassName?: string;
+  type?: 'text' | 'password';
   max?: string | number;
-  showMax?: boolean;
+  withMax?: boolean;
   placeholder?: string;
-  field?: FieldInputProps;
+  field?: FieldInputProps<HTMLInputElement>;
   form?: FormikProps;
-  onBlur?: (event?: React.FocusEvent<any>) => void;
-  onFocus?: (event?: React.FocusEvent<any>) => void;
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
+  onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
   withErrorInLabel?: boolean;
-  disabled?: boolean;
+  isDisabled?: boolean;
   withButton?: boolean;
   buttonText?: string;
 };
@@ -57,19 +56,20 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       onButtonClick,
       error,
       containerClassName,
+      labelClassName,
       inputClassName,
       type = 'text',
       max,
-      showMax,
+      withMax,
       placeholder,
       field,
       form,
       onBlur,
       onFocus,
       withErrorInLabel,
-      disabled,
+      isDisabled,
       withButton,
-      buttonText = 'Text',
+      buttonText,
     },
     ref,
   ) => {
@@ -81,7 +81,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       formikCompatibleOnBlur,
       formikCompatibleOnChange,
       formikCompatibleName,
-    } = useFormikCompatibleValues({
+    } = useFormikCompatibleValues<HTMLInputElement>({
       field,
       form,
       value,
@@ -95,6 +95,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       <div className={classNames('flex flex-col relative', containerClassName)}>
         {label && (
           <Label
+            className={labelClassName}
             secondaryText={secondaryLabel}
             withRequiredIndicator={withRequiredIndicator}
             errorText={withErrorInLabel ? formikCompatibleError : undefined}
@@ -113,13 +114,15 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           )}
         >
           <input
-            onFocus={() => {
+            onFocus={(event) => {
               setIsFocused(true);
-              onFocus();
+              if (onFocus) {
+                onFocus(event);
+              }
             }}
-            onBlur={() => {
+            onBlur={(event) => {
               setIsFocused(false);
-              formikCompatibleOnBlur();
+              formikCompatibleOnBlur(event);
             }}
             ref={ref}
             placeholder={placeholder}
@@ -128,7 +131,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
               'w-full outline-none ml-2',
               {
                 'border-red-700': Boolean(formikCompatibleError),
-                'bg-gray-200 cursor-not-allowed': disabled,
+                'bg-gray-200 cursor-not-allowed': isDisabled,
               },
               inputClassName,
             )}
@@ -136,7 +139,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             onChange={formikCompatibleOnChange}
             onClick={onClick}
             onKeyDown={(event) => {
-              if (event.code === 'Enter') {
+              if (event.code === 'Enter' && onEnterPress) {
                 onEnterPress(formikCompatibleValue);
               }
               if (onKeyDown) {
@@ -146,7 +149,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             name={formikCompatibleName}
             id={id || formikCompatibleName}
             max={max}
-            disabled={disabled}
+            disabled={isDisabled}
           />
           {withButton && (
             <Button
@@ -159,7 +162,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             </Button>
           )}
         </div>
-        {showMax && (
+        {withMax && (
           <p className="flex absolute right-0 bottom-0 text-gray-400 -mb-4 text-xs">
             {`${String(formikCompatibleValue).length}/${max}`}
           </p>

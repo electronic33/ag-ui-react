@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useState } from 'react';
 
 export const useForceRenderHook = () => {
   const [_dummyState, setDummyState] = useState(false);

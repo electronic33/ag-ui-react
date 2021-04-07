@@ -1,84 +1,80 @@
-import React, { useEffect } from "react";
-import classNames from "classnames";
-import { useId } from "react-id-generator";
+import React, { useEffect } from 'react';
+import classNames from 'classnames';
+import { useId } from 'react-id-generator';
 
 type TabsTypes = {
-  /**
-   Array of tab objects, each taking in a title, a content component, and optionally an Icon.
-  */
   tabs: {
-    title?: string;
+    label: string;
     Icon?: React.ComponentType;
-    content?: React.ComponentType;
+    content: React.ReactNode;
   }[];
-  /**
-   The index of the active tab.
-  */
-  currentTab: number;
-  setCurrentTab: (index: number | ((arg: number) => void)) => void;
+  activeIndex: number;
+  setActiveIndex: React.Dispatch<React.SetStateAction<number>>;
 };
 
-export const Tabs = ({
-  tabs,
-  currentTab,
-  setCurrentTab,
-}: TabsTypes): React.ReactElement => {
+export const Tabs = ({ tabs, activeIndex, setActiveIndex }: TabsTypes) => {
   const id = useId();
   useEffect(() => {
-    function handleArrowPress(e) {
-      if (e.code === "ArrowRight" && currentTab < tabs.length - 1) {
-        setCurrentTab((prev) => prev + 1);
+    function handleArrowPress(event: React.KeyboardEvent) {
+      if (event.code === 'ArrowRight' && activeIndex < tabs.length - 1) {
+        setActiveIndex((prev) => prev + 1);
       }
-      if (e.code === "ArrowLeft" && currentTab > 0) {
-        setCurrentTab((prev) => prev - 1);
+
+      if (event.code === 'ArrowLeft' && activeIndex > 0) {
+        setActiveIndex((prev) => prev - 1);
       }
     }
 
-    document.addEventListener("keydown", handleArrowPress);
-    return () => document.removeEventListener("keydown", handleArrowPress);
-  }, [currentTab]);
+    // @ts-ignore
+    document.addEventListener('keydown', handleArrowPress);
+
+    // @ts-ignore
+    return () => document.removeEventListener('keydown', handleArrowPress);
+  }, [activeIndex, setActiveIndex, tabs.length]);
 
   return (
     <div role="tablist" className="tabs">
       <div className="flex">
         {tabs.map((tab, index) => (
-          <div
+          <button
+            type="button"
             role="tab"
-            id={`tabs${id}-tab-${currentTab}`}
-            aria-controls={`tabs${id}-tabpanel-${currentTab}`}
-            arie-aria-selected={index === currentTab}
-            key={index}
-            className={classNames("py-5 cursor-pointer", {
-              "bg-white": currentTab === index,
+            id={`tabs${id}-tab-${activeIndex}`}
+            aria-controls={`tabs${id}-tabpanel-${activeIndex}`}
+            arie-aria-selected={index === activeIndex}
+            key={tab.label}
+            className={classNames('py-5 cursor-pointer', {
+              'bg-white': activeIndex === index,
             })}
-            onClick={() => setCurrentTab(index)}
+            onClick={() => setActiveIndex(index)}
           >
             <p
               className={classNames(
-                "text-lg px-7 border-r-2 border-gray-300 text-gray-400 hover:text-gray-800 font-medium",
+                'text-lg px-7 border-r-2 border-gray-300 text-gray-400 hover:text-gray-800 font-medium',
                 {
-                  "border-none":
-                    currentTab === index || currentTab === index + 1,
+                  'border-none':
+                    activeIndex === index || activeIndex === index + 1,
                 },
               )}
             >
-              {tab.title}
+              {tab.label}
             </p>
-          </div>
+          </button>
         ))}
       </div>
-      <div>
-        {tabs.map((tab, index) => (
-          <div
-            role="tabpanel"
-            id={`tabs${id}-tabpanel-${currentTab}`}
-            aria-labelledby={`tabs${id}-tab-${currentTab}`}
-            key={index}
-          >
-            <div>{currentTab === index && <tab.content />}</div>
-          </div>
-        ))}
-      </div>
+      {tabs.map(
+        (tab, index) =>
+          activeIndex === index && (
+            <div
+              role="tabpanel"
+              id={`tabs-${id}-tabpanel-${activeIndex}`}
+              aria-labelledby={`tabs-${id}-tab-${activeIndex}`}
+              key={tab.label}
+            >
+              <div>{activeIndex === index && tab.content}</div>
+            </div>
+          ),
+      )}
     </div>
   );
 };

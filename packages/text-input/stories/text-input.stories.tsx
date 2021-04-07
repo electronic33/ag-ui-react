@@ -7,12 +7,9 @@ export default {
   component: TextInput,
 };
 
-export const Default = (): React.ReactNode => {
+export const Default = () => {
   const [value, setValue] = useState('');
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
   return (
     <TextInput
       label="Textinput"
@@ -20,12 +17,12 @@ export const Default = (): React.ReactNode => {
       withButton
       buttonText="Search"
       value={value}
-      onChange={(event) => handleChange(event)}
+      onChange={(event) => setValue(event.target.value)}
     />
   );
 };
 
-export const WithIcon = (): React.ReactNode => (
+export const WithIcon = () => (
   <TextInput
     label="Textinput"
     Icon={MdLabelOutline}
@@ -34,7 +31,7 @@ export const WithIcon = (): React.ReactNode => (
   />
 );
 
-export const Error = (): React.ReactNode => (
+export const Error = () => (
   <TextInput
     label="Textinput"
     Icon={MdLabelOutline}
@@ -43,12 +40,12 @@ export const Error = (): React.ReactNode => (
   />
 );
 
-export const ErrorInLabel = (): React.ReactNode => (
+export const ErrorInLabel = () => (
   <TextInput
     label="Textinput"
     Icon={MdLabelOutline}
     placeholder="This is a textinput"
     error="Error"
-    errorInLabel
+    withErrorInLabel
   />
 );

@@ -1,4 +1,4 @@
-import { useState, useCallback, useLayoutEffect } from "react";
+import { useState, useCallback, useLayoutEffect } from 'react';
 
 interface DimensionObject {
   width: number;
@@ -14,7 +14,7 @@ interface DimensionObject {
 type UseDimensionsHook = [
   DimensionObject | Record<string, string | number>,
   (node: HTMLElement) => void,
-  HTMLElement,
+  HTMLElement | null,
 ];
 
 interface UseDimensionsArgs {
@@ -40,10 +40,10 @@ export const useDimensions = ({
   liveMeasure = false,
 }: UseDimensionsArgs = {}): UseDimensionsHook => {
   const [dimensions, setDimensions] = useState({});
-  const [node, setNode] = useState(null);
+  const [node, setNode] = useState<HTMLElement | null>(null);
 
-  const ref = useCallback((node) => {
-    setNode(node);
+  const ref = useCallback((n: HTMLElement) => {
+    setNode(n);
   }, []);
 
   useLayoutEffect(() => {
@@ -56,16 +56,16 @@ export const useDimensions = ({
       measure();
 
       if (liveMeasure) {
-        window.addEventListener("resize", measure);
-        window.addEventListener("scroll", measure);
+        window.addEventListener('resize', measure);
+        window.addEventListener('scroll', measure);
 
         return () => {
-          window.removeEventListener("resize", measure);
-          window.removeEventListener("scroll", measure);
+          window.removeEventListener('resize', measure);
+          window.removeEventListener('scroll', measure);
         };
       }
     }
-  }, [node]);
+  }, [node, liveMeasure]);
 
   return [dimensions, ref, node];
-}
+};

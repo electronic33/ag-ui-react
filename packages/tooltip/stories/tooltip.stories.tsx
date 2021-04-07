@@ -1,37 +1,37 @@
-import React from "react";
-import { Button } from "@app-garage/button";
-import { Tooltip } from "../src";
+import React from 'react';
+import { Button } from '@app-garage/button';
+import { Tooltip } from '../src';
 
 export default {
-  title: "OVERLAY/Tooltip",
+  title: 'OVERLAY/Tooltip',
   component: Tooltip,
 };
 
-export const Top = (): React.ReactNode => (
+export const Top = () => (
   <div className="w-screen h-screen flex justify-center items-center">
     <Tooltip content="Hello, I'm a tooltip">
-      <Button text="Button with tooltip">I&apos;m a button</Button>
+      <Button>I&apos;m a button</Button>
     </Tooltip>
   </div>
 );
-export const Right = (): React.ReactNode => (
+export const Right = () => (
   <div className="w-screen h-screen flex justify-center items-center">
     <Tooltip content="Hello, I'm a tooltip" direction="right">
-      <Button text="Button with tooltip">I&apos;m a button</Button>
+      <Button>I&apos;m a button</Button>
     </Tooltip>
   </div>
 );
-export const Left = (): React.ReactNode => (
+export const Left = () => (
   <div className="w-screen h-screen flex justify-center items-center">
     <Tooltip content="Hello, I'm a tooltip" direction="left">
-      <Button text="Button with tooltip">I&apos;m a button</Button>
+      <Button>I&apos;m a button</Button>
     </Tooltip>
   </div>
 );
-export const Bottom = (): React.ReactNode => (
+export const Bottom = () => (
   <div className="w-screen h-screen flex justify-center items-center">
     <Tooltip content="Hello, I'm a tooltip" direction="bottom">
-      <Button text="Button with tooltip">I&apos;m a button</Button>
+      <Button>I&apos;m a button</Button>
     </Tooltip>
   </div>
 );

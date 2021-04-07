@@ -14,7 +14,7 @@ type TextAreaProps = {
   withRequiredIndicator?: boolean;
   name?: string;
   value?: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onKeyDown?: () => void;
   error?: string;
   className?: string;
@@ -22,9 +22,10 @@ type TextAreaProps = {
   max?: string | number;
   withMax?: boolean;
   placeholder?: string;
-  field?: FieldInputProps;
+  field?: FieldInputProps<HTMLTextAreaElement>;
   form?: FormikProps;
-  onBlur?: () => void;
+  onBlur?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
+  onFocus?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
   withErrorInLabel?: boolean;
   isDisabled?: boolean;
 };
@@ -47,6 +48,7 @@ export const TextArea = ({
   field,
   form,
   onBlur,
+  onFocus,
   withErrorInLabel,
   isDisabled,
 }: TextAreaProps) => {
@@ -56,7 +58,7 @@ export const TextArea = ({
     formikCompatibleOnBlur,
     formikCompatibleOnChange,
     formikCompatibleValue,
-  } = useFormikCompatibleValues({
+  } = useFormikCompatibleValues<HTMLTextAreaElement>({
     field,
     form,
     value,
@@ -94,6 +96,11 @@ export const TextArea = ({
         name={field?.name || name}
         id={field?.name || name ? field?.name || name : undefined}
         onBlur={formikCompatibleOnBlur}
+        onFocus={(event) => {
+          if (onFocus) {
+            onFocus(event);
+          }
+        }}
         disabled={isDisabled}
       />
       {withMax && (
