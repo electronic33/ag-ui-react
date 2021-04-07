@@ -17,7 +17,7 @@ type TextInputProps = {
   name?: string;
   value?: string | number;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLInputElement>) => void;
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
   onEnterPress?: (value: string | number) => void;
   onButtonClick?: () => void;

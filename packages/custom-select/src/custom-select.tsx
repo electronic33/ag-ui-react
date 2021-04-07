@@ -15,7 +15,7 @@ type SelectProps<T extends OptionValue> = {
     value: T;
     Icon?: React.ComponentType<{ className?: string }>;
   }[];
-  value: T;
+  value?: T;
   onChange?: (value: T) => void;
   containerClassName?: string;
   labelClassName?: string;
@@ -53,7 +53,7 @@ export function Select<T extends OptionValue>({
   loadingText,
 }: SelectProps<T>) {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeIndex, setActiveIndex] = useState<number>();
+  const [activeIndex, setActiveIndex] = useState<number>(-1);
 
   const selectOptionsRef = useRef<HTMLDivElement>(null);
   const selectButtonRef = useRef<HTMLButtonElement>(null);
@@ -68,7 +68,7 @@ export function Select<T extends OptionValue>({
 
   const onSpaceOrEnterPress = useCallback(() => {
     if (isOpen && onChange) {
-      onChange(options[activeIndex as number].value);
+      onChange(options[activeIndex].value);
     }
   }, [isOpen, options, onChange, activeIndex]);
 
@@ -77,12 +77,12 @@ export function Select<T extends OptionValue>({
     setIsOpen,
     selectOptionsRef,
     selectButtonRef,
-    activeIndex: activeIndex as number,
+    activeIndex,
     setActiveIndex,
     options,
     onSpaceOrEnterPress,
-    isLoading: isLoading as boolean,
-    error: error as string,
+    isLoading,
+    error,
   });
 
   return (
@@ -206,7 +206,7 @@ export function Select<T extends OptionValue>({
                         optionClassName ? optionClassName(option.value) : '',
                       )}
                       onMouseEnter={() => setActiveIndex(index)}
-                      onMouseLeave={() => setActiveIndex(undefined)}
+                      onMouseLeave={() => setActiveIndex(-1)}
                       onClick={() => {
                         if (onChange) {
                           onChange(option.value);

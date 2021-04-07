@@ -1,13 +1,13 @@
-import React from 'react';
-import { Field, Form, Formik } from 'formik';
+import React, { useCallback } from 'react';
+import { Field, Form, Formik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import classNames from 'classnames';
 
-import { TextInput } from '@app-garage/text-input';
+import { FieldInputProps, TextInput } from '@app-garage/text-input';
 import { ImageUploader } from '@app-garage/image-uploader';
 import { Button } from '@app-garage/button';
 import { Switch } from '@app-garage/switch';
-import { Select } from '@app-garage/select';
+import { Select } from '@app-garage/custom-select';
 import { TextArea } from '@app-garage/text-area';
 import { Checkbox } from '@app-garage/checkbox';
 
@@ -90,24 +90,53 @@ export const AdminForm = ({
   isSubmitDisabled,
   isSubmitting,
   onCancel,
-}: AdminFormProps): React.ReactElement => (
-  <Formik
-    initialValues={items.reduce(
-      (result, currentValue) => ({
-        ...result,
-        [currentValue.name]: currentValue.initialValue,
-      }),
-      {},
-    )}
-    validationSchema={validationSchema && Yup.object().shape(validationSchema)}
-    validateOnBlur
-    validateOnChange={false}
-    onSubmit={onSubmit}
-  >
-    {(props) => {
-      const { values, setFieldValue, handleSubmit } = props;
+}: AdminFormProps) => {
+  const getFormItem = useCallback(({ field, form, item }) => {
+    switch (item.type) {
+      case 'text': {
+        return <TextInput field={field} form={form} {...item} />;
+      }
+      case 'number': {
+        return <TextInput field={field} form={form} {...item} />;
+      }
+      case 'textarea': {
+        return <TextArea field={field} form={form} {...item} />;
+      }
+      case 'checkbox': {
+        return <Checkbox field={field} form={form} {...item} />;
+      }
+      case 'switch': {
+        return <Switch field={field} form={form} {...item} />;
+      }
+      case 'select': {
+        return <Select field={field} form={form} {...item} />;
+      }
+      case 'image-uploader': {
+        return <ImageUploader field={field} form={form} {...item} />;
+      }
+      default: {
+        return <TextInput field={field} form={form} {...item} />;
+      }
+    }
+  }, []);
 
-      return (
+  return (
+    <Formik
+      initialValues={items.reduce(
+        (result, currentValue) => ({
+          ...result,
+          [currentValue.name]: currentValue.initialValue,
+        }),
+        {},
+      )}
+      validationSchema={
+        validationSchema && Yup.object().shape(validationSchema)
+      }
+      validateOnBlur
+      validateOnChange={false}
+      onSubmit={onSubmit}
+    >
+      {({ handleSubmit }) => (
         <Form
           className={classNames(
             'flex flex-col items-center bg-gray-100',
@@ -129,104 +158,19 @@ export const AdminForm = ({
           </div>
           <div className="grid grid-cols-3 gap-5 row-span-full ">
             {items.map((item) => (
-              <>
-                {item.type === 'text' && (
-                  <div className="flex justify-center items-center">
-                    <Field
-                      errorInLabel
-                      containerClassName={classNames(
-                        '',
-                        item.containerClassName,
-                      )}
-                      component={TextInput}
-                      placeholder={item.placeholder}
-                      type="text"
-                      name={item.name}
-                      label={item.label}
-                      Icon={item.Icon}
-                    />
-                  </div>
-                )}
-                {item.type === 'textarea' && (
-                  <div className="flex justify-center items-center row-span-2 ">
-                    <Field
-                      errorInLabel
-                      textarea
-                      containerClassName={classNames(
-                        '',
-                        item.containerClassName,
-                      )}
-                      inputClassName="h-full w-full"
-                      placeholder={item.placeholder}
-                      type="text"
-                      name={item.name}
-                      label={item.label}
-                      withRomanianFlag
-                      Icon={item.Icon}
-                      component={TextArea}
-                    />
-                  </div>
-                )}
-                {item.type === 'number' && (
-                  <div className="flex justify-center items-center">
-                    <Field
-                      errorInLabel
-                      containerClassName={classNames(
-                        '',
-                        item.containerClassName,
-                      )}
-                      component={TextInput}
-                      placeholder={item.placeholder}
-                      type="number"
-                      name={item.name}
-                      label={item.label}
-                      Icon={item.Icon}
-                    />
-                  </div>
-                )}
-                {item.type === 'checkbox' && (
-                  <Checkbox label={item.label} name={item.name} />
-                )}
-                {item.type === 'switch' && (
-                  <Switch
-                    containerClassName="mr-5"
-                    active={values[item.name]}
-                    setActive={() =>
-                      setFieldValue(`${item.name}`, !values[item.name])
-                    }
-                    label={item.label}
-                  />
-                )}
-                {item.type === 'select' && (
-                  <div className="flex justify-center items-center">
-                    <Select
-                      containerClassName={item.containerClassName}
-                      onChange={(selected) =>
-                        setFieldValue(`${item.name}`, selected)
-                      }
-                      selected={values[item.name]}
-                      label={item.label}
-                      options={item.options}
-                    />
-                  </div>
-                )}
-                {item.type === 'image-uploader' && (
-                  <div className="col-span-full flex justify-center items-center">
-                    <ImageUploader
-                      multipleImages={item.isMultiple}
-                      setImages={(images) =>
-                        setFieldValue(`${item.name}`, images)
-                      }
-                      images={values[item.name]}
-                      // error={touched?.newImages && errors?.newImages}
-                    />
-                  </div>
-                )}
-              </>
+              <Field>
+                {({
+                  field,
+                  form,
+                }: {
+                  field: FieldInputProps<any>;
+                  form: FormikProps<any>;
+                }) => getFormItem({ field, form, item })}
+              </Field>
             ))}
           </div>
         </Form>
-      );
-    }}
-  </Formik>
-);
+      )}
+    </Formik>
+  );
+};

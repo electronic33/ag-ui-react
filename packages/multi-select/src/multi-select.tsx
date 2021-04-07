@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { ButtonSpinner } from '@app-garage/button-spinner';
@@ -55,7 +54,7 @@ export function MultiSelect<T extends OptionValue>({
   placeholder,
 }: MultiSelectTypes<T>) {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeIndex, setActiveIndex] = useState<number>();
+  const [activeIndex, setActiveIndex] = useState(-1);
 
   const selectOptionsRef = useRef<HTMLDivElement>(null);
   const selectButtonRef = useRef<HTMLButtonElement>(null);
@@ -294,7 +293,7 @@ export function MultiSelect<T extends OptionValue>({
                             role="button"
                             className="w-full outline-none"
                             onMouseEnter={() => setActiveIndex(index)}
-                            // onMouseLeave={() => setActiveIndex(undefined)}
+                            onMouseLeave={() => setActiveIndex(-1)}
                             onMouseDown={() => {
                               if (value.includes(option.value)) {
                                 const newOptions = value.filter(

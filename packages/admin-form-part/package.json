@@ -30,9 +30,10 @@
   },
   "dependencies": {
     "@app-garage/button": "^1.1.6",
+    "@app-garage/checkbox": "^1.0.2",
+    "@app-garage/custom-select": "^1.0.3",
     "@app-garage/image-uploader": "^1.0.2",
     "@app-garage/label": "^1.1.9",
-    "@app-garage/select": "^1.0.2",
     "@app-garage/switch": "^1.0.2",
     "@app-garage/text-area": "^1.0.2",
     "@app-garage/text-input": "^1.0.3",

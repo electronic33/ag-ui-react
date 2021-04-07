@@ -1,19 +1,19 @@
-export type FieldInputProps = {
+export type FieldInputProps<E extends HTMLButtonElement | HTMLInputElement> = {
   value: boolean;
   name: string;
   multiple?: boolean;
   checked?: boolean;
   onChange: {
-    (event: React.ChangeEvent<any>): void;
-    <T = string | React.ChangeEvent<any>>(
+    (event: React.ChangeEvent<E>): void;
+    <T = string | React.ChangeEvent<E>>(
       field: T,
-    ): T extends React.ChangeEvent<any>
+    ): T extends React.ChangeEvent<E>
       ? void
-      : (event: string | React.ChangeEvent<any>) => void;
+      : (event: string | React.ChangeEvent<E>) => void;
   };
 
   onBlur: {
-    (event: React.FocusEvent<HTMLButtonElement>): void;
+    (event: React.FocusEvent<E>): void;
     <T = string | any>(fieldOrEvent: T): T extends string
       ? (event: any) => void
       : void;
@@ -25,17 +25,21 @@ export type FormikProps = {
   errors?: Record<string, string>;
 };
 
-type UseFormikCompatibleValuesParams = {
-  field?: FieldInputProps;
+type UseFormikCompatibleValuesParams<
+  T extends HTMLButtonElement | HTMLInputElement
+> = {
+  field?: FieldInputProps<T>;
   form?: FormikProps;
   value?: boolean;
   error?: string;
   name?: string;
   onChange?: (value: boolean) => void;
-  onBlur?: (event: React.FocusEvent<HTMLButtonElement>) => void;
+  onBlur?: (event: React.FocusEvent<T>) => void;
 };
 
-export const useFormikCompatibleValues = ({
+export function useFormikCompatibleValues<
+  T extends HTMLButtonElement | HTMLInputElement
+>({
   value,
   error,
   field,
@@ -43,8 +47,8 @@ export const useFormikCompatibleValues = ({
   name,
   onChange,
   onBlur,
-}: UseFormikCompatibleValuesParams) => {
-  let formikCompatibleValue;
+}: UseFormikCompatibleValuesParams<T>) {
+  let formikCompatibleValue: boolean | undefined;
 
   if (value !== undefined) {
     formikCompatibleValue = value;
@@ -71,24 +75,24 @@ export const useFormikCompatibleValues = ({
     formikCompatibleName = field.name;
   }
 
-  let formikCompatibleOnChange:
-    | UseFormikCompatibleValuesParams['onChange']
-    | FieldInputProps['onChange'];
+  let formikCompatibleOnChange: (value: boolean) => void;
 
   if (onChange) {
     formikCompatibleOnChange = onChange;
   } else if (field) {
     formikCompatibleOnChange = field.onChange;
+  } else {
+    formikCompatibleOnChange = () => {};
   }
 
-  let formikCompatibleOnBlur:
-    | UseFormikCompatibleValuesParams['onBlur']
-    | FieldInputProps['onBlur'];
+  let formikCompatibleOnBlur: (event: React.FocusEvent<T>) => void;
 
   if (onBlur) {
     formikCompatibleOnBlur = onBlur;
   } else if (field) {
     formikCompatibleOnBlur = field.onBlur;
+  } else {
+    formikCompatibleOnBlur = () => {};
   }
 
   return {
@@ -98,4 +102,4 @@ export const useFormikCompatibleValues = ({
     formikCompatibleOnChange,
     formikCompatibleName,
   };
-};
+}

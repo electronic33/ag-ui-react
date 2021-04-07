@@ -1,4 +1,4 @@
-import React, { useState, useCallback, Fragment } from 'react';
+import React, { useState } from 'react';
 import Cropper from 'react-easy-crop';
 import { FcAddImage } from 'react-icons/fc';
 import classNames from 'classnames';
@@ -7,6 +7,7 @@ import { useDropzone } from 'react-dropzone';
 import { Button } from '@app-garage/button';
 import { Modal } from '@app-garage/modal';
 import { SliderWithModal } from '@app-garage/slider';
+import { Area, Point } from 'react-easy-crop/types';
 
 const initialCropPosition = { x: 0, y: 0 };
 
@@ -15,20 +16,11 @@ const createImage = (url: string): Promise<HTMLImageElement> =>
     const image = new Image();
     image.addEventListener('load', () => resolve(image));
     image.addEventListener('error', (error) => reject(error));
-    image.setAttribute('crossOrigin', 'anonymous'); // needed to avoid cross-origin issues on CodeSandbox
     image.src = url;
   });
 
-function getRadianAngle(degreeValue: number) {
-  return (degreeValue * Math.PI) / 180;
-}
+const getRadianAngle = (degreeValue: number) => (degreeValue * Math.PI) / 180;
 
-/**
- * This function was adapted from the one in the ReadMe of https://github.com/DominicTobias/react-image-crop
- * @param {File} image - Image File url
- * @param {Object} pixelCrop - pixelCrop Object provided by react-easy-crop
- * @param {number} rotation - optional rotation parameter
- */
 const getCroppedImg = async (
   imageSrc: string,
   pixelCrop: { width: number; height: number; x: number; y: number },
@@ -114,76 +106,69 @@ export async function getRotatedImage(imageSrc: string, rotation = 0) {
 }
 
 const readFile = (file: File) =>
-  new Promise((resolve) => {
+  new Promise<string>((resolve) => {
     const reader = new FileReader();
-    reader.addEventListener('load', () => resolve(reader.result), false);
+    reader.addEventListener(
+      'load',
+      () => resolve(reader.result as string),
+      false,
+    );
     reader.readAsDataURL(file);
   });
+
 type ImageUploaderTypes = {
   images: string[];
   setImages: (images: string[]) => void;
-  multipleImages?: boolean;
+  isMultiple?: boolean;
   aspectRatio?: number;
-  withoutCrop?: boolean;
+  withCrop?: boolean;
   onlyWithCrop?: boolean;
   error?: string;
 };
 
 export const ImageUploader = ({
-  /**
-   An array where the images will be pushed.
-  */
   images = [],
   setImages,
-  multipleImages = false,
-  aspectRatio = 4 / 4,
-  /**
-   Skip the cropping step.
-  */
-  withoutCrop = false,
-  /**
-   Only push the cropped images to the images array.
-  */
+  isMultiple = false,
+  aspectRatio = 1,
+  withCrop = true,
   onlyWithCrop = false,
   error,
 }: ImageUploaderTypes): React.ReactElement => {
-  const [imageSources, setImageSources] = useState([]);
-  const [cropPositions, setCropPositions] = useState([]);
+  const [imageSources, setImageSources] = useState<string[]>([]);
+  const [cropPositions, setCropPositions] = useState<Point[]>([]);
 
-  const [croppedAreaPixelsArray, setCroppedAreaPixelsArray] = useState([]);
+  const [croppedAreaPixelsArray, setCroppedAreaPixelsArray] = useState<Area[]>(
+    [],
+  );
   const [zoom, setZoom] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [acceptedFiles, setAcceptedFiles] = useState<(File & string)[]>([]);
+  const [acceptedFiles, setAcceptedFiles] = useState<File[]>([]);
 
-  const showCroppedImage = useCallback(
-    async (index) => {
-      try {
-        const croppedImage = await getCroppedImg(
-          imageSources[index],
-          croppedAreaPixelsArray[index],
-          0,
-          (acceptedFiles[index] as File).type,
-        );
+  const showCroppedImage = async (index: number) => {
+    try {
+      const croppedImage = await getCroppedImg(
+        imageSources[index],
+        croppedAreaPixelsArray[index],
+        0,
+        (acceptedFiles[index] as File).type,
+      );
 
-        const newImages = [...images];
+      const newImages = [...images];
 
-        newImages[index] = croppedImage;
+      newImages[index] = croppedImage;
 
-        setImages(newImages);
-      } catch (e) {
-        // eslint-disable-next-line no-console
-        console.error(e);
-      }
-    },
-    [imageSources, croppedAreaPixelsArray, acceptedFiles, images, setImages],
-  );
+      setImages(newImages);
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e);
+    }
+  };
 
-  const onFileChange = async (
-    e: UIEvent & { target: HTMLInputElement & { files: Array<string> } },
-  ) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const { files } = e.target;
+  const onFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      const { files } = event.target;
       const newFiles = [];
       const readFilePromiseFns = [];
 
@@ -199,39 +184,42 @@ export const ImageUploader = ({
       setAcceptedFiles(newFiles);
       setImageSources(readyFiles);
 
-      if (!onlyWithCrop) setImages(readyFiles);
-      if (!withoutCrop) {
+      if (!onlyWithCrop) {
+        setImages(readyFiles);
+      }
+
+      if (!withCrop) {
         setIsModalOpen(true);
       }
     }
   };
 
-  const onDrop = useCallback(
-    async (files) => {
-      if (files && files.length > 0) {
-        const newFiles = [];
-        const readFilePromiseFns = [];
+  const onDrop = async (newAcceptedFiles: File[]) => {
+    if (newAcceptedFiles && newAcceptedFiles.length > 0) {
+      const newFiles: File[] = [];
+      const readFilePromiseFns: (() => Promise<string>)[] = [];
 
-        for (let i = 0; i < files.length; i += 1) {
-          readFilePromiseFns.push(() => readFile(files[i]));
-          newFiles.push(files[i]);
-        }
+      newAcceptedFiles.forEach((acceptedFile) => {
+        readFilePromiseFns.push(() => readFile(acceptedFile));
+        newFiles.push(acceptedFile);
+      });
 
-        const readyFiles = await Promise.all(
-          readFilePromiseFns.map((promiseFn) => promiseFn()),
-        );
+      const readyFiles = await Promise.all(
+        readFilePromiseFns.map((promiseFn) => promiseFn()),
+      );
 
-        setAcceptedFiles(newFiles);
-        setImageSources(readyFiles);
+      setAcceptedFiles(newFiles);
+      setImageSources(readyFiles);
 
-        if (!onlyWithCrop) setImages(readyFiles);
-        if (!withoutCrop) {
-          setIsModalOpen(true);
-        }
+      if (!onlyWithCrop) {
+        setImages(readyFiles);
       }
-    },
-    [onlyWithCrop, setImages, withoutCrop],
-  );
+
+      if (!withCrop) {
+        setIsModalOpen(true);
+      }
+    }
+  };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
@@ -243,33 +231,22 @@ export const ImageUploader = ({
         </p>
       )}
       <h1 className="flex uppercase font-bold text-lg text-gray-400 mb-10">
-        Új Képek hozzáadása
+        Add new images
       </h1>
-      <div
-        onChange={onFileChange}
-        {...getRootProps({ className: 'dropzone mb-5 outline-none' })}
-      >
-        {multipleImages ? (
-          <input
-            {...getInputProps()}
-            onChange={onFileChange}
-            accept="image/*"
-          />
-        ) : (
-          <input
-            {...getInputProps()}
-            onChange={onFileChange}
-            multiple={false}
-            accept="image/*"
-          />
-        )}
+      <div {...getRootProps({ className: 'dropzone mb-5 outline-none' })}>
+        <input
+          {...getInputProps()}
+          onChange={onFileChange}
+          multiple={isMultiple ? true : undefined}
+          accept="image/*"
+        />
         {isDragActive ? (
           <div className="flex flex-col items-center border-2 border-dashed border-gray-200 h-50 w-64 640:w-96 rounded">
-            <div className=" flex justify-center items-center p-4 h-20 w-full text-base font-semibold text-gray-500 text-center bg-blue-100">
-              <p> HÚZD IDE A FÁJLOKAT...</p>
+            <div className="flex justify-center items-center p-4 h-20 w-full text-base font-semibold text-gray-500 text-center bg-blue-100">
+              <p>Drag the files here...</p>
             </div>
             <FcAddImage
-              className={classNames(' my-auto text-8xl', {
+              className={classNames('my-auto text-8xl', {
                 'transition-all duration-200 hover:scale-200':
                   isDragActive === true,
               })}
@@ -277,24 +254,23 @@ export const ImageUploader = ({
           </div>
         ) : (
           <div className="flex flex-col items-center border-2 overflow-hidden border-dashed border-gray-200 h-50 w-64 640:w-96 rounded-lg shadow">
-            <div className=" flex justify-center items-center p-4 h-20 w-full text-base font-semibold text-gray-50 text-center bg-blue-500">
-              <p>HÚZD IDE A FÁJLT ÉS ENGEDD EL VAGY KATTINTS</p>
+            <div className="flex justify-center items-center p-4 h-20 w-full text-base font-semibold text-gray-50 text-center bg-blue-500">
+              <p>Drag and drop files here or click to upload</p>
             </div>
             <FcAddImage className="text-7xl my-auto" />
           </div>
         )}
       </div>
-
       {imageSources ? (
         <>
-          <div className=" mb-3 flex flex-col items-center h-full ">
-            {!withoutCrop ? (
+          <div className="mb-3 flex flex-col items-center h-full ">
+            {!withCrop ? (
               <Modal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
                 modalClassName="flex flex-col items-center justify-center h-full"
               >
-                {multipleImages ? (
+                {isMultiple ? (
                   <SliderWithModal
                     startAtIndex={0}
                     itemsToShow={1}
@@ -302,7 +278,8 @@ export const ImageUploader = ({
                     className="w-screen m-auto h-full"
                   >
                     {imageSources.map((image, index) => (
-                      <div className="w-full h-full" key={image}>
+                      // eslint-disable-next-line react/no-array-index-key
+                      <div className="w-full h-full" key={index}>
                         <div className="flex flex-col justify-center items-center h-full">
                           {acceptedFiles && acceptedFiles[index] && (
                             <div className="flex flex-col items-center w-max py-2 bg-blue-100 text-gray-500 text-sm rounded-lg px-4 mb-10">
@@ -316,18 +293,15 @@ export const ImageUploader = ({
                           <div className="relative w-72 h-48 640:w-96 640:h-4/6">
                             <Cropper
                               classes={{
-                                containerClassName: '  ',
-                                mediaClassName: ' bg-black ',
-                                cropAreaClassName: '',
+                                mediaClassName: 'bg-gray-900',
                               }}
-                              // disableAutomaticStylesInjection
                               image={image}
                               crop={cropPositions[index] || initialCropPosition}
                               zoom={zoom}
-                              onZoomChange={!withoutCrop && setZoom}
+                              onZoomChange={!withCrop && setZoom}
                               aspect={aspectRatio}
                               onCropChange={(newCropPosition) =>
-                                !withoutCrop &&
+                                !withCrop &&
                                 setCropPositions((prevCropPositions) => {
                                   const newCropPositions = [
                                     ...prevCropPositions,
@@ -360,10 +334,10 @@ export const ImageUploader = ({
                               className="mt-2"
                               onClick={() => {
                                 showCroppedImage(index);
-                                // setIsModalOpen(false);
                               }}
                             >
-                              <AiFillEye className="mr-2" /> Kép létrehozása
+                              <AiFillEye className="mr-2" />
+                              Generate Image
                             </Button>
                           </div>
                         </div>
@@ -371,99 +345,92 @@ export const ImageUploader = ({
                     ))}
                   </SliderWithModal>
                 ) : (
-                  <>
-                    {imageSources.map((image, index) => (
-                      <div className="w-full h-full" key={image}>
-                        <div className="flex flex-col justify-center items-center h-full">
-                          {acceptedFiles && acceptedFiles[index] && (
-                            <div className="flex flex-col items-center w-max py-2 bg-blue-100 text-gray-500 text-sm rounded-lg px-4 mb-10">
-                              <h4>Feltöltött File:</h4>
-                              <p key={acceptedFiles[index].name}>
-                                {acceptedFiles[index].name} -{' '}
-                                {acceptedFiles[index].size} bytes
-                              </p>
-                            </div>
-                          )}
-                          <div className="relative w-72 h-48 640:w-96 640:h-4/6">
-                            <Cropper
-                              classes={{
-                                containerClassName: '  ',
-                                mediaClassName: ' bg-black ',
-                                cropAreaClassName: '',
-                              }}
-                              // disableAutomaticStylesInjection
-                              image={image}
-                              crop={cropPositions[index] || initialCropPosition}
-                              zoom={zoom}
-                              onZoomChange={!withoutCrop && setZoom}
-                              aspect={aspectRatio}
-                              onCropChange={(newCropPosition) =>
-                                !withoutCrop &&
-                                setCropPositions((prevCropPositions) => {
-                                  const newCropPositions = [
-                                    ...prevCropPositions,
+                  imageSources.map((image, index) => (
+                    // eslint-disable-next-line react/no-array-index-key
+                    <div className="w-full h-full" key={index}>
+                      <div className="flex flex-col justify-center items-center h-full">
+                        {acceptedFiles && acceptedFiles[index] && (
+                          <div className="flex flex-col items-center w-max py-2 bg-blue-100 text-gray-500 text-sm rounded-lg px-4 mb-10">
+                            <h4>Feltöltött File:</h4>
+                            <p key={acceptedFiles[index].name}>
+                              {acceptedFiles[index].name} -{' '}
+                              {acceptedFiles[index].size} bytes
+                            </p>
+                          </div>
+                        )}
+                        <div className="relative w-72 h-48 640:w-96 640:h-4/6">
+                          <Cropper
+                            classes={{
+                              mediaClassName: 'bg-gray-900',
+                            }}
+                            image={image}
+                            crop={cropPositions[index] || initialCropPosition}
+                            zoom={zoom}
+                            onZoomChange={!withCrop && setZoom}
+                            aspect={aspectRatio}
+                            onCropChange={(newCropPosition) =>
+                              !withCrop &&
+                              setCropPositions((prevCropPositions) => {
+                                const newCropPositions = [...prevCropPositions];
+
+                                newCropPositions[index] = newCropPosition;
+
+                                return newCropPositions;
+                              })
+                            }
+                            onCropComplete={(_, croppedAreaPixels) =>
+                              setCroppedAreaPixelsArray(
+                                (prevCroppedAreaPixelsArray) => {
+                                  const newCroppedAreaPixelsArray = [
+                                    ...prevCroppedAreaPixelsArray,
                                   ];
 
-                                  newCropPositions[index] = newCropPosition;
+                                  newCroppedAreaPixelsArray[
+                                    index
+                                  ] = croppedAreaPixels;
 
-                                  return newCropPositions;
-                                })
-                              }
-                              onCropComplete={(_, croppedAreaPixels) =>
-                                setCroppedAreaPixelsArray(
-                                  (prevCroppedAreaPixelsArray) => {
-                                    const newCroppedAreaPixelsArray = [
-                                      ...prevCroppedAreaPixelsArray,
-                                    ];
-
-                                    newCroppedAreaPixelsArray[
-                                      index
-                                    ] = croppedAreaPixels;
-
-                                    return newCroppedAreaPixelsArray;
-                                  },
-                                )
-                              }
-                            />
-                          </div>
-                          <div className="flex justify-center mb-2 mt-2">
-                            <Button
-                              className="mt-2"
-                              onClick={() => {
-                                showCroppedImage(index);
-                                // setIsModalOpen(false);
-                              }}
-                            >
-                              <AiFillEye className="mr-2" /> Kép létrehozása
-                            </Button>
-                          </div>
+                                  return newCroppedAreaPixelsArray;
+                                },
+                              )
+                            }
+                          />
+                        </div>
+                        <div className="flex justify-center mb-2 mt-2">
+                          <Button
+                            className="mt-2"
+                            onClick={() => {
+                              showCroppedImage(index);
+                            }}
+                          >
+                            <AiFillEye className="mr-2" /> Kép létrehozása
+                          </Button>
                         </div>
                       </div>
-                    ))}{' '}
-                  </>
+                    </div>
+                  ))
                 )}
               </Modal>
             ) : null}
           </div>
-
           {images && images[0] && (
             <>
               <div className="flex flex-col justify-center items-center">
                 <p className="text-xl text-gray-500 rounded-t-3xl shadow font-semibold bg-blue-100 px-8 py-1">
-                  ELŐNÉZET
+                  Preview
                 </p>
               </div>
-              {multipleImages ? (
+              {isMultiple ? (
                 <SliderWithModal
                   startAtIndex={0}
                   itemsToShow={1}
                   itemsToScroll={1}
                   className="w-2/6 "
                 >
-                  {images.map((image) => (
-                    <div key={image} className={classNames('')}>
+                  {images.map((image, index) => (
+                    // eslint-disable-next-line react/no-array-index-key
+                    <div key={index} className={classNames('')}>
                       <img
-                        alt=""
+                        alt={`cropped-preview-${index}`}
                         className="object-contain"
                         style={{ width: 384, height: 216 }}
                         src={image}
@@ -472,18 +439,17 @@ export const ImageUploader = ({
                   ))}
                 </SliderWithModal>
               ) : (
-                <>
-                  {images.map((image) => (
-                    <div key={image} className={classNames('')}>
-                      <img
-                        alt=""
-                        className="object-contain"
-                        style={{ width: 384, height: 216 }}
-                        src={image}
-                      />
-                    </div>
-                  ))}
-                </>
+                images.map((image, index) => (
+                  // eslint-disable-next-line react/no-array-index-key
+                  <div key={index} className={classNames('')}>
+                    <img
+                      alt={`cropped-preview-${index}`}
+                      className="object-contain"
+                      style={{ width: 384, height: 216 }}
+                      src={image}
+                    />
+                  </div>
+                ))
               )}
             </>
           )}

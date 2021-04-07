@@ -7,7 +7,7 @@ export default {
   component: MultiSelect,
 };
 
-export const Default = (): React.ReactNode => {
+export const Default = () => {
   const [value, setValue] = useState([0]);
 
   return (

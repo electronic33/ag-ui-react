@@ -53,12 +53,12 @@ const getNextItemFromSearch = <T>(
 
 type UseSelectProps = {
   isOpen: boolean;
-  isLoading: boolean;
-  error: string;
+  isLoading?: boolean;
+  error?: string;
   setIsOpen: (isOpen: boolean) => void;
-  selectOptionsRef: { current: HTMLElement };
-  selectButtonRef: { current: HTMLElement };
-  inputRef?: { current: HTMLElement };
+  selectOptionsRef: React.RefObject<HTMLDivElement>;
+  selectButtonRef: React.RefObject<HTMLButtonElement>;
+  inputRef?: React.RefObject<HTMLDivElement>;
   withFilter?: boolean;
   activeIndex: number;
   onSpaceOrEnterPress: (event?: any) => void;
@@ -84,12 +84,14 @@ export const useSelect = ({
   useEffect(() => {
     // @ts-ignore
     const handleClickOutside = (event) => {
-      if (
-        isOpen &&
-        !selectOptionsRef.current.contains(event.target) &&
-        !selectButtonRef.current.contains(event.target)
-      ) {
-        setIsOpen(false);
+      if (selectButtonRef.current && selectOptionsRef.current) {
+        if (
+          isOpen &&
+          !selectOptionsRef.current.contains(event.target) &&
+          !selectButtonRef.current.contains(event.target)
+        ) {
+          setIsOpen(false);
+        }
       }
     };
 

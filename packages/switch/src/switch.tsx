@@ -8,9 +8,9 @@ import {
 } from './boolean-input-hooks';
 
 type SwitchProps = {
-  value: boolean;
+  value?: boolean;
   label?: string;
-  onChange: (value: boolean) => void;
+  onChange?: (value: boolean) => void;
   onBlur?: (event: React.FocusEvent<HTMLButtonElement>) => void;
   containerClassName?: string;
   isDisabled?: boolean;
@@ -19,7 +19,7 @@ type SwitchProps = {
   activeDotBackgroundColorClass?: string;
   notActiveDotBackgroundColorClass?: string;
   name?: string;
-  field?: FieldInputProps;
+  field?: FieldInputProps<HTMLButtonElement>;
   form?: FormikProps;
 };
 
@@ -106,7 +106,7 @@ export const Switch = ({
         />
       </button>
       {formikCompatibleError && (
-        <span className="">{formikCompatibleError}</span>
+        <span className="text-red-600 mt-2">{formikCompatibleError}</span>
       )}
     </div>
   );

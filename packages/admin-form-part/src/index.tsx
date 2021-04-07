@@ -1,1 +1,1 @@
-export * from "./admin-form-part";
+export * from './admin-form-part';
