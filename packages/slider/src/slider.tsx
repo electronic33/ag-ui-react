@@ -4,53 +4,63 @@ import React, {
   useMemo,
   useRef,
   useState,
-} from "react";
-import { Modal } from "@app-garage/modal";
-import classNames from "classnames";
-import { Arrow } from "./arrow";
-import { Dots } from "./dots";
-import { Slide } from "./slide";
+} from 'react';
+import { Modal } from '@app-garage/modal';
+import classNames from 'classnames';
+import { Arrow } from './arrow';
+import { Dots } from './dots';
+import { Slide } from './slide';
 
-type SliderTypes = {
-  className?: string;
-  withModal?: boolean;
-  children?: React.ReactNode[];
+type BreakpointConfig = {
+  itemsToScroll: number;
+  itemsToShow: number;
+};
+
+type SliderProps = {
+  containerClassName?: string;
+  children: React.ReactNode[];
   itemsToShow?: number;
   itemsToScroll?: number;
   breakpoints?: {
     minWidth: number;
-    config: { itemsToScroll: number; itemsToShow: number };
+    config: BreakpointConfig;
   }[];
-  setterFn?: (index: number) => void;
+  onSlideClick?: (index: number) => void;
   startAtIndex?: number;
 };
 
 const Slider = ({
-  className = "w-full",
+  containerClassName,
   children,
-
   itemsToShow = 1,
   itemsToScroll = 1,
   breakpoints,
-  setterFn,
+  onSlideClick,
   startAtIndex = 0,
-}: SliderTypes): React.ReactElement => {
-  const [width, setGetWidth] = useState(0);
-  const [height, setGetHeight] = useState(0);
+}: SliderProps): React.ReactElement => {
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
   const [dotsArr, setDotsArr] = useState([1, 2, 3]);
   const [activeDot, setActiveDot] = useState(0);
-  const ref = useRef(null);
   const [state, setState] = useState({
     activeIndex: 0,
     translate: 0,
     transition: 0,
   });
+  const [
+    breakpointConfig,
+    setBreakpointConfig,
+  ] = useState<BreakpointConfig | null>(null);
 
-  const [breakpointConfig, setBreakpointConfig] = useState(null);
+  const ref = useRef<HTMLDivElement>(null);
+
+  const { transition, translate, activeIndex } = state;
 
   useLayoutEffect(() => {
-    setGetWidth(ref.current.getBoundingClientRect().width);
-    setGetHeight(ref.current.getBoundingClientRect().height);
+    if (ref.current) {
+      setWidth(ref.current.getBoundingClientRect().width);
+      setHeight(ref.current.getBoundingClientRect().height);
+    }
 
     const screenWidth = window.innerWidth;
 
@@ -61,12 +71,13 @@ const Slider = ({
 
       setBreakpointConfig(currentBp ? currentBp.config : null);
     }
-  }, []);
+  }, [breakpoints]);
 
   const currentItemsToShow = useMemo(
     () => breakpointConfig?.itemsToShow || itemsToShow,
     [breakpointConfig, itemsToShow],
   );
+
   const currentItemsToScroll = useMemo(
     () => breakpointConfig?.itemsToScroll || itemsToScroll,
     [breakpointConfig, itemsToScroll],
@@ -79,30 +90,31 @@ const Slider = ({
       activeIndex: startAtIndex * currentItemsToScroll,
       transition: 0,
     });
+
     setActiveDot(startAtIndex);
-  }, [width]);
+  }, [width, currentItemsToScroll, currentItemsToShow, startAtIndex]);
 
-  const { translate, transition, activeIndex } = state;
+  const dotsNum =
+    Math.ceil((children.length - currentItemsToShow) / currentItemsToScroll) +
+    1;
 
-  const nextSlide = () => {
+  const goToNextSlide = () => {
     if (activeIndex / itemsToScroll === dotsNum - 1) {
-      // if (activeIndex === children.length - currentItemsToShow) {
       return (
         setActiveDot(0),
         setState({
-          ...state,
           translate: 0,
           activeIndex: 0,
           transition: 0.45,
         })
       );
     }
+
     if (activeIndex / itemsToScroll === dotsNum - 2) {
       const index = (activeIndex + itemsToScroll) / itemsToScroll;
       return (
         setActiveDot((prevActiveDot) => prevActiveDot + 1),
         setState({
-          ...state,
           transition: 0.45,
           activeIndex: index * currentItemsToScroll,
           translate:
@@ -120,7 +132,6 @@ const Slider = ({
     }
 
     setState({
-      ...state,
       activeIndex: activeIndex + currentItemsToScroll,
       translate:
         ((activeIndex + currentItemsToScroll) * width) / currentItemsToShow,
@@ -130,7 +141,7 @@ const Slider = ({
     setActiveDot((prevActiveDot) => prevActiveDot + 1);
   };
 
-  const prevSlide = () => {
+  const goToPrevSlide = () => {
     if (activeIndex === 0) {
       return (
         setActiveDot(
@@ -149,7 +160,6 @@ const Slider = ({
     }
 
     setState({
-      ...state,
       activeIndex: activeIndex - currentItemsToScroll,
       translate:
         ((activeIndex - currentItemsToScroll) * width) / currentItemsToShow,
@@ -164,15 +174,10 @@ const Slider = ({
     });
   };
 
-  const dotsNum =
-    Math.ceil((children.length - currentItemsToShow) / currentItemsToScroll) +
-    1;
-
-  const onDotClick = (index) => {
+  const onDotClick = (index: number) => {
     setActiveDot(index);
     if (index + 1 === dotsNum) {
       setState({
-        ...state,
         transition: 0.45,
         activeIndex: index * currentItemsToScroll,
         translate:
@@ -188,7 +193,6 @@ const Slider = ({
       });
     } else {
       setState({
-        ...state,
         transition: 0.45,
         translate:
           index * ((width / currentItemsToShow) * currentItemsToScroll),
@@ -198,25 +202,21 @@ const Slider = ({
   };
 
   useLayoutEffect(() => {
-    let i;
-    const dotsArray: number[] = [];
-    for (i = 0; i < children.length; i += 1)
+    const dotsArray = [];
+
+    for (let i = 0; i < children.length; i += 1)
       if (i + 1 <= dotsNum) {
         dotsArray.push(i + 1);
       }
 
     setDotsArr(dotsArray);
-  }, []);
+  }, [children.length, dotsNum]);
 
   return (
-    <div className="main-div w-full h-full ">
+    <div className={classNames('main-div w-full h-full', containerClassName)}>
       <div className="carousel-and-arrow-container h-full">
-        <Arrow direction="left" handleClick={prevSlide} />
-        <div
-          ref={ref}
-          className={classNames("carousel h-full", className)}
-          style={{ width: `${width * 2}` }}
-        >
+        <Arrow direction="left" onClick={goToPrevSlide} />
+        <div ref={ref} className="carousel h-full" style={{ width: width * 2 }}>
           <div
             className="slider-content h-full"
             style={{
@@ -225,50 +225,47 @@ const Slider = ({
               width: `${(width * children.length) / currentItemsToShow}px`,
             }}
           >
-            {React.Children.map(children || null, (child, i) => (
+            {React.Children.map(children || null, (child, index) => (
               <Slide
-                key={i}
+                // eslint-disable-next-line react/no-array-index-key
+                key={index}
                 height={height}
                 width={width}
-                setterFn={setterFn}
-                index={i}
+                onClick={onSlideClick}
+                index={index}
               >
                 {child}
               </Slide>
             ))}
           </div>
         </div>
-        <Arrow direction="right" handleClick={nextSlide} />
+        <Arrow direction="right" onClick={goToNextSlide} />
       </div>
       <Dots activeDot={activeDot} onDotClick={onDotClick} dotsArr={dotsArr} />
     </div>
   );
 };
 
-export const SliderWithModal = (
-  props,
-  { withModal = false }: SliderTypes,
-): React.ReactElement => {
+export const SliderWithModal = (props: SliderProps): React.ReactElement => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [clickedSlide, setClickedSlide] = useState(null);
+  const [clickedSlide, setClickedSlide] = useState(0);
 
-  const setterFn = (index) => {
+  const handleSlideClick = (index: number) => {
     setIsModalOpen(true);
     setClickedSlide(index);
   };
+
   return (
     <div className="w-full h-full flex items-center justify-center">
-      {withModal && (
-        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-          <Slider
-            {...props}
-            itemsToShow={1}
-            itemsToScroll={1}
-            startAtIndex={clickedSlide}
-          />
-        </Modal>
-      )}
-      <Slider {...props} setterFn={withModal ? setterFn : null} />
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <Slider
+          {...props}
+          itemsToShow={1}
+          itemsToScroll={1}
+          startAtIndex={clickedSlide}
+        />
+      </Modal>
+      <Slider {...props} onSlideClick={handleSlideClick} />
     </div>
   );
 };

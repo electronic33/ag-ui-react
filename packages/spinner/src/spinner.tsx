@@ -1,5 +1,5 @@
-import React from "react";
-import classNames from "classnames";
+import React from 'react';
+import classNames from 'classnames';
 
 type SpinnerTypes = {
   className?: string;
@@ -11,17 +11,17 @@ type SpinnerTypes = {
 export const Spinner = ({
   className,
   containerClassName,
-  stroke = "rgba(59, 130, 246, 1)",
-  fill = "rgba(59, 130, 246, 1)",
+  stroke = 'rgba(59, 130, 246, 1)',
+  fill = 'rgba(59, 130, 246, 1)',
 }: SpinnerTypes): React.ReactElement => (
   <div
     className={classNames(
-      "flex justify-center items-center",
+      'flex justify-center items-center',
       containerClassName,
     )}
   >
     <svg
-      className={classNames("animate-spin h-10 w-10", className)}
+      className={classNames('animate-spin h-10 w-10', className)}
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"

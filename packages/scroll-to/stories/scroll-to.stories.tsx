@@ -1,15 +1,16 @@
-import React, { useRef } from "react";
-import { FaArrowUp } from "react-icons/fa";
-import { ScrollTo, useScrollBelowElementHook } from "../src";
+import React, { useRef } from 'react';
+import { FaArrowUp } from 'react-icons/fa';
+import { ScrollTo, useScrollBelowElement } from '../src';
 
 export default {
-  title: "OTHERS/ScrollTo",
+  title: 'OTHERS/ScrollTo',
   component: ScrollTo,
 };
 
-export const Default = (props): React.ReactNode => {
-  const ref = useRef();
-  const showScroll = useScrollBelowElementHook(ref, false);
+export const Default = () => {
+  const ref = useRef(null);
+  const showScroll = useScrollBelowElement(ref, false);
+
   return (
     <div>
       <div
@@ -21,9 +22,8 @@ export const Default = (props): React.ReactNode => {
       <ScrollTo
         showScroll={showScroll}
         offset={0}
-        ref={ref}
-        Icon={<FaArrowUp className="" />}
-        {...props}
+        scrollToRef={ref}
+        Icon={<FaArrowUp />}
       />
     </div>
   );

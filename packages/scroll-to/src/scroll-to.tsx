@@ -1,9 +1,8 @@
-/* eslint-disable react/display-name */
-import React, { useLayoutEffect, useState } from "react";
-import classNames from "classnames";
+import React, { ReactElement, useLayoutEffect, useState } from 'react';
+import classNames from 'classnames';
 
-export const useScrollBelowElementHook = (
-  ref: any,
+export const useScrollBelowElement = (
+  ref: React.RefObject<HTMLElement>,
   initialState: boolean,
 ): boolean => {
   const [showScroll, setShowScroll] = useState(initialState);
@@ -14,35 +13,29 @@ export const useScrollBelowElementHook = (
       setScroll(window.pageYOffset);
     };
 
-    window.addEventListener("scroll", handleResize);
+    window.addEventListener('scroll', handleResize);
     return () => {
-      window.removeEventListener("scroll", handleResize);
+      window.removeEventListener('scroll', handleResize);
     };
   });
 
   useLayoutEffect(() => {
-    if (ref.current.getBoundingClientRect().top > -0.00001) {
+    if (ref.current && ref.current.getBoundingClientRect().top > -0.00001) {
       setShowScroll(false);
     } else {
       setShowScroll(true);
     }
-  }, [scroll]);
+  }, [scroll, ref]);
 
   return showScroll;
 };
 
 type ScrollToProps = {
-  className: string;
-  /**
-   Scroll offset in pixels.
-  */
-  offset: number;
-  Icon: React.ComponentType<{ className: string }>;
-  /**
-   When to show the scrollTo component.
-  */
-  showScroll: boolean;
-  scrollToRef: { current: HTMLElement };
+  className?: string;
+  offset?: number;
+  Icon: ReactElement<{ className?: string }>;
+  showScroll?: boolean;
+  scrollToRef: React.RefObject<HTMLElement>;
 };
 
 export const ScrollTo = ({
@@ -53,13 +46,15 @@ export const ScrollTo = ({
   scrollToRef,
 }: ScrollToProps) => {
   const executeScroll = () => {
-    const offsetTop =
-      scrollToRef.current.getBoundingClientRect().top + window.pageYOffset;
+    if (scrollToRef.current) {
+      const offsetTop =
+        scrollToRef.current.getBoundingClientRect().top + window.pageYOffset;
 
-    window.scroll({
-      top: offsetTop - offset,
-      behavior: "smooth",
-    });
+      window.scroll({
+        top: offsetTop - offset,
+        behavior: 'smooth',
+      });
+    }
   };
 
   return (
@@ -67,10 +62,10 @@ export const ScrollTo = ({
       type="button"
       onClick={executeScroll}
       className={classNames(
-        "main-div-scroll",
+        'main-div-scroll',
         {
-          "opacity-0 pointer-events-none": showScroll === false,
-          "opacity-1": showScroll === true,
+          'opacity-0 pointer-events-none': showScroll === false,
+          'opacity-1': showScroll === true,
         },
         className,
       )}

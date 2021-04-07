@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { Button } from "@app-garage/button";
-import { Skeleton } from "../src";
+import React, { useState } from 'react';
+import { Button } from '@app-garage/button';
+import { Skeleton } from '../src';
 
 export default {
-  title: "FEEDBACK/Skeleton",
+  title: 'FEEDBACK/Skeleton',
   component: Skeleton,
 };
 
-export const Default = (): React.ReactNode => {
+export const Default = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   return (
@@ -23,19 +23,21 @@ export const Default = (): React.ReactNode => {
           <img
             src="https://source.unsplash.com/random"
             className="mb-3 rounded-full h-12 w-12"
+            alt=""
           />
-          <p className="mb-2" width="200px" height="16px">
+          <p className="mb-2" style={{ width: 200, height: 16 }}>
             Fresh upload!
           </p>
           <img
             src="https://source.unsplash.com/random"
             className=" h-24 w-48"
+            alt=""
           />
         </div>
       )}
-      <div onClick={() => setIsLoading((prevState) => !prevState)}>
-        <Button text="TRIGGER" />
-      </div>
+      <Button onClick={() => setIsLoading((prevState) => !prevState)}>
+        TRIGGER
+      </Button>
     </div>
   );
 };

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { Spinner } from "../src";
+import React from 'react';
+import { Spinner } from '../src';
 
 export default {
-  title: "FEEDBACK/Spinner",
+  title: 'FEEDBACK/Spinner',
   component: Spinner,
 };
 
-export const Top = (): React.ReactNode => <Spinner />;
+export const Top = () => <Spinner />;

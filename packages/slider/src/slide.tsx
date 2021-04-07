@@ -1,29 +1,36 @@
-import React from "react";
+import React from 'react';
 
 type slideProps = {
   height: number;
   width: number;
   children: React.ReactNode;
-  setterFn?: (index: number) => void;
+  onClick?: (index: number) => void;
   index: number;
-}
+};
 
 export const Slide = ({
   height,
   width,
   children,
-  setterFn,
+  onClick,
   index,
-}: slideProps): React.ReactElement => {
-  return (
-    <div
-      onClick={() => setterFn(index)}
-      className="Slide flex justify-center items-center h-auto flex-1"
-      style={{ width: `${width}`, height: `${height}` }}
-    >
-      {children}
-    </div>
-  );
-};
-
-
+}: slideProps): React.ReactElement => (
+  <div
+    role="button"
+    tabIndex={0}
+    onClick={() => {
+      if (onClick) {
+        onClick(index);
+      }
+    }}
+    onKeyDown={(event) => {
+      if (onClick && (event.code === 'Space' || event.code === 'Enter')) {
+        onClick(index);
+      }
+    }}
+    className="Slide flex justify-center items-center h-auto flex-1"
+    style={{ width, height }}
+  >
+    {children}
+  </div>
+);
