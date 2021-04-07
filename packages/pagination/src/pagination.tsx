@@ -2,7 +2,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { Button } from '@app-garage/button';
 import { TextInput } from '@app-garage/text-input';
-import { Select } from '@app-garage/select';
+import { Select } from '@app-garage/custom-select';
 
 type PaginationTypes = {
   /**

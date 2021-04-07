@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
-import { Select } from '@app-garage/select';
+import { Select } from '@app-garage/custom-select';
 // import { Spinner } from "@app-garage/spinner";
 
 export function useFetch<T>(url: string) {

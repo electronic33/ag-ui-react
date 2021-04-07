@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@app-garage/button';
 import { Popover } from '../src';
 
@@ -9,10 +9,13 @@ export default {
 
 export const Default = (): React.ReactNode => {
   const trigger = 'click';
+  const [active, setActive] = useState(false);
   return (
     <div className="w-screen h-screen flex justify-center items-center space-x-3">
       <Button className="bg-yellow-400">I&apos;m a button</Button>
       <Popover
+        active={active}
+        setActive={setActive}
         headerText="Header"
         trigger={`${trigger}`}
         content={

@@ -30,7 +30,7 @@
   },
   "dependencies": {
     "@app-garage/button": "^1.1.6",
-    "@app-garage/select": "^1.0.2",
+    "@app-garage/custom-select": "^1.0.3",
     "@app-garage/text-input": "^1.0.3",
     "classnames": "^2.2.6"
   },

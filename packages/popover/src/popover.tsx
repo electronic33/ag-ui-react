@@ -8,7 +8,19 @@ import { useId } from 'react-id-generator';
 type TooltipTypes = {
   delay?: number;
   children?: React.ReactNode;
-  direction?: 'top' | 'bottom' | 'right' | 'left';
+  direction?:
+    | 'top-start'
+    | 'top'
+    | 'top-end'
+    | 'right-start'
+    | 'right'
+    | 'right-end'
+    | 'bottom-end'
+    | 'bottom'
+    | 'bottom-start'
+    | 'left-end'
+    | 'left'
+    | 'left-start';
   content: React.ReactNode;
   contentClassNames?: string;
   arrowClasses?: string;
