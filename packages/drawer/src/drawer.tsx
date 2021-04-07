@@ -1,12 +1,12 @@
-import React, { useEffect, useMemo } from "react";
-import { AiOutlineClose } from "react-icons/ai";
-import ReactScrollLock from "react-scrolllock";
-import classNames from "classnames";
-import { Link } from "@app-garage/link";
-import { FocusLock } from "@app-garage/focus-trap";
-import { useStopPropagation } from "@app-garage/utils";
-import { useTransition, animated, config } from "react-spring";
-import { Button } from "@app-garage/button";
+import React, { useEffect, useMemo } from 'react';
+import { AiOutlineClose } from 'react-icons/ai';
+import ReactScrollLock from 'react-scrolllock';
+import classNames from 'classnames';
+import { Link } from '@app-garage/link';
+import { FocusLock } from '@app-garage/focus-trap';
+import { useStopPropagation } from '@app-garage/utils';
+import { useTransition, animated, config } from 'react-spring';
+import { Button } from '@app-garage/button';
 
 type DrawerTypes = {
   /**
@@ -24,7 +24,7 @@ type DrawerTypes = {
   SidebarComponent?: React.ReactNode;
   isOpen: boolean;
   onClose: () => void;
-  direction?: "top" | "right" | "bottom" | "left";
+  direction?: 'top' | 'right' | 'bottom' | 'left';
   iconClassName?: string;
   textClassName?: string;
   drawerClassNames?: string;
@@ -34,7 +34,7 @@ type DrawerTypes = {
 export const Drawer = ({
   sidebarData,
   SidebarComponent,
-  direction = "left",
+  direction = 'left',
   isOpen,
   onClose,
   iconClassName,
@@ -46,93 +46,93 @@ export const Drawer = ({
 
   useEffect(() => {
     const handleSpacebarPress = (event: KeyboardEvent) => {
-      if (event.code === "Escape") {
+      if (event.code === 'Escape') {
         onClose();
       }
     };
 
-    document.addEventListener("keydown", handleSpacebarPress);
-    return () => document.removeEventListener("keydown", handleSpacebarPress);
+    document.addEventListener('keydown', handleSpacebarPress);
+    return () => document.removeEventListener('keydown', handleSpacebarPress);
   }, [isOpen, onClose]);
 
   const springConfig = useMemo(() => {
     switch (direction) {
-      case "top":
+      case 'top':
         return {
           from: {
-            opacity: "0",
-            top: "-100%",
-            left: "0%",
+            opacity: '0',
+            top: '-100%',
+            left: '0%',
           },
           enter: {
-            opacity: "1",
-            left: "0%",
-            top: "0%",
+            opacity: '1',
+            left: '0%',
+            top: '0%',
           },
           leave: {
-            opacity: "0",
-            left: "0%",
-            top: "-100%",
+            opacity: '0',
+            left: '0%',
+            top: '-100%',
           },
           unique: true,
           config: config.default,
         };
-      case "right":
+      case 'right':
         return {
           from: {
-            opacity: "0",
-            top: "0%",
-            right: "-100%",
+            opacity: '0',
+            top: '0%',
+            right: '-100%',
           },
           enter: {
-            opacity: "1",
-            right: "-0%",
-            top: "0%",
+            opacity: '1',
+            right: '-0%',
+            top: '0%',
           },
           leave: {
-            opacity: "0",
-            right: "-100%",
-            top: "0%",
+            opacity: '0',
+            right: '-100%',
+            top: '0%',
           },
           unique: true,
           config: config.default,
         };
-      case "bottom":
+      case 'bottom':
         return {
           from: {
-            opacity: "0",
-            bottom: "-100%",
-            left: "0%",
+            opacity: '0',
+            bottom: '-100%',
+            left: '0%',
           },
           enter: {
-            opacity: "1",
-            left: "0%",
-            bottom: "0%",
+            opacity: '1',
+            left: '0%',
+            bottom: '0%',
           },
           leave: {
-            opacity: "0",
-            left: "0%",
-            bottom: "-100%",
+            opacity: '0',
+            left: '0%',
+            bottom: '-100%',
           },
           unique: true,
           config: config.default,
         };
-      case "left":
+      case 'left':
         return {
           from: {
-            opacity: "0",
-            top: "0%",
-            left: "-100%",
+            opacity: '0',
+            top: '0%',
+            left: '-100%',
           },
           enter: {
-            opacity: "1",
-            left: "-0%",
-            top: "0%",
+            opacity: '1',
+            left: '-0%',
+            top: '0%',
           },
           leave: {
-            opacity: "0",
-            left: "-100%",
-            top: "0%",
+            opacity: '0',
+            left: '-100%',
+            top: '0%',
           },
           unique: true,
           config: config.default,
@@ -160,27 +160,27 @@ export const Drawer = ({
                     style={{ ...props, opacity: 1 }}
                     onClick={stopPropagation}
                     className={classNames(
-                      "drawer",
+                      'drawer',
                       {
-                        "drawer-vertical":
-                          direction === "left" || direction === "right",
-                        "drawer-horizontal":
-                          direction === "top" || direction === "bottom",
+                        'drawer-vertical':
+                          direction === 'left' || direction === 'right',
+                        'drawer-horizontal':
+                          direction === 'top' || direction === 'bottom',
                       },
                       drawerClassNames,
                     )}
                   >
                     <ul className="drawer-ul ">
                       <li
-                        className={classNames("drawer-li-1", {
-                          "justify-start": direction === "left",
-                          "justify-end": direction === "right",
+                        className={classNames('drawer-li-1', {
+                          'justify-start': direction === 'left',
+                          'justify-end': direction === 'right',
                         })}
                       >
                         <Button
-                          className={classNames("close-button-container", {
-                            "pl-8": direction === "left",
-                            "pr-8": direction === "right",
+                          className={classNames('close-button-container', {
+                            'pl-8': direction === 'left',
+                            'pr-8': direction === 'right',
                           })}
                           onClick={onClose}
                         >
@@ -193,17 +193,20 @@ export const Drawer = ({
                           <li key={title} className="">
                             <Link
                               className={classNames(
-                                "drawer-link",
+                                'drawer-link',
                                 linkClassNames,
                               )}
-                              to={to}
+                              to={to || undefined}
                             >
-                              <Icon
-                                className={classNames(
-                                  "drawer-link-icon",
-                                  iconClassName,
-                                )}
-                              />
+                              {Icon && (
+                                <Icon
+                                  className={classNames(
+                                    'drawer-link-icon',
+                                    iconClassName,
+                                  )}
+                                />
+                              )}
+
                               <div className={classNames(textClassName)}>
                                 {title}
                               </div>

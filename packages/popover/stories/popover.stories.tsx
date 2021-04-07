@@ -1,37 +1,31 @@
-import React from "react";
-import { Button } from "@app-garage/button";
-import { Popover } from "../src";
+import React from 'react';
+import { Button } from '@app-garage/button';
+import { Popover } from '../src';
 
 export default {
-  title: "OVERLAY/Popover",
+  title: 'OVERLAY/Popover',
   component: Popover,
 };
 
-export const Default = (props): React.ReactNode => {
-  const trigger = "click";
+export const Default = (): React.ReactNode => {
+  const trigger = 'click';
   return (
     <div className="w-screen h-screen flex justify-center items-center space-x-3">
-      <Button className="bg-yellow-400" text="Button with tooltip">
-        I&apos;m a button
-      </Button>
+      <Button className="bg-yellow-400">I&apos;m a button</Button>
       <Popover
         headerText="Header"
         trigger={`${trigger}`}
         content={
           <div className="flex space-x-3">
-            <Button text="button 1" className="my-5 bg-gray-500" />
-            <Button text="button 2" className="my-5 bg-gray-500" />
-            <Button text="button 3" className="my-5 bg-gray-500" />
+            <Button className="my-5 bg-gray-500">button 1</Button>
+            <Button className="my-5 bg-gray-500">button 2 </Button>
+            <Button className="my-5 bg-gray-500">button 3</Button>
           </div>
         }
       >
-        <Button className="bg-green-500" text="Button with tooltip">
-          {trigger} me
-        </Button>
+        <Button className="bg-green-500">{trigger} </Button>
       </Popover>
-      <Button className="bg-yellow-400" text="Button with tooltip">
-        I&apos;m a button
-      </Button>
+      <Button className="bg-yellow-400">I&apos;m a button</Button>
     </div>
   );
 };

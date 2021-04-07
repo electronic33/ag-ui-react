@@ -1,5 +1,5 @@
-import React from "react";
-import classNames from "classnames";
+import React from 'react';
+import classNames from 'classnames';
 
 type ProgressTypes = {
   progressValue: number;
@@ -25,17 +25,17 @@ export const Progress = ({
     aria-valuenow={progressValue}
   >
     <div
-      className={classNames("progress-container ", progressContainerClassNames)}
+      className={classNames('progress-container ', progressContainerClassNames)}
     >
       <div
-        className={classNames("progress-bar ", progressBarClassNames)}
+        className={classNames('progress-bar ', progressBarClassNames)}
         style={{ width: `${progressValue}%` }}
       />
     </div>
     {withTracker && (
       <p
-        style={{ minWidth: "40px" }}
-        className={classNames("progress-tracker", trackerClassNames)}
+        style={{ minWidth: '40px' }}
+        className={classNames('progress-tracker', trackerClassNames)}
       >
         {progressValue}%
       </p>

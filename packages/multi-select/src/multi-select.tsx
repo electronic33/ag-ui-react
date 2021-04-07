@@ -22,7 +22,7 @@ type MultiSelectTypes<T> = {
     Icon?: React.ReactElement<{ className?: string }>;
   }[];
   value: T[];
-  onChange?: (value: T[]) => void;
+  onChange: (value: T[]) => void;
   containerClassName: string;
   label?: string;
   isLoading?: boolean;
@@ -57,8 +57,8 @@ export function MultiSelect<T extends OptionValue>({
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number>();
 
-  const selectOptionsRef = useRef<HTMLDivElement>();
-  const selectButtonRef = useRef<HTMLButtonElement>();
+  const selectOptionsRef = useRef<HTMLDivElement>(null);
+  const selectButtonRef = useRef<HTMLButtonElement>(null);
 
   const [filterValue, setFilterValue] = useState('');
 
@@ -68,9 +68,9 @@ export function MultiSelect<T extends OptionValue>({
     [options, value],
   );
 
-  const inputRef = useRef<HTMLInputElement>();
+  const inputRef = useRef<HTMLInputElement>(null);
 
-  const debouncedFilterValue = useDebounce(filterValue, 500);
+  const debouncedFilterValue: string = useDebounce(filterValue, 500);
 
   const handleFilterInputChange = useCallback((event) => {
     setFilterValue(event.target.value);
@@ -93,13 +93,19 @@ export function MultiSelect<T extends OptionValue>({
     (event) => {
       event.stopPropagation();
 
-      if (isOpen && !value.includes(updatedList[activeIndex].value)) {
-        const newOptions = value.concat(updatedList[activeIndex].value);
+      if (isOpen && !value.includes(updatedList[activeIndex as number].value)) {
+        const newOptions = value.concat(
+          updatedList[activeIndex as number].value,
+        );
 
         onChange(newOptions);
-      } else if (isOpen && value.includes(updatedList[activeIndex].value)) {
+      } else if (
+        isOpen &&
+        value.includes(updatedList[activeIndex as number].value)
+      ) {
         const newOptions = value.filter(
-          (selectedOption) => selectedOption !== updatedList[activeIndex].value,
+          (selectedOption) =>
+            selectedOption !== updatedList[activeIndex as number].value,
         );
 
         onChange(newOptions);
@@ -197,7 +203,7 @@ export function MultiSelect<T extends OptionValue>({
                   !!selectedOptions?.length &&
                   selectedOptions?.map((option) => (
                     <>
-                      <div className="flex" key={option.value}>
+                      <div className="flex" key={option?.value}>
                         <div className="flex bg-blue-500 pl-2 pr-0.5 py-1 rounded-l-full shadow-inner">
                           {option?.Icon && (
                             <span className="flex items-center mr-1.5">
@@ -217,7 +223,7 @@ export function MultiSelect<T extends OptionValue>({
 
                             const newOptions = value.filter(
                               (selectedOption) =>
-                                selectedOption !== option.value,
+                                selectedOption !== option?.value,
                             );
                             onChange(newOptions);
                           }}
@@ -293,7 +299,7 @@ export function MultiSelect<T extends OptionValue>({
                               if (value.includes(option.value)) {
                                 const newOptions = value.filter(
                                   (selectedOption) =>
-                                    options[activeIndex].value ===
+                                    options[activeIndex as number].value ===
                                     selectedOption,
                                 );
                                 onChange(newOptions);

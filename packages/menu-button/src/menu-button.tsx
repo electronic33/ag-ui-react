@@ -1,15 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
-import { usePopper } from "react-popper";
-import classNames from "classnames";
-import { MdClose } from "react-icons/md";
-import { FocusLock } from "@app-garage/focus-trap";
-import { useId } from "react-id-generator";
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { usePopper } from 'react-popper';
+import classNames from 'classnames';
+import { MdClose } from 'react-icons/md';
+import { FocusLock } from '@app-garage/focus-trap';
+import { useId } from 'react-id-generator';
 
 type MenuButtonTypes = {
   delay?: number;
   children?: React.ReactNode;
-  direction?: "top" | "bottom" | "right" | "left";
-  content: string;
+  direction?: 'top' | 'bottom' | 'right' | 'left';
+  content: React.ReactNode;
   contentClassNames?: string;
   arrowClasses?: string;
   trigger?: string;
@@ -23,24 +23,29 @@ export const MenuButton = ({
   delay,
   children,
   content,
-  direction = "bottom",
+  direction = 'bottom',
   contentClassNames,
   headerText,
   closeOnOutsideClick = true,
   closeOnEsc = true,
   initialFocusRef,
 }: MenuButtonTypes): React.ReactElement => {
-  let timeout;
+  let timeout: undefined | number;
 
   const [active, setActive] = useState(false);
 
-  const ref = useRef();
+  const ref = useRef<HTMLDivElement>(null);
 
   const [id] = useId();
 
-  const [referenceElement, setReferenceElement] = useState(null);
+  const [
+    referenceElement,
+    setReferenceElement,
+  ] = useState<HTMLDivElement | null>(null);
 
-  const [popperElement, setPopperElement] = useState(null);
+  const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(
+    null,
+  );
 
   const showTip = () => {
     timeout = setTimeout(() => {
@@ -48,35 +53,34 @@ export const MenuButton = ({
     }, delay || 0);
   };
 
-  const toggleTip = () => {
-    timeout = setTimeout(() => {
-      setActive((prev) => !prev);
-    }, delay || 0);
-  };
+  // const toggleTip = () => {
+  //   timeout = setTimeout(() => {
+  //     setActive((prev) => !prev);
+  //   }, delay || 0);
+  // };
 
-  const hideTip = () => {
+  // const delayedHideTip = () => {
+  //   timeout = setTimeout(() => {
+  //     hideTip();
+  //   }, 1000);
+  // };
+
+  const hideTip = useCallback(() => {
     clearInterval(timeout);
     setActive(false);
-  };
+  }, [timeout]);
 
-  const delayedHideTip = () => {
-    timeout = setTimeout(() => {
-      hideTip();
-    }, 1000);
-  };
+  useEffect(() => {
+    // @ts-ignore
+    const handleButtonPress = (e) => {
+      if (active && closeOnEsc && e.code === 'Escape') {
+        hideTip();
+      }
+    };
 
-  if (closeOnEsc) {
-    useEffect(() => {
-      const handleButtonPress = (e) => {
-        if (active && e.code === "Escape") {
-          hideTip();
-        }
-      };
-
-      document.addEventListener("keydown", handleButtonPress);
-      return () => document.removeEventListener("keydown", handleButtonPress);
-    }, [active]);
-  }
+    document.addEventListener('keydown', handleButtonPress);
+    return () => document.removeEventListener('keydown', handleButtonPress);
+  }, [active, closeOnEsc, hideTip]);
 
   const child = React.Children.only(children) as React.ReactElement & {
     ref?: React.Ref<any>;
@@ -95,38 +99,38 @@ export const MenuButton = ({
     ...child.props,
     onClick: handleClick,
     ariaProps: {
-      "aria-haspopup": true,
-      "aria-controls": `popover-content-${id}`,
-      "aria-expanded": active,
+      'aria-haspopup': true,
+      'aria-controls': `popover-content-${id}`,
+      'aria-expanded': active,
     },
   });
 
-  if (closeOnOutsideClick) {
-    useEffect(() => {
-      function handleClickOutside(event) {
-        if (
-          active &&
-          popperElement &&
-          !popperElement.contains(event.target) &&
-          referenceElement &&
-          !referenceElement.contains(event.target)
-        ) {
-          hideTip();
-        }
+  useEffect(() => {
+    // @ts-ignore
+    function handleClickOutside(event) {
+      if (
+        active &&
+        closeOnOutsideClick &&
+        popperElement &&
+        !popperElement.contains(event.target) &&
+        referenceElement &&
+        !referenceElement.contains(event.target)
+      ) {
+        hideTip();
       }
+    }
 
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, [active, popperElement]);
-  }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [active, closeOnOutsideClick, hideTip, popperElement, referenceElement]);
 
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
     placement: direction,
     modifiers: [
       {
-        name: "offset",
+        name: 'offset',
         enabled: true,
         options: {
           offset: [0, 10],
@@ -157,11 +161,11 @@ export const MenuButton = ({
             aria-labelledby={`popover-header-${id}`}
             aria-describedby={`popover-body-${id}`}
             id={`popover-content-${id}`}
-            tabIndex={1}
+            // tabIndex={0}
           >
             <div
               className={classNames(
-                "tooltip-content relative",
+                'tooltip-content relative',
                 {},
                 contentClassNames,
               )}
@@ -176,8 +180,9 @@ export const MenuButton = ({
               )}
 
               <button
+                type="button"
                 onClick={hideTip}
-                className="absolute flex-shrink-0 top-1 right-2 text-lg text-gray-400 z-10"
+                className="absolute flex-shrink-0 top-1 right-2 text-lg text-gray-400 z-10 focus:ring-2 ring-blue-400"
                 aria-label="close"
               >
                 <MdClose className="flex-shrink-0" />

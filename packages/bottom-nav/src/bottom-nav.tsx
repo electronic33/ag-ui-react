@@ -1,15 +1,17 @@
-import React from "react";
-import classNames from "classnames";
+import React from 'react';
+import classNames from 'classnames';
 
 type BottomNavProps = {
   /**
    A component which redirects somewhere with the help of the 'to' property given in the items array
   */
-  LinkComponent?: React.ComponentType<{
-    className?: string;
-    to: string;
-    onClick?: () => void;
-  }>;
+  LinkComponent?: React.FunctionComponent<any>;
+
+  // LinkComponent?: React.ComponentType<{
+  //   className?: string;
+  //   to: string;
+  //   onClick?: () => void;
+  // }>;
   containerClassName?: string;
   /**
   className for each link
@@ -42,16 +44,16 @@ export const BottomNav = ({
   items,
   activeIndex,
   onClick,
-}: BottomNavProps): React.ReactElement => {
-  return (
-    <div className={classNames("bottom-nav-container", containerClassName)}>
-      {items.map(({ Icon, label, to }, index) => {
-        return (
+}: BottomNavProps): React.ReactElement => (
+  <div className={classNames('bottom-nav-container', containerClassName)}>
+    {items.map(
+      ({ Icon, label, to }, index) =>
+        LinkComponent && (
           <LinkComponent
-            key={index}
+            key={label}
             onClick={onClick}
             className={classNames(
-              "bottom-nav-link",
+              'bottom-nav-link',
               {
                 [`${activeClassName}`]: index === activeIndex,
               },
@@ -62,8 +64,7 @@ export const BottomNav = ({
             <Icon className="bottom-nav-icon" />
             {label}
           </LinkComponent>
-        );
-      })}
-    </div>
-  );
-};
+        ),
+    )}
+  </div>
+);

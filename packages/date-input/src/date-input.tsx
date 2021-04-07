@@ -9,12 +9,12 @@ import { useTransition, animated, config } from 'react-spring';
 
 type DateInputTypes = {
   isOpen?: boolean;
-  setIsOpen?: (isOpen?: boolean) => void;
+  setIsOpen: (isOpen?: boolean) => void;
   label?: string;
   placeholder?: string;
   buttonText?: string;
   value?: string | Date;
-  setValue?: (prevValue?: string | Date) => void;
+  setValue: (prevValue?: string | Date) => void;
   onChange?: (event: any) => void;
   dateFormat?: string;
 };
@@ -30,8 +30,13 @@ export const DateInput = ({
   onChange,
   dateFormat = 'd MMMM yyyy',
 }: DateInputTypes): React.ReactElement => {
-  const [referenceElement, setReferenceElement] = useState(null);
-  const [popperElement, setPopperElement] = useState(null);
+  const [
+    referenceElement,
+    setReferenceElement,
+  ] = useState<HTMLInputElement | null>(null);
+  const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(
+    null,
+  );
 
   const [selectedDates, setSelectedDates] = useState<Date | Date[]>();
 
@@ -56,6 +61,7 @@ export const DateInput = ({
   });
 
   useEffect(() => {
+    // @ts-ignore
     function handleClickOutside(event) {
       if (
         isOpen &&
@@ -96,7 +102,7 @@ export const DateInput = ({
     const handleKeydown = (event: KeyboardEvent) => {
       switch (event.code) {
         case 'Escape':
-          if (isOpen) {
+          if (isOpen && setIsOpen) {
             setIsOpen(false);
           }
           break;
@@ -134,8 +140,8 @@ export const DateInput = ({
     };
   }, [isOpen, setIsOpen]);
 
-  const selectHandler = (selectedDate) => {
-    setValue(format(selectedDate, dateFormat));
+  const selectHandler = (selectedDate: Date | undefined) => {
+    setValue(format(selectedDate as Date, dateFormat));
     setSelectedDates(selectedDate);
   };
 
@@ -187,7 +193,7 @@ export const DateInput = ({
                 disabledTilesClassName={() => ''}
                 LeftArrowIcon={FaChevronLeft}
                 RightArrowIcon={FaChevronRight}
-                selectedDate={selectedDates}
+                selectedDate={selectedDates as Date}
                 selectHandler={selectHandler}
               />
             </animated.div>,

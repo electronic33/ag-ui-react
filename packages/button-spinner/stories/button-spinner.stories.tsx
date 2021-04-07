@@ -1,8 +1,8 @@
-import React from "react";
-import { ButtonSpinner } from "../src";
+import React from 'react';
+import { ButtonSpinner } from '../src';
 
 export default {
-  title: "OTHERS/ButtonSpinner",
+  title: 'OTHERS/ButtonSpinner',
   component: ButtonSpinner,
 };
 

@@ -1,8 +1,8 @@
-import React from "react";
-import { ErrorMessage } from "../src";
+import React from 'react';
+import { ErrorMessage } from '../src';
 
 export default {
-  title: "FEEDBACK/ErrorMessage",
+  title: 'FEEDBACK/ErrorMessage',
   component: ErrorMessage,
 };
 

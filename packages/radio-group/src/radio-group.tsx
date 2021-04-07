@@ -13,7 +13,7 @@ type RadioProps = {
   label?: string;
   labelClassName?: string;
   labelPosition?: 'top' | 'right' | 'bottom' | 'left';
-  onChange?: (prevState: number | string) => void;
+  onChange: (prevState: number | string) => void;
   unCheckedBgClassName?: string;
   checkedBgClassName?: string;
 };

@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { Markdown } from "../src";
+import React, { useState } from 'react';
+import { Markdown } from '../src';
 
 export default {
-  title: "OTHERS/Markdown",
+  title: 'OTHERS/Markdown',
   component: Markdown,
 };
 
 export const Default = (props): React.ReactNode => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
   return (
     <Markdown
       value={value}

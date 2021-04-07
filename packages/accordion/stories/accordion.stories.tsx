@@ -6,35 +6,26 @@ import { Accordion } from '../src';
 export default {
   title: 'DISCLOSURE/Accordion',
   component: Accordion,
-  argTypes: { onChange: { action: 'changed' } },
 };
 
-export const Default = ({ onChange }): React.ReactNode => {
-  const handleChange = (arg: boolean) => {
-    onChange(arg);
-  };
+export const Default = (): React.ReactNode => (
+  <Accordion
+    Icon={FaChrome}
+    ArrowIcon={FaChevronDown}
+    containerClassName="shadow-lg"
+    buttonClassName="bg-gray-50 hover:bg-gray-100"
+    contentClassName="text-center text-lg font-semibold bg-gray-50"
+    content="Hello!"
+  >
+    {(isOpen) => (isOpen ? 'Close me!' : 'Open me!')}
+  </Accordion>
+);
 
-  return (
-    <Accordion
-      Icon={FaChrome}
-      ArrowIcon={FaChevronDown}
-      onChange={handleChange}
-      containerClassName="shadow-lg"
-      buttonClassName="bg-gray-50 hover:bg-gray-100"
-      contentClassName="text-center text-lg font-semibold bg-gray-50"
-      content="Hello!"
-    >
-      {(isOpen) => (isOpen ? 'Close me!' : 'Open me!')}
-    </Accordion>
-  );
-};
-
-export const Controlled = ({ onChange }): React.ReactNode => {
+export const Controlled = (): React.ReactNode => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleChange = (arg: boolean) => {
-    setIsOpen((prevState) => !prevState);
-    onChange(arg);
+    setIsOpen(arg);
   };
 
   return (

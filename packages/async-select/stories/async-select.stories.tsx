@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { AsyncSelect, useFetch } from "../src";
+import React, { useState } from 'react';
+import { AsyncSelect, useFetch } from '../src';
 
 export default {
-  title: "OTHERS/AsyncSelect",
+  title: 'OTHERS/AsyncSelect',
   component: AsyncSelect,
 };
 

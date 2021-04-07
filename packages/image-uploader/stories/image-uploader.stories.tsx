@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { ImageUploader } from "../src";
+import React, { useState } from 'react';
+import { ImageUploader } from '../src';
 
 export default {
-  title: "OTHERS/ImageUploader",
+  title: 'OTHERS/ImageUploader',
   component: ImageUploader,
 };
 

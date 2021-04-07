@@ -64,7 +64,9 @@ type CalendarTypes = {
   activeTilesClassName?: string | ((day: Date) => string);
   selectedTileClassName?: string | ((day: Date) => string);
   selectedDate: Date | Date[];
-  selectHandler?: React.Dispatch<React.SetStateAction<Date[] | Date>>;
+  selectHandler?: React.Dispatch<
+    React.SetStateAction<Date[] | Date | undefined>
+  >;
   rangeSelect?: boolean;
   CellComponent?: React.ComponentType<{ day: Date }>;
 };
@@ -125,13 +127,16 @@ export const Calendar = ({
 
   const monthStart = startOfMonth(currentMonth);
 
-  const calendarRef = useRef<HTMLDivElement>();
-  const daysContainerRef = useRef<HTMLDivElement>();
-  const selectedDateButtonRef = useRef<HTMLButtonElement>();
+  const calendarRef = useRef<HTMLDivElement>(null);
+  const daysContainerRef = useRef<HTMLDivElement>(null);
+  const selectedDateButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     function handleClickOutside(event) {
-      if (calendarRef.current && !calendarRef.current.contains(event.target)) {
+      if (
+        calendarRef.current &&
+        !calendarRef.current.contains(event.currentTarget)
+      ) {
         setHoveredDay(undefined);
       }
     }
@@ -144,28 +149,30 @@ export const Calendar = ({
 
   const rangeSelectHandler = useCallback(
     (day) => {
-      if ((selectedDate as Date[]).length >= 1) {
+      if ((selectedDate as Date[]).length >= 1 && selectHandler) {
         selectHandler([]);
       } else if (!rangeStart) {
         setRangeStart(day);
       } else {
         const datesAfter = isAfter(rangeStart, day);
-        if (!datesAfter) {
+        if (!datesAfter && selectHandler) {
           selectHandler(
             eachDayOfInterval({
               start: rangeStart,
               end: day,
             }),
           );
-          setRangeStart(null);
+          setRangeStart(undefined);
         } else {
           setRangeStart(day);
-          selectHandler(
-            eachDayOfInterval({
-              start: rangeStart,
-              end: day,
-            }),
-          );
+          if (selectHandler) {
+            selectHandler(
+              eachDayOfInterval({
+                start: rangeStart,
+                end: day,
+              }),
+            );
+          }
         }
       }
     },
@@ -223,20 +230,22 @@ export const Calendar = ({
       daysContainerRef.current &&
       daysContainerRef.current.contains(document.activeElement)
     ) {
-      const added7Days = addDays(hoveredDay, 7);
-      const removed7Days = addDays(hoveredDay, -7);
-      const added1Day = addDays(hoveredDay, 1);
-      const nextMonthHover = addMonths(hoveredDay, 1);
-      const removed1Day = addDays(hoveredDay, -1);
-      const prevMonthHover = addMonths(hoveredDay, -1);
+      const added7Days = addDays(hoveredDay as Date, 7);
+      const removed7Days = addDays(hoveredDay as Date, -7);
+      const added1Day = addDays(hoveredDay as Date, 1);
+      const nextMonthHover = addMonths(hoveredDay as Date, 1);
+      const removed1Day = addDays(hoveredDay as Date, -1);
+      const prevMonthHover = addMonths(hoveredDay as Date, -1);
       const handleKeydown = (event: KeyboardEvent) => {
         switch (event.code) {
           case 'Escape':
-            if (rangeSelect) {
-              setRangeStart(null);
-              selectHandler([]);
-            } else {
-              selectHandler(undefined);
+            if (selectHandler) {
+              if (rangeSelect) {
+                setRangeStart(undefined);
+                selectHandler([]);
+              } else {
+                selectHandler(undefined);
+              }
             }
             break;
           case 'ArrowDown':
@@ -252,7 +261,7 @@ export const Calendar = ({
               if (isSameMonth(added7Days, monthStart)) {
                 setHoveredDay(added7Days);
               } else {
-                daysContainerRef.current.focus();
+                daysContainerRef.current?.focus();
                 setHoveredDay(added7Days);
                 setCurrentMonth(nextMonthHover);
               }
@@ -272,7 +281,7 @@ export const Calendar = ({
               if (isSameMonth(removed7Days, monthStart)) {
                 setHoveredDay(removed7Days);
               } else {
-                daysContainerRef.current.focus();
+                daysContainerRef.current?.focus();
                 setHoveredDay(removed7Days);
                 setCurrentMonth(prevMonthHover);
               }
@@ -291,7 +300,7 @@ export const Calendar = ({
             } else if (isSameMonth(added1Day, monthStart)) {
               setHoveredDay(added1Day);
             } else {
-              daysContainerRef.current.focus();
+              daysContainerRef.current?.focus();
               setHoveredDay(added1Day);
               setCurrentMonth(nextMonthHover);
             }
@@ -308,7 +317,7 @@ export const Calendar = ({
             } else if (isSameMonth(removed1Day, monthStart)) {
               setHoveredDay(removed1Day);
             } else {
-              daysContainerRef.current.focus();
+              daysContainerRef.current?.focus();
               setCurrentMonth(prevMonthHover);
               setHoveredDay(removed1Day);
             }
@@ -317,9 +326,9 @@ export const Calendar = ({
           case 'Space':
             if (rangeSelect) {
               rangeSelectHandler(hoveredDay);
-            } else {
+            } else if (selectHandler) {
               selectHandler(hoveredDay);
-              daysContainerRef.current.focus();
+              daysContainerRef.current?.focus();
             }
             break;
 
@@ -456,10 +465,12 @@ export const Calendar = ({
               {
                 [`${hoveredTileClassName} hovered-tile`]: isSameDay(
                   day,
-                  hoveredDay,
+                  hoveredDay as Date,
                 ),
                 [`${rangeHoverClassName} hovered-tile-calendar`]:
-                  rangeStart && day >= rangeStart && day <= hoveredDay,
+                  rangeStart &&
+                  day >= rangeStart &&
+                  day <= (hoveredDay as Date),
 
                 [`${firstDayInRangeClassName} rounded-full-left-side`]:
                   rangeSelect === true && isSameDay(day, selectedDate[0]),
@@ -489,10 +500,10 @@ export const Calendar = ({
                   ? `${selectedTileClassName} selected-tiles`
                   : `${selectedTileClassName(day)} selected-tiles`]: isSelected,
                 [`${selectedAndHoveredTileClassName} selected-and-hovered-tiles`]:
-                  isSelected && isSameDay(day, hoveredDay),
+                  isSelected && isSameDay(day, hoveredDay as Date),
                 [`${firstDayOfRangeWhereIsNoEndDateClassName} first-day-in-range-no-selected-end-date`]: isSameDay(
                   day,
-                  rangeStart,
+                  hoveredDay as Date,
                 ),
               },
               allTilesClassName,
@@ -503,10 +514,10 @@ export const Calendar = ({
               e.preventDefault();
               if (rangeSelect) {
                 rangeSelectHandler(cloneDay);
-              } else {
+              } else if (selectHandler) {
                 selectHandler(cloneDay);
               }
-              daysContainerRef.current.focus();
+              daysContainerRef.current?.focus();
             }}
           >
             <span className={classNames('tile-characters-class')}>

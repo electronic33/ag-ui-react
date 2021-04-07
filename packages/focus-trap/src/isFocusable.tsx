@@ -1,7 +1,7 @@
 export function isDisabled(element: HTMLElement) {
   return (
-    Boolean(element.getAttribute("disabled")) === true ||
-    Boolean(element.getAttribute("aria-disabled")) === true
+    Boolean(element.getAttribute('disabled')) === true ||
+    Boolean(element.getAttribute('aria-disabled')) === true
   );
 }
 
@@ -14,6 +14,7 @@ export function isHidden(element: HTMLElement) {
   return element.hidden;
 }
 
+// eslint-disable-next-line consistent-return
 export function isFocusable(element: HTMLElement) {
   if (!isHTMLElement(element) || isHidden(element) || isDisabled(element)) {
     return false;

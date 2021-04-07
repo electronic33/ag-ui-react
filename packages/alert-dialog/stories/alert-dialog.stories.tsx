@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { Button } from "@app-garage/button";
-import { AlertDialog } from "../src";
+import React, { useState } from 'react';
+import { Button } from '@app-garage/button';
+import { AlertDialog } from '../src';
 
 export default {
-  title: "OVERLAY/AlertDialog",
+  title: 'OVERLAY/AlertDialog',
   component: AlertDialog,
 };
 

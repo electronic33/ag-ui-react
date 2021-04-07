@@ -1,15 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
-import { usePopper } from "react-popper";
-import classNames from "classnames";
-import { MdClose } from "react-icons/md";
-import { FocusLock } from "@app-garage/focus-trap";
-import { useId } from "react-id-generator";
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { usePopper } from 'react-popper';
+import classNames from 'classnames';
+import { MdClose } from 'react-icons/md';
+import { FocusLock } from '@app-garage/focus-trap';
+import { useId } from 'react-id-generator';
 
 type TooltipTypes = {
   delay?: number;
   children?: React.ReactNode;
-  direction?: "top" | "bottom" | "right" | "left";
-  content?: unknown;
+  direction?: 'top' | 'bottom' | 'right' | 'left';
+  content: React.ReactNode;
   contentClassNames?: string;
   arrowClasses?: string;
   trigger?: string;
@@ -28,10 +28,10 @@ export const Popover = ({
   delay,
   children,
   content,
-  direction = "top",
+  direction = 'top',
   contentClassNames,
   arrowClasses,
-  trigger = "click",
+  trigger = 'click',
   headerText,
   closeOnOutsideClick = true,
   closeOnEsc = true,
@@ -42,15 +42,20 @@ export const Popover = ({
   active,
   setActive,
 }: TooltipTypes): React.ReactElement => {
-  let timeout;
+  let timeout: undefined | number;
 
-  const ref = useRef();
+  const ref = useRef<HTMLDivElement>(null);
 
   const [id] = useId();
 
-  const [referenceElement, setReferenceElement] = useState(null);
+  const [
+    referenceElement,
+    setReferenceElement,
+  ] = useState<HTMLDivElement | null>(null);
 
-  const [popperElement, setPopperElement] = useState(null);
+  const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(
+    null,
+  );
 
   const showTip = () => {
     timeout = setTimeout(() => {
@@ -64,10 +69,10 @@ export const Popover = ({
     }, delay || 0);
   };
 
-  const hideTip = () => {
+  const hideTip = useCallback(() => {
     clearInterval(timeout);
     setActive(false);
-  };
+  }, [setActive, timeout]);
 
   const delayedHideTip = () => {
     timeout = setTimeout(() => {
@@ -75,28 +80,27 @@ export const Popover = ({
     }, 1000);
   };
 
-  if (closeOnEsc) {
-    useEffect(() => {
-      const handleButtonPress = (e) => {
-        if (active && e.code === "Escape") {
-          hideTip();
-        }
-      };
+  useEffect(() => {
+    // @ts-ignore
+    const handleButtonPress = (e) => {
+      if (active && closeOnEsc && e.code === 'Escape') {
+        hideTip();
+      }
+    };
 
-      document.addEventListener("keydown", handleButtonPress);
-      return () => document.removeEventListener("keydown", handleButtonPress);
-    }, [active]);
-  }
+    document.addEventListener('keydown', handleButtonPress);
+    return () => document.removeEventListener('keydown', handleButtonPress);
+  }, [active, closeOnEsc, hideTip]);
 
   const child = React.Children.only(children) as React.ReactElement & {
     ref?: React.Ref<any>;
   };
 
   const handleClick = () => {
-    if (trigger === "hover") {
+    if (trigger === 'hover') {
       return null;
     }
-    if (trigger === "click") {
+    if (trigger === 'click') {
       if (!active) {
         return showTip();
       }
@@ -109,43 +113,43 @@ export const Popover = ({
   const childrenWithProps = React.cloneElement(child, {
     ...child.props,
     onClick: handleClick,
-    onFocus: trigger === "hover" ? toggleTip : undefined,
-    onMouseEnter: trigger === "hover" ? showTip : undefined,
-    onMouseLeave: trigger === "hover" ? delayedHideTip : undefined,
-    onBlur: trigger === "hover" ? hideTip : undefined,
+    onFocus: trigger === 'hover' ? toggleTip : undefined,
+    onMouseEnter: trigger === 'hover' ? showTip : undefined,
+    onMouseLeave: trigger === 'hover' ? delayedHideTip : undefined,
+    onBlur: trigger === 'hover' ? hideTip : undefined,
     ariaProps: {
-      "aria-haspopup": true,
-      "aria-controls": `popover-content-${id}`,
-      "aria-expanded": active,
+      'aria-haspopup': true,
+      'aria-controls': `popover-content-${id}`,
+      'aria-expanded': active,
     },
   });
 
-  if (closeOnOutsideClick) {
-    useEffect(() => {
-      function handleClickOutside(event) {
-        if (
-          active &&
-          popperElement &&
-          !popperElement.contains(event.target) &&
-          referenceElement &&
-          !referenceElement.contains(event.target)
-        ) {
-          hideTip();
-        }
+  useEffect(() => {
+    // @ts-ignore
+    function handleClickOutside(event) {
+      if (
+        active &&
+        closeOnOutsideClick &&
+        popperElement &&
+        !popperElement.contains(event.target) &&
+        referenceElement &&
+        !referenceElement.contains(event.target)
+      ) {
+        hideTip();
       }
+    }
 
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, [active, popperElement]);
-  }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [active, closeOnOutsideClick, hideTip, popperElement, referenceElement]);
 
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
     placement: direction,
     modifiers: [
       {
-        name: "offset",
+        name: 'offset',
         enabled: true,
         options: {
           offset: [0, 10],
@@ -163,7 +167,7 @@ export const Popover = ({
       <div className="popover-wrapper" ref={setReferenceElement}>
         {childrenWithProps}
       </div>
-      {active && trigger === "click" && (
+      {active && trigger === 'click' && (
         <FocusLock
           initialFocusRef={initialFocusRef}
           isDisabled={!active}
@@ -184,7 +188,7 @@ export const Popover = ({
           >
             <div
               className={classNames(
-                "popover-content relative",
+                'popover-content relative',
                 {},
                 contentClassNames,
               )}
@@ -214,7 +218,7 @@ export const Popover = ({
             {withArrow && (
               <div
                 className={classNames(
-                  "arrow-base bg-red-400 border border-gray-200 ",
+                  'arrow-base bg-red-400 border border-gray-200 ',
                   arrowClasses,
                 )}
                 style={styles.arrow}
@@ -225,7 +229,7 @@ export const Popover = ({
           </div>
         </FocusLock>
       )}
-      {active && trigger === "hover" && (
+      {active && trigger === 'hover' && (
         <div
           ref={setPopperElement}
           style={styles.popper}
@@ -241,11 +245,11 @@ export const Popover = ({
           aria-labelledby={`popover-header-${id}`}
           aria-describedby={`popover-body-${id}`}
           id={`popover-content-${id}`}
-          tabIndex={1}
+          // tabIndex={0}
         >
           <div
             className={classNames(
-              "popover-content relative",
+              'popover-content relative',
               {},
               contentClassNames,
             )}
@@ -259,6 +263,7 @@ export const Popover = ({
               </div>
             )}
             <button
+              type="button"
               onClick={hideTip}
               className="absolute flex-shrink-0 top-1 right-2 text-lg text-gray-400 z-10"
               aria-label="close"
@@ -269,7 +274,7 @@ export const Popover = ({
           </div>
           <div
             className={classNames(
-              "arrow-base bg-white border border-gray-200",
+              'arrow-base bg-white border border-gray-200',
               arrowClasses,
             )}
             style={styles.arrow}

@@ -17,7 +17,7 @@ function supportsPreventScroll() {
   if (supportsPreventScrollCached == null) {
     supportsPreventScrollCached = false;
     try {
-      const div = document.createElement("div");
+      const div = document.createElement('div');
       div.focus({
         get preventScroll() {
           supportsPreventScrollCached = true;
@@ -70,6 +70,7 @@ function getScrollableElements(element: HTMLElement): ScrollableElement[] {
 }
 
 function restoreScrollPosition(scrollableElements: ScrollableElement[]) {
+  // eslint-disable-next-line no-restricted-syntax
   for (const { element, scrollTop, scrollLeft } of scrollableElements) {
     element.scrollTop = scrollTop;
     element.scrollLeft = scrollLeft;
@@ -85,8 +86,8 @@ function isInputElement(
 ): element is HTMLInputElement {
   return (
     isHTMLElement(element) &&
-    element.tagName.toLowerCase() === "input" &&
-    "select" in element
+    element.tagName.toLowerCase() === 'input' &&
+    'select' in element
   );
 }
 

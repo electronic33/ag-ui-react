@@ -1,8 +1,8 @@
-import React from "react";
-import { Label } from "../src";
+import React from 'react';
+import { Label } from '../src';
 
 export default {
-  title: "LERNA/Label",
+  title: 'LERNA/Label',
   component: Label,
 };
 

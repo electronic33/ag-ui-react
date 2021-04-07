@@ -1,11 +1,11 @@
-import React from "react";
-import { AiFillAudio } from "react-icons/ai";
-import { Button } from "../src";
+import React from 'react';
+import { AiFillAudio } from 'react-icons/ai';
+import { Button } from '../src';
 
 export default {
-  title: "LERNA/Button",
+  title: 'LERNA/Button',
   component: Button,
-  argTypes: { onClick: { action: "clicked" } },
+  argTypes: { onClick: { action: 'clicked' } },
 };
 
 export const Default = ({ onClick, ...rest }): React.ReactNode => (

@@ -1,9 +1,9 @@
-import React, { useRef } from "react";
-import classNames from "classnames";
-import { useId } from "react-id-generator";
+import React, { useRef } from 'react';
+import classNames from 'classnames';
+import { useId } from 'react-id-generator';
 
-import { Button } from "@app-garage/button";
-import { Modal } from "@app-garage/modal";
+import { Button } from '@app-garage/button';
+import { Modal } from '@app-garage/modal';
 
 type AlertDialogProps = {
   isOpen: boolean;
@@ -13,7 +13,7 @@ type AlertDialogProps = {
   cancelText?: string;
   confirmText?: string;
   isLoading?: boolean;
-  onClose?: () => void;
+  onClose: () => void;
   onCancel?: () => void;
   onConfirm?: () => void;
   modalClassName?: string;
@@ -26,8 +26,8 @@ export const AlertDialog = ({
   headerText,
   message,
   children,
-  cancelText = "Cancel",
-  confirmText = "Confirm",
+  cancelText = 'Cancel',
+  confirmText = 'Confirm',
   isLoading,
   onClose,
   onCancel,
@@ -37,15 +37,15 @@ export const AlertDialog = ({
   confirmButtonClassName,
 }: AlertDialogProps): React.ReactElement => {
   const id = useId();
-  const cancelRef = useRef();
+  const cancelRef = useRef<HTMLButtonElement>(null);
 
   return (
     <Modal
       isOpen={isOpen}
       initialFocusRef={cancelRef}
-      ariaProps={{ role: "alertdialog", "aria-modal": "true" }}
+      ariaProps={{ role: 'alertdialog', 'aria-modal': 'true' }}
       onClose={onClose}
-      modalClassName={classNames("alert-dialog-modal ", modalClassName)}
+      modalClassName={classNames('alert-dialog-modal ', modalClassName)}
     >
       {headerText && (
         <header
@@ -64,7 +64,7 @@ export const AlertDialog = ({
             isDisabled={isLoading}
             onClick={onCancel || onClose}
             className={classNames(
-              "alert-dialog-cancel-button",
+              'alert-dialog-cancel-button',
               cancelButtonClassName,
             )}
           >
@@ -74,7 +74,7 @@ export const AlertDialog = ({
             onClick={onConfirm}
             isLoading={isLoading}
             className={classNames(
-              "alert-dialog-confirm-button",
+              'alert-dialog-confirm-button',
               confirmButtonClassName,
             )}
           >

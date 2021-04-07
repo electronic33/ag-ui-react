@@ -1,22 +1,22 @@
-import React, { useCallback, useEffect } from "react";
-import { IoIosClose } from "react-icons/io";
-import ScrollLock from "react-scrolllock";
-import classNames from "classnames";
-import { useTransition, animated } from "react-spring";
-import ReactDOM from "react-dom";
-import { FocusLock } from "@app-garage/focus-trap";
-import { Button } from "@app-garage/button";
+import React, { useCallback, useEffect } from 'react';
+import { IoIosClose } from 'react-icons/io';
+import ScrollLock from 'react-scrolllock';
+import classNames from 'classnames';
+import { useTransition, animated } from 'react-spring';
+import ReactDOM from 'react-dom';
+import { FocusLock } from '@app-garage/focus-trap';
+import { Button } from '@app-garage/button';
 
 const ESC_KEYCODE = 27;
 
 type ModalProps = {
   isOpen: boolean;
   ariaProps?: Record<string, string>;
-  onClose?: () => void;
+  onClose: () => void;
   children?: React.ReactNode;
   overlayClassName?: string;
   modalClassName?: string;
-  initialFocusRef?: { current: HTMLElement };
+  initialFocusRef?: React.RefObject<HTMLButtonElement>;
 };
 
 export const Modal = ({
@@ -38,16 +38,16 @@ export const Modal = ({
   );
 
   const transitions = useTransition(isOpen, null, {
-    from: { opacity: 0, transform: "translateY(10px)" },
-    enter: { opacity: 1, transform: "translateY(0px)" },
-    leave: { opacity: 0, transform: "translateY(10px)" },
+    from: { opacity: 0, transform: 'translateY(10px)' },
+    enter: { opacity: 1, transform: 'translateY(0px)' },
+    leave: { opacity: 0, transform: 'translateY(10px)' },
   });
 
   useEffect(() => {
-    document.addEventListener("keydown", handleKeydown);
+    document.addEventListener('keydown', handleKeydown);
 
     return () => {
-      document.removeEventListener("keydown", handleKeydown);
+      document.removeEventListener('keydown', handleKeydown);
     };
   }, [handleKeydown]);
 
@@ -66,12 +66,12 @@ export const Modal = ({
                 <animated.div
                   key={key}
                   {...ariaProps}
-                  className={classNames("overlay", overlayClassName)}
+                  className={classNames('overlay', overlayClassName)}
                   onClick={onClose}
                   style={{ opacity: props.opacity }}
                 >
                   <animated.div
-                    className={classNames("modal", modalClassName)}
+                    className={classNames('modal', modalClassName)}
                     onClick={stopPropagation}
                     style={{ transform: props.transform }}
                   >

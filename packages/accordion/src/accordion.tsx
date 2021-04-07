@@ -20,7 +20,7 @@ type ConditionalProps =
       children: (isOpen: boolean) => React.ReactNode;
     }
   | {
-      isControlled: true;
+      isControlled?: true;
       isOpen: boolean;
       onChange: (isOpen: boolean) => void;
       children: React.ReactNode;
@@ -40,7 +40,7 @@ export const Accordion = ({
   isOpen = false,
   isControlled = false,
 }: AccordionProps) => {
-  const collapseRef = useRef<HTMLDivElement>();
+  const collapseRef = useRef<HTMLDivElement>(null);
   const [accordionId] = useId(1, 'accordion');
 
   const [internalIsOpen, setInternalIsOpen] = useState(false);
@@ -64,7 +64,7 @@ export const Accordion = ({
   const animateSpring = useCallback(
     (isOpenStatus) => {
       if (isOpenStatus) {
-        const height = collapseRef.current.scrollHeight;
+        const height = collapseRef.current!.scrollHeight;
 
         setSpringProperties({ opacity: 1, height });
       } else {

@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
 type LinkProps = {
   className?: string;
-  to: string;
+  to: string | undefined;
   children: React.ReactNode;
   onClick?: () => void;
 };

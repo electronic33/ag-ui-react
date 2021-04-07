@@ -55,8 +55,8 @@ export function Select<T extends OptionValue>({
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number>();
 
-  const selectOptionsRef = useRef<HTMLDivElement>();
-  const selectButtonRef = useRef<HTMLButtonElement>();
+  const selectOptionsRef = useRef<HTMLDivElement>(null);
+  const selectButtonRef = useRef<HTMLButtonElement>(null);
 
   const selectedOption = useMemo(
     () =>
@@ -67,8 +67,8 @@ export function Select<T extends OptionValue>({
   );
 
   const onSpaceOrEnterPress = useCallback(() => {
-    if (isOpen) {
-      onChange(options[activeIndex].value);
+    if (isOpen && onChange) {
+      onChange(options[activeIndex as number].value);
     }
   }, [isOpen, options, onChange, activeIndex]);
 
@@ -77,12 +77,12 @@ export function Select<T extends OptionValue>({
     setIsOpen,
     selectOptionsRef,
     selectButtonRef,
-    activeIndex,
+    activeIndex: activeIndex as number,
     setActiveIndex,
     options,
     onSpaceOrEnterPress,
-    isLoading,
-    error,
+    isLoading: isLoading as boolean,
+    error: error as string,
   });
 
   return (
@@ -104,7 +104,7 @@ export function Select<T extends OptionValue>({
             setIsOpen((prev) => {
               setActiveIndex(
                 options.findIndex(
-                  (element) => element.value === selectedOption.value,
+                  (element) => element.value === selectedOption?.value,
                 ),
               );
 
@@ -153,12 +153,12 @@ export function Select<T extends OptionValue>({
             )}
             {status === 'ready' && (
               <>
-                {selectedOption.Icon && (
+                {selectedOption?.Icon && (
                   <span className="flex items-center mr-1.5">
                     {selectedOption.Icon}
                   </span>
                 )}
-                <span className="block truncate">{selectedOption.label}</span>
+                <span className="block truncate">{selectedOption?.label}</span>
                 <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
                   <svg
                     className="h-5 w-5 text-gray-400"
@@ -208,7 +208,9 @@ export function Select<T extends OptionValue>({
                       onMouseEnter={() => setActiveIndex(index)}
                       onMouseLeave={() => setActiveIndex(undefined)}
                       onClick={() => {
-                        onChange(option.value);
+                        if (onChange) {
+                          onChange(option.value);
+                        }
                         setIsOpen(false);
                       }}
                       onKeyDown={() => {
@@ -229,8 +231,8 @@ export function Select<T extends OptionValue>({
                       <span
                         className={classNames('block truncate', {
                           'font-semibold':
-                            option.value === selectedOption.value,
-                          'font-normal': option.value !== selectedOption.value,
+                            option.value === selectedOption?.value,
+                          'font-normal': option.value !== selectedOption?.value,
                         })}
                       >
                         {option.label}

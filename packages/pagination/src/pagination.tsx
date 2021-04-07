@@ -39,7 +39,7 @@ export const Pagination = ({
   currentPage = 1,
   setCurrentPage,
   firstAndLastSectionsNumber = 3,
-  initialGotoPageValue,
+  initialGotoPageValue = 0,
   selectOptions,
 }: PaginationTypes): React.ReactElement => {
   const numberOfPages = Math.ceil(maxCount / itemsPerPage);
@@ -54,7 +54,7 @@ export const Pagination = ({
   const [itemsNumber, setItemsNumber] = useState<number>(itemsPerPage);
 
   useEffect(() => {
-    const arrayFirst = [];
+    const arrayFirst: number[] = [];
 
     for (let i = 0; i < firstAndLastSectionsNumber; i += 1) {
       if (i + 1 <= numberOfPages) {
@@ -63,7 +63,7 @@ export const Pagination = ({
     }
     setFirstSection(arrayFirst);
 
-    const arrayLast = [];
+    const arrayLast: number[] = [];
 
     for (
       let j = numberOfPages - firstAndLastSectionsNumber;
@@ -74,7 +74,7 @@ export const Pagination = ({
     }
     setLastSection(arrayLast);
 
-    const arrayMiddle = [];
+    const arrayMiddle: number[] = [];
 
     for (
       let k = currentPage - Math.floor(firstAndLastSectionsNumber / 2);

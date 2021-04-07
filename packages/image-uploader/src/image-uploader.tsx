@@ -1,25 +1,25 @@
-import React, { useState, useCallback, Fragment } from "react";
-import Cropper from "react-easy-crop";
-import { FcAddImage } from "react-icons/fc";
-import classNames from "classnames";
-import { AiFillEye } from "react-icons/ai";
-import { useDropzone } from "react-dropzone";
-import { Button } from "@app-garage/button";
-import { Modal } from "@app-garage/modal";
-import { SliderWithModal } from "@app-garage/slider";
+import React, { useState, useCallback, Fragment } from 'react';
+import Cropper from 'react-easy-crop';
+import { FcAddImage } from 'react-icons/fc';
+import classNames from 'classnames';
+import { AiFillEye } from 'react-icons/ai';
+import { useDropzone } from 'react-dropzone';
+import { Button } from '@app-garage/button';
+import { Modal } from '@app-garage/modal';
+import { SliderWithModal } from '@app-garage/slider';
 
 const initialCropPosition = { x: 0, y: 0 };
 
 const createImage = (url: string): Promise<HTMLImageElement> =>
   new Promise((resolve, reject) => {
     const image = new Image();
-    image.addEventListener("load", () => resolve(image));
-    image.addEventListener("error", (error) => reject(error));
-    image.setAttribute("crossOrigin", "anonymous"); // needed to avoid cross-origin issues on CodeSandbox
+    image.addEventListener('load', () => resolve(image));
+    image.addEventListener('error', (error) => reject(error));
+    image.setAttribute('crossOrigin', 'anonymous'); // needed to avoid cross-origin issues on CodeSandbox
     image.src = url;
   });
 
-function getRadianAngle(degreeValue) {
+function getRadianAngle(degreeValue: number) {
   return (degreeValue * Math.PI) / 180;
 }
 
@@ -33,12 +33,11 @@ const getCroppedImg = async (
   imageSrc: string,
   pixelCrop: { width: number; height: number; x: number; y: number },
   rotation = 0,
-  type = "image/jpeg",
+  type = 'image/jpeg',
 ): Promise<string> => {
   const image = await createImage(imageSrc);
-  console.log("🚀 ~ file: image-uploader.tsx ~ line 39 ~ image", image);
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
 
   const maxSize = Math.max(image.width, image.height);
   const safeArea = 2 * ((maxSize / 2) * Math.sqrt(2));
@@ -48,32 +47,33 @@ const getCroppedImg = async (
   canvas.width = safeArea;
   canvas.height = safeArea;
 
-  // translate canvas context to a central location on image to allow rotating around the center.
-  ctx.translate(safeArea / 2, safeArea / 2);
-  ctx.rotate(getRadianAngle(rotation));
-  ctx.translate(-safeArea / 2, -safeArea / 2);
+  if (ctx) {
+    // translate canvas context to a central location on image to allow rotating around the center.
+    ctx.translate(safeArea / 2, safeArea / 2);
+    ctx.rotate(getRadianAngle(rotation));
+    ctx.translate(-safeArea / 2, -safeArea / 2);
 
-  // draw rotated image and store data.
-  ctx.drawImage(
-    image,
-    safeArea / 2 - image.width * 0.5,
-    safeArea / 2 - image.height * 0.5,
-  );
-  const data = ctx.getImageData(0, 0, safeArea, safeArea);
+    // draw rotated image and store data.
+    ctx.drawImage(
+      image,
+      safeArea / 2 - image.width * 0.5,
+      safeArea / 2 - image.height * 0.5,
+    );
+    const data = ctx.getImageData(0, 0, safeArea, safeArea);
 
-  // set canvas width to final desired crop size - this will clear existing context
-  canvas.width = pixelCrop.width;
-  canvas.height = pixelCrop.height;
+    // set canvas width to final desired crop size - this will clear existing context
+    canvas.width = pixelCrop.width;
+    canvas.height = pixelCrop.height;
 
-  // paste generated rotate image with correct offsets for x,y crop values.
-  ctx.putImageData(
-    data,
-    Math.round(0 - safeArea / 2 + image.width * 0.5 - pixelCrop.x),
-    Math.round(0 - safeArea / 2 + image.height * 0.5 - pixelCrop.y),
-  );
-
-  // As Base64 string
-  // return canvas.toDataURL('image/jpeg');
+    // paste generated rotate image with correct offsets for x,y crop values.
+    ctx.putImageData(
+      data,
+      Math.round(0 - safeArea / 2 + image.width * 0.5 - pixelCrop.x),
+      Math.round(0 - safeArea / 2 + image.height * 0.5 - pixelCrop.y),
+    );
+    // As Base64 string
+    // return canvas.toDataURL('image/jpeg');
+  }
 
   // As a blob
   return new Promise((resolve) => {
@@ -83,10 +83,10 @@ const getCroppedImg = async (
   });
 };
 
-export async function getRotatedImage(imageSrc, rotation = 0) {
+export async function getRotatedImage(imageSrc: string, rotation = 0) {
   const image = await createImage(imageSrc);
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
 
   const orientationChanged =
     rotation === 90 ||
@@ -100,22 +100,23 @@ export async function getRotatedImage(imageSrc, rotation = 0) {
     canvas.width = image.width;
     canvas.height = image.height;
   }
-
-  ctx.translate(canvas.width / 2, canvas.height / 2);
-  ctx.rotate((rotation * Math.PI) / 180);
-  ctx.drawImage(image, -image.width / 2, -image.height / 2);
+  if (ctx) {
+    ctx.translate(canvas.width / 2, canvas.height / 2);
+    ctx.rotate((rotation * Math.PI) / 180);
+    ctx.drawImage(image, -image.width / 2, -image.height / 2);
+  }
 
   return new Promise((resolve) => {
     canvas.toBlob((file) => {
       resolve(URL.createObjectURL(file));
-    }, "image/jpeg");
+    }, 'image/jpeg');
   });
 }
 
-const readFile = (file) =>
+const readFile = (file: File) =>
   new Promise((resolve) => {
     const reader = new FileReader();
-    reader.addEventListener("load", () => resolve(reader.result), false);
+    reader.addEventListener('load', () => resolve(reader.result), false);
     reader.readAsDataURL(file);
   });
 type ImageUploaderTypes = {
@@ -148,11 +149,12 @@ export const ImageUploader = ({
 }: ImageUploaderTypes): React.ReactElement => {
   const [imageSources, setImageSources] = useState([]);
   const [cropPositions, setCropPositions] = useState([]);
+
   const [croppedAreaPixelsArray, setCroppedAreaPixelsArray] = useState([]);
   const [zoom, setZoom] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [acceptedFiles, setAcceptedFiles] = useState([]);
+  const [acceptedFiles, setAcceptedFiles] = useState<(File & string)[]>([]);
 
   const showCroppedImage = useCallback(
     async (index) => {
@@ -161,7 +163,7 @@ export const ImageUploader = ({
           imageSources[index],
           croppedAreaPixelsArray[index],
           0,
-          acceptedFiles[index].type,
+          (acceptedFiles[index] as File).type,
         );
 
         const newImages = [...images];
@@ -174,10 +176,12 @@ export const ImageUploader = ({
         console.error(e);
       }
     },
-    [setImages, images, imageSources, croppedAreaPixelsArray],
+    [imageSources, croppedAreaPixelsArray, acceptedFiles, images, setImages],
   );
 
-  const onFileChange = async (e) => {
+  const onFileChange = async (
+    e: UIEvent & { target: HTMLInputElement & { files: Array<string> } },
+  ) => {
     if (e.target.files && e.target.files.length > 0) {
       const { files } = e.target;
       const newFiles = [];
@@ -202,29 +206,32 @@ export const ImageUploader = ({
     }
   };
 
-  const onDrop = useCallback(async (files) => {
-    if (files && files.length > 0) {
-      const newFiles = [];
-      const readFilePromiseFns = [];
+  const onDrop = useCallback(
+    async (files) => {
+      if (files && files.length > 0) {
+        const newFiles = [];
+        const readFilePromiseFns = [];
 
-      for (let i = 0; i < files.length; i += 1) {
-        readFilePromiseFns.push(() => readFile(files[i]));
-        newFiles.push(files[i]);
+        for (let i = 0; i < files.length; i += 1) {
+          readFilePromiseFns.push(() => readFile(files[i]));
+          newFiles.push(files[i]);
+        }
+
+        const readyFiles = await Promise.all(
+          readFilePromiseFns.map((promiseFn) => promiseFn()),
+        );
+
+        setAcceptedFiles(newFiles);
+        setImageSources(readyFiles);
+
+        if (!onlyWithCrop) setImages(readyFiles);
+        if (!withoutCrop) {
+          setIsModalOpen(true);
+        }
       }
-
-      const readyFiles = await Promise.all(
-        readFilePromiseFns.map((promiseFn) => promiseFn()),
-      );
-
-      setAcceptedFiles(newFiles);
-      setImageSources(readyFiles);
-
-      if (!onlyWithCrop) setImages(readyFiles);
-      if (!withoutCrop) {
-        setIsModalOpen(true);
-      }
-    }
-  }, []);
+    },
+    [onlyWithCrop, setImages, withoutCrop],
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
@@ -240,7 +247,7 @@ export const ImageUploader = ({
       </h1>
       <div
         onChange={onFileChange}
-        {...getRootProps({ className: "dropzone mb-5 outline-none" })}
+        {...getRootProps({ className: 'dropzone mb-5 outline-none' })}
       >
         {multipleImages ? (
           <input
@@ -262,8 +269,8 @@ export const ImageUploader = ({
               <p> HÚZD IDE A FÁJLOKAT...</p>
             </div>
             <FcAddImage
-              className={classNames(" my-auto text-8xl", {
-                "transition-all duration-200 hover:scale-200":
+              className={classNames(' my-auto text-8xl', {
+                'transition-all duration-200 hover:scale-200':
                   isDragActive === true,
               })}
             />
@@ -301,7 +308,7 @@ export const ImageUploader = ({
                             <div className="flex flex-col items-center w-max py-2 bg-blue-100 text-gray-500 text-sm rounded-lg px-4 mb-10">
                               <h4>Feltöltött File:</h4>
                               <p key={acceptedFiles[index].name}>
-                                {acceptedFiles[index].name} -{" "}
+                                {acceptedFiles[index].name} -{' '}
                                 {acceptedFiles[index].size} bytes
                               </p>
                             </div>
@@ -309,9 +316,9 @@ export const ImageUploader = ({
                           <div className="relative w-72 h-48 640:w-96 640:h-4/6">
                             <Cropper
                               classes={{
-                                containerClassName: "  ",
-                                mediaClassName: " bg-black ",
-                                cropAreaClassName: "",
+                                containerClassName: '  ',
+                                mediaClassName: ' bg-black ',
+                                cropAreaClassName: '',
                               }}
                               // disableAutomaticStylesInjection
                               image={image}
@@ -372,7 +379,7 @@ export const ImageUploader = ({
                             <div className="flex flex-col items-center w-max py-2 bg-blue-100 text-gray-500 text-sm rounded-lg px-4 mb-10">
                               <h4>Feltöltött File:</h4>
                               <p key={acceptedFiles[index].name}>
-                                {acceptedFiles[index].name} -{" "}
+                                {acceptedFiles[index].name} -{' '}
                                 {acceptedFiles[index].size} bytes
                               </p>
                             </div>
@@ -380,9 +387,9 @@ export const ImageUploader = ({
                           <div className="relative w-72 h-48 640:w-96 640:h-4/6">
                             <Cropper
                               classes={{
-                                containerClassName: "  ",
-                                mediaClassName: " bg-black ",
-                                cropAreaClassName: "",
+                                containerClassName: '  ',
+                                mediaClassName: ' bg-black ',
+                                cropAreaClassName: '',
                               }}
                               // disableAutomaticStylesInjection
                               image={image}
@@ -432,7 +439,7 @@ export const ImageUploader = ({
                           </div>
                         </div>
                       </div>
-                    ))}{" "}
+                    ))}{' '}
                   </>
                 )}
               </Modal>
@@ -454,7 +461,7 @@ export const ImageUploader = ({
                   className="w-2/6 "
                 >
                   {images.map((image) => (
-                    <div key={image} className={classNames("")}>
+                    <div key={image} className={classNames('')}>
                       <img
                         alt=""
                         className="object-contain"
@@ -467,7 +474,7 @@ export const ImageUploader = ({
               ) : (
                 <>
                   {images.map((image) => (
-                    <div key={image} className={classNames("")}>
+                    <div key={image} className={classNames('')}>
                       <img
                         alt=""
                         className="object-contain"

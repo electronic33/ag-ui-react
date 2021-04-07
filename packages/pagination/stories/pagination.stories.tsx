@@ -1,17 +1,16 @@
-import React, { useState } from "react";
-import { Pagination } from "../src";
+import React, { useState } from 'react';
+import { Pagination } from '../src';
 
 export default {
-  title: "OTHERS/Pagination",
+  title: 'OTHERS/Pagination',
   component: Pagination,
 };
 
-export const Default = (props): React.ReactNode => {
+export const Default = (): React.ReactNode => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(2);
   return (
     <Pagination
-      {...props}
       maxCount={31}
       itemsPerPage={itemsPerPage}
       setItemsPerPage={setItemsPerPage}
@@ -20,7 +19,7 @@ export const Default = (props): React.ReactNode => {
     />
   );
 };
-export const withGoToNum = (): React.ReactNode => {
+export const WithGoToNum = (): React.ReactNode => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(2);
   return (
@@ -34,7 +33,7 @@ export const withGoToNum = (): React.ReactNode => {
     />
   );
 };
-export const withItemsPerPageSelect = (): React.ReactNode => {
+export const WithItemsPerPageSelect = (): React.ReactNode => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(2);
   return (
@@ -45,20 +44,20 @@ export const withItemsPerPageSelect = (): React.ReactNode => {
       currentPage={currentPage}
       setCurrentPage={setCurrentPage}
       selectOptions={[
-        { label: "2", value: 2 },
+        { label: '2', value: 2 },
         {
-          label: "5",
+          label: '5',
           value: 5,
         },
         {
-          label: "10",
+          label: '10',
           value: 10,
         },
       ]}
     />
   );
 };
-export const withAll = (): React.ReactNode => {
+export const WithAll = (): React.ReactNode => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(2);
   return (
@@ -70,13 +69,13 @@ export const withAll = (): React.ReactNode => {
       setCurrentPage={setCurrentPage}
       initialGotoPageValue={1}
       selectOptions={[
-        { label: "2", value: 2 },
+        { label: '2', value: 2 },
         {
-          label: "5",
+          label: '5',
           value: 5,
         },
         {
-          label: "10",
+          label: '10',
           value: 10,
         },
       ]}

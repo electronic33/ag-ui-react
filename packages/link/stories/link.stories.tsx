@@ -1,8 +1,8 @@
-import React from "react";
-import { Link } from "../src";
+import React from 'react';
+import { Link } from '../src';
 
 export default {
-  title: "NAVIGATION/Link",
+  title: 'NAVIGATION/Link',
   component: Link,
 };
 

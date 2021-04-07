@@ -1,7 +1,7 @@
-import React from "react";
-import ReactFocusLock from "react-focus-lock";
-import { getAllFocusable } from "./getAllFocusable";
-import { focus } from "./focus";
+import React from 'react';
+import ReactFocusLock from 'react-focus-lock';
+import { getAllFocusable } from './getAllFocusable';
+import { focus } from './focus';
 
 type FocusableElement = {
   focus(options?: FocusOptions): void;

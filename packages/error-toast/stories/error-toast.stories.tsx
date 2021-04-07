@@ -1,8 +1,8 @@
-import React from "react";
-import { ErrorToast } from "../src";
+import React from 'react';
+import { ErrorToast } from '../src';
 
 export default {
-  title: "FEEDBACK/ErrorToast",
+  title: 'FEEDBACK/ErrorToast',
   component: ErrorToast,
 };
 

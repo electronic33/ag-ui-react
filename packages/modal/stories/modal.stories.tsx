@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { Button } from "@app-garage/button";
-import { Modal } from "../src";
+import React, { useState } from 'react';
+import { Button } from '@app-garage/button';
+import { Modal } from '../src';
 
 export default {
-  title: "OVERLAY/Modal",
+  title: 'OVERLAY/Modal',
   component: Modal,
 };
 

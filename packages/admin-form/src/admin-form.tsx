@@ -1,14 +1,15 @@
-import React from "react";
-import { Field, Form, Formik } from "formik";
-import * as Yup from "yup";
-import classNames from "classnames";
+import React from 'react';
+import { Field, Form, Formik } from 'formik';
+import * as Yup from 'yup';
+import classNames from 'classnames';
 
-import { TextInput } from "@app-garage/text-input";
-import { ImageUploader } from "@app-garage/image-uploader";
-import { Button } from "@app-garage/button";
-import { Switch } from "@app-garage/switch";
-import { Select } from "@app-garage/select";
-import { TextArea } from "@app-garage/text-area";
+import { TextInput } from '@app-garage/text-input';
+import { ImageUploader } from '@app-garage/image-uploader';
+import { Button } from '@app-garage/button';
+import { Switch } from '@app-garage/switch';
+import { Select } from '@app-garage/select';
+import { TextArea } from '@app-garage/text-area';
+import { Checkbox } from '@app-garage/checkbox';
 
 type FormItemCommonProps = {
   name: string;
@@ -20,40 +21,40 @@ type FormItemCommonProps = {
 
 type FormItemConditionalProps =
   | {
-      type: "text";
+      type: 'text';
       initialValue: string;
       placeholder?: string;
       Icon?: React.ComponentType<{ className?: string }>;
     }
   | {
-      type: "number";
+      type: 'number';
       initialValue: number | string;
       placeholder?: string;
       Icon?: React.ComponentType<{ className?: string }>;
     }
   | {
-      type: "textarea";
+      type: 'textarea';
       initialValue: string;
       placeholder?: string;
       Icon?: React.ComponentType<{ className?: string }>;
     }
   | {
-      type: "checkbox";
+      type: 'checkbox';
       initialValue: boolean;
       placeholder?: string;
     }
   | {
-      type: "checkbox";
+      type: 'checkbox';
       initialValue: boolean;
       placeholder?: never;
     }
   | {
-      type: "switch";
+      type: 'switch';
       initialValue: boolean;
       placeholder?: never;
     }
   | {
-      type: "select";
+      type: 'select';
       initialValue: number | string;
       placeholder?: never;
       options: {
@@ -63,7 +64,7 @@ type FormItemConditionalProps =
       }[];
     }
   | {
-      type: "image-uploader";
+      type: 'image-uploader';
       initialValue?: string;
       placeholder?: never;
       isMultiple: boolean;
@@ -91,12 +92,14 @@ export const AdminForm = ({
   onCancel,
 }: AdminFormProps): React.ReactElement => (
   <Formik
-    initialValues={items.reduce((result, currentValue) => {
-      result[currentValue.name] = currentValue.initialValue;
-
-      return result;
-    }, {})}
-    validationSchema={Yup.object().shape(validationSchema)}
+    initialValues={items.reduce(
+      (result, currentValue) => ({
+        ...result,
+        [currentValue.name]: currentValue.initialValue,
+      }),
+      {},
+    )}
+    validationSchema={validationSchema && Yup.object().shape(validationSchema)}
     validateOnBlur
     validateOnChange={false}
     onSubmit={onSubmit}
@@ -107,7 +110,7 @@ export const AdminForm = ({
       return (
         <Form
           className={classNames(
-            "flex flex-col items-center bg-gray-100",
+            'flex flex-col items-center bg-gray-100',
             className,
           )}
         >
@@ -121,18 +124,18 @@ export const AdminForm = ({
               isLoading={isSubmitting}
               isDisabled={isSubmitDisabled}
             >
-              {isSubmitting ? "Submitting" : "Submit"}
+              {isSubmitting ? 'Submitting' : 'Submit'}
             </Button>
           </div>
           <div className="grid grid-cols-3 gap-5 row-span-full ">
             {items.map((item) => (
               <>
-                {item.type === "text" && (
+                {item.type === 'text' && (
                   <div className="flex justify-center items-center">
                     <Field
                       errorInLabel
                       containerClassName={classNames(
-                        "",
+                        '',
                         item.containerClassName,
                       )}
                       component={TextInput}
@@ -144,13 +147,13 @@ export const AdminForm = ({
                     />
                   </div>
                 )}
-                {item.type === "textarea" && (
+                {item.type === 'textarea' && (
                   <div className="flex justify-center items-center row-span-2 ">
                     <Field
                       errorInLabel
                       textarea
                       containerClassName={classNames(
-                        "",
+                        '',
                         item.containerClassName,
                       )}
                       inputClassName="h-full w-full"
@@ -164,12 +167,12 @@ export const AdminForm = ({
                     />
                   </div>
                 )}
-                {item.type === "number" && (
+                {item.type === 'number' && (
                   <div className="flex justify-center items-center">
                     <Field
                       errorInLabel
                       containerClassName={classNames(
-                        "",
+                        '',
                         item.containerClassName,
                       )}
                       component={TextInput}
@@ -181,31 +184,20 @@ export const AdminForm = ({
                     />
                   </div>
                 )}
-                {item.type === "checkbox" && (
-                  // TODO: move label to checkbox and use Checkbox
-                  <>
-                    <label className={classNames("", item.labelClassName)}>
-                      <p className="mr-2">{item.label}</p>
-                      <Field type="checkbox" name={item.name} />
-                    </label>
-                  </>
+                {item.type === 'checkbox' && (
+                  <Checkbox label={item.label} name={item.name} />
                 )}
-                {item.type === "switch" && (
-                  // TODO: move label to switch
-                  <>
-                    <Switch
-                      className="mr-5"
-                      active={values[item.name]}
-                      setActive={() =>
-                        setFieldValue(`${item.name}`, !values[item.name])
-                      }
-                    />
-                    <p className={classNames("", item.labelClassName)}>
-                      {item.label}
-                    </p>
-                  </>
+                {item.type === 'switch' && (
+                  <Switch
+                    containerClassName="mr-5"
+                    active={values[item.name]}
+                    setActive={() =>
+                      setFieldValue(`${item.name}`, !values[item.name])
+                    }
+                    label={item.label}
+                  />
                 )}
-                {item.type === "select" && (
+                {item.type === 'select' && (
                   <div className="flex justify-center items-center">
                     <Select
                       containerClassName={item.containerClassName}
@@ -218,7 +210,7 @@ export const AdminForm = ({
                     />
                   </div>
                 )}
-                {item.type === "image-uploader" && (
+                {item.type === 'image-uploader' && (
                   <div className="col-span-full flex justify-center items-center">
                     <ImageUploader
                       multipleImages={item.isMultiple}

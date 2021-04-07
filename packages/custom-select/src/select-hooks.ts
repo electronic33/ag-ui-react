@@ -82,6 +82,7 @@ export const useSelect = ({
 }: UseSelectProps) => {
   // Listen for outside click
   useEffect(() => {
+    // @ts-ignore
     const handleClickOutside = (event) => {
       if (
         isOpen &&

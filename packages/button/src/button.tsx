@@ -33,7 +33,7 @@ type ButtonProps = {
   };
 };
 
-export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+export const Button = React.forwardRef<HTMLButtonElement | null, ButtonProps>(
   (
     {
       className,
