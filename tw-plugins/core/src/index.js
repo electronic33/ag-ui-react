@@ -29,6 +29,7 @@ const Tabs = require('./classes/tabs');
 const TextArea = require('./classes/text-area');
 const TextInput = require('./classes/text-input');
 const Tooltip = require('./classes/tooltip');
+const NumericInputBaseClasses = require('./classes/numeric-input');
 
 module.exports = plugin(({ addComponents, addBase, theme }) => {
   const newComponents = {
@@ -61,6 +62,7 @@ module.exports = plugin(({ addComponents, addBase, theme }) => {
     ...TextArea(theme),
     ...TextInput(theme),
     ...Tooltip(theme),
+    ...NumericInputBaseClasses(theme),
   };
 
   addComponents(newComponents);

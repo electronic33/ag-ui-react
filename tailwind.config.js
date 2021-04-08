@@ -767,6 +767,7 @@ module.exports = {
       'focus-within',
       'hover',
       'focus',
+      'active',
     ],
     backgroundImage: ['responsive'],
     backgroundOpacity: [
@@ -798,7 +799,14 @@ module.exports = {
     borderRadius: ['responsive'],
     borderStyle: ['responsive'],
     borderWidth: ['responsive'],
-    boxShadow: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus'],
+    boxShadow: [
+      'responsive',
+      'group-hover',
+      'focus-within',
+      'hover',
+      'focus',
+      'active',
+    ],
     boxSizing: ['responsive'],
     clear: ['responsive'],
     container: ['responsive'],
