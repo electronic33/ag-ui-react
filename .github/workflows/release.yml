@@ -43,8 +43,8 @@ jobs:
       - name: Install Dependencies
         run: yarn install --frozen-lockfile && yarn bootstrap
 
-      - name: Start Cypress
-        uses: cypress-io/github-action@v2
+      # - name: Start Cypress
+      #   uses: cypress-io/github-action@v2
 
       - name: Run Tests
         run: yarn run test
