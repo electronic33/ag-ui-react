@@ -88,30 +88,25 @@ export function MultiSelect<T extends OptionValue>({
     [filterValue, options, debouncedFilterValue],
   );
 
-  const onSpaceOrEnterPress = useCallback(
-    (event) => {
-      event.stopPropagation();
+  const onSpaceOrEnterPress = useCallback(() => {
+    // event.stopPropagation();
 
-      if (isOpen && !value.includes(updatedList[activeIndex as number].value)) {
-        const newOptions = value.concat(
-          updatedList[activeIndex as number].value,
-        );
+    if (isOpen && !value.includes(updatedList[activeIndex as number].value)) {
+      const newOptions = value.concat(updatedList[activeIndex as number].value);
 
-        onChange(newOptions);
-      } else if (
-        isOpen &&
-        value.includes(updatedList[activeIndex as number].value)
-      ) {
-        const newOptions = value.filter(
-          (selectedOption) =>
-            selectedOption !== updatedList[activeIndex as number].value,
-        );
+      onChange(newOptions);
+    } else if (
+      isOpen &&
+      value.includes(updatedList[activeIndex as number].value)
+    ) {
+      const newOptions = value.filter(
+        (selectedOption) =>
+          selectedOption !== updatedList[activeIndex as number].value,
+      );
 
-        onChange(newOptions);
-      }
-    },
-    [value, onChange, activeIndex, updatedList, isOpen],
-  );
+      onChange(newOptions);
+    }
+  }, [value, onChange, activeIndex, updatedList, isOpen]);
 
   const transitions = useTransition(isOpen, null, {
     from: { opacity: 0, transform: 'translateY(0px)' },
@@ -163,7 +158,7 @@ export function MultiSelect<T extends OptionValue>({
             >
               <div
                 className={classNames(
-                  'flex items-center flex-wrap gap-2 relative w-full bg-white pl-2 py-2 text-left focus:outline-none focus:shadow-outline-blue  transition ease-in-out duration-150 sm:text-sm sm:leading-5',
+                  'flex items-center min-h-8 flex-wrap gap-2 relative w-full bg-white pl-2 py-2 text-left focus:outline-none focus:shadow-outline-blue  transition ease-in-out duration-150 sm:text-sm sm:leading-5',
                   {
                     'justify-between': status === 'loading',
                     'justify-start': status !== 'loading',
@@ -203,20 +198,18 @@ export function MultiSelect<T extends OptionValue>({
                   selectedOptions?.map((option) => (
                     <>
                       <div className="flex" key={option?.value}>
-                        <div className="flex bg-blue-500 pl-2 pr-0.5 py-1 rounded-l-full shadow-inner">
+                        <div className="flex items-center text-white bg-blue-500 pl-2 pr-1 py-1 rounded-l-full shadow-inner">
                           {option?.Icon && (
                             <span className="flex items-center mr-1.5">
                               {option?.Icon}
                             </span>
                           )}
-                          <span className="block truncate text-white">
-                            {option?.label}
-                          </span>
+                          <span className="pb-0.5">{option?.label}</span>
                         </div>
 
                         <button
                           type="button"
-                          className="flex items-center bg-blue-500 rounded-r-full px-1 transition-all hover:bg-blue-700 hover:text-white"
+                          className="flex items-center bg-blue-500 rounded-r-full px-1 transition-all hover:bg-blue-700 text-white"
                           onClick={(e) => {
                             e.stopPropagation();
 
@@ -227,23 +220,25 @@ export function MultiSelect<T extends OptionValue>({
                             onChange(newOptions);
                           }}
                         >
-                          <IoMdClose className="flex-shrink-0" />
+                          <IoMdClose className="flex-shrink-0 mt-0.5" />
                         </button>
                       </div>
                       {/* TODO: swap with icon only button */}
-                      <button
-                        type="button"
-                        className=" p-1 self-center text-gray-600 hover:text-black mr-5"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onChange([]);
-                        }}
-                      >
-                        <IoMdClose />
-                      </button>
                     </>
                   ))}
               </div>
+              {selectedOptions.length > 0 && (
+                <button
+                  type="button"
+                  className=" p-1 self-center text-gray-600 hover:text-black mr-5"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onChange([]);
+                  }}
+                >
+                  <IoMdClose />
+                </button>
+              )}
             </button>
 
             {status === 'ready' &&
@@ -296,11 +291,20 @@ export function MultiSelect<T extends OptionValue>({
                             onMouseLeave={() => setActiveIndex(-1)}
                             onMouseDown={() => {
                               if (value.includes(option.value)) {
+                                // {
+                                //                                 const newOptions = value.filter(
+                                //                                   (selectedOption) =>
+                                //                                     options[activeIndex as number].value ===
+                                //                                     selectedOption,
+                                //                                 );
+                                //                                 onChange(newOptions);
+                                //                               }
                                 const newOptions = value.filter(
                                   (selectedOption) =>
-                                    options[activeIndex as number].value ===
-                                    selectedOption,
+                                    selectedOption !==
+                                    updatedList[activeIndex as number].value,
                                 );
+
                                 onChange(newOptions);
                               } else {
                                 const newOptions = value.concat(option.value);

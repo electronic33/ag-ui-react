@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { useTransition } from 'react-spring';
 
 const getNextItemFromSearch = <T>(
@@ -80,6 +80,19 @@ export const useSelect = ({
   isLoading,
   error,
 }: UseSelectProps) => {
+  // execute Scroll Fn
+  const executeScroll = useCallback(
+    (index) => {
+      if (selectOptionsRef.current && selectOptionsRef.current.children) {
+        selectOptionsRef.current.children[index].scrollIntoView({
+          behavior: 'smooth',
+          block: 'center',
+        });
+      }
+    },
+    [selectOptionsRef],
+  );
+
   // Listen for outside click
   useEffect(() => {
     // @ts-ignore
@@ -112,44 +125,57 @@ export const useSelect = ({
           }
 
           break;
-        case 'ArrowDown':
+        case 'ArrowDown': {
           event.preventDefault();
+          let newIndex: number;
 
           if (!isOpen && document.activeElement === selectButtonRef.current) {
             setIsOpen(true);
-            setActiveIndex(-1);
+            newIndex = -1;
           } else if (isOpen && activeIndex === undefined) {
-            setActiveIndex(-1);
+            newIndex = -1;
           }
 
           if (isOpen && options.length > 0) {
             if (options.length - 1 === activeIndex) {
-              setActiveIndex(0);
+              newIndex = 0;
             } else {
-              setActiveIndex((prev) => prev + 1);
+              newIndex = activeIndex + 1;
             }
           }
 
+          // @ts-ignore
+          setActiveIndex(newIndex);
+          // @ts-ignore
+          executeScroll(newIndex);
+
           break;
-        case 'ArrowUp':
+        }
+        case 'ArrowUp': {
           event.preventDefault();
+          let newIndex: number;
 
           if (!isOpen && document.activeElement === selectButtonRef.current) {
             setIsOpen(true);
-            setActiveIndex(options.length);
+            newIndex = options.length;
           } else if (isOpen && activeIndex === undefined) {
-            setActiveIndex(options.length);
+            newIndex = options.length;
           }
 
           if (isOpen && options.length > 0) {
             if (activeIndex === 0) {
-              setActiveIndex(options.length - 1);
+              newIndex = options.length - 1;
             } else {
-              setActiveIndex((prev) => prev - 1);
+              newIndex = activeIndex - 1;
             }
           }
+          // @ts-ignore
+          setActiveIndex(newIndex);
+          // @ts-ignore
+          executeScroll(newIndex);
 
           break;
+        }
         case 'Enter':
         case 'Space':
           if (!withFilter) {
@@ -200,6 +226,7 @@ export const useSelect = ({
     onSpaceOrEnterPress,
     inputRef,
     withFilter,
+    executeScroll,
   ]);
 
   const transitions = useTransition(isOpen, null, {
