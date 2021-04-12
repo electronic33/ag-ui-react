@@ -15,7 +15,7 @@
   "module": "dist/index.es.js",
   "devDependencies": {
     "autoprefixer": "^10.0.2",
-    "clean-css": "^4.2.1",
+    "clean-css": "^5.1.2",
     "postcss": "^8.1.7",
     "tailwindcss": "^2.0.3"
   },
