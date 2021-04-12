@@ -226,7 +226,6 @@ export const Pagination = ({
           }}
           value={goToPageValue}
           containerClassName="bg-gray-100 shadow rounded px-2 py-1"
-          type="number"
         />
       )}
 
@@ -237,7 +236,7 @@ export const Pagination = ({
           onChange={(selectedItemsNumber) =>
             setItemsNumber(selectedItemsNumber)
           }
-          selected={itemsNumber}
+          value={itemsNumber}
           options={selectOptions}
         />
       )}

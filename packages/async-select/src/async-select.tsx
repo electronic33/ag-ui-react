@@ -31,15 +31,15 @@ export function useFetch<T>(url: string) {
 }
 
 type AsyncSelectTypes = {
-  selected: string;
-  setSelected: () => void;
+  value: string;
+  onChange: () => void;
   labelKey: string;
   valueKey: string;
 };
 
 export const AsyncSelect = ({
-  selected,
-  setSelected,
+  value,
+  onChange,
   labelKey,
   valueKey,
 }: AsyncSelectTypes): React.ReactElement => {
@@ -55,9 +55,10 @@ export const AsyncSelect = ({
         retryFn={refetch}
         error={error ? 'Error loading the resources' : ''}
         containerClassName="max-w-sm w-64 mb-5 my-2 mr-2"
-        onChange={setSelected}
-        selected={selected}
+        onChange={onChange}
+        value={value}
         label="Select"
+        // @ts-ignore
         options={response.results.map((responseItem) => ({
           label: responseItem[labelKey],
           value: responseItem[valueKey],

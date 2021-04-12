@@ -1,35 +1,51 @@
 import React, { useMemo } from 'react';
 import classNames from 'classnames';
-// import { useId } from 'react-id-generator';
 import { Button } from '@app-garage/button';
 
-type ToggleButtonGroupProps = {
-  items: { value: number | string; label: string }[];
-  multiple?: boolean;
-  onChange: (prevState?) => void;
-  selected: number | string | (number | string)[];
+type Value = string | number | undefined;
+
+type Item<T> = {
+  label: string;
+  value: T;
+};
+
+type ToggleButtonGroupCommonProps = {
   containerClassName?: string;
   selectedClassName?: string;
   buttonClassName?: string;
 };
 
-export const ToggleButtonGroup = ({
+type ToggleButtonGroupConditionalProps<T extends Value> =
+  | {
+      isMultiple?: false | undefined;
+      items: Item<T>[];
+      onChange: (value: T | undefined) => void;
+      value: T;
+    }
+  | {
+      isMultiple: true;
+      items: Item<T>[];
+      onChange: (value: T[]) => void;
+      value: T[];
+    };
+
+export function ToggleButtonGroup<T extends Value>({
   items,
-  multiple = false,
+  isMultiple = false,
   onChange,
-  selected,
+  value: selectedValue,
   containerClassName,
   selectedClassName,
   buttonClassName,
-}: ToggleButtonGroupProps) => {
+}: ToggleButtonGroupCommonProps & ToggleButtonGroupConditionalProps<T>) {
   const selectedOption = useMemo(
     () =>
-      !multiple
-        ? items?.find((item) => item?.value === selected)
-        : (selected as (number | string)[])?.map((val) =>
-            items?.find((o) => o?.value === val),
+      !isMultiple
+        ? items.find((item) => item.value === selectedValue)
+        : (selectedValue as T[]).map((val) =>
+            items.find((o) => o.value === val),
           ),
-    [multiple, items, selected],
+    [isMultiple, items, selectedValue],
   );
 
   return (
@@ -39,18 +55,20 @@ export const ToggleButtonGroup = ({
           className={classNames(
             'text-base transition-all',
             {
-              [`${selectedClassName} bg-blue-700`]: !multiple
+              [`${selectedClassName} bg-blue-700`]: !isMultiple
                 ? value ===
                   (selectedOption as {
-                    value: number | string;
+                    value: T;
                     label: string;
                   })?.value
-                : (selected as (number | string)[]).includes(value),
+                : (selectedValue as T[]).includes(value),
             },
             buttonClassName,
           )}
           onClick={() => {
-            if (!multiple) {
+            if (!isMultiple) {
+              let nextValue;
+
               if (
                 value ===
                 (selectedOption as {
@@ -58,20 +76,22 @@ export const ToggleButtonGroup = ({
                   label: string;
                 })?.value
               ) {
-                onChange(undefined);
+                nextValue = undefined;
               } else {
-                onChange(value);
+                nextValue = value;
               }
-            } else if ((selected as (number | string)[]).includes(value)) {
-              const newOptions = (selected as (number | string)[]).filter(
+
+              (onChange as (val: T | undefined) => void)(nextValue);
+            } else if ((selectedValue as T[]).includes(value)) {
+              const newOptions = (selectedValue as T[]).filter(
                 (selectedItem) => selectedItem !== value,
               );
-              onChange(newOptions);
+
+              (onChange as (val: T[]) => void)(newOptions);
             } else {
-              const newOptions = (selected as (number | string)[]).concat(
-                value,
-              );
-              onChange(newOptions);
+              const newOptions = (selectedValue as T[]).concat(value);
+
+              (onChange as (val: T[]) => void)(newOptions);
             }
           }}
         >
@@ -80,6 +100,6 @@ export const ToggleButtonGroup = ({
       ))}
     </div>
   );
-};
+}
 
 export default ToggleButtonGroup;

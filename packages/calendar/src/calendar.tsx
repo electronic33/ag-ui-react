@@ -63,7 +63,7 @@ type CalendarTypes = {
   disabledTilesClassName?: string | ((day: Date) => string);
   activeTilesClassName?: string | ((day: Date) => string);
   selectedTileClassName?: string | ((day: Date) => string);
-  selectedDate: Date | Date[];
+  selectedDate: Date | Date[] | undefined;
   selectHandler?: React.Dispatch<
     React.SetStateAction<Date[] | Date | undefined>
   >;
@@ -97,7 +97,9 @@ export const Calendar = ({
   CellComponent,
 }: CalendarTypes): React.ReactElement => {
   const [currentMonth, setCurrentMonth] = useState<Date>(
-    (rangeSelect ? selectedDate[0] : selectedDate) || new Date(),
+    (rangeSelect
+      ? (selectedDate as Date[])[0]
+      : (selectedDate as Date | undefined)) || new Date(),
   );
   const [rangeStart, setRangeStart] = useState<Date>();
   const [hoveredDay, setHoveredDay] = useState<Date>();
@@ -114,7 +116,7 @@ export const Calendar = ({
       setCurrentMonth(selectedDate as Date);
     }
     if (rangeSelect && (selectedDate as Date[]).length > 0) {
-      setCurrentMonth(selectedDate[0]);
+      setCurrentMonth((selectedDate as Date[])[0]);
     }
   }, [rangeSelect, selectedDate]);
 
@@ -132,7 +134,7 @@ export const Calendar = ({
   const selectedDateButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    function handleClickOutside(event) {
+    function handleClickOutside(event: React.MouseEvent) {
       if (
         calendarRef.current &&
         !calendarRef.current.contains(event.currentTarget)
@@ -141,8 +143,10 @@ export const Calendar = ({
       }
     }
 
+    // @ts-ignore
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
+      // @ts-ignore
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
@@ -250,8 +254,8 @@ export const Calendar = ({
             break;
           case 'ArrowDown':
             if (!hoveredDay) {
-              if (rangeSelect && (selectedDate as Date[]).length > 0) {
-                setHoveredDay(selectedDate[0]);
+              if (rangeSelect && (selectedDate as Date[])?.length > 0) {
+                setHoveredDay((selectedDate as Date[])[0]);
               } else if (!rangeSelect && selectedDate) {
                 setHoveredDay(selectedDate as Date);
               } else {
@@ -270,8 +274,8 @@ export const Calendar = ({
             break;
           case 'ArrowUp':
             if (!hoveredDay) {
-              if (rangeSelect && (selectedDate as Date[]).length > 0) {
-                setHoveredDay(selectedDate[0]);
+              if (rangeSelect && (selectedDate as Date[])?.length > 0) {
+                setHoveredDay((selectedDate as Date[])[0]);
               } else if (!rangeSelect && selectedDate) {
                 setHoveredDay(selectedDate as Date);
               } else {
@@ -290,8 +294,8 @@ export const Calendar = ({
             break;
           case 'ArrowRight':
             if (!hoveredDay) {
-              if (rangeSelect && (selectedDate as Date[]).length > 0) {
-                setHoveredDay(selectedDate[0]);
+              if (rangeSelect && (selectedDate as Date[])?.length > 0) {
+                setHoveredDay((selectedDate as Date[])[0]);
               } else if (!rangeSelect && selectedDate) {
                 setHoveredDay(selectedDate as Date);
               } else {
@@ -307,8 +311,8 @@ export const Calendar = ({
             break;
           case 'ArrowLeft':
             if (!hoveredDay) {
-              if (rangeSelect && (selectedDate as Date[]).length > 0) {
-                setHoveredDay(selectedDate[0]);
+              if (rangeSelect && (selectedDate as Date[])?.length > 0) {
+                setHoveredDay((selectedDate as Date[])[0]);
               } else if (!rangeSelect && selectedDate) {
                 setHoveredDay(selectedDate as Date);
               } else {
@@ -432,7 +436,7 @@ export const Calendar = ({
               isSelected = true;
             }
           }
-        } else {
+        } else if (selectedDate) {
           isSelected = isSameDay(day, selectedDate);
         }
 
@@ -473,13 +477,16 @@ export const Calendar = ({
                   day <= (hoveredDay as Date),
 
                 [`${firstDayInRangeClassName} rounded-full-left-side`]:
-                  rangeSelect === true && isSameDay(day, selectedDate[0]),
+                  rangeSelect === true &&
+                  isSameDay(day, (selectedDate as Date[])[0]),
 
                 [`${lastDayInRangeClassName} rounded-full-right-side`]:
                   rangeSelect === true &&
                   isSameDay(
                     day,
-                    selectedDate[(selectedDate as Date[])?.length - 1],
+                    (selectedDate as Date[])[
+                      (selectedDate as Date[])?.length - 1
+                    ],
                   ),
 
                 // 'rounded-none': rangeSelect === true && spliceSelected === true,

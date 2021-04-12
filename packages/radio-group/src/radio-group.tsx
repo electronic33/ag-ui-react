@@ -60,7 +60,10 @@ const RadioButton = ({
           defaultLabelClassName: 'label-left',
         };
       default:
-        return null;
+        return {
+          defaultContainerClassName: '',
+          defaultLabelClassName: '',
+        };
     }
   }, [labelPosition]);
 

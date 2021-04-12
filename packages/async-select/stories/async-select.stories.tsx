@@ -13,8 +13,9 @@ export const Top = (): React.ReactNode => {
     <div className="w-96">
       <AsyncSelect
         fetchHook={useFetch}
-        selected={selected}
-        setSelected={setSelected}
+        value={selected}
+        // @ts-ignore
+        onChange={setSelected}
         labelKey="email"
         valueKey="cell"
       />

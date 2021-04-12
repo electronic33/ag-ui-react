@@ -1,18 +1,16 @@
-import React from "react";
-import { AiOutlineHome } from "react-icons/ai";
-import { HamburgerMenu } from "../src";
+import React from 'react';
+import { AiOutlineHome } from 'react-icons/ai';
+import { HamburgerMenu } from '../src';
 
 export default {
-  title: "OTHERS/HamburgerMenu",
+  title: 'OTHERS/HamburgerMenu',
   component: HamburgerMenu,
 };
 
 export const Default = (): React.ReactNode => (
   <HamburgerMenu
     isOpen
-    navLinks={[{ label: "Egy", href: "/", Icon: AiOutlineHome }]}
-    restNavLinks={[{ label: "Egy", href: "/", Icon: AiOutlineHome }]}
-    alwaysShowingLinks={[{ label: "Egy", href: "/", Icon: AiOutlineHome }]}
+    navLinks={[{ label: 'Egy', href: '/', Icon: AiOutlineHome }]}
   />
 );
 

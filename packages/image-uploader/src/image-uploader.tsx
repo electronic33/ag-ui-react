@@ -275,7 +275,7 @@ export const ImageUploader = ({
                     startAtIndex={0}
                     itemsToShow={1}
                     itemsToScroll={1}
-                    className="w-screen m-auto h-full"
+                    containerClassName="w-screen m-auto h-full"
                   >
                     {imageSources.map((image, index) => (
                       // eslint-disable-next-line react/no-array-index-key
@@ -424,7 +424,7 @@ export const ImageUploader = ({
                   startAtIndex={0}
                   itemsToShow={1}
                   itemsToScroll={1}
-                  className="w-2/6 "
+                  containerClassName="w-2/6 "
                 >
                   {images.map((image, index) => (
                     // eslint-disable-next-line react/no-array-index-key

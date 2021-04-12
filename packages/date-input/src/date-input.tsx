@@ -141,7 +141,11 @@ export const DateInput = ({
   }, [isOpen, setIsOpen]);
 
   const selectHandler = (selectedDate: Date | undefined) => {
-    setValue(format(selectedDate as Date, dateFormat));
+    if (selectedDate) {
+      setValue(format(selectedDate, dateFormat));
+    } else {
+      setValue(undefined);
+    }
     setSelectedDates(selectedDate);
   };
 
@@ -184,16 +188,11 @@ export const DateInput = ({
             >
               <Calendar
                 calendarClassName="w-56"
-                headerContainerClassName=""
-                monthClassName=""
-                weekDaysClassName=""
-                allTilesClassName=""
-                activeTilesClassName=""
-                selectedTileClassName=""
                 disabledTilesClassName={() => ''}
                 LeftArrowIcon={FaChevronLeft}
                 RightArrowIcon={FaChevronRight}
-                selectedDate={selectedDates as Date}
+                selectedDate={selectedDates}
+                // @ts-ignore
                 selectHandler={selectHandler}
               />
             </animated.div>,

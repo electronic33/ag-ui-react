@@ -139,7 +139,7 @@ export const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(
               inputClassName,
             )}
             value={formikCompatibleValue}
-            onChange={(e) => formikCompatibleOnChange(e.target.value)}
+            onChange={(event) => formikCompatibleOnChange(event)}
             onClick={onClick}
             onKeyUp={(event) => {
               if (event.key === 'Alt') {
@@ -153,24 +153,30 @@ export const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(
               }
               if (event.key === 'ArrowUp' && withDecimals && isAltPressed) {
                 event.preventDefault();
+
                 formikCompatibleOnChange(
-                  (prev) => Math.round((Number(prev) + 0.1) * 10) / 10,
+                  // TODO: think of a solution
+                  // @ts-ignore
+                  Math.round((Number(formikCompatibleValue) + 0.1) * 10) / 10,
                 );
               } else if (event.key === 'ArrowUp' && withDecimals) {
                 event.preventDefault();
                 formikCompatibleOnChange(
-                  (prev) => Math.round((Number(prev) + 1) * 10) / 10,
+                  // @ts-ignore
+                  Math.round((Number(formikCompatibleValue) + 1) * 10) / 10,
                 );
               }
               if (event.key === 'ArrowDown' && withDecimals && isAltPressed) {
                 event.preventDefault();
                 formikCompatibleOnChange(
-                  (prev) => Math.round((Number(prev) - 0.1) * 10) / 10,
+                  // @ts-ignore
+                  Math.round((Number(formikCompatibleValue) - 0.1) * 10) / 10,
                 );
               } else if (event.key === 'ArrowDown' && withDecimals) {
                 event.preventDefault();
                 formikCompatibleOnChange(
-                  (prev) => Math.round((Number(prev) - 1) * 10) / 10,
+                  // @ts-ignore
+                  Math.round((Number(formikCompatibleValue) - 1) * 10) / 10,
                 );
               }
 
@@ -195,7 +201,8 @@ export const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(
               type="button"
               className="h-full bg-gray-100 w-full border border-gray-300 rounded-tr-md active:bg-gray-300 transition-all duration-75 active:shadow-inner"
               onClick={() =>
-                formikCompatibleOnChange((prev) => Number(prev) + 1)
+                // @ts-ignore
+                formikCompatibleOnChange(Number(formikCompatibleValue) + 1)
               }
             >
               <AiFillCaretUp className="flex-shrink-0 w-full" />
@@ -205,7 +212,8 @@ export const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(
               type="button"
               className="h-full w-full bg-gray-100 border border-gray-300 rounded-br-md active:bg-gray-300 transition-all duration-75 active:shadow-inner"
               onClick={() =>
-                formikCompatibleOnChange((prev) => Number(prev) - 1)
+                // @ts-ignore
+                formikCompatibleOnChange(Number(formikCompatibleValue) - 1)
               }
             >
               <AiFillCaretDown className="flex-shrink-0 w-full" />

@@ -7,13 +7,13 @@ export default {
 };
 
 export const Default = (): React.ReactNode => {
-  const [value, setValue] = useState<number | string | (number | string)[]>();
+  const [value, setValue] = useState(1);
 
   return (
     <div className="flex justify-center items-center">
       <ToggleButtonGroup
         containerClassName="flex space-x-2"
-        selected={value}
+        value={value}
         onChange={setValue}
         items={[
           {
