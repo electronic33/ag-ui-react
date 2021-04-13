@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { ToastProvider, useToast } from '../src';
 
 export default {
@@ -7,23 +7,118 @@ export default {
 };
 
 const DefaultContent = () => {
-  const addToast = useToast();
+  const lastToastId = useRef('');
+
+  const { showToast, closeToast, closeAllToasts } = useToast();
+
+  const closeLastToast = () => {
+    closeToast(lastToastId.current);
+  };
+
+  const closeAll = () => {
+    closeAllToasts();
+  };
 
   return (
-    <button
-      type="button"
-      onClick={() => {
-        addToast({
-          intent: 'primary',
-          text:
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
-          header: 'Header',
-          position: 'top-center',
-        });
-      }}
-    >
-      Click me
-    </button>
+    <div className="space-x-3">
+      <button type="button" onClick={closeAll}>
+        close all toasts
+      </button>
+      <button type="button" onClick={closeLastToast}>
+        delete last toast
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          lastToastId.current = showToast({
+            intent: 'primary',
+            text:
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
+            header: 'Header',
+            position: 'top-left',
+            timeout: 3000,
+          });
+        }}
+      >
+        top-left
+      </button>
+
+      <button
+        type="button"
+        onClick={() => {
+          lastToastId.current = showToast({
+            intent: 'primary',
+            text:
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
+            header: 'Header',
+            position: 'top-center',
+            timeout: 3000,
+          });
+        }}
+      >
+        top-center
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          lastToastId.current = showToast({
+            intent: 'primary',
+            text:
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
+            header: 'Header',
+            position: 'top-right',
+            timeout: 3000,
+          });
+        }}
+      >
+        top-right
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          lastToastId.current = showToast({
+            intent: 'primary',
+            text:
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
+            header: 'Header',
+            position: 'bottom-left',
+            timeout: 3000,
+          });
+        }}
+      >
+        bottom-left
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          lastToastId.current = showToast({
+            intent: 'primary',
+            text:
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
+            header: 'Header',
+            position: 'bottom-center',
+            timeout: 3000,
+          });
+        }}
+      >
+        bottom-center
+      </button>
+      <button
+        type="button"
+        onClick={() => {
+          lastToastId.current = showToast({
+            intent: 'primary',
+            text:
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
+            header: 'Header',
+            position: 'bottom-right',
+            timeout: 3000,
+          });
+        }}
+      >
+        bottom-right
+      </button>
+    </div>
   );
 };
 

@@ -34,7 +34,7 @@
     "@app-garage/focus-trap": "^1.0.1",
     "@app-garage/label": "^1.1.9",
     "classnames": "^2.2.6",
-    "react-spring": "8"
+    "react-spring": "^8.0.27"
   },
   "devDependencies": {
     "react": "^17.0.1",
