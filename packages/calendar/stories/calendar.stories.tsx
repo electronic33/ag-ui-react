@@ -17,7 +17,6 @@ export const Default = (): React.ReactElement => {
   //   new Date('2021-04-12'),
   //   new Date('2021-04-13'),
   // ]);
-
   // const [selectedDates, setSelectedDates] = useMultipleSelectCalendarState([]);
   return (
     <div>

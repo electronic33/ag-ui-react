@@ -24,8 +24,8 @@ jobs:
       - name: Configure max number of watchers
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
-      - name: Install Cypress Deps
-        run: sudo apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
+      # - name: Install Cypress Deps
+      #   run: sudo apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
 
       - uses: actions/cache@v2
         name: Load Yarn cache
@@ -44,5 +44,5 @@ jobs:
       # - name: Start Cypress
       #   uses: cypress-io/github-action@v2
 
-      - name: Run Tests
-        run: yarn run test
+      # - name: Run Tests
+      #   run: yarn run test
