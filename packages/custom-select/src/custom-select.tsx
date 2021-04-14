@@ -84,6 +84,7 @@ export function Select<T extends OptionValue>({
     isLoading,
     error,
   });
+
   return (
     <FocusLock restoreFocus isDisabled={!isOpen}>
       <div className={containerClassName}>
