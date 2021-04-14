@@ -36,7 +36,6 @@ export const Default = (): React.ReactElement => {
         selectedDate={selectedDates}
         selectHandler={setSelectedDates}
         rangeSelect
-
         // CellComponent={({ day }) => (
         //   <div>
         //     {isSameDay(currentdDate, day) ? "-------- currentDay -------" : "nah"}
