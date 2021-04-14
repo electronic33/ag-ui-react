@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 
-// import ButtonSpinner from "../ButtonSpinner/ButtonSpinner";
 import classNames from 'classnames';
+import { Spinner } from '@app-garage/spinner';
 
 type ButtonProps = {
   className?: string;
@@ -80,21 +80,35 @@ export const Button = React.forwardRef<HTMLButtonElement | null, ButtonProps>(
       )}
       {...ariaProps}
     >
-      <>
-        {/* {isLoading && !iconPosition && (
-            <ButtonSpinner className={classNames("btn-icon-spinner-left")} />
-          )} */}
-        {!isLoading && Icon && iconPosition === 'left' && (
-          <Icon className={classNames('btn-icon-spinner-left')} />
-        )}
-        {children}
-        {!isLoading && Icon && iconPosition === 'right' && (
-          <Icon className={classNames('btn-icon-spinner-right')} />
-        )}
-        {/* {isLoading && iconPosition === "right" && (
-            <ButtonSpinner className={classNames("btn-icon-spinner-right")} />
-          )} */}
-      </>
+      {isLoading && iconPosition === 'left' && (
+        <Spinner
+          fill="rgba(255, 255, 255, 1)"
+          stroke="rgba(255, 255, 255, 1)"
+          className={classNames('btn-icon-spinner-left ', {
+            'w-4 h-4 mr-2': size === 'sm',
+            'w-7 h-7 mr-3': size === 'default',
+            'w-9 h-9 mr-4': size === 'lg',
+          })}
+        />
+      )}
+      {!isLoading && Icon && iconPosition === 'left' && (
+        <Icon className={classNames('btn-icon-spinner-left')} />
+      )}
+      {children}
+      {!isLoading && Icon && iconPosition === 'right' && (
+        <Icon className={classNames('btn-icon-spinner-right')} />
+      )}
+      {isLoading && iconPosition === 'right' && (
+        <Spinner
+          fill="rgba(255, 255, 255, 1)"
+          stroke="rgba(255, 255, 255, 1)"
+          className={classNames('btn-icon-spinner-right', {
+            'w-4 h-4 ml-2': size === 'sm',
+            'w-7 h-7 ml-3': size === 'default',
+            'w-9 h-9 ml-4': size === 'lg',
+          })}
+        />
+      )}
     </button>
   ),
 );

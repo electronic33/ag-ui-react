@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import classNames from 'classnames';
-import { ButtonSpinner } from '@app-garage/button-spinner';
+import { Spinner } from '@app-garage/spinner';
 import { Button } from '@app-garage/button';
 import { FocusLock } from '@app-garage/focus-trap';
 import { animated } from 'react-spring';
@@ -84,7 +84,6 @@ export function Select<T extends OptionValue>({
     isLoading,
     error,
   });
-
   return (
     <FocusLock restoreFocus isDisabled={!isOpen}>
       <div className={containerClassName}>
@@ -132,8 +131,11 @@ export function Select<T extends OptionValue>({
           >
             {status === 'loading' && (
               <>
-                <ButtonSpinner
-                  className={classNames('flex-shrink-0', spinnerClassName)}
+                <Spinner
+                  className={classNames(
+                    'flex-shrink-0 w-5 h-5',
+                    spinnerClassName,
+                  )}
                 />
                 {loadingText && <p className="text-gray-400">{loadingText}</p>}
               </>

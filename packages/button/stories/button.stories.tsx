@@ -5,13 +5,10 @@ import { Button } from '../src';
 export default {
   title: 'LERNA/Button',
   component: Button,
-  argTypes: { onClick: { action: 'clicked' } },
 };
 
-export const Default = ({ onClick, ...rest }): React.ReactNode => (
-  <Button Icon={AiFillAudio} {...rest} onClick={onClick}>
-    Button
-  </Button>
+export const Default = (): React.ReactNode => (
+  <Button Icon={AiFillAudio}>Button</Button>
 );
 
 export const Small = (props): React.ReactNode => (

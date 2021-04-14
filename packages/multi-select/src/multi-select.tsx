@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import classNames from 'classnames';
-import { ButtonSpinner } from '@app-garage/button-spinner';
+import { Spinner } from '@app-garage/spinner';
 import { Button } from '@app-garage/button';
 import { FocusLock } from '@app-garage/focus-trap';
 import { useTransition, animated } from 'react-spring';
@@ -10,7 +10,6 @@ import { BiCheck } from 'react-icons/bi';
 import { useSelect } from '@app-garage/custom-select';
 import { TextInput } from '@app-garage/text-input';
 import { useDebounce } from '@app-garage/utils';
-import { Spinner } from '@app-garage/spinner';
 
 type OptionValue = number | string;
 
@@ -169,8 +168,11 @@ export function MultiSelect<T extends OptionValue>({
               >
                 {status === 'loading' && (
                   <>
-                    <ButtonSpinner
-                      className={classNames('flex-shrink-0', spinnerClassName)}
+                    <Spinner
+                      className={classNames(
+                        'flex-shrink-0 w-5 h-5',
+                        spinnerClassName,
+                      )}
                     />
                     {loadingText && (
                       <p className=" text-gray-400 mr-5">{loadingText}</p>

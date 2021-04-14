@@ -32,10 +32,9 @@
   },
   "dependencies": {
     "@app-garage/button": "^1.1.5",
-    "@app-garage/button-spinner": "^1.0.1",
     "@app-garage/custom-select": "^1.0.3",
     "@app-garage/focus-trap": "^1.0.1",
-    "@app-garage/spinner": "^1.0.1",
+    "@app-garage/spinner": "^1.0.2",
     "@app-garage/text-input": "^1.0.1",
     "@app-garage/utils": "^1.0.1",
     "classnames": "^2.2.6",
