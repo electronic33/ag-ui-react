@@ -3,9 +3,9 @@ import classNames from 'classnames';
 import { Label } from '@app-garage/label';
 import { Button } from '@app-garage/button';
 import {
-  FieldInputProps,
-  FormikProps,
-  useFormikCompatibleValues,
+  useTextInputValues,
+  TextFieldInputProps,
+  TextFormikProps,
 } from './input-hooks';
 
 type TextInputProps = {
@@ -29,8 +29,8 @@ type TextInputProps = {
   max?: string | number;
   withMax?: boolean;
   placeholder?: string;
-  field?: FieldInputProps<HTMLInputElement>;
-  form?: FormikProps;
+  field?: TextFieldInputProps<HTMLInputElement>;
+  form?: TextFormikProps;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
   onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
   withErrorInLabel?: boolean;
@@ -81,7 +81,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
       formikCompatibleOnBlur,
       formikCompatibleOnChange,
       formikCompatibleName,
-    } = useFormikCompatibleValues<HTMLInputElement>({
+    } = useTextInputValues<HTMLInputElement>({
       field,
       form,
       value,

@@ -3,7 +3,7 @@ import { Field, Form, Formik, FormikProps } from 'formik';
 import * as Yup from 'yup';
 import classNames from 'classnames';
 
-import { FieldInputProps, TextInput } from '@app-garage/text-input';
+import { TextFieldInputProps, TextInput } from '@app-garage/text-input';
 import { ImageUploader } from '@app-garage/image-uploader';
 import { Button } from '@app-garage/button';
 import { Switch } from '@app-garage/switch';
@@ -163,7 +163,7 @@ export const AdminForm = ({
                   field,
                   form,
                 }: {
-                  field: FieldInputProps<any>;
+                  field: TextFieldInputProps<any>;
                   form: FormikProps<any>;
                 }) => getFormItem({ field, form, item })}
               </Field>

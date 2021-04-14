@@ -31,7 +31,7 @@ export * from '@app-garage/selectable-list';
 export * from '@app-garage/skeleton';
 export * from '@app-garage/slider';
 export * from '@app-garage/spinner';
-export { Switch } from '@app-garage/switch';
+export * from '@app-garage/switch';
 export * from '@app-garage/tabs';
 export * from '@app-garage/text-area';
 export * from '@app-garage/text-input';

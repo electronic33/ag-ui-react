@@ -1,4 +1,4 @@
-export type FieldInputProps<
+export type TextFieldInputProps<
   E extends HTMLInputElement | HTMLTextAreaElement
 > = {
   value: string;
@@ -22,16 +22,16 @@ export type FieldInputProps<
   };
 };
 
-export type FormikProps = {
+export type TextFormikProps = {
   touched?: Record<string, string>;
   errors?: Record<string, string>;
 };
 
-type UseFormikCompatibleValuesParams<
+type useTextInputValuesParams<
   T extends HTMLInputElement | HTMLTextAreaElement
 > = {
-  field?: FieldInputProps<T>;
-  form?: FormikProps;
+  field?: TextFieldInputProps<T>;
+  form?: TextFormikProps;
   value?: string | number;
   error?: string;
   name?: string;
@@ -39,7 +39,7 @@ type UseFormikCompatibleValuesParams<
   onBlur?: (event: React.FocusEvent<T>) => void;
 };
 
-export function useFormikCompatibleValues<
+export function useTextInputValues<
   T extends HTMLInputElement | HTMLTextAreaElement
 >({
   value,
@@ -49,7 +49,7 @@ export function useFormikCompatibleValues<
   name,
   onChange,
   onBlur,
-}: UseFormikCompatibleValuesParams<T>) {
+}: useTextInputValuesParams<T>) {
   let formikCompatibleValue: string | number | undefined = '';
 
   if (value) {

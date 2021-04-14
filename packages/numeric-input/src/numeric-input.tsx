@@ -4,9 +4,9 @@ import { Label } from '@app-garage/label';
 import { Button } from '@app-garage/button';
 import { AiFillCaretDown, AiFillCaretUp } from 'react-icons/ai';
 import {
-  FieldInputProps,
-  FormikProps,
-  useFormikCompatibleValues,
+  useNumberInputValues,
+  FieldNumberInputProps,
+  FormikNumberProps,
 } from './input-hooks';
 
 type NumericInputProps = {
@@ -31,8 +31,8 @@ type NumericInputProps = {
   withMax?: boolean;
   withDecimals?: boolean;
   placeholder?: string;
-  field?: FieldInputProps<HTMLInputElement>;
-  form?: FormikProps;
+  field?: FieldNumberInputProps<HTMLInputElement>;
+  form?: FormikNumberProps;
   onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
   onFocus?: (event: React.FocusEvent<HTMLInputElement>) => void;
   withErrorInLabel?: boolean;
@@ -84,7 +84,7 @@ export const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(
       formikCompatibleOnBlur,
       formikCompatibleOnChange,
       formikCompatibleName,
-    } = useFormikCompatibleValues<HTMLInputElement>({
+    } = useNumberInputValues<HTMLInputElement>({
       field,
       form,
       value,

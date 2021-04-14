@@ -1,4 +1,6 @@
-export type FieldInputProps<E extends HTMLButtonElement | HTMLInputElement> = {
+export type BooleanFieldInputProps<
+  E extends HTMLButtonElement | HTMLInputElement
+> = {
   value: boolean;
   name: string;
   multiple?: boolean;
@@ -20,7 +22,7 @@ export type FieldInputProps<E extends HTMLButtonElement | HTMLInputElement> = {
   };
 };
 
-export type FormikProps = {
+export type BooleanFormikProps = {
   touched?: Record<string, string>;
   errors?: Record<string, string>;
 };
@@ -28,8 +30,8 @@ export type FormikProps = {
 type UseFormikCompatibleValuesParams<
   T extends HTMLButtonElement | HTMLInputElement
 > = {
-  field?: FieldInputProps<T>;
-  form?: FormikProps;
+  field?: BooleanFieldInputProps<T>;
+  form?: BooleanFormikProps;
   value?: boolean;
   error?: string;
   name?: string;
@@ -37,7 +39,7 @@ type UseFormikCompatibleValuesParams<
   onBlur?: (event: React.FocusEvent<T>) => void;
 };
 
-export function useFormikCompatibleValues<
+export function useBooleanInputValues<
   T extends HTMLButtonElement | HTMLInputElement
 >({
   value,

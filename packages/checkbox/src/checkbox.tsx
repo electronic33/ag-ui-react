@@ -3,9 +3,9 @@ import classNames from 'classnames';
 import { useId } from 'react-id-generator';
 import { Label } from '@app-garage/label';
 import {
-  useFormikCompatibleValues,
-  FieldInputProps,
-  FormikProps,
+  useBooleanInputValues,
+  BooleanFieldInputProps,
+  BooleanFormikProps,
 } from '@app-garage/switch';
 
 type CheckBoxProps = {
@@ -21,8 +21,8 @@ type CheckBoxProps = {
   unCheckedBgClassName?: string;
   checkedBgClassName?: string;
   name?: string;
-  field?: FieldInputProps<HTMLInputElement>;
-  form?: FormikProps;
+  field?: BooleanFieldInputProps<HTMLInputElement>;
+  form?: BooleanFormikProps;
   error?: string;
 };
 
@@ -58,7 +58,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckBoxProps>(
       formikCompatibleName,
       formikCompatibleOnChange,
       formikCompatibleValue,
-    } = useFormikCompatibleValues({
+    } = useBooleanInputValues({
       value,
       onChange,
       onBlur,

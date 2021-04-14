@@ -2,9 +2,9 @@ import React from 'react';
 import classNames from 'classnames';
 import { Label } from '@app-garage/label';
 import {
-  useFormikCompatibleValues,
-  FormikProps,
-  FieldInputProps,
+  useTextInputValues,
+  TextFieldInputProps,
+  TextFormikProps,
 } from '@app-garage/text-input';
 
 type TextAreaProps = {
@@ -22,8 +22,8 @@ type TextAreaProps = {
   max?: string | number;
   withMax?: boolean;
   placeholder?: string;
-  field?: FieldInputProps<HTMLTextAreaElement>;
-  form?: FormikProps;
+  field?: TextFieldInputProps<HTMLTextAreaElement>;
+  form?: TextFormikProps;
   onBlur?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
   onFocus?: (event: React.FocusEvent<HTMLTextAreaElement>) => void;
   withErrorInLabel?: boolean;
@@ -58,7 +58,7 @@ export const TextArea = ({
     formikCompatibleOnBlur,
     formikCompatibleOnChange,
     formikCompatibleValue,
-  } = useFormikCompatibleValues<HTMLTextAreaElement>({
+  } = useTextInputValues<HTMLTextAreaElement>({
     field,
     form,
     value,

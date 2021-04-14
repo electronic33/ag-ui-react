@@ -269,7 +269,7 @@ export function MultiSelect<T extends OptionValue>({
                           // }}
                         />
                       )}
-                      {isLoadingOptions && <Spinner containerClassName="p-4" />}
+                      {isLoadingOptions && <Spinner className="p-4" />}
                       {isErrorOptions && (
                         <div className="flex justify-center items-center text-red-600 my-5">
                           {optionsError}

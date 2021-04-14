@@ -2,9 +2,9 @@ import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 import { Label } from '@app-garage/label';
 import {
-  useFormikCompatibleValues,
-  FieldInputProps,
-  FormikProps,
+  useBooleanInputValues,
+  BooleanFieldInputProps,
+  BooleanFormikProps,
 } from './boolean-input-hooks';
 
 type SwitchProps = {
@@ -19,8 +19,8 @@ type SwitchProps = {
   activeDotBackgroundColorClass?: string;
   notActiveDotBackgroundColorClass?: string;
   name?: string;
-  field?: FieldInputProps<HTMLButtonElement>;
-  form?: FormikProps;
+  field?: BooleanFieldInputProps<HTMLButtonElement>;
+  form?: BooleanFormikProps;
 };
 
 export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
@@ -48,7 +48,7 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
       formikCompatibleName,
       formikCompatibleOnBlur,
       formikCompatibleValue,
-    } = useFormikCompatibleValues({
+    } = useBooleanInputValues({
       value,
       field,
       form,
