@@ -10,7 +10,9 @@ export default {
 };
 
 export const Default = (): React.ReactElement => {
-  const [selectedDates, setSelectedDates] = useState<Date | Date[]>([]);
+  const [selectedDates, setSelectedDates] = useState<Date | Date[] | undefined>(
+    [],
+  );
   // const [selectedDates, setSelectedDates] = useState([
   //   new Date('2021-04-10'),
   //   new Date('2021-04-11'),
@@ -21,7 +23,7 @@ export const Default = (): React.ReactElement => {
   return (
     <div>
       <Calendar
-        calendarClassName="w-48 "
+        calendarClassName="w-56 "
         headerContainerClassName=""
         monthClassName=""
         arrowsClassName=""

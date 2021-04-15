@@ -26,13 +26,16 @@
   ],
   "scripts": {
     "build": "rollup -c",
-    "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
+    "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc",
+    "cy:open": "cypress open"
   },
   "dependencies": {
     "@app-garage/label": "^1.1.9",
     "classnames": "^2.2.6"
   },
   "devDependencies": {
+    "@testing-library/cypress": "^7.0.4",
+    "cypress": "^6.8.0",
     "date-fns": "^2.19.0",
     "react": "^17.0.1",
     "react-icons": "^4.2.0"

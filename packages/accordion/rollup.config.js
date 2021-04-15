@@ -1,3 +1,3 @@
-import configure from "../../rollup.config";
+import configure from '../../rollup.config';
 
 export default configure();

@@ -467,10 +467,10 @@ export const Calendar = ({
             className={classNames(
               'tile-class focus:ring-4 ring-blue-400',
               {
-                [`${hoveredTileClassName} hovered-tile`]: isSameDay(
-                  day,
-                  hoveredDay as Date,
-                ),
+                // [`${hoveredTileClassName} hovered-tile`]: isSameDay(
+                //   day,
+                //   hoveredDay as Date,
+                // ),
                 [`${rangeHoverClassName} hovered-tile-calendar`]:
                   rangeStart &&
                   day >= rangeStart &&
@@ -488,6 +488,8 @@ export const Calendar = ({
                       (selectedDate as Date[])?.length - 1
                     ],
                   ),
+                [`${firstDayOfRangeWhereIsNoEndDateClassName} first-day-in-range-no-selected-end-date`]:
+                  rangeStart && isSameDay(day, rangeStart),
 
                 // 'rounded-none': rangeSelect === true && spliceSelected === true,
 
@@ -508,10 +510,8 @@ export const Calendar = ({
                   : `${selectedTileClassName(day)} selected-tiles`]: isSelected,
                 [`${selectedAndHoveredTileClassName} selected-and-hovered-tiles`]:
                   isSelected && isSameDay(day, hoveredDay as Date),
-                [`${firstDayOfRangeWhereIsNoEndDateClassName} first-day-in-range-no-selected-end-date`]: isSameDay(
-                  day,
-                  hoveredDay as Date,
-                ),
+                [`${hoveredTileClassName} hovered-tile`]:
+                  !isSelected && isSameDay(day, hoveredDay as Date),
               },
               allTilesClassName,
             )}
