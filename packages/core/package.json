@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/core",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
@@ -29,13 +29,13 @@
     "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
   },
   "dependencies": {
-    "@app-garage/accordion": "^1.0.2",
+    "@app-garage/accordion": "^1.1.0",
     "@app-garage/alert-dialog": "^1.0.2",
     "@app-garage/bottom-nav": "^1.0.2",
     "@app-garage/bread-crumbs": "^1.0.2",
     "@app-garage/button": "^1.0.2",
     "@app-garage/button-group": "^1.1.6",
-    "@app-garage/calendar": "^1.0.2",
+    "@app-garage/calendar": "^1.0.3",
     "@app-garage/callout": "^1.0.2",
     "@app-garage/checkbox": "^1.0.2",
     "@app-garage/custom-select": "^1.0.3",
@@ -50,7 +50,7 @@
     "@app-garage/menu": "^1.0.2",
     "@app-garage/menu-button": "^1.0.2",
     "@app-garage/modal": "^1.0.2",
-    "@app-garage/multi-select": "^1.0.3",
+    "@app-garage/multi-select": "^1.1.0",
     "@app-garage/numeric-input": "^1.0.3",
     "@app-garage/pagination": "^1.0.3",
     "@app-garage/popover": "^1.0.2",
