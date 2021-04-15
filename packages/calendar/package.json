@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/calendar",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
