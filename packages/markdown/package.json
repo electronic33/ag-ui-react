@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/markdown",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
@@ -29,7 +29,7 @@
     "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
   },
   "dependencies": {
-    "@app-garage/text-area": "^1.0.2",
+    "@app-garage/text-area": "^1.0.3",
     "classnames": "^2.2.6",
     "react-markdown": "^5.0.3"
   },

@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/drawer",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
@@ -29,14 +29,14 @@
     "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
   },
   "dependencies": {
-    "@app-garage/focus-trap": "^1.0.2",
-    "@app-garage/link": "^1.0.2",
-    "@app-garage/utils": "^1.0.2",
+    "@app-garage/focus-trap": "^1.0.3",
+    "@app-garage/link": "^1.0.3",
+    "@app-garage/utils": "^1.0.3",
     "classnames": "^2.2.6",
     "react-scrolllock": "^5.0.1"
   },
   "devDependencies": {
-    "@app-garage/button": "^1.1.6",
+    "@app-garage/button": "^1.1.7",
     "react": "^17.0.1",
     "react-icons": "^4.2.0",
     "react-spring": "^8.0.27"

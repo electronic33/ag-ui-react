@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/modal",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
@@ -29,8 +29,8 @@
     "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
   },
   "dependencies": {
-    "@app-garage/button": "^1.1.6",
-    "@app-garage/focus-trap": "^1.0.2",
+    "@app-garage/button": "^1.1.7",
+    "@app-garage/focus-trap": "^1.0.3",
     "classnames": "^2.2.6"
   },
   "devDependencies": {

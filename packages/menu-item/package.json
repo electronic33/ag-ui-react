@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/menu",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
@@ -32,8 +32,8 @@
     "classnames": "^2.2.6"
   },
   "devDependencies": {
-    "@app-garage/button": "^1.1.6",
-    "@app-garage/popover": "^1.0.2",
+    "@app-garage/button": "^1.1.7",
+    "@app-garage/popover": "^1.0.3",
     "react": "^17.0.1",
     "react-icons": "^4.2.0"
   },

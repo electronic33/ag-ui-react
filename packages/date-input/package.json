@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/date-input",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
@@ -29,10 +29,10 @@
     "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
   },
   "dependencies": {
-    "@app-garage/button": "^1.1.6",
-    "@app-garage/calendar": "^1.0.2",
-    "@app-garage/label": "^1.1.9",
-    "@app-garage/text-input": "^1.0.3",
+    "@app-garage/button": "^1.1.7",
+    "@app-garage/calendar": "^1.0.4",
+    "@app-garage/label": "^1.1.10",
+    "@app-garage/text-input": "^1.0.4",
     "classnames": "^2.2.6",
     "date-fns": "^2.19.0",
     "react-dom": "17.0.1",
