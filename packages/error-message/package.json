@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/error-message",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
