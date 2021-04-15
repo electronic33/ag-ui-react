@@ -1,0 +1,54 @@
+---
+'@app-garage/label': patch
+'@app-garage/accordion': patch
+'@app-garage/admin-form': patch
+'@app-garage/admin-form-part': patch
+'@app-garage/alert-dialog': patch
+'@app-garage/async-select': patch
+'@app-garage/bottom-nav': patch
+'@app-garage/bread-crumbs': patch
+'@app-garage/button': patch
+'@app-garage/button-group': patch
+'@app-garage/calendar': patch
+'@app-garage/callout': patch
+'@app-garage/checkbox': patch
+'@app-garage/core': patch
+'@app-garage/custom-select': patch
+'@app-garage/date-input': patch
+'@app-garage/drawer': patch
+'@app-garage/error-message': patch
+'@app-garage/focus-trap': patch
+'@app-garage/footer': patch
+'@app-garage/hamburger-menu': patch
+'@app-garage/header': patch
+'@app-garage/image-uploader': patch
+'@app-garage/link': patch
+'@app-garage/markdown': patch
+'@app-garage/menu-button': patch
+'@app-garage/menu': patch
+'@app-garage/modal': patch
+'@app-garage/multi-select': patch
+'@app-garage/numeric-input': patch
+'@app-garage/pagination': patch
+'@app-garage/popover': patch
+'@app-garage/progress': patch
+'@app-garage/radio-group': patch
+'@app-garage/rate': patch
+'@app-garage/scroll-to': patch
+'@app-garage/selectable-list': patch
+'@app-garage/skeleton': patch
+'@app-garage/slider': patch
+'@app-garage/spinner': patch
+'@app-garage/suggestion-text-input': patch
+'@app-garage/switch': patch
+'@app-garage/tabs': patch
+'@app-garage/text-area': patch
+'@app-garage/text-input': patch
+'@app-garage/toast': patch
+'@app-garage/toggle-button-group': patch
+'@app-garage/tooltip': patch
+'@app-garage/utils': patch
+'@app-garage/ag-ui-tw-plugin': patch
+---
+
+rebuild

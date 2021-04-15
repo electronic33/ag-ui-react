@@ -23,7 +23,7 @@ export default (input = './index.ts') => ({
     del({ targets: 'dist/*' }),
     peerDepsExternal(),
     resolve({
-      moduleDirectories: ['packages'],
+      moduleDirectories: ['main', 'module'],
     }),
     commonjs(),
     json(),
