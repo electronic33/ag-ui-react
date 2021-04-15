@@ -50,8 +50,8 @@ type CalendarTypes = {
   monthTitle?: (currentMonth: Date) => string;
   weekDaysClassName?: string;
   weekDays?: string[];
-  LeftArrowIcon?: React.ComponentType<{ className: string }>;
-  RightArrowIcon?: React.ComponentType<{ className: string }>;
+  LeftArrowIcon?: React.ElementType<{ className: string }>;
+  RightArrowIcon?: React.ElementType<{ className: string }>;
   arrowsClassName?: string;
   hoveredTileClassName?: string;
   selectedAndHoveredTileClassName?: string;
@@ -68,7 +68,7 @@ type CalendarTypes = {
     React.SetStateAction<Date[] | Date | undefined>
   >;
   rangeSelect?: boolean;
-  CellComponent?: React.ComponentType<{ day: Date }>;
+  CellComponent?: React.ElementType<{ day: Date }>;
 };
 
 export const Calendar = ({
@@ -374,7 +374,7 @@ export const Calendar = ({
           )}
           onClick={goToPrevMonth}
         >
-          {LeftArrowIcon ? <LeftArrowIcon className="flex-shrink-0" /> : '<'}
+          {LeftArrowIcon ? <LeftArrowIcon className="flex-shrink-0" /> : '>'}
         </button>
 
         <span className={classNames('month-class', monthClassName)}>
