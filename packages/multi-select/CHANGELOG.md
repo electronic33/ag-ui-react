@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.1.3
+
+### Patch Changes
+
+- [`9e7f2c1`](https://github.com/electronic33/ag-ui-react/commit/9e7f2c138999ec18e4c8e9196ba528214d9243ab) Thanks [@Levi1235](https://github.com/Levi1235)! - removed react icons
+
+- Updated dependencies [[`9e7f2c1`](https://github.com/electronic33/ag-ui-react/commit/9e7f2c138999ec18e4c8e9196ba528214d9243ab)]:
+  - @app-garage/utils@1.0.4
+
 ## 1.1.2
 
 ### Patch Changes

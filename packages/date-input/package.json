@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/date-input",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,

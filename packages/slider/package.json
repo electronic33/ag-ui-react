@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/slider",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
@@ -29,7 +29,7 @@
     "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
   },
   "dependencies": {
-    "@app-garage/modal": "^1.0.4",
+    "@app-garage/modal": "^1.0.5",
     "classnames": "^2.2.6",
     "react-icons": "^4.2.0"
   },

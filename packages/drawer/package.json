@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/drawer",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
@@ -32,7 +32,7 @@
     "@app-garage/button": "^1.1.6",
     "@app-garage/focus-trap": "^1.0.2",
     "@app-garage/link": "^1.0.2",
-    "@app-garage/utils": "^1.0.2",
+    "@app-garage/utils": "^1.0.4",
     "classnames": "^2.2.6",
     "react-icons": "^4.2.0",
     "react-scrolllock": "^5.0.1",
