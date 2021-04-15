@@ -1,5 +1,19 @@
 # Change Log
 
+## 1.1.1
+
+### Patch Changes
+
+- [`f23eea3`](https://github.com/electronic33/ag-ui-react/commit/f23eea3ad84886203be361f5c781cb97237b19c0) Thanks [@Levi1235](https://github.com/Levi1235)! - rebuild
+
+- Updated dependencies [[`f23eea3`](https://github.com/electronic33/ag-ui-react/commit/f23eea3ad84886203be361f5c781cb97237b19c0)]:
+  - @app-garage/button@1.1.7
+  - @app-garage/custom-select@1.0.4
+  - @app-garage/focus-trap@1.0.3
+  - @app-garage/spinner@1.0.3
+  - @app-garage/text-input@1.0.4
+  - @app-garage/utils@1.0.3
+
 ## 1.1.0
 
 ### Minor Changes

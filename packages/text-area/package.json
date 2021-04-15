@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/text-area",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
@@ -29,8 +29,8 @@
     "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
   },
   "dependencies": {
-    "@app-garage/label": "^1.1.9",
-    "@app-garage/text-input": "^1.0.3",
+    "@app-garage/label": "^1.1.10",
+    "@app-garage/text-input": "^1.0.4",
     "classnames": "^2.2.6"
   },
   "devDependencies": {

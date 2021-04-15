@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/toggle-button-group",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
@@ -29,8 +29,8 @@
     "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
   },
   "dependencies": {
-    "@app-garage/button": "^1.1.6",
-    "@app-garage/label": "^1.1.9",
+    "@app-garage/button": "^1.1.7",
+    "@app-garage/label": "^1.1.10",
     "classnames": "^2.2.6",
     "react-id-generator": "^3.0.1"
   },

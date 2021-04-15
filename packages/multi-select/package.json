@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/multi-select",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
@@ -31,12 +31,12 @@
     "cy:open": "cypress open"
   },
   "dependencies": {
-    "@app-garage/button": "^1.1.5",
-    "@app-garage/custom-select": "^1.0.3",
-    "@app-garage/focus-trap": "^1.0.1",
-    "@app-garage/spinner": "^1.0.2",
-    "@app-garage/text-input": "^1.0.1",
-    "@app-garage/utils": "^1.0.1",
+    "@app-garage/button": "^1.1.7",
+    "@app-garage/custom-select": "^1.0.4",
+    "@app-garage/focus-trap": "^1.0.3",
+    "@app-garage/spinner": "^1.0.3",
+    "@app-garage/text-input": "^1.0.4",
+    "@app-garage/utils": "^1.0.3",
     "classnames": "^2.2.6",
     "react-spring": "^8.0.27"
   },
