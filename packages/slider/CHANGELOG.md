@@ -1,5 +1,14 @@
 # Change Log
 
+## 1.0.4
+
+### Patch Changes
+
+- [`3943150`](https://github.com/electronic33/ag-ui-react/commit/394315007a549e1bebced2ccd76cbee466e1bbe9) Thanks [@Levi1235](https://github.com/Levi1235)! - fixed packages
+
+- Updated dependencies [[`3943150`](https://github.com/electronic33/ag-ui-react/commit/394315007a549e1bebced2ccd76cbee466e1bbe9)]:
+  - @app-garage/modal@1.0.4
+
 ## 1.0.3
 
 ### Patch Changes
