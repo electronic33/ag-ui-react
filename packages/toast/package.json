@@ -32,12 +32,12 @@
     "@app-garage/utils": "^1.0.3",
     "classnames": "^2.2.6",
     "nanoid": "^3.1.22",
+    "react-icons": "^4.2.0",
     "react-spring": "^8.0.27"
   },
   "devDependencies": {
-    "@app-garage/button": "^1.1.7",
-    "react": "^17.0.1",
-    "react-icons": "^4.2.0"
+    "@app-garage/button": "^1.1.6",
+    "react": "^17.0.1"
   },
   "peerDependencies": {
     "react": ">=16.8.6"
