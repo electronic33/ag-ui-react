@@ -4,9 +4,6 @@ import { Spinner } from '@app-garage/spinner';
 import { Button } from '@app-garage/button';
 import { FocusLock } from '@app-garage/focus-trap';
 import { useTransition, animated } from 'react-spring';
-import { IoMdClose } from 'react-icons/io';
-import { BiCheck } from 'react-icons/bi';
-
 import { useSelect } from '@app-garage/custom-select';
 import { TextInput } from '@app-garage/text-input';
 import { useDebounce } from '@app-garage/utils';
@@ -222,7 +219,18 @@ export function MultiSelect<T extends OptionValue>({
                             onChange(newOptions);
                           }}
                         >
-                          <IoMdClose className="flex-shrink-0 mt-0.5" />
+                          <svg
+                            className="flex-shrink-0 mt-0.5"
+                            stroke="currentColor"
+                            fill="currentColor"
+                            strokeWidth="0"
+                            viewBox="0 0 512 512"
+                            height="1em"
+                            width="1em"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z" />
+                          </svg>
                         </button>
                       </div>
                       {/* TODO: swap with icon only button */}
@@ -238,7 +246,17 @@ export function MultiSelect<T extends OptionValue>({
                     onChange([]);
                   }}
                 >
-                  <IoMdClose />
+                  <svg
+                    stroke="currentColor"
+                    fill="currentColor"
+                    strokeWidth="0"
+                    viewBox="0 0 512 512"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M405 136.798L375.202 107 256 226.202 136.798 107 107 136.798 226.202 256 107 375.202 136.798 405 256 285.798 375.202 405 405 375.202 285.798 256z" />
+                  </svg>
                 </button>
               )}
             </button>
@@ -354,7 +372,18 @@ export function MultiSelect<T extends OptionValue>({
                                   </span>
                                 </div>
                                 {value.includes(option.value) && (
-                                  <BiCheck className="flex-shrink-0 text-green-500 text-xl" />
+                                  <svg
+                                    className="flex-shrink-0 text-green-500 text-xl"
+                                    stroke="currentColor"
+                                    fill="currentColor"
+                                    strokeWidth="0"
+                                    viewBox="0 0 24 24"
+                                    height="1em"
+                                    width="1em"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path d="M10 15.586L6.707 12.293 5.293 13.707 10 18.414 19.707 8.707 18.293 7.293z" />
+                                  </svg>
                                 )}
                               </div>
                             </div>
