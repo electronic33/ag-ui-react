@@ -39,7 +39,6 @@
 '@app-garage/skeleton': patch
 '@app-garage/slider': patch
 '@app-garage/spinner': patch
-'@app-garage/suggestion-text-input': patch
 '@app-garage/switch': patch
 '@app-garage/tabs': patch
 '@app-garage/text-area': patch
