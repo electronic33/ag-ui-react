@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/suggestion-text-input",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
@@ -36,7 +36,7 @@
     "@app-garage/focus-trap": "^1.0.1",
     "@app-garage/spinner": "^1.0.2",
     "@app-garage/text-input": "^1.0.1",
-    "@app-garage/utils": "^1.0.1",
+    "@app-garage/utils": "^1.0.4",
     "classnames": "^2.2.6",
     "react-spring": "^8.0.27"
   },
