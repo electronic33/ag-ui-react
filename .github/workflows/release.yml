@@ -14,6 +14,14 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    strategy:
+      # Use false if you integrate Cypress Dashboard
+      fail-fast: true
+      matrix:
+        cypress:
+          - working_directory: packages/accordion
+          - working_directory: packages/multi-select
+
     steps:
       - id: yarn-cache
         name: Get Yarn cache path
@@ -32,9 +40,6 @@ jobs:
       - name: Configure max number of watchers
         run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
-      # - name: Install Cypress Deps
-      #   run: sudo apt-get install libgtk2.0-0 libgtk-3-0 libgbm-dev libnotify-dev libgconf-2-4 libnss3 libxss1 libasound2 libxtst6 xauth xvfb
-
       - uses: actions/cache@v2
         name: Load Yarn cache
         with:
@@ -46,11 +51,12 @@ jobs:
       - name: Install Dependencies
         run: yarn install --frozen-lockfile && yarn bootstrap
 
-      # - name: Start Cypress
-      #   uses: cypress-io/github-action@v2
-
-      # - name: Run Tests
-      #   run: yarn run test
+      - name: Run Tests
+        uses: cypress-io/github-action@v2
+        with:
+          start: yarn storybook:ci
+          wait-on: 'http://localhost:6006'
+          working-directory: ${{ matrix.cypress.working_directory }}
 
       - name: Setup CI Git User
         run: |
