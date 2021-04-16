@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/header",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
@@ -29,12 +29,12 @@
     "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
   },
   "dependencies": {
-    "@app-garage/hamburger-menu": "^1.0.2",
-    "@app-garage/link": "^1.0.2",
+    "@app-garage/hamburger-menu": "^1.0.3",
+    "@app-garage/link": "^1.0.3",
     "classnames": "^2.2.6"
   },
   "devDependencies": {
-    "@app-garage/text-input": "^1.0.3",
+    "@app-garage/text-input": "^1.0.4",
     "react": "^17.0.1",
     "react-icons": "^4.2.0"
   },

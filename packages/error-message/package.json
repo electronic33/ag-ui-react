@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/error-message",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
@@ -30,11 +30,11 @@
   },
   "dependencies": {
     "@app-garage/label": "^1.1.9",
-    "classnames": "^2.2.6"
+    "classnames": "^2.2.6",
+    "react-icons": "^4.2.0"
   },
   "devDependencies": {
-    "react": "^17.0.1",
-    "react-icons": "^4.2.0"
+    "react": "^17.0.1"
   },
   "peerDependencies": {
     "react": ">=16.8.6"

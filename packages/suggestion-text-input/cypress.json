@@ -1,0 +1,8 @@
+{
+  "integrationFolder": "tests",
+  "supportFile": "cypress.commands.js",
+  "fixturesFolder": false,
+  "pluginsFile": false,
+  "screenshotOnRunFailure": false,
+  "video": false
+}

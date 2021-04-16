@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/image-uploader",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
@@ -30,15 +30,15 @@
   },
   "dependencies": {
     "@app-garage/button": "^1.1.6",
-    "@app-garage/modal": "^1.0.2",
-    "@app-garage/slider": "^1.0.2",
-    "classnames": "^2.2.6"
-  },
-  "devDependencies": {
-    "react": "^17.0.1",
+    "@app-garage/modal": "^1.0.5",
+    "@app-garage/slider": "^1.0.5",
+    "classnames": "^2.2.6",
     "react-dropzone": "^11.3.1",
     "react-easy-crop": "^3.3.2",
     "react-icons": "^4.2.0"
+  },
+  "devDependencies": {
+    "react": "^17.0.1"
   },
   "peerDependencies": {
     "react": ">=16.8.6"

@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/utils",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,

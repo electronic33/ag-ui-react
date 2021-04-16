@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import Cropper from 'react-easy-crop';
-import { FcAddImage } from 'react-icons/fc';
 import classNames from 'classnames';
-import { AiFillEye } from 'react-icons/ai';
 import { useDropzone } from 'react-dropzone';
 import { Button } from '@app-garage/button';
 import { Modal } from '@app-garage/modal';
@@ -245,19 +243,65 @@ export const ImageUploader = ({
             <div className="flex justify-center items-center p-4 h-20 w-full text-base font-semibold text-gray-500 text-center bg-blue-100">
               <p>Drag the files here...</p>
             </div>
-            <FcAddImage
+            <svg
               className={classNames('my-auto text-8xl', {
                 'transition-all duration-200 hover:scale-200':
                   isDragActive === true,
               })}
-            />
+              stroke="currentColor"
+              fill="currentColor"
+              strokeWidth="0"
+              version="1"
+              viewBox="0 0 48 48"
+              enableBackground="new 0 0 48 48"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill="#8CBCD6"
+                d="M40,41H8c-2.2,0-4-1.8-4-4V11c0-2.2,1.8-4,4-4h32c2.2,0,4,1.8,4,4v26C44,39.2,42.2,41,40,41z"
+              />
+              <circle fill="#B3DDF5" cx="35" cy="16" r="3" />
+              <polygon fill="#9AC9E3" points="20,16 9,32 31,32" />
+              <polygon fill="#B3DDF5" points="31,22 23,32 39,32" />
+              <circle fill="#43A047" cx="38" cy="38" r="10" />
+              <g fill="#fff">
+                <rect x="36" y="32" width="4" height="12" />
+                <rect x="32" y="36" width="12" height="4" />
+              </g>
+            </svg>
           </div>
         ) : (
           <div className="flex flex-col items-center border-2 overflow-hidden border-dashed border-gray-200 h-50 w-64 640:w-96 rounded-lg shadow">
             <div className="flex justify-center items-center p-4 h-20 w-full text-base font-semibold text-gray-50 text-center bg-blue-500">
               <p>Drag and drop files here or click to upload</p>
             </div>
-            <FcAddImage className="text-7xl my-auto" />
+            <svg
+              className="text-7xl my-auto"
+              stroke="currentColor"
+              fill="currentColor"
+              strokeWidth="0"
+              version="1"
+              viewBox="0 0 48 48"
+              enableBackground="new 0 0 48 48"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fill="#8CBCD6"
+                d="M40,41H8c-2.2,0-4-1.8-4-4V11c0-2.2,1.8-4,4-4h32c2.2,0,4,1.8,4,4v26C44,39.2,42.2,41,40,41z"
+              />
+              <circle fill="#B3DDF5" cx="35" cy="16" r="3" />
+              <polygon fill="#9AC9E3" points="20,16 9,32 31,32" />
+              <polygon fill="#B3DDF5" points="31,22 23,32 39,32" />
+              <circle fill="#43A047" cx="38" cy="38" r="10" />
+              <g fill="#fff">
+                <rect x="36" y="32" width="4" height="12" />
+                <rect x="32" y="36" width="12" height="4" />
+              </g>
+            </svg>
           </div>
         )}
       </div>
@@ -336,7 +380,18 @@ export const ImageUploader = ({
                                 showCroppedImage(index);
                               }}
                             >
-                              <AiFillEye className="mr-2" />
+                              <svg
+                                className="mr-2"
+                                stroke="currentColor"
+                                fill="currentColor"
+                                strokeWidth="0"
+                                viewBox="0 0 1024 1024"
+                                height="1em"
+                                width="1em"
+                                xmlns="http://www.w3.org/2000/svg"
+                              >
+                                <path d="M396 512a112 112 0 1 0 224 0 112 112 0 1 0-224 0zm546.2-25.8C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM508 688c-97.2 0-176-78.8-176-176s78.8-176 176-176 176 78.8 176 176-78.8 176-176 176z" />
+                              </svg>
                               Generate Image
                             </Button>
                           </div>
@@ -402,7 +457,19 @@ export const ImageUploader = ({
                               showCroppedImage(index);
                             }}
                           >
-                            <AiFillEye className="mr-2" /> Kép létrehozása
+                            <svg
+                              className="mr-2"
+                              stroke="currentColor"
+                              fill="currentColor"
+                              strokeWidth="0"
+                              viewBox="0 0 1024 1024"
+                              height="1em"
+                              width="1em"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path d="M396 512a112 112 0 1 0 224 0 112 112 0 1 0-224 0zm546.2-25.8C847.4 286.5 704.1 186 512 186c-192.2 0-335.4 100.5-430.2 300.3a60.3 60.3 0 0 0 0 51.5C176.6 737.5 319.9 838 512 838c192.2 0 335.4-100.5 430.2-300.3 7.7-16.2 7.7-35 0-51.5zM508 688c-97.2 0-176-78.8-176-176s78.8-176 176-176 176 78.8 176 176-78.8 176-176 176z" />
+                            </svg>
+                            Kép létrehozása
                           </Button>
                         </div>
                       </div>

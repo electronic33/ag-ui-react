@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { usePopper } from 'react-popper';
 import classNames from 'classnames';
-import { MdClose } from 'react-icons/md';
 import { FocusLock } from '@app-garage/focus-trap';
 import { useId } from 'react-id-generator';
 
@@ -221,7 +220,17 @@ export const Popover = ({
                   className="absolute flex-shrink-0 top-1 right-2 text-lg text-gray-400 z-10"
                   aria-label="close"
                 >
-                  <MdClose className="flex-shrink-0" />
+                  <svg
+                    stroke="currentColor"
+                    fill="currentColor"
+                    strokeWidth="0"
+                    viewBox="0 0 24 24"
+                    height="1em"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                  </svg>{' '}
                 </button>
               )}
 
@@ -280,7 +289,18 @@ export const Popover = ({
               className="absolute flex-shrink-0 top-1 right-2 text-lg text-gray-400 z-10"
               aria-label="close"
             >
-              <MdClose className="flex-shrink-0" />
+              <svg
+                className="flex-shrink-0"
+                stroke="currentColor"
+                fill="currentColor"
+                strokeWidth="0"
+                viewBox="0 0 24 24"
+                height="1em"
+                width="1em"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+              </svg>{' '}
             </button>
             <div id={`popover-body-${id}`}>{content}</div>
           </div>
