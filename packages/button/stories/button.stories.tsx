@@ -11,14 +11,19 @@ export const Default = (): React.ReactNode => (
   <Button Icon={AiFillAudio}>Button</Button>
 );
 
-export const Small = (props): React.ReactNode => (
-  <Button {...props} Icon={AiFillAudio} size="sm">
+export const Small = (): React.ReactNode => (
+  <Button Icon={AiFillAudio} size="sm">
     Button
   </Button>
 );
 
 export const Large = (): React.ReactNode => (
   <Button Icon={AiFillAudio} size="lg">
+    Button
+  </Button>
+);
+export const ExtraLarge = (): React.ReactNode => (
+  <Button Icon={AiFillAudio} size="xl">
     Button
   </Button>
 );

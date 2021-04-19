@@ -10,6 +10,44 @@ export default {
 };
 
 export const Default = (): React.ReactElement => {
+  const [selectedDates, setSelectedDates] = useState<
+    Date | Date[] | undefined
+  >();
+  // const [selectedDates, setSelectedDates] = useState([
+  //   new Date('2021-04-10'),
+  //   new Date('2021-04-11'),
+  //   new Date('2021-04-12'),
+  //   new Date('2021-04-13'),
+  // ]);
+  // const [selectedDates, setSelectedDates] = useMultipleSelectCalendarState([]);
+  return (
+    <div>
+      <Calendar
+        calendarClassName="w-56 "
+        headerContainerClassName=""
+        monthClassName=""
+        arrowsClassName=""
+        weekDaysClassName=""
+        allTilesClassName=""
+        activeTilesClassName=""
+        selectedTileClassName=""
+        disabledTilesClassName={() => ''}
+        LeftArrowIcon={FaChevronLeft}
+        RightArrowIcon={FaChevronRight}
+        selectedDate={selectedDates}
+        selectHandler={setSelectedDates}
+
+        // CellComponent={({ day }) => (
+        //   <div>
+        //     {isSameDay(currentdDate, day) ? "-------- currentDay -------" : "nah"}
+        //   </div>
+        // )}
+      />
+    </div>
+  );
+};
+
+export const RangeSelect = (): React.ReactElement => {
   const [selectedDates, setSelectedDates] = useState<Date | Date[] | undefined>(
     [],
   );

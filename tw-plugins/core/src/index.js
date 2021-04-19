@@ -1,4 +1,5 @@
 const plugin = require('tailwindcss/plugin');
+const defaultConfig = require('./defaultConfig');
 
 const ButtonClasses = require('./classes/button');
 const AccordionClasses = require('./classes/accordion');
@@ -28,7 +29,7 @@ const TextInput = require('./classes/text-input');
 const Tooltip = require('./classes/tooltip');
 const NumericInputBaseClasses = require('./classes/numeric-input');
 
-module.exports = plugin(({ addComponents, addBase, theme }) => {
+module.exports = plugin(({ addComponents, theme }) => {
   const newComponents = {
     ...ButtonClasses(theme),
     ...AccordionClasses(theme),
@@ -60,15 +61,4 @@ module.exports = plugin(({ addComponents, addBase, theme }) => {
   };
 
   addComponents(newComponents);
-
-  addBase({
-    button: {
-      '&:focus': {
-        outline: 'none',
-        // "box-shadow": `var(--tw-ring-inset) 0 0 0 calc(1px + var(${theme(
-        //   "ringOffsetWidth.2",
-        // )})) var(${theme("ringColor.DEFAULT")})`,
-      },
-    },
-  });
-});
+}, defaultConfig);

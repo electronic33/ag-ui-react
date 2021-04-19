@@ -31,6 +31,15 @@ module.exports = {
       purple: colors.violet,
       pink: colors.pink,
     },
+    // extend: {
+    //   components: (theme) => ({
+    //     button: {
+    //       colors: {
+    //         primary: theme('colors.blue.600'),
+    //       },
+    //     },
+    //   }),
+    // },
     spacing: {
       px: '1px',
       0: '0px',
@@ -68,6 +77,7 @@ module.exports = {
       80: '20rem',
       96: '24rem',
     },
+
     animation: {
       none: 'none',
       spin: 'spin 1s linear infinite',
