@@ -83,7 +83,11 @@ export const useSelect = ({
   // execute Scroll Fn
   const executeScroll = useCallback(
     (index) => {
-      if (selectOptionsRef.current && selectOptionsRef.current.children) {
+      if (
+        selectOptionsRef.current &&
+        selectOptionsRef.current.children &&
+        selectOptionsRef.current.children[index]
+      ) {
         selectOptionsRef.current.children[index].scrollIntoView({
           behavior: 'smooth',
           block: 'center',
@@ -199,9 +203,7 @@ export const useSelect = ({
           );
 
           if (nextItem) {
-            const index = options.findIndex(
-              (element) => element.label === nextItem,
-            );
+            const index = options.findIndex((element) => element.label === nextItem);
 
             setActiveIndex(index);
           }

@@ -45,11 +45,10 @@ export const Accordion = ({
 
   const [internalIsOpen, setInternalIsOpen] = useState(false);
 
-  const isOpenState = useMemo(() => (isControlled ? isOpen : internalIsOpen), [
-    isControlled,
-    internalIsOpen,
-    isOpen,
-  ]);
+  const isOpenState = useMemo(
+    () => (isControlled ? isOpen : internalIsOpen),
+    [isControlled, internalIsOpen, isOpen],
+  );
 
   const [springStyles, setSpringProperties] = useSpring(() => ({
     opacity: 0,

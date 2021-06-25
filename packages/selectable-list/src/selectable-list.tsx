@@ -34,7 +34,7 @@ export const SelectableList = ({
   const ref = useRef<HTMLDivElement>(null);
 
   const executeScroll = useCallback((index) => {
-    if (ref.current && ref.current.children) {
+    if (ref.current && ref.current.children && ref.current.children[index]) {
       ref.current.children[index].scrollIntoView({
         behavior: 'smooth',
         block: 'center',

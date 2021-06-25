@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { TextInput } from '@app-garage/text-input';
 import { useDebounce } from '@app-garage/utils';
 import classNames from 'classnames';
@@ -88,10 +82,7 @@ export const SuggestionTextInput = ({
     () =>
       value && suggestions
         ? suggestions.filter(
-            (item) =>
-              item.label
-                .toLowerCase()
-                .search(debouncedFilterValue.toLowerCase()) !== -1,
+            (item) => item.label.toLowerCase().search(debouncedFilterValue.toLowerCase()) !== -1,
           )
         : suggestions,
     [debouncedFilterValue, suggestions, value],
@@ -99,7 +90,11 @@ export const SuggestionTextInput = ({
 
   const executeScroll = useCallback(
     (index) => {
-      if (selectOptionsRef.current && selectOptionsRef.current.children) {
+      if (
+        selectOptionsRef.current &&
+        selectOptionsRef.current.children &&
+        selectOptionsRef.current.children[index]
+      ) {
         selectOptionsRef.current.children[index].scrollIntoView({
           behavior: 'smooth',
           block: 'center',
@@ -171,11 +166,7 @@ export const SuggestionTextInput = ({
           event.preventDefault();
           let newIndex: number;
 
-          if (
-            !isOpen &&
-            document.activeElement === inputRef.current &&
-            updatedList
-          ) {
+          if (!isOpen && document.activeElement === inputRef.current && updatedList) {
             setIsOpen(true);
             newIndex = updatedList.length;
           } else if (isOpen && activeIndex === undefined && updatedList) {
@@ -215,9 +206,7 @@ export const SuggestionTextInput = ({
           );
 
           if (nextItem && updatedList) {
-            const index = updatedList.findIndex(
-              (element) => element.label === nextItem,
-            );
+            const index = updatedList.findIndex((element) => element.label === nextItem);
 
             setActiveIndex(index);
           }
@@ -295,10 +284,9 @@ export const SuggestionTextInput = ({
                   onMouseEnter={() => setActiveIndex(index)}
                   onMouseLeave={() => setActiveIndex(-1)}
                   type="button"
-                  className={classNames(
-                    'px-4 py-2 text-left hover:bg-gray-200 cursor-pointer',
-                    { 'bg-gray-200': index === activeIndex },
-                  )}
+                  className={classNames('px-4 py-2 text-left hover:bg-gray-200 cursor-pointer', {
+                    'bg-gray-200': index === activeIndex,
+                  })}
                   onClick={() => {
                     onChange(sugg.label);
                     setIsOpen(false);
