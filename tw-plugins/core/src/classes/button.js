@@ -8,7 +8,7 @@ const ButtonBaseClasses = (theme) => ({
     backgroundColor: theme('colors.blue.500'),
     paddingRight: theme('spacing.8'),
     paddingLeft: theme('spacing.8'),
-    paddingTop: theme('spacing.2'),
+    paddingTop: theme('btn.py') || theme('spacing.2'),
     paddingBottom: theme('spacing.2'),
     fontSize: theme('fontSize.xl'),
     color: theme('colors.white'),
