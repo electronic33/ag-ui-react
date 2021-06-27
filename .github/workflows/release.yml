@@ -14,13 +14,13 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    strategy:
-      # Use false if you integrate Cypress Dashboard
-      # fail-fast: true
-      # matrix:
-      #   cypress:
-      #     - working_directory: packages/accordion
-      #     - working_directory: packages/multi-select
+    # strategy:
+    # Use false if you integrate Cypress Dashboard
+    # fail-fast: true
+    # matrix:
+    #   cypress:
+    #     - working_directory: packages/accordion
+    #     - working_directory: packages/multi-select
 
     steps:
       - id: yarn-cache
