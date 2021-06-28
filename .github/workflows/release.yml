@@ -58,6 +58,9 @@ jobs:
       #     wait-on: 'http://localhost:6006'
       #     working-directory: ${{ matrix.cypress.working_directory }}
 
+      - name: Start Cypress
+        uses: cypress-io/github-action@v2
+
       - name: Run Tests
         run: yarn test
 

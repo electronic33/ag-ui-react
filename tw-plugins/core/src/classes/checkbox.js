@@ -48,7 +48,7 @@ const CheckboxBaseClasses = (theme) => ({
     transitionProperty: theme('transitionProperty.colors'),
     transitionTimingFunction: theme('transitionTimingFunction.in-out'),
     transitionDuration: theme('transitionDuration.150'),
-    border: `2px solid ${theme('colors.gray.500')}`,
+    border: `2px solid ${theme('checkbox.borderColor') || theme('colors.gray.500')}`,
     borderRadius: theme('borderRadius.DEFAULT'),
   },
 });
