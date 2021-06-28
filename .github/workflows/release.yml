@@ -51,12 +51,15 @@ jobs:
       - name: Install Dependencies
         run: yarn install --frozen-lockfile && yarn bootstrap
 
+      # - name: Run Tests
+      #   uses: cypress-io/github-action@v2
+      #   with:
+      #     start: yarn storybook:ci
+      #     wait-on: 'http://localhost:6006'
+      #     working-directory: ${{ matrix.cypress.working_directory }}
+
       - name: Run Tests
-        uses: cypress-io/github-action@v2
-        with:
-          start: yarn storybook:ci
-          wait-on: 'http://localhost:6006'
-          working-directory: ${{ matrix.cypress.working_directory }}
+        run: yarn test
 
       - name: Setup CI Git User
         run: |
