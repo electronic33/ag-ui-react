@@ -40,7 +40,7 @@
     "react": "^17.0.2",
     "react-icons": "^4.2.0",
     "react-id-generator": "^3.0.1",
-    "react-spring": "^8.0.27"
+    "react-spring": "^9.2.3"
   },
   "peerDependencies": {
     "react": ">=16.8.6"
