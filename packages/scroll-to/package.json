@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/scroll-to",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
@@ -29,7 +29,7 @@
     "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
   },
   "dependencies": {
-    "@app-garage/label": "^1.1.10",
+    "@app-garage/label": "^1.2.0",
     "classnames": "^2.3.1"
   },
   "devDependencies": {
