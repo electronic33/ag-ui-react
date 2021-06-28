@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/electronic33/ag-ui-react.git"
   },
-  "version": "1.1.7",
+  "version": "1.2.0",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
@@ -29,7 +29,7 @@
     "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
   },
   "dependencies": {
-    "@app-garage/button": "^1.1.7",
+    "@app-garage/button": "^1.2.0",
     "classnames": "^2.3.1"
   },
   "devDependencies": {
