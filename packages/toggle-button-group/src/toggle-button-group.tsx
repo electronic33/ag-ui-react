@@ -42,9 +42,7 @@ export function ToggleButtonGroup<T extends Value>({
     () =>
       !isMultiple
         ? items.find((item) => item.value === selectedValue)
-        : (selectedValue as T[]).map((val) =>
-            items.find((o) => o.value === val),
-          ),
+        : (selectedValue as T[]).map((val) => items.find((o) => o.value === val)),
     [isMultiple, items, selectedValue],
   );
 
@@ -57,24 +55,28 @@ export function ToggleButtonGroup<T extends Value>({
             {
               [`${selectedClassName} bg-blue-700`]: !isMultiple
                 ? value ===
-                  (selectedOption as {
-                    value: T;
-                    label: string;
-                  })?.value
+                  (
+                    selectedOption as {
+                      value: T;
+                      label: string;
+                    }
+                  )?.value
                 : (selectedValue as T[]).includes(value),
             },
             buttonClassName,
           )}
           onClick={() => {
             if (!isMultiple) {
-              let nextValue;
+              let nextValue: T | undefined;
 
               if (
                 value ===
-                (selectedOption as {
-                  value: number | string;
-                  label: string;
-                })?.value
+                (
+                  selectedOption as {
+                    value: number | string;
+                    label: string;
+                  }
+                )?.value
               ) {
                 nextValue = undefined;
               } else {
