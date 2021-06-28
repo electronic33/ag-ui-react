@@ -58,14 +58,14 @@ jobs:
       #     wait-on: 'http://localhost:6006'
       #     working-directory: ${{ matrix.cypress.working_directory }}
 
-      - name: Start Cypress
-        uses: cypress-io/github-action@v2
-        with:
-          # just perform install
-          runTests: false
+      # - name: Start Cypress
+      #   uses: cypress-io/github-action@v2
+      #   with:
+      #     # just perform install
+      #     runTests: false
 
-      - name: Run Tests
-        run: yarn test
+      # - name: Run Tests
+      #   run: yarn test
 
       - name: Setup CI Git User
         run: |

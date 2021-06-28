@@ -1,6 +1,6 @@
 const DrawerBaseClasses = (theme) => ({
   '.drawer': {
-    backgroundColor: theme('colors.gray.700'),
+    backgroundColor: theme('drawer-bg-color') || theme('colors.gray.700'),
     position: 'fixed',
     display: 'flex',
     justifyContent: 'center',
