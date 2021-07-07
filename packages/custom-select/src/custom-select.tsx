@@ -9,14 +9,16 @@ import { useSelect } from './select-hooks';
 
 type OptionValue = number | string;
 
+type Option<T> = {
+  label: string;
+  value: T;
+  Icon?: React.ComponentType<{ className?: string }>;
+};
+
 type SelectProps<T extends OptionValue> = {
-  options: {
-    label: string;
-    value: T;
-    Icon?: React.ComponentType<{ className?: string }>;
-  }[];
+  options: Option<T>[];
   value?: T;
-  onChange?: (value: T) => void;
+  onChange?: (value: T, option: Option<T>) => void;
   containerClassName?: string;
   labelClassName?: string;
   selectClassName?: string;
@@ -58,17 +60,17 @@ export function Select<T extends OptionValue>({
   const selectOptionsRef = useRef<HTMLDivElement>(null);
   const selectButtonRef = useRef<HTMLButtonElement>(null);
 
-  const selectedOption = useMemo(
-    () =>
-      !isLoading
-        ? options.find((option) => option.value === value)
-        : { label: placeholder, Icon: undefined, value: undefined },
-    [value, isLoading, options, placeholder],
-  );
+  const selectedOption = useMemo(() => {
+    const selectedO = options.find((option) => option.value === value);
+
+    return !isLoading && selectedO
+      ? selectedO
+      : { label: placeholder, Icon: undefined, value: undefined };
+  }, [value, isLoading, options, placeholder]);
 
   const onSpaceOrEnterPress = useCallback(() => {
     if (isOpen && onChange) {
-      onChange(options[activeIndex].value);
+      onChange(options[activeIndex].value, options[activeIndex]);
     }
   }, [isOpen, options, onChange, activeIndex]);
 
@@ -87,7 +89,7 @@ export function Select<T extends OptionValue>({
 
   return (
     <FocusLock restoreFocus isDisabled={!isOpen}>
-      <div className={containerClassName}>
+      <div className={classNames(containerClassName, 'relative')}>
         {label && (
           <Label
             className={labelClassName}
@@ -103,9 +105,7 @@ export function Select<T extends OptionValue>({
           onClick={() => {
             setIsOpen((prev) => {
               setActiveIndex(
-                options.findIndex(
-                  (element) => element.value === selectedOption?.value,
-                ),
+                options.findIndex((element) => element.value === selectedOption?.value),
               );
 
               return !prev;
@@ -125,28 +125,22 @@ export function Select<T extends OptionValue>({
                 'justify-between': status === 'loading',
                 'justify-start': status !== 'loading',
                 'border-red-600 justify-between pr-2': status === 'error',
-                'border-gray-300 focus:border-blue-300 pr-8':
-                  status !== 'error',
+                'border-gray-300 focus:border-blue-300 pr-8': status !== 'error',
               },
             )}
           >
             {status === 'loading' && (
               <>
-                <Spinner
-                  className={classNames(
-                    'flex-shrink-0 w-5 h-5',
-                    spinnerClassName,
-                  )}
-                />
+                <Spinner className={classNames('flex-shrink-0 w-5 h-5', spinnerClassName)} />
                 {loadingText && <p className="text-gray-400">{loadingText}</p>}
               </>
             )}
             {status === 'error' && (
               <>
-                <p className="text-red-600">{error}</p>
+                <p className="text-red-600 whitespace-nowrap">{error}</p>
                 {retryFn && (
                   <Button
-                    className="text-white font-semibold bg-red-400 hover:bg-red-500 text-base focus:bg-red-500 px-2 py-1 rounded"
+                    className="text-white font-semibold bg-red-400 hover:bg-red-500 text-base focus:bg-red-500 px-2 py-1 rounded ml-2"
                     onClick={retryFn}
                   >
                     Try again
@@ -157,9 +151,7 @@ export function Select<T extends OptionValue>({
             {status === 'ready' && (
               <>
                 {selectedOption?.Icon && (
-                  <span className="flex items-center mr-1.5">
-                    {selectedOption.Icon}
-                  </span>
+                  <span className="flex items-center mr-1.5">{selectedOption.Icon}</span>
                 )}
                 <span className="block truncate">{selectedOption?.label}</span>
                 <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
@@ -190,7 +182,7 @@ export function Select<T extends OptionValue>({
                 ref={selectOptionsRef}
                 // TODO: extract in classes
                 className={classNames(
-                  'max-h-60 rounded-md py-1 text-base leading-6 shadow-lg overflow-auto focus:outline-none sm:text-sm sm:leading-5',
+                  'max-h-60 rounded-md py-1 text-base leading-6 shadow-lg overflow-auto focus:outline-none sm:text-sm sm:leading-5 absolute z-10 bg-white inset-x-0',
                   optionsContainerClassName,
                 )}
               >
@@ -212,7 +204,7 @@ export function Select<T extends OptionValue>({
                       onMouseLeave={() => setActiveIndex(-1)}
                       onClick={() => {
                         if (onChange) {
-                          onChange(option.value);
+                          onChange(option.value, option);
                         }
                         setIsOpen(false);
                       }}
@@ -233,8 +225,7 @@ export function Select<T extends OptionValue>({
                       )}
                       <span
                         className={classNames('block truncate', {
-                          'font-semibold':
-                            option.value === selectedOption?.value,
+                          'font-semibold': option.value === selectedOption?.value,
                           'font-normal': option.value !== selectedOption?.value,
                         })}
                       >

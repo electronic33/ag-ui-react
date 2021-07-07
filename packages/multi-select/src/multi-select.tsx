@@ -10,12 +10,14 @@ import { useDebounce } from '@app-garage/utils';
 
 type OptionValue = number | string;
 
+type Option<T> = {
+  label: string;
+  value: T;
+  Icon?: React.ElementType<{ className?: string }>;
+};
+
 type MultiSelectTypes<T> = {
-  options: {
-    label: string;
-    value: T;
-    Icon?: React.ReactElement<{ className?: string }>;
-  }[];
+  options: Option<T>[];
   value: T[];
   onChange: (value: T[]) => void;
   containerClassName: string;
@@ -75,10 +77,7 @@ export function MultiSelect<T extends OptionValue>({
     () =>
       filterValue
         ? options.filter(
-            (item) =>
-              item.label
-                .toLowerCase()
-                .search(debouncedFilterValue.toLowerCase()) !== -1,
+            (item) => item.label.toLowerCase().search(debouncedFilterValue.toLowerCase()) !== -1,
           )
         : options,
     [filterValue, options, debouncedFilterValue],
@@ -91,13 +90,9 @@ export function MultiSelect<T extends OptionValue>({
       const newOptions = value.concat(updatedList[activeIndex as number].value);
 
       onChange(newOptions);
-    } else if (
-      isOpen &&
-      value.includes(updatedList[activeIndex as number].value)
-    ) {
+    } else if (isOpen && value.includes(updatedList[activeIndex as number].value)) {
       const newOptions = value.filter(
-        (selectedOption) =>
-          selectedOption !== updatedList[activeIndex as number].value,
+        (selectedOption) => selectedOption !== updatedList[activeIndex as number].value,
       );
 
       onChange(newOptions);
@@ -128,7 +123,7 @@ export function MultiSelect<T extends OptionValue>({
 
   return (
     <FocusLock restoreFocus isDisabled={!isOpen}>
-      <div className={containerClassName}>
+      <div className={classNames(containerClassName, 'relative')}>
         <>
           {label && (
             <div className="block text-sm leading-5 font-medium text-gray-700 mb-2">
@@ -143,14 +138,12 @@ export function MultiSelect<T extends OptionValue>({
               onClick={() => {
                 if (transitions.length === 1 && !isOpen) {
                   setActiveIndex(
-                    options.findIndex(
-                      (element) => element?.value === options[0]?.value,
-                    ),
+                    options.findIndex((element) => element?.value === options[0]?.value),
                   );
                 }
                 setIsOpen((prev) => !prev);
               }}
-              className="inline-flex w-full shadow-sm focus:ring-2 focus:ring-blue-500 rounded-md border border-gray-300"
+              className="inline-flex w-full shadow-sm focus:ring-2 focus:ring-blue-500 rounded-md border border-gray-300 overflow-hidden"
             >
               <div
                 className={classNames(
@@ -158,22 +151,14 @@ export function MultiSelect<T extends OptionValue>({
                   {
                     'justify-between': status === 'loading',
                     'justify-start': status !== 'loading',
-                    'border border-red-600 justify-between pr-2':
-                      status === 'error',
+                    'border border-red-600 justify-between pr-2': status === 'error',
                   },
                 )}
               >
                 {status === 'loading' && (
                   <>
-                    <Spinner
-                      className={classNames(
-                        'flex-shrink-0 w-5 h-5',
-                        spinnerClassName,
-                      )}
-                    />
-                    {loadingText && (
-                      <p className=" text-gray-400 mr-5">{loadingText}</p>
-                    )}
+                    <Spinner className={classNames('flex-shrink-0 w-5 h-5', spinnerClassName)} />
+                    {loadingText && <p className=" text-gray-400 mr-5">{loadingText}</p>}
                   </>
                 )}
                 {status === 'error' && (
@@ -199,9 +184,7 @@ export function MultiSelect<T extends OptionValue>({
                       <div className="flex" key={option?.value}>
                         <div className="flex items-center text-white bg-blue-500 pl-2 pr-1 py-1 rounded-l-full shadow-inner">
                           {option?.Icon && (
-                            <span className="flex items-center mr-1.5">
-                              {option?.Icon}
-                            </span>
+                            <span className="flex items-center mr-1.5">{option?.Icon}</span>
                           )}
                           <span className="pb-0.5">{option?.label}</span>
                         </div>
@@ -213,8 +196,7 @@ export function MultiSelect<T extends OptionValue>({
                             e.stopPropagation();
 
                             const newOptions = value.filter(
-                              (selectedOption) =>
-                                selectedOption !== option?.value,
+                              (selectedOption) => selectedOption !== option?.value,
                             );
                             onChange(newOptions);
                           }}
@@ -269,7 +251,7 @@ export function MultiSelect<T extends OptionValue>({
                       key={key}
                       style={props}
                       ref={selectOptionsRef}
-                      className="max-h-60 rounded-md py-1 text-base leading-6 shadow-lg overflow-auto focus:outline-none sm:text-sm sm:leading-5"
+                      className="max-h-60 rounded-md py-1 text-base leading-6 shadow-lg overflow-auto focus:outline-none sm:text-sm sm:leading-5 absolute z-10 bg-white inset-x-0"
                     >
                       {withFilter && (
                         <TextInput
@@ -299,9 +281,7 @@ export function MultiSelect<T extends OptionValue>({
                         updatedList?.map((option, index) => (
                           <div
                             data-testid={`${
-                              activeIndex === index
-                                ? 'active-option'
-                                : 'not-active-option'
+                              activeIndex === index ? 'active-option' : 'not-active-option'
                             }`}
                             key={option.value}
                             tabIndex={-1}
@@ -321,8 +301,7 @@ export function MultiSelect<T extends OptionValue>({
                                 //                               }
                                 const newOptions = value.filter(
                                   (selectedOption) =>
-                                    selectedOption !==
-                                    updatedList[activeIndex as number].value,
+                                    selectedOption !== updatedList[activeIndex as number].value,
                                 );
 
                                 onChange(newOptions);
@@ -336,8 +315,7 @@ export function MultiSelect<T extends OptionValue>({
                               className={classNames(
                                 'select-none relative py-2 px-2 flex items-center',
                                 {
-                                  'text-white bg-blue-600':
-                                    activeIndex === index,
+                                  'text-white bg-blue-600': activeIndex === index,
                                   'text-gray-900': activeIndex !== index,
                                 },
                               )}
@@ -346,26 +324,18 @@ export function MultiSelect<T extends OptionValue>({
                                 <div className="flex">
                                   {option.Icon && (
                                     <span
-                                      className={classNames(
-                                        'flex items-center mr-1.5',
-                                        {
-                                          'text-gray-50': activeIndex === index,
-                                          'text-blue-600':
-                                            activeIndex !== index,
-                                        },
-                                      )}
+                                      className={classNames('flex items-center mr-1.5', {
+                                        'text-gray-50': activeIndex === index,
+                                        'text-blue-600': activeIndex !== index,
+                                      })}
                                     >
                                       {option.Icon}
                                     </span>
                                   )}
                                   <span
                                     className={classNames('block truncate', {
-                                      'font-semibold': value.includes(
-                                        option.value,
-                                      ),
-                                      'font-normal': !value.includes(
-                                        option.value,
-                                      ),
+                                      'font-semibold': value.includes(option.value),
+                                      'font-normal': !value.includes(option.value),
                                     })}
                                   >
                                     {option.label}

@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect } from 'react';
 import { Select } from '@app-garage/custom-select';
-// import { Spinner } from "@app-garage/spinner";
 
 export function useFetch<T>(url: string) {
   const [response, setResponse] = React.useState<T>();
@@ -31,10 +30,13 @@ export function useFetch<T>(url: string) {
 }
 
 type AsyncSelectTypes = {
-  value: string;
-  onChange: () => void;
+  value?: string;
+  onChange: (value: any) => void;
   labelKey: string;
   valueKey: string;
+  apiUrl: string;
+  queryParams?: string;
+  dataResponseKey: string;
 };
 
 export const AsyncSelect = ({
@@ -42,27 +44,32 @@ export const AsyncSelect = ({
   onChange,
   labelKey,
   valueKey,
+  apiUrl,
+  queryParams,
+  dataResponseKey,
 }: AsyncSelectTypes): React.ReactElement => {
-  const { response, error, isLoading, refetch } = useFetch(
-    'https://randomuser.me/api/?results=5',
-  );
+  const { response, error, isLoading, refetch } = useFetch<object>(`${apiUrl}${queryParams}`);
 
   return (
     <div>
       <Select
         isLoading={isLoading}
         loadingText="Loading.."
+        placeholder="Select..."
         retryFn={refetch}
         error={error ? 'Error loading the resources' : ''}
         containerClassName="max-w-sm w-64 mb-5 my-2 mr-2"
         onChange={onChange}
         value={value}
         label="Select"
-        // @ts-ignore
-        options={response.results.map((responseItem) => ({
-          label: responseItem[labelKey],
-          value: responseItem[valueKey],
-        }))}
+        options={
+          !isLoading && !error && response
+            ? response?.[dataResponseKey]?.map((responseItem: any) => ({
+                label: responseItem[labelKey].en,
+                value: responseItem[valueKey],
+              }))
+            : []
+        }
       />
     </div>
   );

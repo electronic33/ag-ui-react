@@ -28,6 +28,12 @@ type DrawerTypes = {
   textClassName?: string;
   drawerClassNames?: string;
   linkClassNames?: string;
+  LinkComponent?: React.ElementType<{
+    className?: string;
+    to: string;
+    onClick?: () => void;
+    children: React.ReactNode;
+  }>;
 };
 
 export const Drawer = ({
@@ -40,6 +46,7 @@ export const Drawer = ({
   textClassName,
   drawerClassNames,
   linkClassNames,
+  LinkComponent = Link,
 }: DrawerTypes) => {
   const stopPropagation = useStopPropagation();
 
@@ -161,10 +168,8 @@ export const Drawer = ({
                     className={classNames(
                       'drawer',
                       {
-                        'drawer-vertical':
-                          direction === 'left' || direction === 'right',
-                        'drawer-horizontal':
-                          direction === 'top' || direction === 'bottom',
+                        'drawer-vertical': direction === 'left' || direction === 'right',
+                        'drawer-horizontal': direction === 'top' || direction === 'bottom',
                       },
                       drawerClassNames,
                     )}
@@ -200,26 +205,16 @@ export const Drawer = ({
                       {sidebarData &&
                         sidebarData.map(({ title, Icon, to, Component }) => (
                           <li key={title} className="">
-                            <Link
-                              className={classNames(
-                                'drawer-link',
-                                linkClassNames,
-                              )}
+                            <LinkComponent
+                              className={classNames('drawer-link', linkClassNames)}
                               to={to || undefined}
                             >
                               {Icon && (
-                                <Icon
-                                  className={classNames(
-                                    'drawer-link-icon',
-                                    iconClassName,
-                                  )}
-                                />
+                                <Icon className={classNames('drawer-link-icon', iconClassName)} />
                               )}
 
-                              <div className={classNames(textClassName)}>
-                                {title}
-                              </div>
-                            </Link>
+                              <div className={classNames(textClassName)}>{title}</div>
+                            </LinkComponent>
                             {Component}
                           </li>
                         ))}

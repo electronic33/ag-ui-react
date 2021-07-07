@@ -16,7 +16,7 @@ export const Default = () => {
       label="NumericInput"
       placeholder="This is a NumericInput"
       value={value}
-      onChange={setValue}
+      onChange={(event) => setValue(event.target.value)}
     />
   );
 };

@@ -12,6 +12,7 @@ const ButtonBaseClasses = (theme) => ({
     paddingBottom: theme('btn.md.py') || theme('spacing.2'),
     fontSize: theme('fontSize.xl'),
     color: theme('colors.white'),
+    whiteSpace: 'nowrap',
   },
   '.btn-sm': {
     display: 'flex',
@@ -26,6 +27,7 @@ const ButtonBaseClasses = (theme) => ({
     paddingBottom: theme('spacing.2'),
     fontSize: theme('fontSize.sm'),
     color: theme('colors.white'),
+    whiteSpace: 'nowrap',
   },
   '.btn-lg': {
     display: 'flex',
@@ -40,6 +42,7 @@ const ButtonBaseClasses = (theme) => ({
     paddingBottom: theme('spacing.2'),
     fontSize: theme('fontSize.3xl'),
     color: theme('colors.white'),
+    whiteSpace: 'nowrap',
   },
   '.btn-disabled': {
     opacity: theme('opacity.75'),

@@ -7,22 +7,15 @@ export default {
   component: DateInput,
 };
 
-export const Default = (): React.ReactNode => {
+export const Default = () => {
   const [value, setValue] = useState<string | Date>('');
-  const [isOpen, setIsOpen] = useState(false);
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
   return (
     <DateInput
-      isOpen={isOpen}
-      setIsOpen={setIsOpen}
       label="DateInput"
       placeholder="This is a date input"
       value={value}
-      setValue={setValue}
-      onChange={(event) => handleChange(event)}
+      onChange={(val) => setValue(val)}
     />
   );
 };
