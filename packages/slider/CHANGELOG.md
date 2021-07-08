@@ -1,5 +1,12 @@
 # Change Log
 
+## 1.2.0
+
+### Minor Changes
+
+- [`c15bb21`](https://github.com/electronic33/ag-ui-react/commit/c15bb21307eb1f0ead95009297c7e9e704ff1f1a) - Fixe
+  zsh:1: command not found: q
+
 ## 1.1.0
 
 ### Minor Changes

@@ -1,5 +1,17 @@
 # Change Log
 
+## 1.3.0
+
+### Minor Changes
+
+- [`f15d826`](https://github.com/electronic33/ag-ui-react/commit/f15d8268c75e59209d30a2509a76596130538333) - General improvements
+
+### Patch Changes
+
+- Updated dependencies [[`f15d826`](https://github.com/electronic33/ag-ui-react/commit/f15d8268c75e59209d30a2509a76596130538333), [`c15bb21`](https://github.com/electronic33/ag-ui-react/commit/c15bb21307eb1f0ead95009297c7e9e704ff1f1a)]:
+  - @app-garage/button@1.3.0
+  - @app-garage/custom-select@1.2.0
+
 ## 1.2.0
 
 ### Minor Changes
