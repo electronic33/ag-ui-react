@@ -1,5 +1,11 @@
 # Change Log
 
+## 1.2.0
+
+### Minor Changes
+
+- [`f15d826`](https://github.com/electronic33/ag-ui-react/commit/f15d8268c75e59209d30a2509a76596130538333) - General improvements
+
 ## 1.1.0
 
 ### Minor Changes
