@@ -204,17 +204,19 @@ export const Drawer = ({
                       {SidebarComponent}
                       {sidebarData &&
                         sidebarData.map(({ title, Icon, to, Component }) => (
-                          <li key={title} className="">
-                            <LinkComponent
-                              className={classNames('drawer-link', linkClassNames)}
-                              to={to || undefined}
-                            >
-                              {Icon && (
-                                <Icon className={classNames('drawer-link-icon', iconClassName)} />
-                              )}
+                          <li key={title}>
+                            {to && (
+                              <LinkComponent
+                                className={classNames('drawer-link', linkClassNames)}
+                                to={to}
+                              >
+                                {Icon && (
+                                  <Icon className={classNames('drawer-link-icon', iconClassName)} />
+                                )}
 
-                              <div className={classNames(textClassName)}>{title}</div>
-                            </LinkComponent>
+                                <div className={classNames(textClassName)}>{title}</div>
+                              </LinkComponent>
+                            )}
                             {Component}
                           </li>
                         ))}

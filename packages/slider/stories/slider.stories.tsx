@@ -45,9 +45,8 @@ export const Default = (): React.ReactNode => (
     startAtIndex={0}
     itemsToShow={5}
     itemsToScroll={4}
-    breakpoints={[
-      { minWidth: 800, config: { itemsToScroll: 1, itemsToShow: 2 } },
-    ]}
+    breakpoints={[{ minWidth: 800, config: { itemsToScroll: 1, itemsToShow: 2 } }]}
+    containerClassName="h-24"
   >
     {strings.map((image, index) => (
       <div

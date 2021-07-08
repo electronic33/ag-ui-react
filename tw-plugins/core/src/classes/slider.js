@@ -1,6 +1,8 @@
 const SliderBaseClasses = (theme) => ({
   '.main-div': {
-    width: theme('width.full'),
+    width: '100%',
+    height: '100%',
+    minHeight: 200,
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
@@ -8,7 +10,9 @@ const SliderBaseClasses = (theme) => ({
     alignItems: 'center',
   },
   '.carousel-and-arrow-container': {
-    width: theme('width.full'),
+    width: '100%',
+    height: '100%',
+    alignSelf: 'stretch',
     position: 'relative',
     display: 'flex',
     justifyContent: 'center',
@@ -16,15 +20,20 @@ const SliderBaseClasses = (theme) => ({
   },
   '.carousel': {
     position: 'relative',
+    alignSelf: 'stretch',
     marginTop: theme('spacing.0'),
     marginBottom: theme('spacing.0'),
     marginLeft: theme('spacing.2'),
     marginRight: theme('spacing.2'),
     overflow: 'hidden',
-    width: theme('width.full'),
+    flexGrow: 1,
+    width: '100%',
+    height: '100%',
+    minHeight: 200,
   },
   '.slider-content': {
     display: 'flex',
+    height: '100%',
   },
   '.arrow-container': {
     display: 'flex',
@@ -53,7 +62,7 @@ const SliderBaseClasses = (theme) => ({
   },
   '.dots': {
     paddingTop: theme('spacing.4'),
-    width: theme('width.full'),
+    width: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
