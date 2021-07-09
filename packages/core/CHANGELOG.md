@@ -1,5 +1,11 @@
 # @app-garage/core
 
+## 2.2.0
+
+### Minor Changes
+
+- [`41b9598`](https://github.com/electronic33/ag-ui-react/commit/41b959857d5143d241db516690b11d88c441f624) - Version dependencies
+
 ## 2.1.0
 
 ### Minor Changes
