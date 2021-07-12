@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/utils",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
@@ -29,7 +29,7 @@
     "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
   },
   "devDependencies": {
-    "react": "^17.0.1"
+    "react": "^17.0.2"
   },
   "peerDependencies": {
     "react": ">=16.8.6"

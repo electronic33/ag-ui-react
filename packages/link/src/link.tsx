@@ -5,6 +5,7 @@ type LinkProps = {
   to: string | undefined;
   children: React.ReactNode;
   onClick?: () => void;
+  target?: string;
 };
 
 export const Link = ({
@@ -12,14 +13,9 @@ export const Link = ({
   children,
   className,
   onClick,
+  target,
 }: LinkProps): React.ReactElement => (
-  <a
-    className={className}
-    href={to}
-    target="_blank"
-    rel="noreferrer"
-    onClick={onClick}
-  >
+  <a className={className} href={to} target={target} onClick={onClick}>
     {children}
   </a>
 );

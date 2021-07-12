@@ -8,7 +8,6 @@ export default {
 
 export const Default = () => (
   <Table>
-    {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
     <Thead>
       <Tr>
         <Th>To convert</Th>
@@ -33,12 +32,5 @@ export const Default = () => (
         <Td>0.91444</Td>
       </Tr>
     </Tbody>
-    {/* <Tfoot>
-      <Tr>
-        <Th>To convert</Th>
-        <Th>into</Th>
-        <Th >multiply by</Th>
-      </Tr>
-    </Tfoot> */}
   </Table>
 );

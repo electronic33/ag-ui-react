@@ -21,15 +21,7 @@ type ButtonProps = {
   onBlur?: (event?: React.FocusEvent<HTMLButtonElement>) => void;
   children: ReactNode;
   ariaProps?: {
-    'aria-haspopup':
-      | boolean
-      | 'dialog'
-      | 'menu'
-      | 'false'
-      | 'true'
-      | 'listbox'
-      | 'tree'
-      | 'grid';
+    'aria-haspopup': boolean | 'dialog' | 'menu' | 'false' | 'true' | 'listbox' | 'tree' | 'grid';
   };
 };
 

@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  useLayoutEffect,
-  useMemo,
-  useRef,
-  useState,
-} from 'react';
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Modal } from '@app-garage/modal';
 import classNames from 'classnames';
 import { Arrow } from './arrow';
@@ -47,16 +41,13 @@ const Slider = ({
     translate: 0,
     transition: 0,
   });
-  const [
-    breakpointConfig,
-    setBreakpointConfig,
-  ] = useState<BreakpointConfig | null>(null);
+  const [breakpointConfig, setBreakpointConfig] = useState<BreakpointConfig | null>(null);
 
   const ref = useRef<HTMLDivElement>(null);
 
   const { transition, translate, activeIndex } = state;
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (ref.current) {
       setWidth(ref.current.getBoundingClientRect().width);
       setHeight(ref.current.getBoundingClientRect().height);
@@ -85,8 +76,7 @@ const Slider = ({
 
   useEffect(() => {
     setState({
-      translate:
-        startAtIndex * ((width / currentItemsToShow) * currentItemsToScroll),
+      translate: startAtIndex * ((width / currentItemsToShow) * currentItemsToScroll),
       activeIndex: startAtIndex * currentItemsToScroll,
       transition: 0,
     });
@@ -94,9 +84,7 @@ const Slider = ({
     setActiveDot(startAtIndex);
   }, [width, currentItemsToScroll, currentItemsToShow, startAtIndex]);
 
-  const dotsNum =
-    Math.ceil((children.length - currentItemsToShow) / currentItemsToScroll) +
-    1;
+  const dotsNum = Math.ceil((children.length - currentItemsToShow) / currentItemsToScroll) + 1;
 
   const goToNextSlide = () => {
     if (activeIndex / itemsToScroll === dotsNum - 1) {
@@ -123,8 +111,7 @@ const Slider = ({
               ? index * ((width / currentItemsToShow) * currentItemsToScroll)
               : index * ((width / currentItemsToShow) * currentItemsToScroll) -
                 (currentItemsToScroll -
-                  ((children.length -
-                    (currentItemsToShow - currentItemsToScroll)) %
+                  ((children.length - (currentItemsToShow - currentItemsToScroll)) %
                     currentItemsToScroll)) *
                   (width / currentItemsToShow),
         })
@@ -133,8 +120,7 @@ const Slider = ({
 
     setState({
       activeIndex: activeIndex + currentItemsToScroll,
-      translate:
-        ((activeIndex + currentItemsToScroll) * width) / currentItemsToShow,
+      translate: ((activeIndex + currentItemsToScroll) * width) / currentItemsToShow,
       transition: 0.45,
     });
 
@@ -144,14 +130,10 @@ const Slider = ({
   const goToPrevSlide = () => {
     if (activeIndex === 0) {
       return (
-        setActiveDot(
-          (children.length - currentItemsToShow) / currentItemsToScroll,
-        ),
+        setActiveDot((children.length - currentItemsToShow) / currentItemsToScroll),
         setState({
           ...state,
-          translate:
-            (width / currentItemsToShow) *
-            Math.ceil(children.length - currentItemsToShow),
+          translate: (width / currentItemsToShow) * Math.ceil(children.length - currentItemsToShow),
           transition: 0.45,
 
           activeIndex: children.length - currentItemsToShow,
@@ -161,8 +143,7 @@ const Slider = ({
 
     setState({
       activeIndex: activeIndex - currentItemsToScroll,
-      translate:
-        ((activeIndex - currentItemsToScroll) * width) / currentItemsToShow,
+      translate: ((activeIndex - currentItemsToScroll) * width) / currentItemsToShow,
       transition: 0.45,
     });
     setActiveDot((prevActiveDot) => {
@@ -186,16 +167,14 @@ const Slider = ({
             ? index * ((width / currentItemsToShow) * currentItemsToScroll)
             : index * ((width / currentItemsToShow) * currentItemsToScroll) -
               (currentItemsToScroll -
-                ((children.length -
-                  (currentItemsToShow - currentItemsToScroll)) %
+                ((children.length - (currentItemsToShow - currentItemsToScroll)) %
                   currentItemsToScroll)) *
                 (width / currentItemsToShow),
       });
     } else {
       setState({
         transition: 0.45,
-        translate:
-          index * ((width / currentItemsToShow) * currentItemsToScroll),
+        translate: index * ((width / currentItemsToShow) * currentItemsToScroll),
         activeIndex: index * currentItemsToScroll,
       });
     }
@@ -213,12 +192,12 @@ const Slider = ({
   }, [children.length, dotsNum]);
 
   return (
-    <div className={classNames('main-div w-full h-full', containerClassName)}>
-      <div className="carousel-and-arrow-container h-full">
+    <div className={classNames('main-div', containerClassName)}>
+      <div className="carousel-and-arrow-container">
         <Arrow direction="left" onClick={goToPrevSlide} />
-        <div ref={ref} className="carousel h-full" style={{ width: width * 2 }}>
+        <div ref={ref} className="carousel" style={{ width: width * 2 }}>
           <div
-            className="slider-content h-full"
+            className="slider-content"
             style={{
               transform: `translate(-${translate}px, ${0}px)`,
               transition: `transform ease-out ${transition}s`,
@@ -258,12 +237,7 @@ export const SliderWithModal = (props: SliderProps): React.ReactElement => {
   return (
     <div className="w-full h-full flex items-center justify-center">
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <Slider
-          {...props}
-          itemsToShow={1}
-          itemsToScroll={1}
-          startAtIndex={clickedSlide}
-        />
+        <Slider {...props} itemsToShow={1} itemsToScroll={1} startAtIndex={clickedSlide} />
       </Modal>
       <Slider {...props} onSlideClick={handleSlideClick} />
     </div>

@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/bread-crumbs",
-  "version": "1.0.5",
+  "version": "1.1.0",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
@@ -29,13 +29,13 @@
     "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
   },
   "dependencies": {
-    "@app-garage/label": "^1.1.9",
-    "classnames": "^2.2.6",
+    "@app-garage/label": "^1.2.0",
+    "classnames": "^2.3.1",
     "react-icons": "^4.2.0"
   },
   "devDependencies": {
-    "@app-garage/link": "^1.0.2",
-    "react": "^17.0.1"
+    "@app-garage/link": "^1.1.0",
+    "react": "^17.0.2"
   },
   "peerDependencies": {
     "react": ">=16.8.6"

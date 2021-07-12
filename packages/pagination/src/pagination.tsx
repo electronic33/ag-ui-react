@@ -48,9 +48,7 @@ export const Pagination = ({
   const [middleSection, setMiddleSection] = useState<number[]>([]);
   const [lastSection, setLastSection] = useState<number[]>([]);
 
-  const [goToPageValue, setGoToPageValue] = useState<number>(
-    initialGotoPageValue,
-  );
+  const [goToPageValue, setGoToPageValue] = useState<number>(initialGotoPageValue);
   const [itemsNumber, setItemsNumber] = useState<number>(itemsPerPage);
 
   useEffect(() => {
@@ -65,11 +63,7 @@ export const Pagination = ({
 
     const arrayLast: number[] = [];
 
-    for (
-      let j = numberOfPages - firstAndLastSectionsNumber;
-      j < numberOfPages;
-      j += 1
-    ) {
+    for (let j = numberOfPages - firstAndLastSectionsNumber; j < numberOfPages; j += 1) {
       arrayLast.push(j + 1);
     }
     setLastSection(arrayLast);
@@ -87,15 +81,10 @@ export const Pagination = ({
     setMiddleSection(
       arrayMiddle.filter(
         (val) =>
-          !arrayFirst.includes(val) &&
-          !arrayLast.includes(val) &&
-          val > 0 &&
-          val < numberOfPages,
+          !arrayFirst.includes(val) && !arrayLast.includes(val) && val > 0 && val < numberOfPages,
       ),
     );
-    setLastSection(
-      arrayLast.filter((val) => !arrayFirst.includes(val) && val > 0),
-    );
+    setLastSection(arrayLast.filter((val) => !arrayFirst.includes(val) && val > 0));
   }, [currentPage, itemsPerPage, firstAndLastSectionsNumber, numberOfPages]);
 
   return (
@@ -106,11 +95,7 @@ export const Pagination = ({
         setItemsPerPage(itemsNumber);
         setCurrentPage(1);
 
-        if (
-          goToPageValue &&
-          goToPageValue > 0 &&
-          goToPageValue <= numberOfPages
-        ) {
+        if (goToPageValue && goToPageValue > 0 && goToPageValue <= numberOfPages) {
           setCurrentPage(goToPageValue);
         }
       }}
@@ -163,8 +148,7 @@ export const Pagination = ({
                   className={classNames(
                     'pagination',
                     {
-                      'bg-blue-400 text-white':
-                        middleSectionItem === currentPage,
+                      'bg-blue-400 text-white': middleSectionItem === currentPage,
                     },
                     {
                       'text-blue-400': middleSectionItem !== currentPage,
@@ -217,7 +201,7 @@ export const Pagination = ({
           Next Page
         </button>
       </div>
-      {initialGotoPageValue && (
+      {initialGotoPageValue ? (
         <TextInput
           label="Go to page number:"
           id={geToPageId}
@@ -227,20 +211,18 @@ export const Pagination = ({
           value={goToPageValue}
           containerClassName="bg-gray-100 shadow rounded px-2 py-1"
         />
-      )}
+      ) : null}
 
-      {selectOptions && (
+      {selectOptions ? (
         <Select
           label="Items per page:"
           containerClassName="max-w-16 w-64 mb-5 my-4 mr-2"
-          onChange={(selectedItemsNumber) =>
-            setItemsNumber(selectedItemsNumber)
-          }
+          onChange={(selectedItemsNumber) => setItemsNumber(selectedItemsNumber)}
           value={itemsNumber}
           options={selectOptions}
         />
-      )}
-      {(initialGotoPageValue || selectOptions) && (
+      ) : null}
+      {initialGotoPageValue || selectOptions ? (
         <Button
           className={classNames('font-medium cursor-pointer bg-gray-500', {
             'cursor-default bg-opacity-70 hover:bg-opacity-75':
@@ -249,7 +231,7 @@ export const Pagination = ({
         >
           Button
         </Button>
-      )}
+      ) : null}
     </form>
   );
 };

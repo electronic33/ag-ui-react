@@ -2,11 +2,7 @@ import React, { forwardRef, useState } from 'react';
 import classNames from 'classnames';
 import { Label } from '@app-garage/label';
 import { Button } from '@app-garage/button';
-import {
-  useNumberInputValues,
-  FieldNumberInputProps,
-  FormikNumberProps,
-} from './input-hooks';
+import { useNumberInputValues, FieldNumberInputProps, FormikNumberProps } from './input-hooks';
 
 type NumericInputProps = {
   id?: string;
@@ -155,28 +151,30 @@ export const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(
 
                 formikCompatibleOnChange(
                   // TODO: think of a solution
-                  // @ts-ignore
-                  Math.round((Number(formikCompatibleValue) + 0.1) * 10) / 10,
+                  {
+                    // @ts-ignore
+                    target: { value: Math.round((Number(formikCompatibleValue) + 0.1) * 10) / 10 },
+                  },
                 );
               } else if (event.key === 'ArrowUp' && withDecimals) {
                 event.preventDefault();
-                formikCompatibleOnChange(
+                formikCompatibleOnChange({
                   // @ts-ignore
-                  Math.round((Number(formikCompatibleValue) + 1) * 10) / 10,
-                );
+                  target: { value: Math.round((Number(formikCompatibleValue) + 1) * 10) / 10 },
+                });
               }
               if (event.key === 'ArrowDown' && withDecimals && isAltPressed) {
                 event.preventDefault();
-                formikCompatibleOnChange(
+                formikCompatibleOnChange({
                   // @ts-ignore
-                  Math.round((Number(formikCompatibleValue) - 0.1) * 10) / 10,
-                );
+                  target: { value: Math.round((Number(formikCompatibleValue) - 0.1) * 10) / 10 },
+                });
               } else if (event.key === 'ArrowDown' && withDecimals) {
                 event.preventDefault();
-                formikCompatibleOnChange(
+                formikCompatibleOnChange({
                   // @ts-ignore
-                  Math.round((Number(formikCompatibleValue) - 1) * 10) / 10,
-                );
+                  target: { value: Math.round((Number(formikCompatibleValue) - 1) * 10) / 10 },
+                });
               }
 
               if (!withDecimals && (event.key === ',' || event.key === '.')) {
@@ -200,8 +198,10 @@ export const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(
               type="button"
               className="h-full bg-gray-100 w-full border border-gray-300 rounded-tr-md active:bg-gray-300 transition-all duration-75 active:shadow-inner"
               onClick={() =>
-                // @ts-ignore
-                formikCompatibleOnChange(Number(formikCompatibleValue) + 1)
+                formikCompatibleOnChange({
+                  // @ts-ignore
+                  target: { value: Number(formikCompatibleValue) + 1 },
+                })
               }
             >
               <svg
@@ -222,8 +222,10 @@ export const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(
               type="button"
               className="h-full w-full bg-gray-100 border border-gray-300 rounded-br-md active:bg-gray-300 transition-all duration-75 active:shadow-inner"
               onClick={() =>
-                // @ts-ignore
-                formikCompatibleOnChange(Number(formikCompatibleValue) - 1)
+                formikCompatibleOnChange({
+                  // @ts-ignore
+                  target: { value: Number(formikCompatibleValue) - 1 },
+                })
               }
             >
               <svg

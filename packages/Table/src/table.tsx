@@ -7,23 +7,14 @@ type TableTypes = {
   tableClassName?: string;
 };
 
-export const Table = ({
-  children,
-  containerClassName,
-  tableClassName,
-}: TableTypes) => (
+export const Table = ({ children, containerClassName, tableClassName }: TableTypes) => (
   <div
     className={classNames(
-      'shadow overflow-hidden border-b border-gray-200 sm:rounded-lg',
+      'shadow overflow-hidden overflow-x-auto border-b border-gray-200 rounded-md',
       containerClassName,
     )}
   >
-    <table
-      className={classNames(
-        'min-w-full divide-y divide-gray-200',
-        tableClassName,
-      )}
-    >
+    <table className={classNames('min-w-full divide-y rounded-md divide-gray-200', tableClassName)}>
       {children}
     </table>
   </div>

@@ -37,36 +37,36 @@ const RightArrow = ({ className }: { className?: string }) => (
 
 type DateInputTypes = {
   isOpen?: boolean;
-  setIsOpen: (isOpen?: boolean) => void;
+  setIsOpen?: (isOpen?: boolean) => void;
   label?: string;
   placeholder?: string;
   buttonText?: string;
   value?: string | Date;
-  setValue: (prevValue?: string | Date) => void;
-  onChange?: (event: any) => void;
+  onChange: (prevValue?: string | Date) => void;
   dateFormat?: string;
 };
 
 export const DateInput = ({
-  isOpen,
-  setIsOpen,
+  isOpen: externalIsOpen,
+  setIsOpen: externalSetIsOpen,
   label,
   placeholder,
   buttonText,
   value,
-  setValue,
   onChange,
   dateFormat = 'd MMMM yyyy',
 }: DateInputTypes): React.ReactElement => {
-  const [
-    referenceElement,
-    setReferenceElement,
-  ] = useState<HTMLInputElement | null>(null);
-  const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(
-    null,
-  );
+  const isControlled = externalIsOpen !== undefined;
+
+  const [internalIsOpen, setInternalIsOpen] = useState(isControlled ? externalIsOpen : false);
+
+  const [referenceElement, setReferenceElement] = useState<HTMLInputElement | null>(null);
+  const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
 
   const [selectedDates, setSelectedDates] = useState<Date | Date[]>();
+
+  const isOpen = isControlled ? externalIsOpen : internalIsOpen;
+  const setIsOpen = isControlled ? externalSetIsOpen : setInternalIsOpen;
 
   const transitions = useTransition(isOpen, null, {
     from: { opacity: 0, transform: 'translateY(0px)' },
@@ -98,15 +98,17 @@ export const DateInput = ({
         referenceElement &&
         !referenceElement.contains(event.target)
       ) {
-        setIsOpen(false);
+        if (setIsOpen) {
+          setIsOpen(false);
+        }
         if (value && isValid(new Date(value))) {
-          setValue(format(new Date(value), dateFormat));
+          onChange(format(new Date(value), dateFormat));
           setSelectedDates(new Date(value));
         } else if (selectedDates) {
-          setValue(format(selectedDates as Date, dateFormat));
+          onChange(format(selectedDates as Date, dateFormat));
           setSelectedDates(selectedDates);
         } else {
-          setValue(undefined);
+          onChange(undefined);
         }
       }
     }
@@ -121,7 +123,7 @@ export const DateInput = ({
     popperElement,
     referenceElement,
     value,
-    setValue,
+    onChange,
     selectedDates,
     dateFormat,
   ]);
@@ -170,9 +172,9 @@ export const DateInput = ({
 
   const selectHandler = (selectedDate: Date | undefined) => {
     if (selectedDate) {
-      setValue(format(selectedDate, dateFormat));
+      onChange(format(selectedDate, dateFormat));
     } else {
-      setValue(undefined);
+      onChange(undefined);
     }
     setSelectedDates(selectedDate);
   };
@@ -182,27 +184,31 @@ export const DateInput = ({
       <TextInput
         onEnterPress={() => {
           if (value && isValid(new Date(value))) {
-            setValue(format(new Date(value), dateFormat));
+            onChange(format(new Date(value), dateFormat));
             setSelectedDates(new Date(value));
           } else if (selectedDates) {
-            setValue(format(selectedDates as Date, dateFormat));
+            onChange(format(selectedDates as Date, dateFormat));
             setSelectedDates(selectedDates);
           } else {
-            setValue(undefined);
+            onChange(undefined);
           }
         }}
         containerClassName="w-96"
         ref={setReferenceElement}
         onFocus={() => {
-          if (isValid(value)) setSelectedDates(value as Date);
-          setIsOpen(true);
+          if (isValid(value)) {
+            setSelectedDates(value as Date);
+          }
+
+          if (setIsOpen) {
+            setIsOpen(true);
+          }
         }}
-        // onBlur={() => setIsOpen(false)}
         label={label}
         placeholder={placeholder}
         buttonText={buttonText}
         value={value as string}
-        onChange={onChange}
+        onChange={(event) => onChange(event.target.value)}
       />
       {transitions.map(
         ({ item, key, props }) =>

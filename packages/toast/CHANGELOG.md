@@ -1,5 +1,16 @@
 # Change Log
 
+## 1.1.0
+
+### Minor Changes
+
+- [`84d04fa`](https://github.com/electronic33/ag-ui-react/commit/84d04fa51dbf206cc4b2713796baeb2efbf54381) - Updated packages
+
+### Patch Changes
+
+- Updated dependencies [[`84d04fa`](https://github.com/electronic33/ag-ui-react/commit/84d04fa51dbf206cc4b2713796baeb2efbf54381)]:
+  - @app-garage/utils@1.1.0
+
 ## 1.0.5
 
 ### Patch Changes

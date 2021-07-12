@@ -1,6 +1,6 @@
 {
   "name": "@app-garage/async-select",
-  "version": "1.0.3",
+  "version": "1.2.0",
   "author": "Matyas Furtos",
   "license": "MIT",
   "sideEffects": false,
@@ -29,12 +29,12 @@
     "lint:src": "eslint src --ext .ts,.tsx --config ../../.eslintrc"
   },
   "dependencies": {
-    "@app-garage/custom-select": "^1.0.4",
-    "@app-garage/label": "^1.1.10",
-    "classnames": "^2.2.6"
+    "@app-garage/custom-select": "^1.2.0",
+    "@app-garage/label": "^1.2.0",
+    "classnames": "^2.3.1"
   },
   "devDependencies": {
-    "react": "^17.0.1",
+    "react": "^17.0.2",
     "react-icons": "^4.2.0",
     "yup": "^0.32.9"
   },

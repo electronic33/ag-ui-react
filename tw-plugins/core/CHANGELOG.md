@@ -1,5 +1,28 @@
 # Change Log
 
+## 1.3.0
+
+### Minor Changes
+
+- [`f15d826`](https://github.com/electronic33/ag-ui-react/commit/f15d8268c75e59209d30a2509a76596130538333) - General improvements
+
+* [`c15bb21`](https://github.com/electronic33/ag-ui-react/commit/c15bb21307eb1f0ead95009297c7e9e704ff1f1a) - Fixe
+  zsh:1: command not found: q
+
+## 1.2.0
+
+### Minor Changes
+
+- [`84d04fa`](https://github.com/electronic33/ag-ui-react/commit/84d04fa51dbf206cc4b2713796baeb2efbf54381) - Updated packages
+
+### Patch Changes
+
+- [`0839dc3`](https://github.com/electronic33/ag-ui-react/commit/0839dc38faf7a2b84f59b66214d9770e1a804a5d) - added padding config for button
+
+  Please enter a summary for your changes.
+
+* [`7392dc4`](https://github.com/electronic33/ag-ui-react/commit/7392dc47d3ccc528729c690ed036bb0aa41257ed) - downgrade yarn
+
 ## 1.1.8
 
 ### Patch Changes

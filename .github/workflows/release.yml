@@ -14,13 +14,13 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
-    strategy:
-      # Use false if you integrate Cypress Dashboard
-      fail-fast: true
-      matrix:
-        cypress:
-          - working_directory: packages/accordion
-          - working_directory: packages/multi-select
+    # strategy:
+    # Use false if you integrate Cypress Dashboard
+    # fail-fast: true
+    # matrix:
+    #   cypress:
+    #     - working_directory: packages/accordion
+    #     - working_directory: packages/multi-select
 
     steps:
       - id: yarn-cache
@@ -51,12 +51,21 @@ jobs:
       - name: Install Dependencies
         run: yarn install --frozen-lockfile && yarn bootstrap
 
-      - name: Run Tests
-        uses: cypress-io/github-action@v2
-        with:
-          start: yarn storybook:ci
-          wait-on: 'http://localhost:6006'
-          working-directory: ${{ matrix.cypress.working_directory }}
+      # - name: Run Tests
+      #   uses: cypress-io/github-action@v2
+      #   with:
+      #     start: yarn storybook:ci
+      #     wait-on: 'http://localhost:6006'
+      #     working-directory: ${{ matrix.cypress.working_directory }}
+
+      # - name: Start Cypress
+      #   uses: cypress-io/github-action@v2
+      #   with:
+      #     # just perform install
+      #     runTests: false
+
+      # - name: Run Tests
+      #   run: yarn test
 
       - name: Setup CI Git User
         run: |
