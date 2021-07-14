@@ -34,7 +34,7 @@
     "@app-garage/label": "^1.2.0",
     "@app-garage/spinner": "^1.1.0",
     "classnames": "^2.3.1",
-    "react-spring": "^8.0.27"
+    "react-spring": "^9.2.4"
   },
   "devDependencies": {
     "react": "^17.0.2",
