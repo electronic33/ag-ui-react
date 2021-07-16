@@ -16,21 +16,21 @@ const TooltipBaseClasses = (theme) => ({
       position: 'absolute',
       width: '8px',
       height: '8px',
-      background: 'inherit',
+      background: theme('components.toolTip.backgroundColor') || theme('colors.black'),
     },
   },
 
   '.tooltip-content': {
-    paddingTop: theme('spacing.2'),
-    paddingBottom: theme('spacing.2'),
-    paddingLeft: theme('spacing.4'),
-    paddingRight: theme('spacing.4'),
-    color: theme('colors.black'),
-    borderRadius: theme('borderRadius.DEFAULT'),
+    paddingRight: theme('components.toolTip.pr') || theme('spacing.4'),
+    paddingLeft: theme('components.toolTip.pl') || theme('spacing.4'),
+    paddingTop: theme('components.toolTip.pt') || theme('spacing.2'),
+    paddingBottom: theme('components.toolTip.pb') || theme('spacing.2'),
+    color: theme('components.toolTip.color') || theme('colors.white'),
+    borderRadius: theme('components.toolTip.borderRadius') || theme('borderRadius.DEFAULT'),
+    backgroundColor: theme('components.toolTip.backgroundColor') || theme('colors.black'),
+    fontSize: theme('components.toolTip.fontSize') || theme('fontSize.base'),
   },
-  '.arrow-container': {
-    backgroundColor: theme('colors.gray.700'),
-  },
+  '.arrow-container': {},
 });
 
 module.exports = TooltipBaseClasses;

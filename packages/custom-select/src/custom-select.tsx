@@ -114,7 +114,7 @@ export function Select<T extends OptionValue>({
           className={classNames('custom-select-classes', selectClassName)}
         >
           <div
-            className={classNames('custom-select-status-div sm:text-sm sm:leading-5', {
+            className={classNames('custom-select-status-div ', {
               'custom-select-status-loading': status === 'loading',
               'custom-select-status-not-loading': status !== 'loading',
               'custom-select-status-error': status === 'error',
@@ -171,10 +171,7 @@ export function Select<T extends OptionValue>({
                 key={key}
                 style={props}
                 ref={selectOptionsRef}
-                className={classNames(
-                  'custom-select-options-container sm:text-sm sm:leading-5',
-                  optionsContainerClassName,
-                )}
+                className={classNames('custom-select-options-container', optionsContainerClassName)}
               >
                 {!isLoading &&
                   options.map((option, index) => (

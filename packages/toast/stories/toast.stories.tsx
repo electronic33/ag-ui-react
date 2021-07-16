@@ -32,8 +32,7 @@ const DefaultContent = () => {
         onClick={() => {
           lastToastId.current = showToast({
             intent: 'primary',
-            text:
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
             header: 'Header',
             position: 'top-left',
             timeout: 3000,
@@ -48,8 +47,7 @@ const DefaultContent = () => {
         onClick={() => {
           lastToastId.current = showToast({
             intent: 'primary',
-            text:
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
             header: 'Header',
             position: 'top-center',
             timeout: 3000,
@@ -63,8 +61,7 @@ const DefaultContent = () => {
         onClick={() => {
           lastToastId.current = showToast({
             intent: 'primary',
-            text:
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
             header: 'Header',
             position: 'top-right',
             timeout: 3000,
@@ -78,8 +75,7 @@ const DefaultContent = () => {
         onClick={() => {
           lastToastId.current = showToast({
             intent: 'primary',
-            text:
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
             header: 'Header',
             position: 'bottom-left',
             timeout: 3000,
@@ -93,8 +89,7 @@ const DefaultContent = () => {
         onClick={() => {
           lastToastId.current = showToast({
             intent: 'primary',
-            text:
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
             header: 'Header',
             position: 'bottom-center',
             timeout: 3000,
@@ -108,8 +103,7 @@ const DefaultContent = () => {
         onClick={() => {
           lastToastId.current = showToast({
             intent: 'primary',
-            text:
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ',
             header: 'Header',
             position: 'bottom-right',
             timeout: 3000,

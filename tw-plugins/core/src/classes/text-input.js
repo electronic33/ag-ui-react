@@ -21,15 +21,12 @@ const TextInputBaseClasses = (theme) => ({
   '.text-input-input-wrapper': {
     display: 'flex',
     justifyContent: 'space-between',
-    height: theme('spacing.10'),
-    borderRadius: theme('borderRadius.md'),
-    boxShadow: theme('boxShadow.DEFAULT'),
     transitionProperty: theme('transitionProperty.all'),
     transitionTimingFunction: theme('transitionTimingFunction.DEFAULT'),
     transitionDuration: theme('transitionDuration.150'),
-    '&:hover': {
-      boxShadow: theme('boxShadow.md'),
-    },
+    borderRadius: theme('components.textInput.borderRadius') || theme('borderRadius.md'),
+    borderWidth: theme('components.textInput.borderWidth') || theme('borderWidth.DEFAULT'),
+    borderColor: theme('components.text-input.borderColor') || theme('colors.gray.400'),
   },
   '.text-input-input-wrapper-focus': {
     boxShadow: theme('boxShadow.md'),
@@ -39,6 +36,11 @@ const TextInputBaseClasses = (theme) => ({
     marginLeft: theme('spacing.2'),
     outline: '2px solid transparent',
     outlineOffset: '2px',
+    paddingLeft: theme('components.textInput.pl') || theme('spacing.2'),
+    paddingRight: theme('components.textInput.pr') || theme('spacing.2'),
+    paddingTop: theme('components.textInput.pt') || theme('spacing.2'),
+    paddingBottom: theme('components.textInput.pb') || theme('spacing.2'),
+    fontSize: theme('components.textInput.fontSize') || theme('fontSize.base'),
   },
   '.text-input-input-error': {
     borderColor: theme('colors.red.700'),

@@ -9,6 +9,9 @@ const ImageUploaderBaseClasses = (theme) => ({
     padding: theme('spacing.2'),
     borderRadius: theme('borderRadius.DEFAULT'),
     boxShadow: theme('boxShadow.xl'),
+    '@media (min-width: 640px)': {
+      padding: theme('spacing.5'),
+    },
   },
   '.image-uploader-error': {
     textAlign: 'center',
@@ -40,6 +43,9 @@ const ImageUploaderBaseClasses = (theme) => ({
     borderColor: theme('colors.gray.200'),
     height: theme('spacing.50'),
     width: theme('spacing.64'),
+    '@media (min-width: 640px)': {
+      width: theme('spacing.96'),
+    },
   },
   '.image-uploader-box-drag-text-container': {
     display: 'flex',
@@ -78,6 +84,9 @@ const ImageUploaderBaseClasses = (theme) => ({
     borderColor: theme('colors.gray.200'),
     height: theme('spacing.50'),
     width: theme('spacing.64'),
+    '@media (min-width: 640px)': {
+      width: theme('spacing.96'),
+    },
   },
   '.image-uploader-box-text-container': {
     display: 'flex',
@@ -140,10 +149,14 @@ const ImageUploaderBaseClasses = (theme) => ({
     paddingLeft: theme('spacing.4'),
     marginBottom: theme('spacing.10'),
   },
-  '.image-uploader-image-sources-modal-multiple-slider-generate-image-cropper-container': {
+  '.image-uploader-image-sources-modal-slider-generate-image-cropper-container': {
     position: 'relative',
     width: theme('spacing.72'),
     height: theme('spacing.48'),
+    '@media (min-width: 640px)': {
+      width: theme('spacing.96'),
+      height: theme('height.4/6'),
+    },
   },
   '.image-uploader-image-sources-modal-slider-generate-image-cropper': {
     backgroundColor: theme('colors.gray.900'),

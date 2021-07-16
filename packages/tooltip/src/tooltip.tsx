@@ -83,7 +83,7 @@ export const Tooltip = ({
           >
             <p className={classNames('tooltip-content', contentClassName)}>{content}</p>
             <div
-              className={classNames('arrow-container', arrowClassName)}
+              className={classNames('', arrowClassName)}
               style={styles.arrow}
               data-popper-arrow
               id="arrow"

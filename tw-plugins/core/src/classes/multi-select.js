@@ -17,10 +17,15 @@ const MultiSelectBaseClasses = (theme) => ({
     display: 'inline-flex',
     width: '100%',
     boxShadow: theme('boxShadow.sm'),
-    borderRadius: theme('borderRadius.md'),
     borderWidth: theme('borderWidth.DEFAULT'),
     borderColor: theme('color.gray.300'),
     overflow: 'hidden',
+    borderRadius: theme('components.multiSelect.borderRadius') || theme('borderRadius.md'),
+    backgroundColor: theme('components.multiSelect.bg') || theme('colors.white'),
+    paddingRight: theme('components.multiSelect.pr') || theme('spacing.2'),
+    paddingLeft: theme('components.multiSelect.pl') || theme('spacing.2'),
+    paddingTop: theme('components.multiSelect.pt') || theme('spacing.2'),
+    paddingBottom: theme('components.multiSelect.pb') || theme('spacing.2'),
   },
   '.multi-select-selected-options-status-div': {
     display: 'flex',
@@ -30,18 +35,19 @@ const MultiSelectBaseClasses = (theme) => ({
     gap: theme('spacing.2'),
     position: 'relative',
     width: '100%',
-    backgroundColor: theme('colors.white'),
-    paddingLeft: theme('spacing.2'),
-    paddingTop: theme('spacing.2'),
-    paddingBottom: theme('spacing.2'),
     textAlign: 'left',
     transitionProperty: theme('transitionProperty.DEFAULT'),
     transitionTimingFunction: theme('transitionTimingFunction.DEFAULT'),
     transitionDelay: theme('transitionDelay.150'),
+
     '&:focus': {
       // outline-none
       outline: ' 2px solid transparent',
       outlineOffset: '2px',
+    },
+    '@media (min-width: 640px)': {
+      fontSize: theme('fontSize.sm'),
+      lineHeight: theme('lineHeight.5'),
     },
   },
   '.multi-select-status-loading': {
@@ -158,10 +164,20 @@ const MultiSelectBaseClasses = (theme) => ({
       outline: '2px solid transparent',
       outlineOffset: '2px',
     },
+    '@media (min-width: 640px)': {
+      fontSize: theme('fontSize.sm'),
+      lineHeight: theme('lineHeight.5'),
+    },
   },
   '.multi-select-options-filter': {
     width: '100%',
     marginBottom: theme('spacing.2'),
+  },
+  '.multi-select-options-filter-input': {
+    paddingLeft: theme('spacing.4'),
+    paddingRight: theme('spacing.4'),
+    paddingTop: theme('spacing.2'),
+    paddingBottom: theme('spacing.2'),
   },
   '.multi-select-options-error': {
     display: 'flex',

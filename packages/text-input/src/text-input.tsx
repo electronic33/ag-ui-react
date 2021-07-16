@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 import { Label } from '@app-garage/label';
 import { Button } from '@app-garage/button';
@@ -69,7 +69,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     },
     ref,
   ) => {
-    const [isFocused, setIsFocused] = useState(false);
+    // const [isFocused, setIsFocused] = useState(false);
 
     const {
       formikCompatibleValue,
@@ -103,18 +103,18 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         )}
         <div
           className={classNames('text-input-input-wrapper', {
-            'text-input-input-wrapper-focus': isFocused,
+            // 'text-input-input-wrapper-focus': isFocused,
           })}
         >
           <input
             onFocus={(event) => {
-              setIsFocused(true);
+              // setIsFocused(true);
               if (onFocus) {
                 onFocus(event);
               }
             }}
             onBlur={(event) => {
-              setIsFocused(false);
+              // setIsFocused(false);
               formikCompatibleOnBlur(event);
             }}
             ref={ref}
@@ -146,8 +146,8 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           />
           {withButton && (
             <Button
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
+              // onFocus={() => setIsFocused(true)}
+              // onBlur={() => setIsFocused(false)}
               className="text-input-input-button"
               onClick={onButtonClick}
             >

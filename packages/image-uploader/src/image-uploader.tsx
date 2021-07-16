@@ -205,7 +205,7 @@ export const ImageUploader = ({
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
-    <div className="image-uploader-container 640:p-10">
+    <div className="image-uploader-container">
       {error && <p className="image-uploader-error">{error}</p>}
       <h1 className="image-uploader-add-new-images">Add new images</h1>
       <div {...getRootProps({ className: 'dropzone image-uploader-box-main-container' })}>
@@ -216,7 +216,7 @@ export const ImageUploader = ({
           accept="image/*"
         />
         {isDragActive ? (
-          <div className="image-uploader-box-drag-container 640:w-96">
+          <div className="image-uploader-box-drag-container">
             <div className="image-uploader-box-drag-text-container">
               <p>Drag the files here...</p>
             </div>
@@ -249,7 +249,7 @@ export const ImageUploader = ({
             </svg>
           </div>
         ) : (
-          <div className="image-uploader-box-container 640:w-96">
+          <div className="image-uploader-box-container">
             <div className="image-uploader-box-text-container">
               <p>Drag and drop files here or click to upload</p>
             </div>
@@ -312,7 +312,7 @@ export const ImageUploader = ({
                               </p>
                             </div>
                           )}
-                          <div className="image-uploader-image-sources-modal-slider-generate-image-cropper-container 640:w-96 640:h-4/6">
+                          <div className="image-uploader-image-sources-modal-slider-generate-image-cropper-container">
                             <Cropper
                               classes={{
                                 mediaClassName:
@@ -386,7 +386,7 @@ export const ImageUploader = ({
                             </p>
                           </div>
                         )}
-                        <div className="image-uploader-image-sources-modal-multiple-slider-generate-image-cropper-container 640:w-96 640:h-4/6">
+                        <div className="image-uploader-image-sources-modal-slider-generate-image-cropper-container">
                           <Cropper
                             classes={{
                               mediaClassName:

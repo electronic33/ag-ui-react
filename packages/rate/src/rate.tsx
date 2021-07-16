@@ -50,7 +50,7 @@ export const Rate = ({
             key={i}
           >
             <StarIcon
-              className={classNames('icon-rate transform ', {
+              className={classNames('icon-rate', {
                 [`${disabledClassName}`]: isHovering ? i > hoveredIndex - 1 : i > activeIndex,
                 [`${activeClassName}`]: isHovering ? i < hoveredIndex : i < activeIndex + 1,
                 'scale-125 ': i === hoveredIndex - 1,

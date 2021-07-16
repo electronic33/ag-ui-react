@@ -27,7 +27,6 @@ const Tabs = require('./classes/tabs');
 const TextArea = require('./classes/text-area');
 const TextInput = require('./classes/text-input');
 const Tooltip = require('./classes/tooltip');
-const AsyncSelect = require('./classes/async-select');
 const CustomSelect = require('./classes/custom-select');
 const Callout = require('./classes/callout');
 const DateInput = require('./classes/date-input');
@@ -70,7 +69,6 @@ module.exports = plugin(({ addComponents, theme }) => {
     ...TextInput(theme),
     ...Tooltip(theme),
     ...NumericInput(theme),
-    ...AsyncSelect(theme),
     ...Callout(theme),
     ...CustomSelect(theme),
     ...DateInput(theme),

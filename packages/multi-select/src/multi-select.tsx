@@ -146,14 +146,11 @@ export function MultiSelect<T extends OptionValue>({
               className="multi-select-main-button"
             >
               <div
-                className={classNames(
-                  'multi-select-selected-options-status-div focus:shadow-outline-blue  sm:text-sm sm:leading-5',
-                  {
-                    'multi-select-status-loading': status === 'loading',
-                    'multi-select-status-not-loading': status !== 'loading',
-                    'multi-select-status-error': status === 'error',
-                  },
-                )}
+                className={classNames('multi-select-selected-options-status-div', {
+                  'multi-select-status-loading': status === 'loading',
+                  'multi-select-status-not-loading': status !== 'loading',
+                  'multi-select-status-error': status === 'error',
+                })}
               >
                 {status === 'loading' && (
                   <>
@@ -254,12 +251,13 @@ export function MultiSelect<T extends OptionValue>({
                       key={key}
                       style={props}
                       ref={selectOptionsRef}
-                      className="multi-select-options-container sm:text-sm sm:leading-5 "
+                      className="multi-select-options-container"
                     >
                       {withFilter && (
                         <TextInput
                           ref={inputRef}
                           containerClassName="multi-select-options-filter"
+                          inputClassName="multi-select-options-filter-input"
                           placeholder="Search here.."
                           value={filterValue}
                           onChange={(event) => handleFilterInputChange(event)}

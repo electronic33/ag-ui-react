@@ -7,32 +7,36 @@ const CustomSelectBaseClasses = (theme) => ({
   '.custom-select-classes': {
     display: 'inline-flex',
     width: '100%',
-    borderRadius: theme('borderRadius.md'),
-    boxShadow: theme('boxShadow.sm'),
     position: 'relative',
     '--tw-ring-color': rgba(theme('colors.blue.500'), Number(theme('ringOpacity.DEFAULT'))),
     '&:focus': {
       boxShadow:
         'var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)',
     },
+    borderRadius: theme('components.customSelect.borderRadius') || theme('borderRadius.md'),
+    borderWidth: theme('components.customSelect.borderWidth') || theme('borderWidth.DEFAULT'),
+    borderColor: theme('components.customSelect.borderColor') || theme('color.gray.300'),
+    backgroundColor: theme('components.customSelect.bg') || theme('colors.white'),
+    paddingRight: theme('components.customSelect.pr') || theme('spacing.2'),
+    paddingLeft: theme('components.customSelect.pl') || theme('spacing.2'),
+    paddingTop: theme('components.customSelect.pt') || theme('spacing.2'),
+    paddingBottom: theme('components.customSelect.pb') || theme('spacing.2'),
+    height: theme('components.customSelect.height') || theme('spacing.10'),
   },
   '.custom-select-status-div': {
     display: 'flex',
     alignItems: 'center',
     position: 'relative',
     width: '100%',
-    borderRadius: theme('borderRadius.md'),
-    borderWidth: theme('borderWidth.DEFAULT'),
-    borderColor: theme('color.gray.300'),
-    backgroundColor: theme('colors.white'),
-    paddingRight: theme('spacing.2'),
-    paddingLeft: theme('spacing.2'),
-    paddingTop: theme('spacing.2'),
-    paddingBottom: theme('spacing.2'),
+
     textAlign: 'left',
     transitionProperty: theme('transitionProperty.all'),
     transitionTimingFunction: theme('transitionTimingFunction.DEFAULT'),
     transitionDuration: theme('transitionDuration.150'),
+    '@media (min-width: 640px)': {
+      fontSize: theme('fontSize.sm'),
+      lineHeight: theme('lineHeight.5'),
+    },
   },
 
   '.custom-select-status-loading': {
@@ -131,6 +135,10 @@ const CustomSelectBaseClasses = (theme) => ({
       // outline-none
       outline: '2px solid transparent',
       outlineOffset: '2px',
+    },
+    '@media (min-width: 640px)': {
+      fontSize: theme('fontSize.sm'),
+      lineHeight: theme('lineHeight.5'),
     },
   },
 

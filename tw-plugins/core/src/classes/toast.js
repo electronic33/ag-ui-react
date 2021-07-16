@@ -29,22 +29,27 @@ const ToastBaseClasses = (theme) => ({
   },
   '.toast': {
     display: 'flex',
-    padding: theme('spacing.4'),
+    paddingRight: theme('components.toast.pr') || theme('spacing.4'),
+    paddingLeft: theme('components.toast.pl') || theme('spacing.4'),
+    paddingTop: theme('components.toast.pt') || theme('spacing.4'),
+    paddingBottom: theme('components.toast.pb') || theme('spacing.4'),
+    maxWidth: theme('components.toast.maxWidth') || theme('spacing.96'),
+    fontSize: theme('components.toast.fontSize') || theme('fontSize.base'),
   },
   '.toast-no-intent': {
-    backgroundColor: theme('colors.gray.200'),
+    backgroundColor: theme('components.toast.noIntent.bg') || theme('colors.gray.200'),
   },
   '.toast-primary': {
-    backgroundColor: theme('colors.blue.100'),
+    backgroundColor: theme('components.toast.primary.bg') || theme('colors.blue.100'),
   },
   '.toast-success': {
-    backgroundColor: theme('colors.green.100'),
+    backgroundColor: theme('components.toast.success.bg') || theme('colors.green.100'),
   },
   '.toast-warning': {
-    backgroundColor: theme('colors.yellow.100'),
+    backgroundColor: theme('components.toast.warning.bg') || theme('colors.yellow.100'),
   },
   '.toast-danger': {
-    backgroundColor: theme('colors.red.100'),
+    backgroundColor: theme('components.toast.danger.bg') || theme('colors.red.100'),
   },
   '.toast-text-container': {
     display: 'flex',
@@ -58,19 +63,19 @@ const ToastBaseClasses = (theme) => ({
     fontWeight: theme('fontWeight.semibold'),
   },
   '.toast-header-no-intent': {
-    color: theme('colors.gray.700'),
+    color: theme('components.toast.noIntent.color') || theme('colors.gray.700'),
   },
   '.toast-header-primary': {
-    color: theme('colors.blue.600'),
+    color: theme('components.toast.primary.color') || theme('colors.blue.600'),
   },
   '.toast-header-success': {
-    color: theme('colors.green.600'),
+    color: theme('components.toast.success.color') || theme('colors.green.600'),
   },
   '.toast-header-warning': {
-    color: theme('colors.yellow.600'),
+    color: theme('components.toast.warning.color') || theme('colors.yellow.600'),
   },
   '.toast-header-danger': {
-    color: theme('colors.red.600'),
+    color: theme('components.toast.danger.color') || theme('colors.red.600'),
   },
   '.toast-top-left': {
     position: 'fixed',
