@@ -126,7 +126,7 @@
     "fork-ts-checker-webpack-plugin": "^6.2.12",
     "formik": "^2.2.9",
     "git-cz": "^4.7.6",
-    "husky": "4",
+    "husky": "7",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^27.0.5",
     "jest-transform-css": "^2.1.0",
