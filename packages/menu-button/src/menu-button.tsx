@@ -165,7 +165,7 @@ export const MenuButton = ({
               <button
                 type="button"
                 onClick={hideTip}
-                className="menu-button-button focus:ring-2 ring-blue-400"
+                className="menu-button-button"
                 aria-label="close"
               >
                 <svg

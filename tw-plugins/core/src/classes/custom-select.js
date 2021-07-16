@@ -1,3 +1,5 @@
+const { rgba } = require('polished');
+
 const CustomSelectBaseClasses = (theme) => ({
   '.custom-select-container': {
     position: 'relative',
@@ -8,6 +10,11 @@ const CustomSelectBaseClasses = (theme) => ({
     borderRadius: theme('borderRadius.md'),
     boxShadow: theme('boxShadow.sm'),
     position: 'relative',
+    '--tw-ring-color': rgba(theme('colors.blue.500'), Number(theme('ringOpacity.DEFAULT'))),
+    '&:focus': {
+      boxShadow:
+        'var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)',
+    },
   },
   '.custom-select-status-div': {
     display: 'flex',

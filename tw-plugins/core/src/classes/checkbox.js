@@ -1,3 +1,5 @@
+const { rgba } = require('polished');
+
 const CheckboxBaseClasses = (theme) => ({
   '.label-right-container': {
     display: 'flex',
@@ -54,6 +56,13 @@ const CheckboxBaseClasses = (theme) => ({
   '.checkbox-error': {
     color: theme('colors.red.600'),
     marginTop: theme('spacing.2'),
+  },
+  '.checkbox-focus': {
+    '--tw-ring-color': rgba(theme('colors.blue.500'), Number(theme('ringOpacity.DEFAULT'))),
+    '&:focus': {
+      boxShadow:
+        'var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)',
+    },
   },
 });
 

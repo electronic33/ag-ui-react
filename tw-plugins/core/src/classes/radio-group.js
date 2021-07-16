@@ -1,3 +1,5 @@
+const { rgba } = require('polished');
+
 const RadioGroupBaseClasses = (theme) => ({
   '.radio-group-unchecked-bg-default': {
     backgroundColor: theme('colors.gray.50'),
@@ -64,6 +66,13 @@ const RadioGroupBaseClasses = (theme) => ({
   '.radio-group-button-checked-xl': {
     width: theme('spacing.2'),
     height: theme('spacing.2'),
+  },
+  '.radio-group-focus': {
+    '--tw-ring-color': rgba(theme('colors.blue.300'), Number(theme('ringOpacity.DEFAULT'))),
+    '&:focus': {
+      boxShadow:
+        'var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)',
+    },
   },
 });
 

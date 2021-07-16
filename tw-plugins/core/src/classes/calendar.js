@@ -1,3 +1,5 @@
+const { rgba } = require('polished');
+
 const CalendarBaseClasses = (theme) => ({
   /// / RENDER HEADER ////
   '.calendar-header': {
@@ -13,6 +15,11 @@ const CalendarBaseClasses = (theme) => ({
     transitionProperty: theme('transitionProperty.all'),
     transitionTimingFunction: theme('transitionTimingFunction.DEFAULT'),
     transitionDuration: theme('transitionDuration.300'),
+    '--tw-ring-color': rgba(theme('colors.blue.400'), Number(theme('ringOpacity.DEFAULT'))),
+    '&:focus': {
+      boxShadow:
+        'var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)',
+    },
   },
 
   '.month-container': {
@@ -64,6 +71,11 @@ const CalendarBaseClasses = (theme) => ({
     transitionTimingFunction: theme('transitionTimingFunction.DEFAULT'),
     transitionDuration: theme('transitionDuration.300'),
     maxWidth: theme('maxWidth.full'),
+    '--tw-ring-color': rgba(theme('colors.blue.500'), Number(theme('ringOpacity.DEFAULT'))),
+    '&:focus': {
+      boxShadow:
+        'var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color)',
+    },
   },
   '.hovered-tile': {
     backgroundColor: theme('colors.gray.100'),
@@ -95,17 +107,6 @@ const CalendarBaseClasses = (theme) => ({
     backgroundColor: theme('colors.blue.500'),
   },
 
-  'focus-blue': {
-    '--tw-ring-offset-shadow':
-      'var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)',
-    '--tw-ring-shadow':
-      'var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)',
-    '--tw-ring-opacity': '1',
-    '--tw-ring-color': 'rgba(96, 165, 250, var(--tw-ring-opacity))',
-    boxShadow: theme('boxShadow.DEFAULT'),
-    // 'var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)',
-  },
-
   '.tile-characters-class': {
     display: 'flex',
     justifyContent: 'center',
@@ -124,6 +125,13 @@ const CalendarBaseClasses = (theme) => ({
     color: theme('colors.gray.600'),
     backgroundColor: theme('colors.white'),
     position: 'relative',
+    outline: '2px solid transparent',
+    outlineOffset: '2px',
+    '--tw-ring-color': rgba(theme('colors.blue.400'), Number(theme('ringOpacity.DEFAULT'))),
+    '&:focus': {
+      boxShadow:
+        'var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)',
+    },
   },
   '.calendar': {
     display: 'block',

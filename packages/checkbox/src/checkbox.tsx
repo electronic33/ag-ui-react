@@ -144,7 +144,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckBoxProps>(
               [unCheckedBgClassName]: !value,
               [checkedBgClassName]: value,
               [tickCheckedClassName]: value,
-              'ring-2 ring-blue-500': isFocused,
+              'checkbox-focus': isFocused,
             },
             checkboxClassNames,
           )}

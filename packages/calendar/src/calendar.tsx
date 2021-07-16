@@ -358,10 +358,7 @@ export const Calendar = ({
           onFocus={() => setIsFocusInHeader(true)}
           onBlur={() => setIsFocusInHeader(false)}
           type="button"
-          className={classNames(
-            'calendar-arrow-container focus:ring-2 ring-blue-400',
-            arrowsClassName,
-          )}
+          className={classNames('calendar-arrow-container', arrowsClassName)}
           onClick={goToPrevMonth}
         >
           {LeftArrowIcon ? <LeftArrowIcon /> : '>'}
@@ -375,10 +372,7 @@ export const Calendar = ({
           onFocus={() => setIsFocusInHeader(true)}
           onBlur={() => setIsFocusInHeader(false)}
           type="button"
-          className={classNames(
-            'calendar-arrow-container focus:ring-2 ring-blue-400',
-            arrowsClassName,
-          )}
+          className={classNames('calendar-arrow-container', arrowsClassName)}
           onClick={goToNextMonth}
         >
           {RightArrowIcon ? <RightArrowIcon /> : '>'}
@@ -453,7 +447,7 @@ export const Calendar = ({
             onMouseEnter={() => setHoveredDay(cloneDay)}
             // onMouseLeave={() => setHoveredDay(undefined)}
             className={classNames(
-              'tile-class focus:ring-4 ring-blue-400',
+              'tile-class',
               {
                 // [`${hoveredTileClassName} hovered-tile`]: isSameDay(
                 //   day,
@@ -519,7 +513,7 @@ export const Calendar = ({
     }
     return (
       <div
-        className="rows focus:ring-2 ring-blue-400 outline-none "
+        className="rows outline-none "
         onMouseLeave={() => setHoveredDay(undefined)}
         // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
         tabIndex={0}

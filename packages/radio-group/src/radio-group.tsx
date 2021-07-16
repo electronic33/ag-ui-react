@@ -119,7 +119,7 @@ const RadioButton = ({
             [`${unCheckedBgClassName} radio-group-button-unchecked`]: !isChecked,
             [`${checkedBgClassName} radio-group-button-checked`]: isChecked,
             [tickCheckedClassName]: isChecked,
-            'ring-2 ring-blue-300': isFocused,
+            'radio-group-focus': isFocused,
             'radio-group-button-sm': size === 'sm',
             'radio-group-button-md': size === 'md',
             'radio-group-button-lg': size === 'lg',

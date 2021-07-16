@@ -1,3 +1,5 @@
+const { rgba } = require('polished');
+
 const ButtonBaseClasses = (theme) => ({
   '.btn-sm': {
     display: 'flex',
@@ -117,6 +119,12 @@ const ButtonBaseClasses = (theme) => ({
     height: theme('spacing.11'),
     marginRight: theme('spacing.5'),
   },
+  '.btn-focus': {
+    '--tw-ring-color': rgba(theme('colors.blue.500'), Number(theme('ringOpacity.DEFAULT'))),
+    '&:focus': {
+      boxShadow:
+        'var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color)',
+    },
+  },
 });
-
 module.exports = ButtonBaseClasses;

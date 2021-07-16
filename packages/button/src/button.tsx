@@ -70,7 +70,7 @@ export const Button = React.forwardRef<HTMLButtonElement | null, ButtonProps>(
         {
           'btn-disabled': isDisabled || isLoading,
         },
-        'focus:ring-4 focus:ring-blue:500 focus:ring-opacity:50',
+        'btn-focus',
         className,
       )}
       {...ariaProps}

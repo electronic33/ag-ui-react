@@ -21,5 +21,8 @@
   },
   "peerDependencies": {
     "tailwindcss": ">=2.2.4"
+  },
+  "dependencies": {
+    "polished": "^4.1.3"
   }
 }

@@ -111,21 +111,15 @@ export function Select<T extends OptionValue>({
               return !prev;
             });
           }}
-          className={classNames(
-            'custom-select-classes focus:ring-2 focus:ring-blue-500 ',
-            selectClassName,
-          )}
+          className={classNames('custom-select-classes', selectClassName)}
         >
           <div
-            className={classNames(
-              'custom-select-status-div focus:outline-none focus:shadow-outline-blue sm:text-sm sm:leading-5',
-              {
-                'custom-select-status-loading': status === 'loading',
-                'custom-select-status-not-loading': status !== 'loading',
-                'custom-select-status-error': status === 'error',
-                'custom-select-status-no-error': status !== 'error',
-              },
-            )}
+            className={classNames('custom-select-status-div sm:text-sm sm:leading-5', {
+              'custom-select-status-loading': status === 'loading',
+              'custom-select-status-not-loading': status !== 'loading',
+              'custom-select-status-error': status === 'error',
+              'custom-select-status-no-error': status !== 'error',
+            })}
           >
             {status === 'loading' && (
               <>
