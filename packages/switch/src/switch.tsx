@@ -32,10 +32,10 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
       onBlur,
       containerClassName,
       isDisabled,
-      notActiveBackGroundColorClass = 'bg-gray-400',
-      activeBackGroundColorClass = 'bg-gray-200',
-      activeDotBackgroundColorClass = 'bg-gray-100',
-      notActiveDotBackgroundColorClass = 'bg-gray-100',
+      notActiveBackGroundColorClass = 'switch-not-active-bg-default',
+      activeBackGroundColorClass = 'switch-active-bg-default',
+      activeDotBackgroundColorClass = 'switch-dot-bg-default',
+      notActiveDotBackgroundColorClass = 'switch-dot-bg-default',
       name,
       field,
       form,
@@ -58,23 +58,20 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
     });
 
     return (
-      <div className="flex flex-col">
+      <div className="switch-container">
         {label && <Label>{label}</Label>}
         <button
           type="button"
           className={classNames(
-            ' flex items-center relative align-middle cursor-pointer select-none w-8 h-3',
+            ' switch-button',
             {
-              'opacity-70 cursor-not-allowed ': isDisabled,
+              'switch-button-disabled ': isDisabled,
             },
             containerClassName,
           )}
           disabled={isDisabled}
           onClick={() => {
-            if (
-              formikCompatibleValue !== undefined &&
-              formikCompatibleOnChange
-            ) {
+            if (formikCompatibleValue !== undefined && formikCompatibleOnChange) {
               formikCompatibleOnChange(!formikCompatibleValue);
             }
           }}
@@ -91,31 +88,31 @@ export const Switch = forwardRef<HTMLInputElement, SwitchProps>(
           />
           <span
             className={classNames(
-              'absolute inset-0 rounded-xl',
+              'switch-box',
               {
-                [`${notActiveBackGroundColorClass} transition-colors`]: !formikCompatibleValue,
+                [`${notActiveBackGroundColorClass} switch-color-transition`]:
+                  !formikCompatibleValue,
               },
               {
-                [`${activeBackGroundColorClass} transition-colors`]: formikCompatibleValue,
+                [`${activeBackGroundColorClass} switch-color-transition`]: formikCompatibleValue,
               },
             )}
           />
 
           <span
             className={classNames(
-              'absolute rounded-full w-5 h-5 transition-all duration-100 ease-linear',
+              'switch-dot',
               {
-                [`left-4 -top-1 -bottom-1 right-4 transition-all ${activeDotBackgroundColorClass}`]: formikCompatibleValue,
+                [`switch-active-dot ${activeDotBackgroundColorClass}`]: formikCompatibleValue,
               },
               {
-                [`left-0 -top-1 -bottom-1 right-0 transition-all  ${notActiveDotBackgroundColorClass}`]: !formikCompatibleValue,
+                [`switch-not-active-dot  ${notActiveDotBackgroundColorClass}`]:
+                  !formikCompatibleValue,
               },
             )}
           />
         </button>
-        {formikCompatibleError && (
-          <span className="text-red-600 mt-2">{formikCompatibleError}</span>
-        )}
+        {formikCompatibleError && <span className="switch-error">{formikCompatibleError}</span>}
       </div>
     );
   },

@@ -11,7 +11,7 @@ const CalendarBaseClasses = (theme) => ({
     padding: theme('spacing.1'),
     margin: theme('spacing.2'),
     transitionProperty: theme('transitionProperty.all'),
-    transitionTimingFunction: theme('transitionTimingFunction.in-out'),
+    transitionTimingFunction: theme('transitionTimingFunction.DEFAULT'),
     transitionDuration: theme('transitionDuration.300'),
   },
 

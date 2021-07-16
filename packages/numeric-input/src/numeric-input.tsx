@@ -90,7 +90,7 @@ export const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(
     });
 
     return (
-      <div className={classNames('flex flex-col relative', containerClassName)}>
+      <div className={classNames('numeric-input-container', containerClassName)}>
         {label && (
           <Label
             className={labelClassName}
@@ -99,17 +99,14 @@ export const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(
             errorText={withErrorInLabel ? formikCompatibleError : undefined}
             htmlFor={formikCompatibleName}
           >
-            {Icon ? <Icon className="w-5 mr-2" /> : null}
+            {Icon ? <Icon className="numeric-input-label" /> : null}
             {label}
           </Label>
         )}
         <div
-          className={classNames(
-            'flex justify-between h-10 rounded-md shadow transition-all hover:shadow-md ',
-            {
-              'shadow-md': isFocused,
-            },
-          )}
+          className={classNames('numeric-input-main-div', {
+            'numeric-input-main-div': isFocused,
+          })}
         >
           <input
             onFocus={(event) => {
@@ -126,10 +123,10 @@ export const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(
             placeholder={placeholder}
             type="number"
             className={classNames(
-              'no-arrows-numeric-input w-full outline-none ml-2',
+              'no-arrows-numeric-input numeric-input-input',
               {
-                'border-red-700': Boolean(formikCompatibleError),
-                'bg-gray-200 cursor-not-allowed': isDisabled,
+                'numeric-input-input-formik-error': Boolean(formikCompatibleError),
+                'numeric-input-input-disabled': isDisabled,
               },
               inputClassName,
             )}
@@ -192,11 +189,11 @@ export const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(
             max={max}
             disabled={isDisabled}
           />
-          <div className="flex flex-col items-center justify-center w-8 ">
+          <div className="numeric-input-div">
             <button
               tabIndex={-1}
               type="button"
-              className="h-full bg-gray-100 w-full border border-gray-300 rounded-tr-md active:bg-gray-300 transition-all duration-75 active:shadow-inner"
+              className="numeric-input-div-button"
               onClick={() =>
                 formikCompatibleOnChange({
                   // @ts-ignore
@@ -205,7 +202,7 @@ export const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(
               }
             >
               <svg
-                className="flex-shrink-0 w-full"
+                className="numeric-input-div-button-svg"
                 stroke="currentColor"
                 fill="currentColor"
                 strokeWidth="0"
@@ -220,7 +217,7 @@ export const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(
             <button
               tabIndex={-1}
               type="button"
-              className="h-full w-full bg-gray-100 border border-gray-300 rounded-br-md active:bg-gray-300 transition-all duration-75 active:shadow-inner"
+              className="numeric-input-div-button-2"
               onClick={() =>
                 formikCompatibleOnChange({
                   // @ts-ignore
@@ -229,7 +226,7 @@ export const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(
               }
             >
               <svg
-                className="flex-shrink-0 w-full"
+                className="numeric-input-div-button-svg"
                 stroke="currentColor"
                 fill="currentColor"
                 strokeWidth="0"
@@ -246,7 +243,7 @@ export const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(
             <Button
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
-              className="flex-shrink-0 hover:bg-blue-600 rounded-l-none active:shadow-inner outline-none"
+              className=" numeric-input-with-button"
               onClick={onButtonClick}
             >
               {buttonText}
@@ -254,14 +251,12 @@ export const NumericInput = forwardRef<HTMLInputElement, NumericInputProps>(
           )}
         </div>
         {withMax && (
-          <p className="flex absolute right-0 bottom-0 text-gray-400 -mb-4 text-xs">
+          <p className="numeric-input-with-max">
             {`${String(formikCompatibleValue).length}/${max}`}
           </p>
         )}
         {!withErrorInLabel && formikCompatibleError && (
-          <p className="flex absolute inset-x-0 bottom-0 text-red-700 -mb-4 text-xs">
-            {formikCompatibleError}
-          </p>
+          <p className="numeric-input-with-error-in-label">{formikCompatibleError}</p>
         )}
       </div>
     );

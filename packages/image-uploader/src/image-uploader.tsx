@@ -44,11 +44,7 @@ const getCroppedImg = async (
     ctx.translate(-safeArea / 2, -safeArea / 2);
 
     // draw rotated image and store data.
-    ctx.drawImage(
-      image,
-      safeArea / 2 - image.width * 0.5,
-      safeArea / 2 - image.height * 0.5,
-    );
+    ctx.drawImage(image, safeArea / 2 - image.width * 0.5, safeArea / 2 - image.height * 0.5);
     const data = ctx.getImageData(0, 0, safeArea, safeArea);
 
     // set canvas width to final desired crop size - this will clear existing context
@@ -79,10 +75,7 @@ export async function getRotatedImage(imageSrc: string, rotation = 0) {
   const ctx = canvas.getContext('2d');
 
   const orientationChanged =
-    rotation === 90 ||
-    rotation === -90 ||
-    rotation === 270 ||
-    rotation === -270;
+    rotation === 90 || rotation === -90 || rotation === 270 || rotation === -270;
   if (orientationChanged) {
     canvas.width = image.height;
     canvas.height = image.width;
@@ -106,11 +99,7 @@ export async function getRotatedImage(imageSrc: string, rotation = 0) {
 const readFile = (file: File) =>
   new Promise<string>((resolve) => {
     const reader = new FileReader();
-    reader.addEventListener(
-      'load',
-      () => resolve(reader.result as string),
-      false,
-    );
+    reader.addEventListener('load', () => resolve(reader.result as string), false);
     reader.readAsDataURL(file);
   });
 
@@ -136,9 +125,7 @@ export const ImageUploader = ({
   const [imageSources, setImageSources] = useState<string[]>([]);
   const [cropPositions, setCropPositions] = useState<Point[]>([]);
 
-  const [croppedAreaPixelsArray, setCroppedAreaPixelsArray] = useState<Area[]>(
-    [],
-  );
+  const [croppedAreaPixelsArray, setCroppedAreaPixelsArray] = useState<Area[]>([]);
   const [zoom, setZoom] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -175,9 +162,7 @@ export const ImageUploader = ({
         newFiles.push(files[i]);
       }
 
-      const readyFiles = await Promise.all(
-        readFilePromiseFns.map((promiseFn) => promiseFn()),
-      );
+      const readyFiles = await Promise.all(readFilePromiseFns.map((promiseFn) => promiseFn()));
 
       setAcceptedFiles(newFiles);
       setImageSources(readyFiles);
@@ -202,9 +187,7 @@ export const ImageUploader = ({
         newFiles.push(acceptedFile);
       });
 
-      const readyFiles = await Promise.all(
-        readFilePromiseFns.map((promiseFn) => promiseFn()),
-      );
+      const readyFiles = await Promise.all(readFilePromiseFns.map((promiseFn) => promiseFn()));
 
       setAcceptedFiles(newFiles);
       setImageSources(readyFiles);
@@ -222,16 +205,10 @@ export const ImageUploader = ({
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
   return (
-    <div className="flex flex-col items-center justify-center mb-10 bg-white p-2 640:p-10 rounded shadow-xl">
-      {error && (
-        <p className="text-center text-lg font-semibold mb-4 text-red-600">
-          {error}
-        </p>
-      )}
-      <h1 className="flex uppercase font-bold text-lg text-gray-400 mb-10">
-        Add new images
-      </h1>
-      <div {...getRootProps({ className: 'dropzone mb-5 outline-none' })}>
+    <div className="image-uploader-container 640:p-10">
+      {error && <p className="image-uploader-error">{error}</p>}
+      <h1 className="image-uploader-add-new-images">Add new images</h1>
+      <div {...getRootProps({ className: 'dropzone image-uploader-box-main-container' })}>
         <input
           {...getInputProps()}
           onChange={onFileChange}
@@ -239,14 +216,13 @@ export const ImageUploader = ({
           accept="image/*"
         />
         {isDragActive ? (
-          <div className="flex flex-col items-center border-2 border-dashed border-gray-200 h-50 w-64 640:w-96 rounded">
-            <div className="flex justify-center items-center p-4 h-20 w-full text-base font-semibold text-gray-500 text-center bg-blue-100">
+          <div className="image-uploader-box-drag-container 640:w-96">
+            <div className="image-uploader-box-drag-text-container">
               <p>Drag the files here...</p>
             </div>
             <svg
-              className={classNames('my-auto text-8xl', {
-                'transition-all duration-200 hover:scale-200':
-                  isDragActive === true,
+              className={classNames('image-uploader-box-drag-svg', {
+                'image-uploader-box-drag-svg-drag-active': isDragActive === true,
               })}
               stroke="currentColor"
               fill="currentColor"
@@ -273,12 +249,12 @@ export const ImageUploader = ({
             </svg>
           </div>
         ) : (
-          <div className="flex flex-col items-center border-2 overflow-hidden border-dashed border-gray-200 h-50 w-64 640:w-96 rounded-lg shadow">
-            <div className="flex justify-center items-center p-4 h-20 w-full text-base font-semibold text-gray-50 text-center bg-blue-500">
+          <div className="image-uploader-box-container 640:w-96">
+            <div className="image-uploader-box-text-container">
               <p>Drag and drop files here or click to upload</p>
             </div>
             <svg
-              className="text-7xl my-auto"
+              className="image-uploader-box-svg"
               stroke="currentColor"
               fill="currentColor"
               strokeWidth="0"
@@ -307,37 +283,40 @@ export const ImageUploader = ({
       </div>
       {imageSources ? (
         <>
-          <div className="mb-3 flex flex-col items-center h-full ">
+          <div className="image-uploader-image-sources-container">
             {!withCrop ? (
               <Modal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
-                modalClassName="flex flex-col items-center justify-center h-full"
+                modalClassName="image-uploader-image-sources-modal"
               >
                 {isMultiple ? (
                   <SliderWithModal
                     startAtIndex={0}
                     itemsToShow={1}
                     itemsToScroll={1}
-                    containerClassName="w-screen m-auto h-full"
+                    containerClassName="image-uploader-image-sources-modal-multiple-slider-container"
                   >
                     {imageSources.map((image, index) => (
-                      // eslint-disable-next-line react/no-array-index-key
-                      <div className="w-full h-full" key={index}>
-                        <div className="flex flex-col justify-center items-center h-full">
+                      <div
+                        className="image-uploader-image-sources-modal-slider-generate-image-container"
+                        // eslint-disable-next-line react/no-array-index-key
+                        key={index}
+                      >
+                        <div className="image-uploader-image-sources-modal-slider-generate-image-container-2">
                           {acceptedFiles && acceptedFiles[index] && (
-                            <div className="flex flex-col items-center w-max py-2 bg-blue-100 text-gray-500 text-sm rounded-lg px-4 mb-10">
+                            <div className="image-uploader-image-sources-modale-slider-generate-image-accepted-files">
                               <h4>Feltöltött File:</h4>
                               <p key={acceptedFiles[index].name}>
-                                {acceptedFiles[index].name} -{' '}
-                                {acceptedFiles[index].size} bytes
+                                {acceptedFiles[index].name} - {acceptedFiles[index].size} bytes
                               </p>
                             </div>
                           )}
-                          <div className="relative w-72 h-48 640:w-96 640:h-4/6">
+                          <div className="image-uploader-image-sources-modal-slider-generate-image-cropper-container 640:w-96 640:h-4/6">
                             <Cropper
                               classes={{
-                                mediaClassName: 'bg-gray-900',
+                                mediaClassName:
+                                  'image-uploader-image-sources-modal-slider-generate-image-cropper',
                               }}
                               image={image}
                               crop={cropPositions[index] || initialCropPosition}
@@ -347,9 +326,7 @@ export const ImageUploader = ({
                               onCropChange={(newCropPosition) =>
                                 !withCrop &&
                                 setCropPositions((prevCropPositions) => {
-                                  const newCropPositions = [
-                                    ...prevCropPositions,
-                                  ];
+                                  const newCropPositions = [...prevCropPositions];
 
                                   newCropPositions[index] = newCropPosition;
 
@@ -357,31 +334,25 @@ export const ImageUploader = ({
                                 })
                               }
                               onCropComplete={(_, croppedAreaPixels) =>
-                                setCroppedAreaPixelsArray(
-                                  (prevCroppedAreaPixelsArray) => {
-                                    const newCroppedAreaPixelsArray = [
-                                      ...prevCroppedAreaPixelsArray,
-                                    ];
+                                setCroppedAreaPixelsArray((prevCroppedAreaPixelsArray) => {
+                                  const newCroppedAreaPixelsArray = [...prevCroppedAreaPixelsArray];
 
-                                    newCroppedAreaPixelsArray[
-                                      index
-                                    ] = croppedAreaPixels;
+                                  newCroppedAreaPixelsArray[index] = croppedAreaPixels;
 
-                                    return newCroppedAreaPixelsArray;
-                                  },
-                                )
+                                  return newCroppedAreaPixelsArray;
+                                })
                               }
                             />
                           </div>
-                          <div className="flex justify-center mb-2 mt-2">
+                          <div className="image-uploader-image-sources-modal-slider-generate-image-button-container">
                             <Button
-                              className="mt-2"
+                              className="image-uploader-image-sources-modal-slider-generate-image-button"
                               onClick={() => {
                                 showCroppedImage(index);
                               }}
                             >
                               <svg
-                                className="mr-2"
+                                className="image-uploader-image-sources-modal-slider-generate-image-button-svg"
                                 stroke="currentColor"
                                 fill="currentColor"
                                 strokeWidth="0"
@@ -401,22 +372,25 @@ export const ImageUploader = ({
                   </SliderWithModal>
                 ) : (
                   imageSources.map((image, index) => (
-                    // eslint-disable-next-line react/no-array-index-key
-                    <div className="w-full h-full" key={index}>
-                      <div className="flex flex-col justify-center items-center h-full">
+                    <div
+                      className="image-uploader-image-sources-modal-slider-generate-image-container"
+                      // eslint-disable-next-line react/no-array-index-key
+                      key={index}
+                    >
+                      <div className="image-uploader-image-sources-modal-slider-generate-image-container-2">
                         {acceptedFiles && acceptedFiles[index] && (
-                          <div className="flex flex-col items-center w-max py-2 bg-blue-100 text-gray-500 text-sm rounded-lg px-4 mb-10">
+                          <div className="image-uploader-image-sources-modal-slider-generate-image-accepted-files">
                             <h4>Feltöltött File:</h4>
                             <p key={acceptedFiles[index].name}>
-                              {acceptedFiles[index].name} -{' '}
-                              {acceptedFiles[index].size} bytes
+                              {acceptedFiles[index].name} - {acceptedFiles[index].size} bytes
                             </p>
                           </div>
                         )}
-                        <div className="relative w-72 h-48 640:w-96 640:h-4/6">
+                        <div className="image-uploader-image-sources-modal-multiple-slider-generate-image-cropper-container 640:w-96 640:h-4/6">
                           <Cropper
                             classes={{
-                              mediaClassName: 'bg-gray-900',
+                              mediaClassName:
+                                'image-uploader-image-sources-modal-slider-generate-image-cropper',
                             }}
                             image={image}
                             crop={cropPositions[index] || initialCropPosition}
@@ -434,31 +408,25 @@ export const ImageUploader = ({
                               })
                             }
                             onCropComplete={(_, croppedAreaPixels) =>
-                              setCroppedAreaPixelsArray(
-                                (prevCroppedAreaPixelsArray) => {
-                                  const newCroppedAreaPixelsArray = [
-                                    ...prevCroppedAreaPixelsArray,
-                                  ];
+                              setCroppedAreaPixelsArray((prevCroppedAreaPixelsArray) => {
+                                const newCroppedAreaPixelsArray = [...prevCroppedAreaPixelsArray];
 
-                                  newCroppedAreaPixelsArray[
-                                    index
-                                  ] = croppedAreaPixels;
+                                newCroppedAreaPixelsArray[index] = croppedAreaPixels;
 
-                                  return newCroppedAreaPixelsArray;
-                                },
-                              )
+                                return newCroppedAreaPixelsArray;
+                              })
                             }
                           />
                         </div>
-                        <div className="flex justify-center mb-2 mt-2">
+                        <div className="image-uploader-image-sources-modal-slider-generate-image-button-container">
                           <Button
-                            className="mt-2"
+                            className="image-uploader-image-sources-modal-slider-generate-image-button"
                             onClick={() => {
                               showCroppedImage(index);
                             }}
                           >
                             <svg
-                              className="mr-2"
+                              className="image-uploader-image-sources-modal-slider-generate-image-button-svg"
                               stroke="currentColor"
                               fill="currentColor"
                               strokeWidth="0"
@@ -481,21 +449,19 @@ export const ImageUploader = ({
           </div>
           {images && images[0] && (
             <>
-              <div className="flex flex-col justify-center items-center">
-                <p className="text-xl text-gray-500 rounded-t-3xl shadow font-semibold bg-blue-100 px-8 py-1">
-                  Preview
-                </p>
+              <div className="image-uploader-image-display-text-container">
+                <p className="image-uploader-image-display-text">Preview</p>
               </div>
               {isMultiple ? (
                 <SliderWithModal
                   startAtIndex={0}
                   itemsToShow={1}
                   itemsToScroll={1}
-                  containerClassName="w-2/6 "
+                  containerClassName="image-uploader-image-display-slider-with-modal"
                 >
                   {images.map((image, index) => (
                     // eslint-disable-next-line react/no-array-index-key
-                    <div key={index} className={classNames('')}>
+                    <div key={index}>
                       <img
                         alt={`cropped-preview-${index}`}
                         className="object-contain"
@@ -508,7 +474,7 @@ export const ImageUploader = ({
               ) : (
                 images.map((image, index) => (
                   // eslint-disable-next-line react/no-array-index-key
-                  <div key={index} className={classNames('')}>
+                  <div key={index}>
                     <img
                       alt={`cropped-preview-${index}`}
                       className="object-contain"

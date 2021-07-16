@@ -1,5 +1,5 @@
 const ModalBaseClasses = (theme) => ({
-  '.overlay': {
+  '.modal-overlay': {
     position: 'fixed',
     zIndex: '40',
     display: 'flex',
@@ -19,6 +19,14 @@ const ModalBaseClasses = (theme) => ({
     backgroundColor: theme('colors.gray.50'),
     borderRadius: theme('borderRadius.lg'),
     padding: theme('spacing.6'),
+  },
+  '.modal-button': {
+    position: 'fixed',
+    top: theme('spacing.4'),
+    right: theme('spacing.4'),
+    zIndex: 50,
+    fontSize: theme('fontSize.5xl'),
+    color: theme('spacing.gray.50'),
   },
 });
 

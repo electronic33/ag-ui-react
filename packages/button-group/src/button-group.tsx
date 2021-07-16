@@ -9,13 +9,7 @@ type ButtonGroupTypes = {
   variant?: string;
 };
 
-export const ButtonGroup = ({
-  className,
-  children,
-  vertical,
-  color,
-  variant,
-}: ButtonGroupTypes) =>
+export const ButtonGroup = ({ className, children, vertical, color, variant }: ButtonGroupTypes) =>
   children && (
     <div
       className={classNames(
@@ -40,11 +34,8 @@ export const ButtonGroup = ({
                 variant === 'outline',
               [`rounded-none border-r border-${color}-500 shadow-none bg-transparent hover:bg-gray-100 text-${color}-500`]:
                 variant === 'no-border',
-              [`${
-                !vertical
-                  ? 'rounded-l-md rounded-r-none'
-                  : 'rounded-t-md rounded-b-none'
-              }`]: index === 0,
+              [`${!vertical ? 'rounded-l-md rounded-r-none' : 'rounded-t-md rounded-b-none'}`]:
+                index === 0,
               [`
 ${!vertical ? 'rounded-r-md rounded-l-none' : 'rounded-b-md rounded-t-none'} ${
                 variant !== 'outline' && 'border-none'

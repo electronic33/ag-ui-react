@@ -37,14 +37,9 @@ export const MenuButton = ({
 
   const [id] = useId();
 
-  const [
-    referenceElement,
-    setReferenceElement,
-  ] = useState<HTMLDivElement | null>(null);
+  const [referenceElement, setReferenceElement] = useState<HTMLDivElement | null>(null);
 
-  const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(
-    null,
-  );
+  const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
 
   const showTip = () => {
     timeout = setTimeout(() => {
@@ -144,16 +139,12 @@ export const MenuButton = ({
         {childrenWithProps}
       </div>
       {active && (
-        <FocusLock
-          initialFocusRef={initialFocusRef}
-          isDisabled={!active}
-          restoreFocus
-        >
+        <FocusLock initialFocusRef={initialFocusRef} isDisabled={!active} restoreFocus>
           <div
             ref={setPopperElement}
             style={styles.popper}
             {...attributes.popper}
-            className="bg-white border border-gray-200 rounded z-20 focus:border-transparent popper-arrow-conainer"
+            className="menu-button-popper-container popper-arrow-conainer"
             data-popper-placement={direction}
             role="dialog"
             aria-hidden={active}
@@ -163,17 +154,10 @@ export const MenuButton = ({
             // tabIndex={0}
           >
             <div
-              className={classNames(
-                'tooltip-content relative',
-                {},
-                contentClassNames,
-              )}
+              className={classNames('tooltip-content menu-button-content', {}, contentClassNames)}
             >
               {headerText && (
-                <div
-                  className="text-gray-700 font-semibold text-lg pb-2 border-b border-gray-200 w-full mr-10"
-                  id={`popover-header-${id}`}
-                >
+                <div className="menu-button-header-text" id={`popover-header-${id}`}>
                   {headerText}
                 </div>
               )}
@@ -181,11 +165,11 @@ export const MenuButton = ({
               <button
                 type="button"
                 onClick={hideTip}
-                className="absolute flex-shrink-0 top-1 right-2 text-lg text-gray-400 z-10 focus:ring-2 ring-blue-400"
+                className="menu-button-button focus:ring-2 ring-blue-400"
                 aria-label="close"
               >
                 <svg
-                  className="flex-shrink-0"
+                  className="menu-button-svg"
                   stroke="currentColor"
                   fill="currentColor"
                   strokeWidth="0"

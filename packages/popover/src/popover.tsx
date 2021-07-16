@@ -59,14 +59,9 @@ export const Popover = ({
 
   const [id] = useId();
 
-  const [
-    referenceElement,
-    setReferenceElement,
-  ] = useState<HTMLDivElement | null>(null);
+  const [referenceElement, setReferenceElement] = useState<HTMLDivElement | null>(null);
 
-  const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(
-    null,
-  );
+  const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
 
   const showTip = () => {
     timeout = setTimeout(() => {
@@ -179,16 +174,12 @@ export const Popover = ({
         {childrenWithProps}
       </div>
       {active && trigger === 'click' && (
-        <FocusLock
-          initialFocusRef={initialFocusRef}
-          isDisabled={!active}
-          restoreFocus
-        >
+        <FocusLock initialFocusRef={initialFocusRef} isDisabled={!active} restoreFocus>
           <div
             ref={setPopperElement}
             style={styles.popper}
             {...attributes.popper}
-            className="bg-white border border-gray-200 rounded z-20 focus:border-transparent popper-arrow-conainer"
+            className="popover-click-container popper-arrow-conainer"
             data-popper-placement={direction}
             role="dialog"
             aria-hidden={active}
@@ -197,18 +188,9 @@ export const Popover = ({
             id={`popover-content-${id}`}
             {...tabbable}
           >
-            <div
-              className={classNames(
-                'popover-content relative',
-                {},
-                contentClassNames,
-              )}
-            >
+            <div className={classNames('popover-content relative', {}, contentClassNames)}>
               {headerText && (
-                <div
-                  className="text-gray-700 font-semibold text-lg pb-2 border-b border-gray-200 w-full mr-10"
-                  id={`popover-header-${id}`}
-                >
+                <div className="popover-header-text" id={`popover-header-${id}`}>
                   {headerText}
                 </div>
               )}
@@ -217,7 +199,7 @@ export const Popover = ({
                 <button
                   type="button"
                   onClick={hideTip}
-                  className="absolute flex-shrink-0 top-1 right-2 text-lg text-gray-400 z-10"
+                  className="popover-close-button"
                   aria-label="close"
                 >
                   <svg
@@ -238,10 +220,7 @@ export const Popover = ({
             </div>
             {withArrow && (
               <div
-                className={classNames(
-                  'arrow-base bg-red-400 border border-gray-200 ',
-                  arrowClasses,
-                )}
+                className={classNames('arrow-base popover-with-arrow', arrowClasses)}
                 style={styles.arrow}
                 data-popper-arrow
                 id="arrow"
@@ -259,7 +238,7 @@ export const Popover = ({
             hideTip();
           }}
           {...attributes.popper}
-          className="bg-white border border-gray-200 rounded z-20"
+          className="popover-hover-container"
           data-popper-placement={direction}
           role="tooltip"
           aria-hidden={active}
@@ -268,29 +247,20 @@ export const Popover = ({
           id={`popover-content-${id}`}
           // tabIndex={0}
         >
-          <div
-            className={classNames(
-              'popover-content relative',
-              {},
-              contentClassNames,
-            )}
-          >
+          <div className={classNames('popover-content relative', {}, contentClassNames)}>
             {headerText && (
-              <div
-                className="text-gray-700 font-semibold text-lg pb-2 border-b border-gray-200 w-full mr-10"
-                id={`popover-header-${id}`}
-              >
+              <div className="popover-header-text" id={`popover-header-${id}`}>
                 {headerText}
               </div>
             )}
             <button
               type="button"
               onClick={hideTip}
-              className="absolute flex-shrink-0 top-1 right-2 text-lg text-gray-400 z-10"
+              className="popover-close-button"
               aria-label="close"
             >
               <svg
-                className="flex-shrink-0"
+                className="popover-hover-icon"
                 stroke="currentColor"
                 fill="currentColor"
                 strokeWidth="0"
@@ -305,10 +275,7 @@ export const Popover = ({
             <div id={`popover-body-${id}`}>{content}</div>
           </div>
           <div
-            className={classNames(
-              'arrow-base bg-white border border-gray-200',
-              arrowClasses,
-            )}
+            className={classNames('arrow-base popover-with-arrow', arrowClasses)}
             style={styles.arrow}
             data-popper-arrow
             id="arrow"

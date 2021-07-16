@@ -46,10 +46,14 @@ const CheckboxBaseClasses = (theme) => ({
     height: theme('checkbox.size') || theme('spacing.4'),
     width: theme('checkbox.size') || theme('spacing.4'),
     transitionProperty: theme('transitionProperty.colors'),
-    transitionTimingFunction: theme('transitionTimingFunction.in-out'),
+    transitionTimingFunction: theme('transitionTimingFunction.DEFAULT'),
     transitionDuration: theme('transitionDuration.150'),
     border: `2px solid ${theme('checkbox.borderColor') || theme('colors.gray.500')}`,
     borderRadius: theme('checkbox.borderRadius') || theme('borderRadius.DEFAULT'),
+  },
+  '.checkbox-error': {
+    color: theme('colors.red.600'),
+    marginTop: theme('spacing.2'),
   },
 });
 

@@ -7,5 +7,5 @@ type TbodyTypes = {
 };
 
 export const Tbody = ({ children, className }: TbodyTypes) => (
-  <tbody className={classNames('bg-white divide-y divide-gray-200', className)}>{children}</tbody>
+  <tbody className={classNames('table-tbody', className)}>{children}</tbody>
 );

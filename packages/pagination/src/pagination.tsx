@@ -89,7 +89,7 @@ export const Pagination = ({
 
   return (
     <form
-      className="flex flex-col items-center justify-center space-y-10"
+      className="pagination-contaier"
       onSubmit={(event) => {
         event.preventDefault();
         setItemsPerPage(itemsNumber);
@@ -100,7 +100,7 @@ export const Pagination = ({
         }
       }}
     >
-      <div className="flex">
+      <div className="pagination-contaier-div">
         <button
           type="button"
           onClick={() => {
@@ -108,25 +108,25 @@ export const Pagination = ({
               setCurrentPage(currentPage - 1);
             }
           }}
-          className={classNames('pagination', {
-            'cursor-default bg-gray-100': currentPage === 1,
+          className={classNames('pagination-buttons', {
+            'pagination-contaier-prev-next-buttons-disabled': currentPage === 1,
           })}
         >
           Previous Page
         </button>
-        <div className="flex">
-          <div className="flex">
+        <div className="pagination-contaier-div">
+          <div className="pagination-contaier-div">
             {firstSection.map((firstSectionItem) => (
               <button
                 type="button"
                 key={firstSectionItem}
                 className={classNames(
-                  'pagination',
+                  'pagination-buttons',
                   {
-                    'bg-blue-400 text-white': firstSectionItem === currentPage,
+                    'pagination-active-button': firstSectionItem === currentPage,
                   },
                   {
-                    'text-blue-400': firstSectionItem !== currentPage,
+                    'pagination-not-active-button': firstSectionItem !== currentPage,
                   },
                 )}
                 onClick={() => setCurrentPage(firstSectionItem)}
@@ -137,7 +137,7 @@ export const Pagination = ({
             <div className="flex">
               {middleSection.length &&
               middleSection[0] !== firstSection[firstSection.length - 1] + 1 ? (
-                <p className="text-xl self-end mx-2">...</p>
+                <p className="pagination-dots">...</p>
               ) : (
                 ''
               )}
@@ -146,12 +146,12 @@ export const Pagination = ({
                   type="button"
                   key={middleSectionItem}
                   className={classNames(
-                    'pagination',
+                    'pagination-buttons',
                     {
-                      'bg-blue-400 text-white': middleSectionItem === currentPage,
+                      'pagination-active-button': middleSectionItem === currentPage,
                     },
                     {
-                      'text-blue-400': middleSectionItem !== currentPage,
+                      'pagination-not-active-button': middleSectionItem !== currentPage,
                     },
                   )}
                   onClick={() => setCurrentPage(middleSectionItem)}
@@ -162,7 +162,7 @@ export const Pagination = ({
               {lastSection[0] !== firstSection[firstSection.length - 1] + 1 &&
               lastSection[0] &&
               lastSection[0] !== middleSection[middleSection.length - 1] + 1 ? (
-                <p className="text-xl self-end mx-2">...</p>
+                <p className="pagination-dots">...</p>
               ) : (
                 ''
               )}
@@ -172,12 +172,12 @@ export const Pagination = ({
                 type="button"
                 key={lastSectionItem}
                 className={classNames(
-                  'pagination',
+                  'pagination-buttons',
                   {
-                    'bg-blue-400 text-white': lastSectionItem === currentPage,
+                    'pagination-active-button': lastSectionItem === currentPage,
                   },
                   {
-                    'text-blue-400': lastSectionItem !== currentPage,
+                    'pagination-not-active-button': lastSectionItem !== currentPage,
                   },
                 )}
                 onClick={() => setCurrentPage(lastSectionItem)}
@@ -194,8 +194,8 @@ export const Pagination = ({
               setCurrentPage(currentPage + 1);
             }
           }}
-          className={classNames('pagination', {
-            'cursor-default bg-gray-100': currentPage === numberOfPages,
+          className={classNames('pagination-buttons', {
+            'pagination-contaier-prev-next-buttons-disabled': currentPage === numberOfPages,
           })}
         >
           Next Page
@@ -209,14 +209,14 @@ export const Pagination = ({
             setGoToPageValue(Number(event.target.value));
           }}
           value={goToPageValue}
-          containerClassName="bg-gray-100 shadow rounded px-2 py-1"
+          containerClassName="pagination-initial-go-to-input"
         />
       ) : null}
 
       {selectOptions ? (
         <Select
           label="Items per page:"
-          containerClassName="max-w-16 w-64 mb-5 my-4 mr-2"
+          containerClassName="pagination-items-per-page-select"
           onChange={(selectedItemsNumber) => setItemsNumber(selectedItemsNumber)}
           value={itemsNumber}
           options={selectOptions}
@@ -224,8 +224,8 @@ export const Pagination = ({
       ) : null}
       {initialGotoPageValue || selectOptions ? (
         <Button
-          className={classNames('font-medium cursor-pointer bg-gray-500', {
-            'cursor-default bg-opacity-70 hover:bg-opacity-75':
+          className={classNames('pagination-action-button', {
+            'pagination-action-button-invalid-input bg-opacity-70 hover:bg-opacity-75':
               goToPageValue <= 0 || goToPageValue > numberOfPages,
           })}
         >

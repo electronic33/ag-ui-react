@@ -8,11 +8,11 @@ type MarkDownProps = {
 };
 
 export const Markdown = ({ value, onChange }: MarkDownProps) => (
-  <div className="flex">
-    <div className="w-1/2 bg-gray-400 p-10">
-      <TextArea className="w-full" value={value} onChange={onChange} />
+  <div className="markdown-container">
+    <div className="markdown-textarea-container">
+      <TextArea className="markdown-textarea-container" value={value} onChange={onChange} />
     </div>
-    <div className="markdown w-1/2 bg-gray-100 p-10 ">
+    <div className="markdown">
       <ReactMarkdown source={value} />
     </div>
   </div>

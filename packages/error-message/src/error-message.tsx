@@ -10,7 +10,7 @@ export const ErrorMessage = ({
 }): React.ReactElement => (
   <div className={classNames('error-message', className)}>
     <svg
-      className="mr-2 text-lg min-w-5 flex-shrink-0"
+      className="error-message-svg"
       stroke="currentColor"
       fill="currentColor"
       strokeWidth="0"

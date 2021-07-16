@@ -1,24 +1,18 @@
-export type TextFieldInputProps<
-  E extends HTMLInputElement | HTMLTextAreaElement
-> = {
+export type TextFieldInputProps<E extends HTMLInputElement | HTMLTextAreaElement> = {
   value: string;
   name: string;
   multiple?: boolean;
   checked?: boolean;
   onChange: {
     (event: React.ChangeEvent<E>): void;
-    <T = string | React.ChangeEvent<E>>(
-      field: T,
-    ): T extends React.ChangeEvent<E>
+    <T = string | React.ChangeEvent<E>>(field: T): T extends React.ChangeEvent<E>
       ? void
       : (event: string | React.ChangeEvent<E>) => void;
   };
 
   onBlur: {
     (event: React.FocusEvent<E>): void;
-    <T = string | any>(fieldOrEvent: T): T extends string
-      ? (event: any) => void
-      : void;
+    <T = string | any>(fieldOrEvent: T): T extends string ? (event: any) => void : void;
   };
 };
 
@@ -27,9 +21,7 @@ export type TextFormikProps = {
   errors?: Record<string, string>;
 };
 
-type useTextInputValuesParams<
-  T extends HTMLInputElement | HTMLTextAreaElement
-> = {
+type useTextInputValuesParams<T extends HTMLInputElement | HTMLTextAreaElement> = {
   field?: TextFieldInputProps<T>;
   form?: TextFormikProps;
   value?: string | number;
@@ -39,9 +31,7 @@ type useTextInputValuesParams<
   onBlur?: (event: React.FocusEvent<T>) => void;
 };
 
-export function useTextInputValues<
-  T extends HTMLInputElement | HTMLTextAreaElement
->({
+export function useTextInputValues<T extends HTMLInputElement | HTMLTextAreaElement>({
   value,
   error,
   field,
@@ -64,9 +54,7 @@ export function useTextInputValues<
     formikCompatibleError = error;
   } else if (form && field) {
     formikCompatibleError =
-      form.errors?.[field.name] && form.touched?.[field.name]
-        ? form.errors?.[field?.name]
-        : '';
+      form.errors?.[field.name] && form.touched?.[field.name] ? form.errors?.[field?.name] : '';
   }
 
   let formikCompatibleName: string | undefined = '';

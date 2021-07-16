@@ -51,12 +51,8 @@ export const Rate = ({
           >
             <StarIcon
               className={classNames('icon-rate transform ', {
-                [`${disabledClassName}`]: isHovering
-                  ? i > hoveredIndex - 1
-                  : i > activeIndex,
-                [`${activeClassName}`]: isHovering
-                  ? i < hoveredIndex
-                  : i < activeIndex + 1,
+                [`${disabledClassName}`]: isHovering ? i > hoveredIndex - 1 : i > activeIndex,
+                [`${activeClassName}`]: isHovering ? i < hoveredIndex : i < activeIndex + 1,
                 'scale-125 ': i === hoveredIndex - 1,
               })}
             />

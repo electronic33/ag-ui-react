@@ -2,11 +2,7 @@ import React, { forwardRef, useState } from 'react';
 import classNames from 'classnames';
 import { Label } from '@app-garage/label';
 import { Button } from '@app-garage/button';
-import {
-  useTextInputValues,
-  TextFieldInputProps,
-  TextFormikProps,
-} from './input-hooks';
+import { useTextInputValues, TextFieldInputProps, TextFormikProps } from './input-hooks';
 
 type TextInputProps = {
   id?: string;
@@ -92,7 +88,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     });
 
     return (
-      <div className={classNames('flex flex-col relative', containerClassName)}>
+      <div className={classNames('text-input-container', containerClassName)}>
         {label && (
           <Label
             className={labelClassName}
@@ -101,17 +97,14 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             errorText={withErrorInLabel ? formikCompatibleError : undefined}
             htmlFor={formikCompatibleName}
           >
-            {Icon ? <Icon className="w-5 mr-2" /> : null}
+            {Icon ? <Icon className="text-input-label-icon" /> : null}
             {label}
           </Label>
         )}
         <div
-          className={classNames(
-            'flex justify-between h-10 rounded-md shadow transition-all hover:shadow-md ',
-            {
-              'shadow-md': isFocused,
-            },
-          )}
+          className={classNames('text-input-input-wrapper', {
+            'text-input-input-wrapper-focus': isFocused,
+          })}
         >
           <input
             onFocus={(event) => {
@@ -128,10 +121,10 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             placeholder={placeholder}
             type={type}
             className={classNames(
-              'w-full outline-none ml-2',
+              'text-input-input',
               {
-                'border-red-700': Boolean(formikCompatibleError),
-                'bg-gray-200 cursor-not-allowed': isDisabled,
+                'text-input-input-error': Boolean(formikCompatibleError),
+                'text-input-input-disabled': isDisabled,
               },
               inputClassName,
             )}
@@ -155,7 +148,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             <Button
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
-              className="flex-shrink-0 hover:bg-blue-600 rounded-l-none active:shadow-inner outline-none"
+              className="text-input-input-button"
               onClick={onButtonClick}
             >
               {buttonText}
@@ -163,14 +156,10 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           )}
         </div>
         {withMax && (
-          <p className="flex absolute right-0 bottom-0 text-gray-400 -mb-4 text-xs">
-            {`${String(formikCompatibleValue).length}/${max}`}
-          </p>
+          <p className="text-input-with-max">{`${String(formikCompatibleValue).length}/${max}`}</p>
         )}
         {!withErrorInLabel && formikCompatibleError && (
-          <p className="flex absolute inset-x-0 bottom-0 text-red-700 -mb-4 text-xs">
-            {formikCompatibleError}
-          </p>
+          <p className="text-input-with-error">{formikCompatibleError}</p>
         )}
       </div>
     );

@@ -1,5 +1,5 @@
 const ScrollToBaseClasses = (theme) => ({
-  '.main-div-scroll': {
+  '.scroll-to-main-div': {
     backgroundColor: theme('colors.gray.50'),
     borderRadius: theme('borderRadius.full'),
     position: 'fixed',
@@ -12,7 +12,7 @@ const ScrollToBaseClasses = (theme) => ({
     lineHeight: theme('lineHeight.9'),
     padding: theme('spacing.2'),
     transitionProperty: theme('transitionProperty.all'),
-    transitionTimingFunction: theme('transitionTimingFunction.in-out'),
+    transitionTimingFunction: theme('transitionTimingFunction.DEFAULT'),
     transitionDuration: theme('transitionDuration.300'),
     cursor: 'pointer',
     '@media (min-width: 640px)': {
@@ -20,6 +20,13 @@ const ScrollToBaseClasses = (theme) => ({
       bottom: theme('spacing.12'),
       fontSize: theme('fontSize.5xl'),
     },
+  },
+  '.scroll-to-hide-scroll': {
+    opacity: 0,
+    pointerEvents: 'none',
+  },
+  '.scroll-to-show-scroll': {
+    opacity: 100,
   },
 });
 

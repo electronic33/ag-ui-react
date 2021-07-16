@@ -213,9 +213,7 @@ export const Menu = ({
             arr[activeIndex].label,
           );
           if (nextItem) {
-            const index = arr.findIndex(
-              (element) => element.label === nextItem,
-            );
+            const index = arr.findIndex((element) => element.label === nextItem);
             setActiveIndex(index);
           }
           break;
@@ -240,66 +238,45 @@ export const Menu = ({
       headerText={headerText}
       trigger={trigger}
       content={
-        <div className="rounded shadow-md w-56 py-4">
+        <div className="menu-container">
           {content.map((item) => (
             <>
               {item.type === 'item' && (
                 <p
                   onClick={item.onClick}
-                  onMouseEnter={() =>
-                    setActiveIndex(findIndexByLabel(item.label!, ''))
-                  }
+                  onMouseEnter={() => setActiveIndex(findIndexByLabel(item.label!, ''))}
                   onMouseLeave={() => setActiveIndex(-1)}
-                  className={classNames(
-                    'flex items-center text-lg py-1 px-4 text-gray-700 cursor-pointer',
-                    {
-                      'bg-blue-50':
-                        activeIndex === findIndexByLabel(item.label!, ''),
-                    },
-                  )}
+                  className={classNames('menu-type-item', {
+                    'menu-active': activeIndex === findIndexByLabel(item.label!, ''),
+                  })}
                 >
-                  {item.Icon && <item.Icon className="mr-2" />}
+                  {item.Icon && <item.Icon className="menu-type-item-icon" />}
                   {item.label}
                 </p>
               )}
               {item.type === 'group' && (
                 <div>
-                  <p
-                    className={classNames(
-                      'py-1 px-4 font-bold text-sm text-gray-700',
-                      {},
-                    )}
-                  >
-                    {item.label}
-                  </p>
+                  <p className={classNames('menu-type-group-label', {})}>{item.label}</p>
 
                   {item.items!.map((groupItem) => (
                     <p
                       onClick={groupItem.onClick}
                       onMouseEnter={() =>
-                        setActiveIndex(
-                          findIndexByLabel(groupItem.label, item.label!),
-                        )
+                        setActiveIndex(findIndexByLabel(groupItem.label, item.label!))
                       }
                       onMouseLeave={() => setActiveIndex(-1)}
-                      className={classNames(
-                        'flex items-center text-lg py-1 px-4 text-gray-700 cursor-pointer',
-                        {
-                          'bg-blue-50':
-                            activeIndex ===
-                            findIndexByLabel(groupItem.label, item.label!),
-                        },
-                      )}
+                      className={classNames('menu-type-group', {
+                        'menu-active':
+                          activeIndex === findIndexByLabel(groupItem.label, item.label!),
+                      })}
                     >
-                      {groupItem.Icon && <groupItem.Icon className="mr-2" />}
+                      {groupItem.Icon && <groupItem.Icon className="menu-type-item-icon" />}
                       {groupItem.label}
                     </p>
                   ))}
                 </div>
               )}
-              {item.type === 'divider' && (
-                <div className="w-full h-px bg-gray-200 my-2" />
-              )}
+              {item.type === 'divider' && <div className="menu-type-divider" />}
             </>
           ))}
         </div>

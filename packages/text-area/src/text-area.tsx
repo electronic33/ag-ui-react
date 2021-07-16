@@ -1,11 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { Label } from '@app-garage/label';
-import {
-  useTextInputValues,
-  TextFieldInputProps,
-  TextFormikProps,
-} from '@app-garage/text-input';
+import { useTextInputValues, TextFieldInputProps, TextFormikProps } from '@app-garage/text-input';
 
 type TextAreaProps = {
   label?: string;
@@ -68,7 +64,7 @@ export const TextArea = ({
   });
 
   return (
-    <div className={classNames('flex flex-col relative', className)}>
+    <div className={classNames('text-area-container', className)}>
       {label && (
         <Label
           secondaryText={secondaryLabel}
@@ -76,7 +72,7 @@ export const TextArea = ({
           errorText={withErrorInLabel ? formikCompatibleError : undefined}
           htmlFor={formikCompatibleName}
         >
-          {Icon ? <Icon className="w-5 mr-2" /> : null}
+          {Icon ? <Icon className="text-area-label" /> : null}
           {label}
         </Label>
       )}
@@ -84,8 +80,8 @@ export const TextArea = ({
         placeholder={placeholder}
         className={classNames(
           {
-            'border-red-700': !!formikCompatibleError,
-            'bg-gray-200': isDisabled,
+            'text-area-label-icon': !!formikCompatibleError,
+            'text-area-error': isDisabled,
           },
           'text-area',
           inputClassName,
@@ -104,14 +100,10 @@ export const TextArea = ({
         disabled={isDisabled}
       />
       {withMax && (
-        <p className="flex absolute right-0 bottom-0 text-gray-400 -mb-4 text-xs">
-          {`${String(formikCompatibleValue).length}/${max}`}
-        </p>
+        <p className="text-area-with-max">{`${String(formikCompatibleValue).length}/${max}`}</p>
       )}
       {!withErrorInLabel && formikCompatibleError && (
-        <p className="flex absolute inset-x-0 bottom-0 text-red-700 -mb-4 text-xs">
-          {formikCompatibleError}
-        </p>
+        <p className="text-area-with-error-label">{formikCompatibleError}</p>
       )}
     </div>
   );

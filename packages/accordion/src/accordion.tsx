@@ -45,11 +45,10 @@ export const Accordion = ({
 
   const [internalIsOpen, setInternalIsOpen] = useState(false);
 
-  const isOpenState = useMemo(() => (isControlled ? isOpen : internalIsOpen), [
-    isControlled,
-    internalIsOpen,
-    isOpen,
-  ]);
+  const isOpenState = useMemo(
+    () => (isControlled ? isOpen : internalIsOpen),
+    [isControlled, internalIsOpen, isOpen],
+  );
 
   const [springStyles, setSpringProperties] = useSpring(() => ({
     opacity: 0,
@@ -96,7 +95,7 @@ export const Accordion = ({
         className={classNames('accordion-button', buttonClassName)}
         onClick={handleAccordionButtonClick}
       >
-        {Icon && <Icon className="mr-2" />}
+        {Icon && <Icon className="accordion-icon-mr" />}
         {isControlled
           ? children
           : (children as (isOpen: boolean) => React.ReactNode)(internalIsOpen)}

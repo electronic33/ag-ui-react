@@ -129,20 +129,13 @@ export const AdminForm = ({
         }),
         {},
       )}
-      validationSchema={
-        validationSchema && Yup.object().shape(validationSchema)
-      }
+      validationSchema={validationSchema && Yup.object().shape(validationSchema)}
       validateOnBlur
       validateOnChange={false}
       onSubmit={onSubmit}
     >
       {({ handleSubmit }) => (
-        <Form
-          className={classNames(
-            'flex flex-col items-center bg-gray-100',
-            className,
-          )}
-        >
+        <Form className={classNames('flex flex-col items-center bg-gray-100', className)}>
           <div className="w-full sticky top-0 flex justify-center py-2 bg-gray-50 z-10">
             <Button type="button" className="mr-4 text-lg" onClick={onCancel}>
               Cancel
@@ -159,13 +152,9 @@ export const AdminForm = ({
           <div className="grid grid-cols-3 gap-5 row-span-full ">
             {items.map((item) => (
               <Field>
-                {({
-                  field,
-                  form,
-                }: {
-                  field: TextFieldInputProps<any>;
-                  form: FormikProps<any>;
-                }) => getFormItem({ field, form, item })}
+                {({ field, form }: { field: TextFieldInputProps<any>; form: FormikProps<any> }) =>
+                  getFormItem({ field, form, item })
+                }
               </Field>
             ))}
           </div>

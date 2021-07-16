@@ -51,13 +51,8 @@ export const Tooltip = ({
     onBlur: hideTip,
   });
 
-  const [
-    referenceElement,
-    setReferenceElement,
-  ] = useState<HTMLDivElement | null>(null);
-  const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(
-    null,
-  );
+  const [referenceElement, setReferenceElement] = useState<HTMLDivElement | null>(null);
+  const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
 
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
     placement: direction,
@@ -86,11 +81,9 @@ export const Tooltip = ({
             className="popper-arrow-conainer"
             data-popper-placement={direction}
           >
-            <p className={classNames('tooltip-content', contentClassName)}>
-              {content}
-            </p>
+            <p className={classNames('tooltip-content', contentClassName)}>{content}</p>
             <div
-              className={classNames('bg-gray-700', arrowClassName)}
+              className={classNames('arrow-container', arrowClassName)}
               style={styles.arrow}
               data-popper-arrow
               id="arrow"

@@ -89,7 +89,7 @@ export function Select<T extends OptionValue>({
 
   return (
     <FocusLock restoreFocus isDisabled={!isOpen}>
-      <div className={classNames(containerClassName, 'relative')}>
+      <div className={classNames(containerClassName, 'custom-select-container')}>
         {label && (
           <Label
             className={labelClassName}
@@ -111,38 +111,35 @@ export function Select<T extends OptionValue>({
               return !prev;
             });
           }}
-          // TODO: extract classes
           className={classNames(
-            'inline-flex w-full rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 relative',
+            'custom-select-classes focus:ring-2 focus:ring-blue-500 ',
             selectClassName,
           )}
         >
           <div
-            // TODO: extract classes
             className={classNames(
-              'flex items-center relative w-full rounded-md border border-gray-300 bg-white pl-2 py-2 text-left focus:outline-none focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5',
+              'custom-select-status-div focus:outline-none focus:shadow-outline-blue sm:text-sm sm:leading-5',
               {
-                'justify-between': status === 'loading',
-                'justify-start': status !== 'loading',
-                'border-red-600 justify-between pr-2': status === 'error',
-                'border-gray-300 focus:border-blue-300 pr-8': status !== 'error',
+                'custom-select-status-loading': status === 'loading',
+                'custom-select-status-not-loading': status !== 'loading',
+                'custom-select-status-error': status === 'error',
+                'custom-select-status-no-error': status !== 'error',
               },
             )}
           >
             {status === 'loading' && (
               <>
-                <Spinner className={classNames('flex-shrink-0 w-5 h-5', spinnerClassName)} />
-                {loadingText && <p className="text-gray-400">{loadingText}</p>}
+                <Spinner
+                  className={classNames('custom-select-loading-spinner', spinnerClassName)}
+                />
+                {loadingText && <p className="custom-select-loading-text">{loadingText}</p>}
               </>
             )}
             {status === 'error' && (
               <>
-                <p className="text-red-600 whitespace-nowrap">{error}</p>
+                <p className="custom-select-error-text">{error}</p>
                 {retryFn && (
-                  <Button
-                    className="text-white font-semibold bg-red-400 hover:bg-red-500 text-base focus:bg-red-500 px-2 py-1 rounded ml-2"
-                    onClick={retryFn}
-                  >
+                  <Button className="custom-select-retry-button" onClick={retryFn}>
                     Try again
                   </Button>
                 )}
@@ -151,12 +148,12 @@ export function Select<T extends OptionValue>({
             {status === 'ready' && (
               <>
                 {selectedOption?.Icon && (
-                  <span className="flex items-center mr-1.5">{selectedOption.Icon}</span>
+                  <span className="custom-select-ready-icon">{selectedOption.Icon}</span>
                 )}
-                <span className="block truncate">{selectedOption?.label}</span>
-                <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
+                <span className="custom-select-ready-label">{selectedOption?.label}</span>
+                <span className="custom-select-ready-svg-container">
                   <svg
-                    className="h-5 w-5 text-gray-400"
+                    className="custom-select-ready-svg"
                     viewBox="0 0 20 20"
                     fill="none"
                     stroke="currentColor"
@@ -180,9 +177,8 @@ export function Select<T extends OptionValue>({
                 key={key}
                 style={props}
                 ref={selectOptionsRef}
-                // TODO: extract in classes
                 className={classNames(
-                  'max-h-60 rounded-md py-1 text-base leading-6 shadow-lg overflow-auto focus:outline-none sm:text-sm sm:leading-5 absolute z-10 bg-white inset-x-0',
+                  'custom-select-options-container sm:text-sm sm:leading-5',
                   optionsContainerClassName,
                 )}
               >
@@ -191,12 +187,11 @@ export function Select<T extends OptionValue>({
                     <div
                       role="button"
                       tabIndex={-1}
-                      // TODO: extract in classes
                       className={classNames(
-                        'w-full select-none relative py-2 px-2 flex items-center',
+                        'custom-select-option',
                         {
-                          'text-white bg-blue-600': activeIndex === index,
-                          'text-gray-900': activeIndex !== index,
+                          'custom-select-active-option': activeIndex === index,
+                          'custom-select-not-active-option': activeIndex !== index,
                         },
                         optionClassName ? optionClassName(option.value) : '',
                       )}
@@ -215,18 +210,20 @@ export function Select<T extends OptionValue>({
                     >
                       {option.Icon && (
                         <span
-                          className={classNames('flex items-center mr-1.5', {
-                            'text-white': activeIndex === index,
-                            'text-blue-600': activeIndex !== index,
+                          className={classNames('custom-select-option-icon', {
+                            'custom-select-option-icon-active': activeIndex === index,
+                            'custom-select-option-icon-not-active': activeIndex !== index,
                           })}
                         >
                           {option.Icon}
                         </span>
                       )}
                       <span
-                        className={classNames('block truncate', {
-                          'font-semibold': option.value === selectedOption?.value,
-                          'font-normal': option.value !== selectedOption?.value,
+                        className={classNames('custom-select-option-label', {
+                          'custom-select-option-label-selected':
+                            option.value === selectedOption?.value,
+                          'custom-select-option-label-not-selected':
+                            option.value !== selectedOption?.value,
                         })}
                       >
                         {option.label}

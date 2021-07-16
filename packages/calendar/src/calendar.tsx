@@ -50,8 +50,8 @@ type CalendarTypes = {
   monthTitle?: (currentMonth: Date) => string;
   weekDaysClassName?: string;
   weekDays?: string[];
-  LeftArrowIcon?: React.ElementType<{ className: string }>;
-  RightArrowIcon?: React.ElementType<{ className: string }>;
+  LeftArrowIcon?: React.ElementType<{ className?: string }>;
+  RightArrowIcon?: React.ElementType<{ className?: string }>;
   arrowsClassName?: string;
   hoveredTileClassName?: string;
   selectedAndHoveredTileClassName?: string;
@@ -64,9 +64,7 @@ type CalendarTypes = {
   activeTilesClassName?: string | ((day: Date) => string);
   selectedTileClassName?: string | ((day: Date) => string);
   selectedDate: Date | Date[] | undefined;
-  selectHandler?: React.Dispatch<
-    React.SetStateAction<Date[] | Date | undefined>
-  >;
+  selectHandler?: React.Dispatch<React.SetStateAction<Date[] | Date | undefined>>;
   rangeSelect?: boolean;
   CellComponent?: React.ElementType<{ day: Date }>;
 };
@@ -97,9 +95,7 @@ export const Calendar = ({
   CellComponent,
 }: CalendarTypes): React.ReactElement => {
   const [currentMonth, setCurrentMonth] = useState<Date>(
-    (rangeSelect
-      ? (selectedDate as Date[])[0]
-      : (selectedDate as Date | undefined)) || new Date(),
+    (rangeSelect ? (selectedDate as Date[])[0] : (selectedDate as Date | undefined)) || new Date(),
   );
   const [rangeStart, setRangeStart] = useState<Date>();
   const [hoveredDay, setHoveredDay] = useState<Date>();
@@ -135,10 +131,7 @@ export const Calendar = ({
 
   useEffect(() => {
     function handleClickOutside(event: React.MouseEvent) {
-      if (
-        calendarRef.current &&
-        !calendarRef.current.contains(event.currentTarget)
-      ) {
+      if (calendarRef.current && !calendarRef.current.contains(event.currentTarget)) {
         setHoveredDay(undefined);
       }
     }
@@ -230,10 +223,7 @@ export const Calendar = ({
         window.removeEventListener('keydown', handleKeydown);
       };
     }
-    if (
-      daysContainerRef.current &&
-      daysContainerRef.current.contains(document.activeElement)
-    ) {
+    if (daysContainerRef.current && daysContainerRef.current.contains(document.activeElement)) {
       const added7Days = addDays(hoveredDay as Date, 7);
       const removed7Days = addDays(hoveredDay as Date, -7);
       const added1Day = addDays(hoveredDay as Date, 1);
@@ -374,13 +364,11 @@ export const Calendar = ({
           )}
           onClick={goToPrevMonth}
         >
-          {LeftArrowIcon ? <LeftArrowIcon className="flex-shrink-0" /> : '>'}
+          {LeftArrowIcon ? <LeftArrowIcon /> : '>'}
         </button>
 
         <span className={classNames('month-class', monthClassName)}>
-          {monthTitle
-            ? monthTitle(currentMonth)
-            : format(currentMonth, dateFormat)}
+          {monthTitle ? monthTitle(currentMonth) : format(currentMonth, dateFormat)}
         </span>
 
         <button
@@ -393,7 +381,7 @@ export const Calendar = ({
           )}
           onClick={goToNextMonth}
         >
-          {RightArrowIcon ? <RightArrowIcon className="flex-shrink-0" /> : '>'}
+          {RightArrowIcon ? <RightArrowIcon /> : '>'}
         </button>
       </div>
     );
@@ -472,22 +460,14 @@ export const Calendar = ({
                 //   hoveredDay as Date,
                 // ),
                 [`${rangeHoverClassName} hovered-tile-calendar`]:
-                  rangeStart &&
-                  day >= rangeStart &&
-                  day <= (hoveredDay as Date),
+                  rangeStart && day >= rangeStart && day <= (hoveredDay as Date),
 
                 [`${firstDayInRangeClassName} rounded-full-left-side`]:
-                  rangeSelect === true &&
-                  isSameDay(day, (selectedDate as Date[])[0]),
+                  rangeSelect === true && isSameDay(day, (selectedDate as Date[])[0]),
 
                 [`${lastDayInRangeClassName} rounded-full-right-side`]:
                   rangeSelect === true &&
-                  isSameDay(
-                    day,
-                    (selectedDate as Date[])[
-                      (selectedDate as Date[])?.length - 1
-                    ],
-                  ),
+                  isSameDay(day, (selectedDate as Date[])[(selectedDate as Date[])?.length - 1]),
                 [`${firstDayOfRangeWhereIsNoEndDateClassName} first-day-in-range-no-selected-end-date`]:
                   rangeStart && isSameDay(day, rangeStart),
 
@@ -495,16 +475,11 @@ export const Calendar = ({
 
                 [typeof disabledTilesClassName === 'string'
                   ? `${disabledTilesClassName} disabled-tiles`
-                  : `${disabledTilesClassName(
-                      day,
-                    )} disabled-tiles`]: !isSameMonth(day, monthStart),
+                  : `${disabledTilesClassName(day)} disabled-tiles`]: !isSameMonth(day, monthStart),
 
                 [typeof activeTilesClassName === 'string'
                   ? `${activeTilesClassName} active-tiles`
-                  : `${activeTilesClassName(day)} active-tiles`]: isSameMonth(
-                  day,
-                  monthStart,
-                ),
+                  : `${activeTilesClassName(day)} active-tiles`]: isSameMonth(day, monthStart),
                 [typeof selectedTileClassName === 'string'
                   ? `${selectedTileClassName} selected-tiles`
                   : `${selectedTileClassName(day)} selected-tiles`]: isSelected,
@@ -556,10 +531,7 @@ export const Calendar = ({
   };
 
   return (
-    <div
-      className={classNames('calendar', calendarClassName)}
-      ref={calendarRef}
-    >
+    <div className={classNames('calendar', calendarClassName)} ref={calendarRef}>
       {renderHeader()}
       {renderDays()}
       {renderCells()}

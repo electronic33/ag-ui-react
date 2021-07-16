@@ -276,7 +276,7 @@ export const SuggestionTextInput = ({
             <animated.div
               key={key}
               style={props}
-              className="flex flex-col shadow-md my-4"
+              className="suggestion-text-input-container"
               ref={selectOptionsRef}
             >
               {updatedList?.map((sugg, index) => (
@@ -284,8 +284,8 @@ export const SuggestionTextInput = ({
                   onMouseEnter={() => setActiveIndex(index)}
                   onMouseLeave={() => setActiveIndex(-1)}
                   type="button"
-                  className={classNames('px-4 py-2 text-left hover:bg-gray-200 cursor-pointer', {
-                    'bg-gray-200': index === activeIndex,
+                  className={classNames('suggestion-text-input-suggestion', {
+                    'suggestion-text-input-suggestion-active': index === activeIndex,
                   })}
                   onClick={() => {
                     onChange(sugg.label);

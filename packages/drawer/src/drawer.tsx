@@ -158,7 +158,7 @@ export const Drawer = ({
             <FocusLock key={key} isDisabled={!isOpen} restoreFocus>
               <ReactScrollLock>
                 <animated.div
-                  className="fixed top-0 left-0 z-10 w-screen h-screen bg-black bg-opacity-40"
+                  className="drawer-container bg-opacity-40"
                   onClick={onClose}
                   style={{ opacity: props.opacity }}
                 >
@@ -177,14 +177,14 @@ export const Drawer = ({
                     <ul className="drawer-ul ">
                       <li
                         className={classNames('drawer-li-1', {
-                          'justify-start': direction === 'left',
-                          'justify-end': direction === 'right',
+                          'drawer-li-left': direction === 'left',
+                          'drawer-li-right': direction === 'right',
                         })}
                       >
                         <Button
                           className={classNames('close-button-container', {
-                            'pl-8': direction === 'left',
-                            'pr-8': direction === 'right',
+                            'drawer-close-button-left': direction === 'left',
+                            'drawer-close-button-right': direction === 'right',
                           })}
                           onClick={onClose}
                         >

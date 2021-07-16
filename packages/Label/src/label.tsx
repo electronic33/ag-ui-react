@@ -23,24 +23,18 @@ export const Label = ({
   const content = (
     <>
       {children}
-      {withRequiredIndicator && (
-        <span className="ml-px self-start text-xs font-thin text-red-600">
-          *
-        </span>
-      )}
+      {withRequiredIndicator && <span className="label-with-required-indicator">*</span>}
       {secondaryText && (
         <span
-          className={classNames('text-sm text-gray-400', {
-            'ml-1': withRequiredIndicator,
-            'ml-2': !withRequiredIndicator,
+          className={classNames('label-secondary-text', {
+            'label-with-indicator-margin': withRequiredIndicator,
+            'label-without-indicator-margin': !withRequiredIndicator,
           })}
         >
           {secondaryText}
         </span>
       )}
-      {errorText && (
-        <span className="ml-1 text-red-600 text-sm">- {errorText}</span>
-      )}
+      {errorText && <span className="label-error-text">- {errorText}</span>}
     </>
   );
 
@@ -55,24 +49,18 @@ export const Label = ({
   return (
     <label htmlFor={htmlFor} {...wrapperProps}>
       {children}
-      {withRequiredIndicator && (
-        <span className="ml-px self-start text-xs font-thin text-red-600">
-          *
-        </span>
-      )}
+      {withRequiredIndicator && <span className="label-with-required-indicator">*</span>}
       {secondaryText && (
         <span
-          className={classNames('text-sm text-gray-400', {
-            'ml-1': withRequiredIndicator,
-            'ml-2': !withRequiredIndicator,
+          className={classNames('label-secondary-text', {
+            'label-with-indicator-margin': withRequiredIndicator,
+            'label-without-indicator-margin': !withRequiredIndicator,
           })}
         >
           {secondaryText}
         </span>
       )}
-      {errorText && (
-        <span className="ml-1 text-red-600 text-sm">- {errorText}</span>
-      )}
+      {errorText && <span className="label-error-text">- {errorText}</span>}
     </label>
   );
 };

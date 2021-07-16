@@ -22,9 +22,9 @@ type RadioProps = {
 
 const RadioButton = ({
   checkboxClassNames,
-  unCheckedBgClassName = 'bg-gray-50',
-  checkedBgClassName = 'bg-blue-400',
-  tickCheckedClassName = 'text-gray-50',
+  unCheckedBgClassName = 'radio-group-unchecked-bg-default',
+  checkedBgClassName = 'radio-group-checked-bg-default',
+  tickCheckedClassName = 'radio-group-tick-checked-default',
   isChecked,
   label,
   value,
@@ -76,16 +76,13 @@ const RadioButton = ({
   }, []);
 
   return (
-    <label
-      htmlFor={radioId}
-      className={classNames(defaultContainerClassName, containerClassName)}
-    >
+    <label htmlFor={radioId} className={classNames(defaultContainerClassName, containerClassName)}>
       <Label
         as="span"
         className={classNames(
           {
-            'text-sm': size === 'sm',
-            'text-lg': size === 'xl',
+            'radio-group-label-sm': size === 'sm',
+            'radio-group-label-xl': size === 'xl',
           },
           defaultLabelClassName,
           labelClassName,
@@ -117,27 +114,27 @@ const RadioButton = ({
           onChange(value);
         }}
         className={classNames(
-          'checkbox rounded-full transition-all duration-300',
+          'checkbox radio-group-button',
           {
-            [`${unCheckedBgClassName} border-gray-200`]: !isChecked,
-            [`${checkedBgClassName} border-none`]: isChecked,
+            [`${unCheckedBgClassName} radio-group-button-unchecked`]: !isChecked,
+            [`${checkedBgClassName} radio-group-button-checked`]: isChecked,
             [tickCheckedClassName]: isChecked,
             'ring-2 ring-blue-300': isFocused,
-            'w-3 h-3': size === 'sm',
-            'w-3.5 h-3.5': size === 'md',
-            'w-4 h-4': size === 'lg',
-            'w-5 h-5': size === 'xl',
+            'radio-group-button-sm': size === 'sm',
+            'radio-group-button-md': size === 'md',
+            'radio-group-button-lg': size === 'lg',
+            'radio-group-button-xl': size === 'xl',
           },
           checkboxClassNames,
         )}
       >
         {isChecked && (
           <div
-            className={classNames('bg-white rounded-full', {
-              'w-1 h-1': size === 'sm',
-              'w-1.5 h-1.5': size === 'md',
-              'w-1.5 h-1.5 ': size === 'lg',
-              'w-2 h-2': size === 'xl',
+            className={classNames('radio-group-button-is-checked', {
+              'radio-group-button-checked-sm': size === 'sm',
+              'radio-group-button-checked-md': size === 'md',
+              'radio-group-button-checked-lg': size === 'lg',
+              'radio-group-button-checked-xl': size === 'xl',
             })}
           />
         )}

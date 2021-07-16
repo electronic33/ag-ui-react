@@ -47,8 +47,7 @@ export const ScrollTo = ({
 }: ScrollToProps) => {
   const executeScroll = () => {
     if (scrollToRef.current) {
-      const offsetTop =
-        scrollToRef.current.getBoundingClientRect().top + window.pageYOffset;
+      const offsetTop = scrollToRef.current.getBoundingClientRect().top + window.pageYOffset;
 
       window.scroll({
         top: offsetTop - offset,
@@ -62,10 +61,10 @@ export const ScrollTo = ({
       type="button"
       onClick={executeScroll}
       className={classNames(
-        'main-div-scroll',
+        'scroll-to-main-div',
         {
-          'opacity-0 pointer-events-none': showScroll === false,
-          'opacity-1': showScroll === true,
+          'scroll-to-hide-scroll': showScroll === false,
+          'scroll-to-show-scroll': showScroll === true,
         },
         className,
       )}

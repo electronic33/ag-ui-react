@@ -1,4 +1,13 @@
 const DrawerBaseClasses = (theme) => ({
+  '.drawer-container': {
+    position: 'fixed',
+    top: '0px',
+    left: '0px',
+    zIndex: 10,
+    width: '100vw',
+    height: '100vh',
+    backgroundColor: theme('colors.black'),
+  },
   '.drawer': {
     backgroundColor: theme('drawer-bg-color') || theme('colors.gray.700'),
     position: 'fixed',
@@ -25,6 +34,20 @@ const DrawerBaseClasses = (theme) => ({
     justifyContent: 'flex-start',
     alignItems: 'center',
   },
+
+  '.drawer-li-left': {
+    justifyContent: 'flex-start',
+  },
+  '.drawer-li-right': {
+    justifyContent: 'flex-end',
+  },
+  '.drawer-close-button-left': {
+    paddingLeft: theme('spacing.8'),
+  },
+  '.drawer-close-button-right': {
+    paddingRight: theme('spacing.8'),
+  },
+
   '.close-button-container': {
     marginLeft: theme('spacing.8'),
     fontSize: theme('fontSize.3xl'),

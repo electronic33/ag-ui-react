@@ -127,42 +127,23 @@ export const SelectableList = ({
 
   if (isLoading) {
     return (
-      <div
-        className={classNames(
-          'shadow-md rounded-md w-56 py-4 flex flex-col justify-center items-center h-60',
-          containerClassName,
-        )}
-      >
+      <div className={classNames('selectable-list-loading', containerClassName)}>
         <Spinner />
       </div>
     );
   }
 
   if (error) {
-    return (
-      <div
-        className={classNames(
-          'shadow-md rounded-md w-56 py-4 flex flex-col justify-center items-center h-60 text-red-500',
-          containerClassName,
-        )}
-      >
-        {error}
-      </div>
-    );
+    return <div className={classNames('selectable-list-error', containerClassName)}>{error}</div>;
   }
   return (
-    <div
-      className={classNames(
-        'shadow-md rounded-md py-4 flex flex-col items-center max-h-80',
-        containerClassName,
-      )}
-    >
+    <div className={classNames('selectable-list-container', containerClassName)}>
       {title && (
-        <div className="flex justify-center w-full font-semibold border-b-2 border-gray-200 pb-2">
+        <div className="selectable-list-title">
           <p>{title}</p>
         </div>
       )}
-      <div ref={ref} className="flex flex-col overflow-y-auto w-full">
+      <div ref={ref} className="selectable-list-wrapper">
         {items.map(
           ({ value, label, Icon, Component }, i) =>
             Component || (
@@ -171,17 +152,17 @@ export const SelectableList = ({
                 onMouseLeave={() => setActiveIndex(undefined)}
                 type="button"
                 className={classNames(
-                  'flex justify-center items-center px-4 py-2  cursor-pointer active:bg-gray-200 active:shadow-inner w-full transition-all ',
+                  'selectable-list-item',
 
                   {
-                    'bg-gray-100': activeIndex === i,
-                    'font-semibold': value === selectValue,
+                    'selectable-list-item-active-bg': activeIndex === i,
+                    'selectable-list-item-active-text': value === selectValue,
                   },
                   itemClassName,
                 )}
                 onClick={() => onSelect(value)}
               >
-                {Icon && <Icon className="flex-shrink-0 mr-2" />}
+                {Icon && <Icon className="selectable-list-item-icon" />}
                 <p>{label}</p>
               </button>
             ),

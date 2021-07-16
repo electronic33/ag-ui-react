@@ -93,12 +93,12 @@ export const Callout = ({
   }
   return (
     <div
-      className={classNames('flex p-4', {
-        'bg-gray-200': !intent,
-        'bg-blue-100': intent === 'primary',
-        'bg-green-100': intent === 'success',
-        'bg-yellow-100': intent === 'warning',
-        'bg-red-100': intent === 'danger',
+      className={classNames('callout-container', {
+        'callout-container-nointent-bg': !intent,
+        'callout-container-primary-bg': intent === 'primary',
+        'callout-container-success-bg': intent === 'success',
+        'callout-container-warning-bg': intent === 'warning',
+        'callout-container-danger-bg': intent === 'danger',
       })}
     >
       {Icon !== null && <div> {IntentIcon}</div>}
@@ -106,11 +106,11 @@ export const Callout = ({
         {header && (
           <p
             className={classNames('text-xl -mt-0.5 mb-1 font-semibold', {
-              'text-gray-700': !intent,
-              'text-blue-600': intent === 'primary',
-              'text-green-600': intent === 'success',
-              'text-yellow-600': intent === 'warning',
-              'text-red-600': intent === 'danger',
+              'callout-container-nointent-text': !intent,
+              'callout-container-primary-text': intent === 'primary',
+              'callout-container-success-text': intent === 'success',
+              'callout-container-warning-text': intent === 'warning',
+              'callout-container-danger-text': intent === 'danger',
             })}
           >
             {header}

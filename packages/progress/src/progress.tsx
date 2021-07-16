@@ -19,24 +19,15 @@ export const Progress = ({
   withTracker,
   trackerClassNames,
 }: ProgressTypes): React.ReactElement => (
-  <div
-    className="main-div-progress"
-    role="progressbar"
-    aria-valuenow={progressValue}
-  >
-    <div
-      className={classNames('progress-container ', progressContainerClassNames)}
-    >
+  <div className="main-div-progress" role="progressbar" aria-valuenow={progressValue}>
+    <div className={classNames('progress-container ', progressContainerClassNames)}>
       <div
         className={classNames('progress-bar ', progressBarClassNames)}
         style={{ width: `${progressValue}%` }}
       />
     </div>
     {withTracker && (
-      <p
-        style={{ minWidth: '40px' }}
-        className={classNames('progress-tracker', trackerClassNames)}
-      >
+      <p style={{ minWidth: '40px' }} className={classNames('progress-tracker', trackerClassNames)}>
         {progressValue}%
       </p>
     )}

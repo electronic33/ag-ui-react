@@ -9,14 +9,14 @@ export const Arrow = ({ direction, onClick }: ArrowProps) => (
   <button
     type="button"
     onClick={onClick}
-    className="arrow-container"
+    className="slider-arrow-container"
     // className={`flex absolute top-1/2 h-12 w-12 just9ify-center bg-blue-700 rounded-full cursor-pointer items-center transition-transform ease-in duration-100 hover:scale-110 ${
     //   direction === "right" ? `right-6` : `left-6`
     // }`}
   >
     {direction === 'right' ? (
       <svg
-        className="arrow-icon"
+        className="slider-arrow-icon"
         stroke="currentColor"
         fill="currentColor"
         strokeWidth="0"
@@ -29,7 +29,7 @@ export const Arrow = ({ direction, onClick }: ArrowProps) => (
       </svg>
     ) : (
       <svg
-        className="arrow-icon"
+        className="slider-arrow-icon"
         stroke="currentColor"
         fill="currentColor"
         strokeWidth="0"

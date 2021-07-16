@@ -111,10 +111,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckBoxProps>(
         htmlFor={`${checkboxId}${formikCompatibleName || ''}`}
         className={classNames(defaultContainerClassName, containerClassName)}
       >
-        <Label
-          as="span"
-          className={classNames(defaultLabelClassName, labelClassName)}
-        >
+        <Label as="span" className={classNames(defaultLabelClassName, labelClassName)}>
           {label}
         </Label>
         <input
@@ -163,9 +160,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckBoxProps>(
             <polyline points="20 6 9 17 4 12" />
           </svg>
         </div>
-        {formikCompatibleError && (
-          <span className="text-red-600 mt-2">{formikCompatibleError}</span>
-        )}
+        {formikCompatibleError && <span className="checkbox-error">{formikCompatibleError}</span>}
       </label>
     );
   },

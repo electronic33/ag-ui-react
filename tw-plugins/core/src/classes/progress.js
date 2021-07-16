@@ -15,7 +15,7 @@ const ProgressBaseClasses = (theme) => ({
     backgroundColor: theme('colors.blue.700'),
     borderRadius: theme('borderRadius.full'),
     transitionProperty: theme('transitionProperty.all'),
-    transitionTimingFunction: theme('transitionTimingFunction.in-out'),
+    transitionTimingFunction: theme('transitionTimingFunction.DEFAULT'),
     transitionDuration: theme('transitionDuration.1000'),
   },
   '.progress-tracker': {

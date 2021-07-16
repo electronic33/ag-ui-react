@@ -48,10 +48,7 @@ export const AlertDialog = ({
       modalClassName={classNames('alert-dialog-modal ', modalClassName)}
     >
       {headerText && (
-        <header
-          id={`alert-dialog-header-${id}`}
-          className="alert-dialog-header"
-        >
+        <header id={`alert-dialog-header-${id}`} className="alert-dialog-header">
           {headerText}
         </header>
       )}
@@ -63,20 +60,14 @@ export const AlertDialog = ({
             ref={cancelRef}
             isDisabled={isLoading}
             onClick={onCancel || onClose}
-            className={classNames(
-              'alert-dialog-cancel-button',
-              cancelButtonClassName,
-            )}
+            className={classNames('alert-dialog-cancel-button', cancelButtonClassName)}
           >
             {cancelText}
           </Button>
           <Button
             onClick={onConfirm}
             isLoading={isLoading}
-            className={classNames(
-              'alert-dialog-confirm-button',
-              confirmButtonClassName,
-            )}
+            className={classNames('alert-dialog-confirm-button', confirmButtonClassName)}
           >
             {confirmText}
           </Button>

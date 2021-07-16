@@ -51,9 +51,9 @@ export function ToggleButtonGroup<T extends Value>({
       {items.map(({ value, label }) => (
         <Button
           className={classNames(
-            'text-base transition-all',
+            'toggle-button-group-button',
             {
-              [`${selectedClassName} bg-blue-700`]: !isMultiple
+              [`${selectedClassName} toggle-button-group-button-not-multiple`]: !isMultiple
                 ? value ===
                   (
                     selectedOption as {

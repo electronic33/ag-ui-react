@@ -65,7 +65,7 @@ export const Modal = ({
                 <animated.div
                   key={key}
                   {...ariaProps}
-                  className={classNames('overlay', overlayClassName)}
+                  className={classNames('modal-overlay', overlayClassName)}
                   onClick={onClose}
                   style={{ opacity: props.opacity }}
                 >
@@ -76,10 +76,7 @@ export const Modal = ({
                   >
                     {children}
                   </animated.div>
-                  <Button
-                    onClick={onClose}
-                    className="fixed top-4 right-4 z-50 text-5xl text-gray-50"
-                  >
+                  <Button onClick={onClose} className="modal-button">
                     <svg
                       stroke="currentColor"
                       fill="currentColor"

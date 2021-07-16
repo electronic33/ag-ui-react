@@ -80,10 +80,10 @@ export const Button = React.forwardRef<HTMLButtonElement | null, ButtonProps>(
           fill="rgba(255, 255, 255, 1)"
           stroke="rgba(255, 255, 255, 1)"
           className={classNames('btn-icon-spinner-left', {
-            'w-4 h-4 mr-2': size === 'sm',
-            'w-7 h-7 mr-3': size === 'md',
-            'w-9 h-9 mr-4': size === 'lg',
-            'w-11 h-11 mr-5': size === 'xl',
+            'btn-spinner-left-sm': size === 'sm',
+            'btn-spinner-left-md': size === 'md',
+            'btn-spinner-left-lg': size === 'lg',
+            'btn-spinner-left-xl': size === 'xl',
           })}
         />
       )}
@@ -99,10 +99,10 @@ export const Button = React.forwardRef<HTMLButtonElement | null, ButtonProps>(
           fill="rgba(255, 255, 255, 1)"
           stroke="rgba(255, 255, 255, 1)"
           className={classNames('btn-icon-spinner-right', {
-            'w-4 h-4 ml-2': size === 'sm',
-            'w-7 h-7 ml-3': size === 'md',
-            'w-9 h-9 ml-4': size === 'lg',
-            'w-11 h-11 ml-5': size === 'xl',
+            'btn-spinner-right-sm': size === 'sm',
+            'btn-spinner-right-md': size === 'md',
+            'btn-spinner-right-lg': size === 'lg',
+            'btn-spinner-right-xl': size === 'xl',
           })}
         />
       )}

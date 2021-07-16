@@ -1,5 +1,5 @@
 const SliderBaseClasses = (theme) => ({
-  '.main-div': {
+  '.slider-main-div': {
     width: '100%',
     height: '100%',
     minHeight: 200,
@@ -9,7 +9,7 @@ const SliderBaseClasses = (theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  '.carousel-and-arrow-container': {
+  '.slider-carousel-and-arrow-container': {
     width: '100%',
     height: '100%',
     alignSelf: 'stretch',
@@ -18,7 +18,7 @@ const SliderBaseClasses = (theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  '.carousel': {
+  '.slider-carousel': {
     position: 'relative',
     alignSelf: 'stretch',
     marginTop: theme('spacing.0'),
@@ -35,7 +35,7 @@ const SliderBaseClasses = (theme) => ({
     display: 'flex',
     height: '100%',
   },
-  '.arrow-container': {
+  '.slider-arrow-container': {
     display: 'flex',
     flexShrink: theme('flexShrink.0'),
     width: theme('spacing.10'),
@@ -52,7 +52,7 @@ const SliderBaseClasses = (theme) => ({
       scale: '110',
     },
   },
-  '.arrow-icon': {
+  '.slider-arrow-icon': {
     color: theme('colors.white'),
     fontSize: theme('fontSize.xl'),
     lineHeight: theme('lineHeight.7'),
@@ -60,14 +60,14 @@ const SliderBaseClasses = (theme) => ({
       outline: 'none',
     },
   },
-  '.dots': {
+  '.slider-dots': {
     paddingTop: theme('spacing.4'),
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  '.dot': {
+  '.slider-dot': {
     padding: theme('spacing.1.5'),
     width: theme('spacing.3'),
     height: theme('spacing.3'),
@@ -77,6 +77,19 @@ const SliderBaseClasses = (theme) => ({
     marginRight: theme('spacing.2'),
     cursor: 'pointer',
     borderRadius: theme('borderRadius.full'),
+  },
+  '.slider-dot-active': {
+    backgroundColor: theme('colors.blue.600'),
+  },
+  '.slider-dot-not-active': {
+    backgroundColor: theme('colors.blue.400'),
+  },
+  '.slider-with-modal': {
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 

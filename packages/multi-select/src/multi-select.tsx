@@ -123,14 +123,14 @@ export function MultiSelect<T extends OptionValue>({
 
   return (
     <FocusLock restoreFocus isDisabled={!isOpen}>
-      <div className={classNames(containerClassName, 'relative')}>
+      <div className={classNames(containerClassName, 'multi-select-container')}>
         <>
           {label && (
-            <div className="block text-sm leading-5 font-medium text-gray-700 mb-2">
-              <p className={classNames({ 'text-red-600': error })}>{label}</p>
+            <div className="multi-select-label">
+              <p className={classNames({ 'multi-select-label-error': error })}>{label}</p>
             </div>
           )}
-          <div className="relative">
+          <div className="multi-select-container">
             <button
               data-testid="select-button "
               type="button"
@@ -143,55 +143,58 @@ export function MultiSelect<T extends OptionValue>({
                 }
                 setIsOpen((prev) => !prev);
               }}
-              className="inline-flex w-full shadow-sm focus:ring-2 focus:ring-blue-500 rounded-md border border-gray-300 overflow-hidden"
+              className="multi-select-main-button"
             >
               <div
                 className={classNames(
-                  'flex items-center min-h-8 flex-wrap gap-2 relative w-full bg-white pl-2 py-2 text-left focus:outline-none focus:shadow-outline-blue  transition ease-in-out duration-150 sm:text-sm sm:leading-5',
+                  'multi-select-selected-options-status-div focus:shadow-outline-blue  sm:text-sm sm:leading-5',
                   {
-                    'justify-between': status === 'loading',
-                    'justify-start': status !== 'loading',
-                    'border border-red-600 justify-between pr-2': status === 'error',
+                    'multi-select-status-loading': status === 'loading',
+                    'multi-select-status-not-loading': status !== 'loading',
+                    'multi-select-status-error': status === 'error',
                   },
                 )}
               >
                 {status === 'loading' && (
                   <>
-                    <Spinner className={classNames('flex-shrink-0 w-5 h-5', spinnerClassName)} />
-                    {loadingText && <p className=" text-gray-400 mr-5">{loadingText}</p>}
+                    <Spinner
+                      className={classNames('multi-select-loading-spinner', spinnerClassName)}
+                    />
+                    {loadingText && <p className=" multi-select-loading-text">{loadingText}</p>}
                   </>
                 )}
                 {status === 'error' && (
                   <>
-                    <p className="text-red-600 ">{error}</p>
+                    <p className="multi-select-error-text">{error}</p>
                     {retryFn && (
-                      <Button
-                        className="text-white font-semibold bg-red-400 hover:bg-red-500 text-base focus:bg-red-500 px-2 py-1 rounded"
-                        onClick={retryFn}
-                      >
+                      <Button className="multi-select-retry-button" onClick={retryFn}>
                         Try again
                       </Button>
                     )}
                   </>
                 )}
                 {status === 'ready' && !selectedOptions?.length && (
-                  <p className="text-gray-400">{placeholder}</p>
+                  <p className="multi-select-ready-no-selected">{placeholder}</p>
                 )}
                 {status === 'ready' &&
                   !!selectedOptions?.length &&
                   selectedOptions?.map((option) => (
                     <>
-                      <div className="flex" key={option?.value}>
-                        <div className="flex items-center text-white bg-blue-500 pl-2 pr-1 py-1 rounded-l-full shadow-inner">
+                      <div className="multi-select-selected-options-container" key={option?.value}>
+                        <div className="multi-select-selected-options-label-icon-container">
                           {option?.Icon && (
-                            <span className="flex items-center mr-1.5">{option?.Icon}</span>
+                            <span className="multi-select-selected-options-icon">
+                              {option?.Icon}
+                            </span>
                           )}
-                          <span className="pb-0.5">{option?.label}</span>
+                          <span className="multi-select-selected-options-label">
+                            {option?.label}
+                          </span>
                         </div>
 
                         <button
                           type="button"
-                          className="flex items-center bg-blue-500 rounded-r-full px-1 transition-all hover:bg-blue-700 text-white"
+                          className="multi-select-remove-selected-option-button"
                           onClick={(e) => {
                             e.stopPropagation();
 
@@ -202,7 +205,7 @@ export function MultiSelect<T extends OptionValue>({
                           }}
                         >
                           <svg
-                            className="flex-shrink-0 mt-0.5"
+                            className="multi-select-remove-selected-option-button-svg"
                             stroke="currentColor"
                             fill="currentColor"
                             strokeWidth="0"
@@ -222,7 +225,7 @@ export function MultiSelect<T extends OptionValue>({
               {selectedOptions.length > 0 && (
                 <button
                   type="button"
-                  className=" p-1 self-center text-gray-600 hover:text-black mr-5"
+                  className="multi-select-unselect-all-button"
                   onClick={(e) => {
                     e.stopPropagation();
                     onChange([]);
@@ -251,12 +254,12 @@ export function MultiSelect<T extends OptionValue>({
                       key={key}
                       style={props}
                       ref={selectOptionsRef}
-                      className="max-h-60 rounded-md py-1 text-base leading-6 shadow-lg overflow-auto focus:outline-none sm:text-sm sm:leading-5 absolute z-10 bg-white inset-x-0"
+                      className="multi-select-options-container sm:text-sm sm:leading-5 "
                     >
                       {withFilter && (
                         <TextInput
                           ref={inputRef}
-                          containerClassName="w-full mb-2"
+                          containerClassName="multi-select-options-filter"
                           placeholder="Search here.."
                           value={filterValue}
                           onChange={(event) => handleFilterInputChange(event)}
@@ -269,11 +272,11 @@ export function MultiSelect<T extends OptionValue>({
                           // }}
                         />
                       )}
-                      {isLoadingOptions && <Spinner className="p-4" />}
+                      {isLoadingOptions && (
+                        <Spinner className="multi-select-options-loading-spinner" />
+                      )}
                       {isErrorOptions && (
-                        <div className="flex justify-center items-center text-red-600 my-5">
-                          {optionsError}
-                        </div>
+                        <div className="multi-select-options-error">{optionsError}</div>
                       )}
                       {!isLoading &&
                         !isLoadingOptions &&
@@ -286,7 +289,7 @@ export function MultiSelect<T extends OptionValue>({
                             key={option.value}
                             tabIndex={-1}
                             role="button"
-                            className="w-full outline-none"
+                            className="multi-select-options-list-container"
                             onMouseEnter={() => setActiveIndex(index)}
                             onMouseLeave={() => setActiveIndex(-1)}
                             onMouseDown={() => {
@@ -312,30 +315,34 @@ export function MultiSelect<T extends OptionValue>({
                             }}
                           >
                             <div
-                              className={classNames(
-                                'select-none relative py-2 px-2 flex items-center',
-                                {
-                                  'text-white bg-blue-600': activeIndex === index,
-                                  'text-gray-900': activeIndex !== index,
-                                },
-                              )}
+                              className={classNames('multi-select-options-list-div', {
+                                'multi-select-options-list-div-active': activeIndex === index,
+                                'multi-select-options-list-div-not-active': activeIndex !== index,
+                              })}
                             >
-                              <div className="flex justify-between items-center w-full">
-                                <div className="flex">
+                              <div className="multi-select-options-list-div-div">
+                                <div className="multi-select-options-list-div-div-option">
                                   {option.Icon && (
                                     <span
-                                      className={classNames('flex items-center mr-1.5', {
-                                        'text-gray-50': activeIndex === index,
-                                        'text-blue-600': activeIndex !== index,
-                                      })}
+                                      className={classNames(
+                                        'multi-select-options-list-div-div-option-icon',
+                                        {
+                                          'multi-select-options-list-div-div-option-icon-active':
+                                            activeIndex === index,
+                                          'multi-select-options-list-div-div-option-icon-not-active':
+                                            activeIndex !== index,
+                                        },
+                                      )}
                                     >
                                       {option.Icon}
                                     </span>
                                   )}
                                   <span
                                     className={classNames('block truncate', {
-                                      'font-semibold': value.includes(option.value),
-                                      'font-normal': !value.includes(option.value),
+                                      'multi-select-options-list-div-div-option-label-active':
+                                        value.includes(option.value),
+                                      'multi-select-options-list-div-div-option-label-not-active':
+                                        !value.includes(option.value),
                                     })}
                                   >
                                     {option.label}
@@ -343,7 +350,7 @@ export function MultiSelect<T extends OptionValue>({
                                 </div>
                                 {value.includes(option.value) && (
                                   <svg
-                                    className="flex-shrink-0 text-green-500 text-xl"
+                                    className="multi-select-options-list-div-div-active-icon"
                                     stroke="currentColor"
                                     fill="currentColor"
                                     strokeWidth="0"

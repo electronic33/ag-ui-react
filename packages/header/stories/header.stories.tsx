@@ -24,12 +24,7 @@ export const Default = (): React.ReactNode => {
 };
 
 export const WithIcon = (): React.ReactNode => (
-  <TextInput
-    label="Textinput"
-    Icon={MdLabelOutline}
-    placeholder="This is a textinput"
-    value=""
-  />
+  <TextInput label="Textinput" Icon={MdLabelOutline} placeholder="This is a textinput" value="" />
 );
 
 export const Error = (): React.ReactNode => (

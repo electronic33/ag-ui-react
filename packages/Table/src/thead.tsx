@@ -7,5 +7,5 @@ type TheadTypes = {
 };
 
 export const Thead = ({ children, className }: TheadTypes) => (
-  <thead className={classNames('bg-gray-50', className)}>{children}</thead>
+  <thead className={classNames('table-thead', className)}>{children}</thead>
 );

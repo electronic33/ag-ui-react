@@ -192,10 +192,10 @@ const Slider = ({
   }, [children.length, dotsNum]);
 
   return (
-    <div className={classNames('main-div', containerClassName)}>
-      <div className="carousel-and-arrow-container">
+    <div className={classNames('slider-main-div', containerClassName)}>
+      <div className="slider-carousel-and-arrow-container">
         <Arrow direction="left" onClick={goToPrevSlide} />
-        <div ref={ref} className="carousel" style={{ width: width * 2 }}>
+        <div ref={ref} className="slider-carousel" style={{ width: width * 2 }}>
           <div
             className="slider-content"
             style={{
@@ -235,7 +235,7 @@ export const SliderWithModal = (props: SliderProps): React.ReactElement => {
   };
 
   return (
-    <div className="w-full h-full flex items-center justify-center">
+    <div className="slider-with-modal">
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         <Slider {...props} itemsToShow={1} itemsToScroll={1} startAtIndex={clickedSlide} />
       </Modal>

@@ -114,9 +114,7 @@ export const Header = ({
                 to={callToActionButton.to}
                 className="flex flex-shrink-0 items-center justify-center text-xl max-w-lg border bg-blue-600 text-gray-50 border-solid border-gray-500 rounded-md shadow px-3 py-2 transition-color duration-700 hover:bg-blue-500"
               >
-                {callToActionButton.Icon && (
-                  <callToActionButton.Icon className="mr-2" />
-                )}
+                {callToActionButton.Icon && <callToActionButton.Icon className="mr-2" />}
                 {callToActionButton.text}
               </LinkComponent>
             )}
@@ -137,9 +135,7 @@ export const Header = ({
               )}
             >
               <hamburgerMenu.Icon className="mr-2" />
-              <span className="font-bold mr-4 text-xl">
-                {hamburgerMenu.text}
-              </span>
+              <span className="font-bold mr-4 text-xl">{hamburgerMenu.text}</span>
               <div
                 className={classNames('hamburger', {
                   'hamburger-open': isHamburgerOpen,

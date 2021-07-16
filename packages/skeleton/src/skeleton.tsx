@@ -8,15 +8,10 @@ type SkeletonTypes = {
   height?: string | number;
 };
 
-export const Skeleton = ({
-  className,
-  type,
-  width,
-  height,
-}: SkeletonTypes): React.ReactElement => (
+export const Skeleton = ({ className, type, width, height }: SkeletonTypes): React.ReactElement => (
   <div
     className={classNames(
-      'bg-gray-200 animate-pulse rounded',
+      'skeleton animate-pulse',
       {
         'rounded-full': type === 'circle',
       },

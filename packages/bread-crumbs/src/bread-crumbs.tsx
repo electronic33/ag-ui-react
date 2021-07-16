@@ -44,14 +44,10 @@ export const BreadCrumbs = ({ items, LinkComponent }: BreadCrumbsTypes) => (
             to={to}
             onClick={onClick}
           >
-            <div aria-current={i === items.length - 1 ? 'page' : undefined}>
-              {label}
-            </div>
+            <div aria-current={i === items.length - 1 ? 'page' : undefined}>{label}</div>
           </LinkComponent>
         ) : (
-          <div aria-current={i === items.length - 1 ? 'page' : undefined}>
-            {label}
-          </div>
+          <div aria-current={i === items.length - 1 ? 'page' : undefined}>{label}</div>
         )}
       </div>
     ))}

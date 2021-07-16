@@ -34,7 +34,7 @@ export const Tabs = ({ tabs, activeIndex, setActiveIndex }: TabsTypes) => {
 
   return (
     <div role="tablist" className="tabs">
-      <div className="flex">
+      <div className="tabs-wrapper">
         {tabs.map((tab, index) => (
           <button
             type="button"
@@ -43,19 +43,15 @@ export const Tabs = ({ tabs, activeIndex, setActiveIndex }: TabsTypes) => {
             aria-controls={`tabs${id}-tabpanel-${activeIndex}`}
             arie-aria-selected={index === activeIndex}
             key={tab.label}
-            className={classNames('py-5 cursor-pointer', {
-              'bg-white': activeIndex === index,
+            className={classNames('tabs-tab', {
+              'tabs-tab-active': activeIndex === index,
             })}
             onClick={() => setActiveIndex(index)}
           >
             <p
-              className={classNames(
-                'text-lg px-7 border-r-2 border-gray-300 text-gray-400 hover:text-gray-800 font-medium',
-                {
-                  'border-none':
-                    activeIndex === index || activeIndex === index + 1,
-                },
-              )}
+              className={classNames('tabs-tab-label', {
+                'tabs-tab--active': activeIndex === index || activeIndex === index + 1,
+              })}
             >
               {tab.label}
             </p>

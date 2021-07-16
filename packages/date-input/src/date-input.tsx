@@ -193,7 +193,7 @@ export const DateInput = ({
             onChange(undefined);
           }
         }}
-        containerClassName="w-96"
+        containerClassName="date-input-text-input-container"
         ref={setReferenceElement}
         onFocus={() => {
           if (isValid(value)) {

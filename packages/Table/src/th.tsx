@@ -7,13 +7,7 @@ type ThTypes = {
 };
 
 export const Th = ({ children, className }: ThTypes) => (
-  <th
-    scope="col"
-    className={classNames(
-      'px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider',
-      className,
-    )}
-  >
+  <th scope="col" className={classNames('table-th', className)}>
     {children}
   </th>
 );

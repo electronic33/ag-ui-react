@@ -9,6 +9,13 @@ const ErrorBaseClasses = (theme) => ({
     width: '100%',
     maxWidth: theme('maxWidth.sm'),
   },
+  '.error-message-svg': {
+    marginRight: theme('spacing.2'),
+    fontSize: theme('fontSize.lg'),
+    lineHeight: theme('lineHeight.7'),
+    minWidth: theme('spacing.5'),
+    flexShrink: 0,
+  },
 });
 
 module.exports = ErrorBaseClasses;
